@@ -2,7 +2,7 @@
 
 【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to AIGC Algorithm Engineer Job Interviews
 
-**AIGC Interview、Deep Learning Interview、LLMs Interview**
+**AIGC Interview、LLMs Interview、Deep Learning Interview、Algorithm Engineer Interview**
 
 **AIGC算法岗方向：** 涵盖AIGC、传统深度学习、自动驾驶、机器学习、计算机视觉、自然语言处理、强化学习、具身智能、元宇宙、AGI等。
 
@@ -16,7 +16,7 @@
 
 ## 目录
 
-- :star: [算法岗面试求职宝典](算法岗面试求职宝典)
+- :star: [算法岗面试求职宝典（包含简历模版、求职攻略、面试经验、面试技巧等通用AIGC面试技巧）](算法岗面试求职宝典)
 - :art: [AI绘画基础](AI绘画基础)
 - :clapper: [AI视频基础](AI视频基础)
 - :sparkler: [大模型基础](大模型基础)
