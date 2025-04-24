@@ -2,7 +2,7 @@
 
 ## 第一章 Stable Diffusion系列核心高频考点
 
-- [1.目前主流的AI绘画大模型有哪些？](#1.目前主流的AI绘画大模型有哪些？)
+- [1.目前主流的AI绘画大模型（文生图大模型）有哪些？](#1.目前主流的AI绘画大模型（文生图大模型）有哪些？)
 - [2.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？](#2.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？)
 - [3.SD模型中的CFGClassifier-Free-Guidance的原理？](#3.SD模型中的CFG(Classifier-Free-Guidance)的原理？)
 - [4.SD模型中的（negative-prompt）反向提示词如何加入的？](#4.SD模型中的(negative-prompt)反向提示词如何加入的？)
@@ -78,19 +78,27 @@
 
 ## 第一章 Stable Diffusion系列核心高频考点正文
 
-<h2 id="1.目前主流的AI绘画大模型有哪些？">1.目前主流的AI绘画大模型有哪些？</h2>
+<h2 id="1.目前主流的AI绘画大模型（文生图大模型）有哪些？">1.目前主流的AI绘画大模型（文生图大模型）有哪些？</h2>
 
-目前，几个主流的文生图大模型包括：
+目前，AIGC时代主流的AI绘画大模型（文生图大模型）包括：
 
-1. FLUX.1系列模型（pro、dev、schnell）
-2. Stable Diffusion系列（1.x、2.x、XL、3、3.5）
-3. Midjourney系列（V5-V6）
-4. Ideogram系列
-5. DaLL·E系列（2-3）
-6. PixArt系列（α、Σ）
-7. Playground系列（v2.5-v3）
-8. Imagen系列（1、2、3）
+1. FLUX.1系列文生图大模型（pro、dev、schnell）
+2. Stable Diffusion系列文生图大模型（1.x、2.x、XL、3、3.5）
+3. Seedream系列文生图大模型（Seedream 3.0、2.0）
+4. Midjourney系列文生图大模型（V5、V6、V7）
+5. 可图系列文生图大模型
+6. Ideogram系列文生图大模型
+7. DaLL·E系列文生图大模型（2-3）
+8. PixArt系列文生图大模型（α、Σ）
+9. Playground系列文生图大模型（v2.5-v3）
+10. Imagen系列文生图大模型（1、2、3）
+11. PixArt系列文生图大模型
+12. 混元系列文生图大模型
+13. NovelAI系列文生图大模型
 
+- [点击查看详细答案](https://articles.zsxq.com/id_bkt6vb2dw655.html)
+
+Rocky会根据AIGC时代的AI绘画大模型技术更新来持续补充完善详细答案和本答案！
 
 <h2 id="2.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？">2.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？</h2>
 
