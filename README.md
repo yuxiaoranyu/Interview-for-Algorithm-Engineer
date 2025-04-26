@@ -1,8 +1,6 @@
 # 【三年面试五年模拟】AIGC算法岗/开发岗的面试求职秘籍
 
-【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to AIGC Algorithm Engineer Job Interviews
-
-**AIGC Interview、LLMs Interview、Deep Learning Interview、Algorithm Engineer Interview**
+【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、Deep Learning Interview、Algorithm Engineer Interview**
 
 **AIGC算法岗方向：** 涵盖AIGC、传统深度学习、自动驾驶、机器学习、计算机视觉、自然语言处理、强化学习、具身智能、元宇宙、AGI等。
 
