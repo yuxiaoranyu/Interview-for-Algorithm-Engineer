@@ -19,6 +19,9 @@
 - [18.Python中处理GLB文件的操作大全](#18.Python中处理GLB文件的操作大全)
 - [19.Python中处理OBJ文件的操作大全](#19.Python中处理OBJ文件的操作大全)
 - [20.Python中日志模块loguru的使用](#20.Python中日志模块loguru的使用)
+- [21.Python中连接MySQL数据库](#21.Python中连接MySQL数据库)
+- [22.Python中使用Pandas连接MySQL数据库](#22.Python中使用Pandas连接MySQL数据库)
+- [23.使用Pandas与Pymysql连接数据库的对比](#23.使用Pandas与Pymysql连接数据库的对比)
 
 <h2 id='1.多进程multiprocessing基本使用代码段'>1.多进程multiprocessing基本使用代码段</h2>
 
@@ -2552,3 +2555,359 @@ logger.info("Loguru is ready!")
 - 默认会输出到 `stderr`，通过 `logger.remove()` 可移除。
 - 支持结构化日志（JSON 格式）和异步日志。
 - 可通过 `enqueue=True` 参数保证多进程/线程安全。
+
+<h2 id="21.Python中连接MySQL数据库">21.Python中连接MySQL数据库</h2>
+
+在 Python 中读取 MySQL 数据库，通常需要以下步骤：
+
+---
+
+### **1. 安装 MySQL 驱动库**
+推荐使用 `mysql-connector-python` 或 `PyMySQL`（任选其一）：
+```bash
+# 官方驱动（Oracle 官方维护）
+pip install mysql-connector-python
+
+# 或使用纯 Python 实现的 PyMySQL（推荐）
+pip install pymysql
+```
+
+---
+
+### **2. 连接数据库**
+使用 `connect()` 方法建立连接，需提供数据库地址、用户名、密码、数据库名等信息。
+
+#### **示例代码**：
+```python
+import mysql.connector
+
+# 配置数据库连接参数
+config = {
+    "host": "localhost",    # 数据库服务器地址
+    "user": "root",         # 用户名
+    "password": "123456",   # 密码
+    "database": "test_db",  # 数据库名
+    "port": 3306            # 端口（默认3306）
+}
+
+try:
+    # 建立数据库连接
+    connection = mysql.connector.connect(**config)
+    print("数据库连接成功！")
+
+    # 创建游标对象（用于执行SQL）
+    cursor = connection.cursor()
+
+except mysql.connector.Error as err:
+    print(f"连接失败: {err}")
+
+finally:
+    # 关闭连接
+    if 'connection' in locals() and connection.is_connected():
+        cursor.close()
+        connection.close()
+        print("数据库连接已关闭")
+```
+
+---
+
+### **3. 执行查询并读取数据**
+通过游标执行 SQL 查询，并用 `fetchall()` 或 `fetchone()` 获取结果。
+
+#### **示例：读取表中所有数据**
+```python
+try:
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+
+    # 执行查询
+    cursor.execute("SELECT * FROM users")
+
+    # 获取所有数据（返回列表格式）
+    results = cursor.fetchall()
+
+    # 遍历结果
+    for row in results:
+        print(f"ID: {row[0]}, 用户名: {row[1]}, 邮箱: {row[2]}")
+
+except mysql.connector.Error as err:
+    print(f"查询失败: {err}")
+```
+
+---
+
+### **4. 参数化查询（防止 SQL 注入）**
+使用占位符 `%s` 传递参数，避免直接拼接 SQL 语句。
+
+#### **示例：条件查询**
+```python
+user_id = 1  # 假设用户输入的参数
+
+try:
+    cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+    result = cursor.fetchone()
+    print(result)
+
+except mysql.connector.Error as err:
+    print(f"参数查询失败: {err}")
+```
+
+---
+
+### **5. 使用上下文管理器（自动关闭连接）**
+通过 `with` 语句自动管理资源，无需手动关闭连接和游标。
+
+#### **示例**：
+```python
+import mysql.connector
+
+config = {
+    "host": "localhost",
+    "user": "root",
+    "password": "123456",
+    "database": "test_db"
+}
+
+try:
+    with mysql.connector.connect(**config) as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM products")
+            for row in cursor.fetchall():
+                print(row)
+
+except mysql.connector.Error as err:
+    print(f"错误: {err}")
+```
+
+---
+
+### **6. 使用 ORM 框架（如 SQLAlchemy）**
+对于复杂项目，推荐使用 ORM（对象关系映射）库，例如 **SQLAlchemy**。
+
+#### **安装 SQLAlchemy**：
+```bash
+pip install sqlalchemy
+```
+
+#### **示例代码**：
+```python
+from sqlalchemy import create_engine, text
+
+# 创建数据库引擎（格式：mysql+驱动://用户名:密码@地址:端口/数据库名）
+engine = create_engine("mysql+pymysql://root:123456@localhost:3306/test_db")
+
+# 执行原生 SQL
+with engine.connect() as connection:
+    result = connection.execute(text("SELECT * FROM users"))
+    for row in result:
+        print(row)
+```
+
+<h2 id="22.Python中使用Pandas连接MySQL数据库">22.Python中使用Pandas连接MySQL数据库</h2>
+
+以下是使用 **pandas** 连接 MySQL 数据库并执行查询和插入操作的详细步骤：
+
+---
+
+### **1. 安装依赖库**
+确保已安装以下库：
+```bash
+pip install pandas sqlalchemy pymysql
+```
+- **`pandas`**：数据处理核心库。
+- **`SQLAlchemy`**：用于创建数据库引擎（ORM 工具）。
+- **`PyMySQL`**：纯 Python 实现的 MySQL 驱动。
+
+---
+
+### **2. 连接 MySQL 数据库**
+使用 `SQLAlchemy` 创建数据库引擎，格式为：  
+`mysql+pymysql://用户名:密码@地址:端口/数据库名`
+
+```python
+from sqlalchemy import create_engine
+
+# 创建数据库引擎
+engine = create_engine("mysql+pymysql://root:123456@localhost:3306/test_db")
+```
+
+---
+
+### **3. 查询数据到 DataFrame**
+使用 `pandas.read_sql()` 直接读取 SQL 查询结果到 DataFrame。
+
+#### **示例：查询表中所有数据**
+```python
+import pandas as pd
+
+# 定义 SQL 查询语句
+sql_query = "SELECT * FROM users"
+
+# 执行查询并加载到 DataFrame
+df = pd.read_sql(sql_query, engine)
+print("查询结果：")
+print(df.head())  # 显示前5行
+```
+
+#### **带参数的查询（防止 SQL 注入）**
+```python
+user_id = 1  # 动态参数
+sql_query = "SELECT * FROM users WHERE id = %s"
+df = pd.read_sql(sql_query, engine, params=(user_id,))
+```
+
+---
+
+### **4. 插入数据到 MySQL**
+使用 `DataFrame.to_sql()` 将数据写入数据库。
+
+#### **示例：插入 DataFrame 到新表**
+```python
+# 创建示例 DataFrame
+data = {
+    "name": ["Alice", "Bob"],
+    "age": [25, 30],
+    "email": ["alice@example.com", "bob@example.com"]
+}
+df = pd.DataFrame(data)
+
+# 写入数据库（表名：new_users）
+df.to_sql(
+    name="new_users",      # 表名
+    con=engine,            # 数据库引擎
+    index=False,           # 不写入行索引
+    if_exists="append"     # 如果表存在，追加数据
+)
+print("数据插入成功！")
+```
+
+#### **关键参数说明**
+| 参数         | 说明                                                                 |
+|--------------|----------------------------------------------------------------------|
+| `name`       | 目标表名                                                             |
+| `con`        | 数据库引擎对象                                                       |
+| `index`      | 是否写入 DataFrame 的索引列（默认 `True`，通常设为 `False`）          |
+| `if_exists`  | 表存在时的行为：`fail`（报错）, `replace`（覆盖表）, `append`（追加） |
+| `dtype`      | 可选，指定列的数据类型（如 `{'age': INTEGER}`）                      |
+
+
+<h2 id="23.使用Pandas与Pymysql连接数据库的对比">23.使用Pandas与Pymysql连接数据库的对比</h2>
+
+使用 **pandas 结合 SQLAlchemy/PyMySQL** 与直接使用 **PyMySQL** 操作 MySQL 数据库的主要区别体现在 **开发效率、功能定位、适用场景** 上。以下是详细对比：
+
+---
+
+### **1. 核心区别对比**
+| **特性**               | **PyMySQL**（直接使用）                            | **pandas + SQLAlchemy**                     |
+|------------------------|--------------------------------------------------|--------------------------------------------|
+| **定位**               | 直接操作数据库的底层驱动库                        | 基于数据库操作的高层数据分析工具             |
+| **语法复杂度**         | 需要手动编写 SQL，管理游标和连接                  | 通过 DataFrame 抽象化 SQL 操作，语法更简洁  |
+| **数据交互形式**       | 返回原始元组（Tuple）或字典                       | 返回结构化 DataFrame，支持列名和数据类型    |
+| **数据操作能力**       | 需自行处理数据过滤、聚合、转换等逻辑              | 内置丰富的数据处理函数（如 `groupby`、`merge`） |
+| **性能**               | 适合小规模数据的精细控制，高频操作性能更高        | 大数据批量操作优化（如 `chunksize` 分块写入） |
+| **适用场景**           | 需要直接控制 SQL、执行复杂事务或存储过程          | 数据分析、快速原型开发、ETL 流程            |
+
+---
+
+### **2. 代码示例对比**
+#### **场景：查询数据并插入到另一张表**
+
+##### **（1）直接使用 PyMySQL**
+```python
+import pymysql
+
+# 连接数据库
+conn = pymysql.connect(
+    host="localhost",
+    user="root",
+    password="123456",
+    database="test_db"
+)
+cursor = conn.cursor()
+
+# 查询数据
+cursor.execute("SELECT id, name, age FROM users WHERE age > 20")
+rows = cursor.fetchall()
+
+# 处理数据并插入新表
+for row in rows:
+    new_age = row[2] + 1  # 年龄加1
+    cursor.execute(
+        "INSERT INTO updated_users (id, name, age) VALUES (%s, %s, %s)",
+        (row[0], row[1], new_age)
+    )
+
+# 提交事务并关闭连接
+conn.commit()
+cursor.close()
+conn.close()
+```
+
+##### **（2）使用 pandas + SQLAlchemy**
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+
+# 创建数据库引擎
+engine = create_engine("mysql+pymysql://root:123456@localhost/test_db")
+
+# 查询数据到 DataFrame
+df = pd.read_sql("SELECT id, name, age FROM users WHERE age > 20", engine)
+
+# 处理数据（年龄加1）
+df["age"] = df["age"] + 1
+
+# 插入到新表
+df.to_sql(
+    name="updated_users",
+    con=engine,
+    index=False,
+    if_exists="append"
+)
+```
+
+---
+
+### **3. 核心优势对比**
+#### **PyMySQL 的优势**
+1. **精细控制**：
+   - 直接编写 SQL，支持复杂事务、存储过程、动态 SQL 拼接。
+   - 适合需要严格管理数据库连接、事务提交/回滚的场景。
+2. **轻量级**：
+   - 依赖库少，适合小型项目或资源受限环境。
+3. **高频操作性能**：
+   - 对于简单、高频的插入/查询操作，性能优于 pandas 的批量写入。
+
+#### **pandas + SQLAlchemy 的优势**
+1. **开发效率**：
+   - 通过 `DataFrame` 抽象化数据操作，避免手动处理游标和结果集。
+   - 内置数据清洗、转换、分析功能（如 `pandas` 的 `merge`、`groupby`）。
+2. **数据科学友好**：
+   - 查询结果直接转为 DataFrame，可无缝衔接机器学习库（如 Scikit-learn、TensorFlow）。
+3. **批量写入优化**：
+   - `to_sql` 支持分块写入（`chunksize`），适合处理大数据量。
+4. **避免 SQL 注入**：
+   - 参数化查询通过 DataFrame 自动处理，减少手动拼接 SQL 的风险。
+
+---
+
+### **4. 性能对比**
+| **操作类型**         | **PyMySQL**                          | **pandas + SQLAlchemy**           |
+|----------------------|--------------------------------------|-----------------------------------|
+| **单条插入 1000 行** | 快（直接逐条执行 SQL）               | 慢（默认逐行插入）                |
+| **批量插入 10 万行** | 需要手动优化（如 `executemany`）      | 快（使用 `chunksize` 分块批量插入） |
+| **复杂查询+分析**    | 需手动处理结果集                     | 快（内置向量化操作，如聚合、过滤） |
+
+---
+
+### **5. 适用场景推荐**
+#### **选择 PyMySQL 的场景**
+- 需要执行动态 SQL 或复杂事务（如银行转账逻辑）。
+- 对数据库连接和性能有极致要求（如高频交易系统）。
+- 项目规模小，无需复杂数据处理。
+
+#### **选择 pandas 的场景**
+- 数据分析和探索（如统计、可视化）。
+- 需要将数据库数据与本地数据（如 CSV、Excel）结合处理。
+- 快速实现 ETL（数据抽取、转换、加载）流程。
+- 机器学习/数据科学项目的前期数据处理。
