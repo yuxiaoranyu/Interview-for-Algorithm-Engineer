@@ -32,10 +32,11 @@
 - [30.EasyPhoto的训练和推理流程是什么样的？](#30.EasyPhoto的训练和推理流程是什么样的？)
 - [31.FaceChain的训练和推理流程是什么样的？](#31.FaceChain的训练和推理流程是什么样的？)
 - [32.ReCo的框架和原理](#32.ReCo的框架和原理)
-- [33.Be Yourself（Bounded Attention for Multi-Subject Text-to-Image Generation）的框架和原理](#33.Be Yourself（Bounded Attention for Multi-Subject Text-to-Image Generation）的框架和原理)
+- [33.Be Yourself（Bounded Attention for Multi-Subject Text-to-Image Generation）的框架和原理](#33.Be-Yourself（Bounded-Attention-for-Multi-Subject-Text-to-Image-Generation）的框架和原理)
 - [34.IFadapter的框架和原理](#34.IFadapter的框架和原理)
 - [35.LAW-Diffusion的框架和原理](#35.LAW-Diffusion的框架和原理)
-- [36.Check, Locate, Rectify（A Training-Free Layout Calibration System for Text-to-Image Generation）的框架和原理](#36.Check, Locate, Rectify（A Training-Free Layout Calibration System for Text-to-Image Generation）的框架和原理)
+- [36.Check, Locate, Rectify（A Training-Free Layout Calibration System for Text-to-Image Generation）的框架和原理](#36.Check,Locate,Rectify（A-Training-Free-Layout-Calibration-System-for-Text-to-Image-Generation）的框架和原理)
+- [37.Conceptrol: Concept Control of Zero-shot Personalized Image Generation的框架和原理](#37.Conceptrol: Concept Control of Zero-shot Personalized Image Generation的框架和原理)
 
 
 <h2 id="1.Ip-adapter的模型结构与原理">1.Ip-adapter的模型结构与原理 </h2>
@@ -822,7 +823,7 @@ FaceChain是一个功能上近似“秒鸭相机”的技术，我们只需要�
 
 
 
-<h2 id="33.Be Yourself（Bounded Attention for Multi-Subject Text-to-Image Generation）的框架和原理">33.Be Yourself（Bounded Attention for Multi-Subject Text-to-Image Generation）的框架和原理</h2>
+<h2 id="33.Be-Yourself（Bounded-Attention-for-Multi-Subject-Text-to-Image-Generation）的框架和原理">33.Be Yourself（Bounded Attention for Multi-Subject Text-to-Image Generation）的框架和原理</h2>
 
 论文链接：[[2403.16990\] Be Yourself: Bounded Attention for Multi-Subject Text-to-Image Generation](https://arxiv.org/abs/2403.16990)
 
@@ -935,7 +936,7 @@ LAW-Diffusion还支持实例级别的重构能力，包括添加/移除/重新�
 
 LAW-Diffusion通过引入空间依赖关系解析、自适应引导调度和布局感知潜在嫁接等创新技术，显著提升了布局到图像生成的效果，特别是在保持复杂场景中对象之间合理和协调的关系方面。该方法为控制复杂场景生成提供了新的思路，具有重要的理论和应用价值。
 
-<h2 id="36.Check, Locate, Rectify（A Training-Free Layout Calibration System for Text-to-Image Generation）的框架和原理">36.Check, Locate, Rectify（A Training-Free Layout Calibration System for Text-to-Image Generation）的框架和原理</h2>
+<h2 id="36.Check,Locate,Rectify（A-Training-Free-Layout-Calibration-System-for-Text-to-Image-Generation）的框架和原理">36.Check, Locate, Rectify（A Training-Free Layout Calibration System for Text-to-Image Generation）的框架和原理</h2>
 
 本研究论文介绍了SimM，这是一种新颖的系统，旨在解决文本到图像生成中的一个常见挑战：准确实现文本提示中的空间布局指令。
 
@@ -973,3 +974,26 @@ SimM采用“检查-定位-纠正”流程，无需额外训练即可干预生�
 4. **最小的计算开销**：直接修改注意力图，无需复杂的优化
 
 该技术可以改善创意应用中的用户控制，允许在文本到图像生成中更精确地指定布局，而无需具备布局技术知识或额外训练。
+
+<h2 id="37.Conceptrol: Concept Control of Zero-shot Personalized Image Generation的框架和原理">37.Conceptrol: Concept Control of Zero-shot Personalized Image Generation的框架和原理</h2>
+
+个性化图像生成面临着一个根本性的困境：如何在遵循创意文本提示的同时，平衡从参考图像中保留对象身份。目前的方法主要分为两类：
+
+1. **微调方法**，如 DreamBooth 和 Textual Inversion，每种新概念都需要大量的计算资源和训练时间。
+2. **零样本适配器**，如 IP-Adapter 和 OmniControl，效率更高，但在遵循复杂的提示时，通常难以维持概念身份。
+
+核心挑战是，现有的零样本适配器无法有效地利用扩散模型的文本理解能力。它们分别处理参考图像和文本提示，错过了它们之间的关键联系。
+Conceptrol 引入了一种非常简单但有效的方法来解决这个困境。关键的见解是，扩散模型已经包含强大的“文本概念掩码”，可以引导注意力集中到图像的相关部分。
+
+![image-20250420205157570](./imgs/conceptrol.png)
+
+该方法通过一个三步过程工作：
+
+1. **文本概念识别**：系统首先识别提示中与参考图像相对应的文本概念（例如，雕像图像的“雕像”）。
+2. **概念掩码提取**：它从模型的内部表示中提取与该文本概念相对应的注意力掩码。
+3. **引导注意力**：该掩码用于约束参考图像的视觉信息的应用位置，确保它与文本提示的意图对齐。
+
+这种方法不需要额外的训练，并且可以作为现有零样本适配器的即插即用增强功能。它可以应用于基于 U-Net 的模型（如 Stable Diffusion）和基于 DiT 的模型（如 FLUX）。
+
+
+
