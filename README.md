@@ -1,4 +1,4 @@
-# 【三年面试五年模拟】AIGC算法岗/开发岗的面试求职秘籍
+# 🔥【三年面试五年模拟】AIGC算法岗/开发岗的面试求职秘籍
 
 【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、Deep Learning Interview、Algorithm Engineer Interview**
 
@@ -12,7 +12,7 @@
 
 **本项目构建和维护不容易，希望大家能多多star～。star本项目，你就获得了0.5个心仪的offer，再转发本项目，你就获得了0.75个心仪offer！持续star和分享本项目，你就获得了职场晋升和薪资上涨的50%必要条件。祝大家求职顺利、工作顺利！**
 
-## 目录
+## 📖目录
 
 - :star: [算法岗面试求职宝典（包含简历模版、求职攻略、面试经验、面试技巧等通用AIGC面试技巧）](算法岗面试求职宝典)
 - :art: [AI绘画基础](AI绘画基础)
@@ -84,7 +84,7 @@ Rocky最新撰写完成10万字的Stable Diffusion 3和FLUX.1系列模型全网�
 
 玉箫然，资深高级算法工程师，在CV、AIGC、大模型等多个领域经验丰富，在国内头部金融投顾公司任职，主要从事大模型相关的应用落地、性能优化。
 
-## AIGC行业技术交流群
+## 💡AIGC行业技术交流群
 
 <div align=center>
 <img src="imgs/AI绘画交流群.jpg" alt="AIGCmagic社区-AI绘画交流群" width="200"/><img src="imgs/AI视频交流群.jpg" alt="AIGCmagic社区-AI视频交流群" width="200"/><img src="imgs/大模型交流群.jpg" alt="AIGCmagic社区-大模型交流群" width="200"/>
@@ -94,7 +94,7 @@ Rocky最新撰写完成10万字的Stable Diffusion 3和FLUX.1系列模型全网�
 <img src="imgs/AI多模态交流群.jpg" alt="AIGCmagic社区-AI多模态交流群" width="200"/><img src="imgs/传统深度学习交流群.jpg" alt="AIGCmagic社区-传统深度学习交流群" width="200"/><img src="imgs/自动驾驶交流群.jpg" alt="AIGCmagic社区-自动驾驶交流群" width="200"/>
 </div>
 
-## 项目合作&共建
+## 🤝项目合作&共建
 
 **Rocky承诺本项目会陪伴大家的完整职业生涯和码二代们的完整职业生涯，所以会持续更新，欢迎大家分享AIGC求职经历、工作经验、招聘内推、工作机会等信息，欢迎共同建设完善本项目！**
 
