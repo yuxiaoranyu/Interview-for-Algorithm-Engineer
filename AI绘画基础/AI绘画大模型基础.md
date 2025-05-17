@@ -49,6 +49,7 @@
 - [45.关于GPT4O生成的看法（技术路线未公布）](#45.关于GPT4O生成的看法（技术路线未公布）)
 - [46.什么是REAL（新的评价基准）？](#46.什么是REAL（新的评价基准）？)
 - [47.什么是ImageGen-CoT（思维链条）？](#47.什么是ImageGen-CoT（思维链条）？)
+- [48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？](#48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？)
 
 ## 第二章 Midjourney高频考点
 
@@ -1065,6 +1066,15 @@ ImageGen-CoT框架在图像生成之前引入了结构化思维过程，帮助ML
 思维链数据集：
 
 ![image-20250420205954326](./imgs/image-cot.png)
+
+
+<h2 id="48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？">48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？</h2>
+
+**这个问题最本质的回答是：传统深度学习时代的VAE是单独作为生成模型；而在AIGC时代，VAE只是作为特征编码器，提供特征给Diffusion用于图像的生成。其实两者的本质作用已经发生改变。**
+
+同时传统深度学习时代的VAE的重构损失只使用了平方误差，而Stable Diffusion中的VAE使用了平方误差 + Perceptual损失 + 对抗损失。在正则项方面，传统深度学习时代的VAE使用了完整的KL散度项，而Stable Diffusion中的VAE使用了弱化的KL散度项。同时传统深度学习时代的VAE将图像压缩成单个向量，而Stable Diffusion中的VAE则将图像压缩成一个 $N\times M$ 的特征矩阵。
+
+上述的差别都导致了传统深度学习时代的VAE生成效果不佳。
 
 ## 第二章 Midjourney高频考点正文
 
