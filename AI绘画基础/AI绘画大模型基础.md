@@ -50,7 +50,7 @@
 - [46.什么是REAL（新的评价基准）？](#46.什么是REAL（新的评价基准）？)
 - [47.什么是ImageGen-CoT（思维链条）？](#47.什么是ImageGen-CoT（思维链条）？)
 - [48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？](#48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？)
-- [49.什么是Textual Inversion（文本反演）？](#49.什么是Textual Inversion/（文本反演/）？)
+- [49.什么是Textual Inversion（文本反演）？](#49.什么是Textual Inversion\（文本反演\）？)
 - [50.什么是OminGen？](#50.什么是OminGen？)
 - [51.介绍一下PAG（Perturbed-Attention Guidance）](#51.介绍一下PAG（Perturbed-Attention Guidance）)
 - [52.介绍一下Kandinsky 2.1](#52.介绍一下Kandinsky 2.1)
@@ -1084,7 +1084,7 @@ ImageGen-CoT框架在图像生成之前引入了结构化思维过程，帮助ML
 
 
 
-<h2 id="49.什么是Textual Inversion/（文本反演/）？">49.什么是Textual Inversion（文本反演）？</h2>
+<h2 id="49.什么是Textual Inversion\（文本反演\）？">49.什么是Textual Inversion（文本反演）？</h2>
 
 ### 理解 Textual Inversion 的核心思想
 
