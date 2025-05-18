@@ -25,6 +25,7 @@
 - [23.Python中布尔索引有哪些用法？](#23.Python中布尔索引有哪些用法？)
 - [24.Python中有哪些高级的逐元素矩阵级计算操作？](#24.Python中有哪些高级的逐元素矩阵级计算操作？)
 - [25.Python中使用迭代器遍历和非迭代器遍历有什么区别？](#25.Python中使用迭代器遍历和非迭代器遍历有什么区别？)
+- [26.介绍一下Python中map与reduce函数的用法](#26.介绍一下Python中map与reduce函数的用法)
 
 
 <h2 id="1.python中迭代器的概念？">1.Python中迭代器的概念？</h2>
@@ -2835,4 +2836,125 @@ normalized_image = image / 255.0  # 逐元素除法
 | **遍历列表**          | `for item in iter_list:`                          | `for i in range(len(list)): item = list[i]`          |
 | **自定义无限序列**    | 生成器函数`yield`                                  | 无法实现（需预定义长度）                             |
 | **文件读取**          | 逐行`for line in file:`                           | 一次性`lines = file.readlines()`                     |
+
+
+<h2 id="26.介绍一下Python中map与reduce函数的用法">26.介绍一下Python中map与reduce函数的用法</h2>
+
+### **一、map与reduce函数的核心概念与基本用法**
+**map** 和 **reduce** 是函数式编程中的核心高阶函数，**用于对集合数据进行批量处理和聚合计算**。Python通过内置模块 `functools` 提供 `reduce` 函数，而 `map` 函数为原生支持。
+
+#### **1. map函数**
+- **作用**：对可迭代对象（如列表、元组）中的每个元素应用指定函数，返回新迭代器。
+- **语法**：`map(func, iterable)`
+- **特点**：  
+  - **延迟计算**：返回生成器（Python 3+），节省内存。  
+  - **并行友好**：天然支持多线程/多进程并行处理。
+
+#### **2. reduce函数**
+- **作用**：通过指定函数对可迭代对象中的元素进行累积计算，返回单一结果。
+- **语法**：`reduce(func, iterable[, initializer])`  
+- **特点**：  
+  - **累积性**：从左到右依次处理元素，将前一步结果作为下一步输入。  
+  - **初始值**：可指定初始值避免空迭代报错。
+
+### **二、实际案例：统计文本词频**
+**需求**：统计一段文本中各单词出现的频率，并按频率降序输出前3名。  
+
+#### **代码实现**
+```python
+from functools import reduce
+
+text = "apple banana apple cherry banana apple"
+
+# Step 1: 使用map拆分单词并转为小写
+words = list(map(lambda x: x.lower(), text.split()))  # ["apple", "banana", "apple", ...]
+
+# Step 2: 使用reduce统计词频
+word_counts = reduce(
+    lambda counts, word: {**counts, word: counts.get(word, 0) + 1},
+    words,
+    {}
+)
+
+# Step 3: 按频率排序并取前3
+top_words = sorted(word_counts.items(), key=lambda x: -x[1])[:3]
+print(top_words)  # 输出 [('apple', 3), ('banana', 2), ('cherry', 1)]
+```
+
+#### **关键点**
+- **map阶段**：将原始文本转换为标准化单词列表。  
+- **reduce阶段**：通过字典累积统计词频。  
+- **组合性**：map处理原子操作，reduce实现聚合逻辑。
+
+### **三、三大领域应用场景**
+
+#### **1. AIGC（生成式AI）**
+- **应用场景**：批量生成图像后的元数据处理。  
+- **案例**：对1000张生成图像计算平均亮度并筛选合格样本。  
+  ```python
+  import cv2
+  import numpy as np
+  from functools import reduce
+
+  # 加载生成图像路径列表
+  image_paths = ["gen_001.png", "gen_002.png", ..., "gen_1000.png"]
+
+  # Step 1: 使用map并行读取图像并计算亮度
+  def calc_brightness(path):
+      img = cv2.imread(path)
+      return np.mean(img)
+
+  brightness_values = list(map(calc_brightness, image_paths))
+
+  # Step 2: 使用reduce计算总平均值
+  total_avg = reduce(lambda a, b: a + b, brightness_values) / len(brightness_values)
+
+  # Step 3: 筛选亮度达标的图像路径
+  qualified_paths = [path for path, brightness in zip(image_paths, brightness_values) if brightness > total_avg]
+  ```
+
+#### **2. 传统深度学习**
+- **应用场景**：分布式训练中的参数聚合。  
+- **案例**：多GPU训练时汇总各卡梯度均值。  
+  ```python
+  import torch
+  from functools import reduce
+
+  # 模拟4个GPU的梯度数据（实际通过DistributedDataParallel获取）
+  gradients = [
+      torch.randn(10, 10).cuda(0),
+      torch.randn(10, 10).cuda(1),
+      torch.randn(10, 10).cuda(2),
+      torch.randn(10, 10).cuda(3)
+  ]
+
+  # Step 1: 使用map在各GPU上计算梯度均值
+  local_means = list(map(lambda x: x.mean().item(), gradients))  # [0.12, -0.05, ...]
+
+  # Step 2: 使用reduce计算全局均值
+  global_mean = reduce(lambda a, b: a + b, local_means) / len(local_means)
+  ```
+
+#### **3. 自动驾驶**
+- **应用场景**：多传感器数据融合。  
+- **案例**：融合激光雷达点云与摄像头图像的特征向量。  
+  ```python
+  from functools import reduce
+
+  # 模拟传感器数据（点云特征+图像特征）
+  lidar_features = [[0.1, 0.3], [0.5, 0.7]]
+  camera_features = [[0.2, 0.4], [0.6, 0.8]]
+
+  # Step 1: 使用map对齐特征维度（假设通过神经网络提取）
+  aligned_features = map(
+      lambda pair: np.concatenate(pair),
+      zip(lidar_features, camera_features)
+  )  # [[0.1,0.3,0.2,0.4], [0.5,0.7,0.6,0.8]]
+
+  # Step 2: 使用reduce融合多帧数据（加权平均）
+  fused_feature = reduce(
+      lambda a, b: [0.7 * a[i] + 0.3 * b[i] for i in range(len(a))],
+      aligned_features
+  )
+  ```
 
