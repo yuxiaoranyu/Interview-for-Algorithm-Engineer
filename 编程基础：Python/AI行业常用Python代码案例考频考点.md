@@ -22,6 +22,10 @@
 - [21.Python中连接MySQL数据库](#21.Python中连接MySQL数据库)
 - [22.Python中使用Pandas连接MySQL数据库](#22.Python中使用Pandas连接MySQL数据库)
 - [23.使用Pandas与Pymysql连接数据库的对比](#23.使用Pandas与Pymysql连接数据库的对比)
+- [24.Python中如何编译安装自定义包](#24.Python中如何编译安装自定义包)
+- [25.Python中Redis安装及数据插入、查询](#25.Python中Redis安装及数据插入、查询)
+- [26.Gradio如何使用？](#26.Gradio如何使用？)
+- [27.Strreamlit如何使用？](#27.Streamlit如何使用？)
 
 <h2 id='1.多进程multiprocessing基本使用代码段'>1.多进程multiprocessing基本使用代码段</h2>
 
@@ -2911,3 +2915,347 @@ df.to_sql(
 - 需要将数据库数据与本地数据（如 CSV、Excel）结合处理。
 - 快速实现 ETL（数据抽取、转换、加载）流程。
 - 机器学习/数据科学项目的前期数据处理。
+
+
+<h2 id="24.Python中如何编译安装自定义包">24.Python中如何编译安装自定义包</h2>
+
+要通过 `setup.py` 安装自定义的 Python 库包，请按以下步骤操作：
+
+---
+
+### 1. **准备项目结构**
+确保你的项目包含以下基本结构（示例）：
+```bash
+my_package/
+├── setup.py              # 安装脚本
+├── my_package/           # 包目录（与包名一致）
+│   ├── __init__.py       # 标识为Python包
+│   └── module.py         # 自定义模块
+└── README.md             # 可选说明文件
+```
+
+---
+
+### 2. **编写 `setup.py`**
+创建 `setup.py` 文件并配置元数据（示例）：
+```python
+from setuptools import setup, find_packages
+
+setup(
+    name="my_package",          # 包名称
+    version="0.1.0",            # 版本号
+    packages=find_packages(),   # 自动查找包目录
+    # 显式指定包：packages=['my_package']  
+    install_requires=[          # 依赖库
+        "requests>=2.25.1",
+        "numpy"
+    ],
+    author="Your Name",
+    description="A custom Python package",
+    long_description=open("README.md").read(),
+    url="https://github.com/yourusername/my_package"
+)
+```
+
+---
+
+### 3. **安装包**
+在项目根目录（含 `setup.py` 的位置）打开终端，执行：
+
+#### 方式一：常规安装（全局/虚拟环境）
+```bash
+pip install .
+```
+
+#### 方式二：开发模式安装（代码修改实时生效）
+```bash
+pip install -e .
+```
+> ✅ 推荐开发时使用：修改代码后无需重新安装
+
+---
+
+### 4. **验证安装**
+在 Python 中测试导入：
+```python
+import my_package
+print(my_package.__version__)  # 如果 version 在 __init__.py 中定义
+```
+
+---
+
+### 关键配置说明
+| **参数**           | **作用**                                                                 |
+|--------------------|--------------------------------------------------------------------------|
+| `packages`         | 指定包含的包目录（推荐 `find_packages()` 自动查找）                       |
+| `install_requires` | 声明依赖库，安装时自动解决依赖                                           |
+| `entry_points`     | 创建命令行工具（如 `'console_scripts': ['mycmd=my_package.cli:main']`） |
+| `package_data`     | 包含非代码文件（如数据、配置文件）                                       |
+
+---
+
+通过以上步骤，你可以将自定义库包安装到 Python 环境中，并进行使用或分发。
+
+编译wheel包：
+```bash
+python setup.py bdist_wheel
+```
+
+安装wheel包：
+```bash
+pip install dist/my_package-0.1.0-py3-none-any.whl
+```
+
+<h2 id="25.Python中Redis安装及数据插入、查询">25.Python中Redis安装及数据插入、查询</h2>
+
+### 1. 安装 Redis**
+```
+sudo apt update
+sudo apt install redis-server
+```
+安装完成后，Redis服务将会自动启动。想要检查服务的状态，输入下面的命令：
+```
+sudo systemctl status redis-server
+```
+可看到如下输出：
+```
+● redis-server.service - Advanced key-value store
+     Loaded: loaded (/lib/systemd/system/redis-server.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2020-06-06 20:03:08 UTC; 10s ago
+...
+```
+在 Python 中，可以通过 `redis-py` 库来连接 Redis 数据库，并执行插入和查询等操作。以下是详细的步骤说明：
+
+### 2. 安装 `redis-py` 库
+```bash
+pip install redis
+```
+
+这是官方推荐的安装方式 。
+
+---
+
+### 3. 导入模块并连接 Redis 数据库
+
+使用 `redis.Redis()` 方法连接到 Redis 服务器。默认情况下，它会连接到本地主机（`localhost`）的 6379 端口，并选择默认数据库 `db0`：
+
+```python
+import redis
+
+# 默认连接到本地 Redis
+r = redis.Redis()
+
+# 或者指定连接参数
+# r = redis.Redis(host='127.0.0.1', port=6379, db=0)
+```
+
+如果连接远程 Redis 服务器，可以分别使用 `host` 和 `port` 参数指定主机地址和端口号 。
+
+---
+
+### 4. 插入数据
+
+Redis 支持多种数据结构，最常用的是字符串类型。可以使用 `set()` 方法插入键值对：
+
+```python
+r.set('name', 'ZhangSan')
+```
+
+该操作将键 `'name'` 的值设置为 `'ZhangSan'` 。
+
+---
+
+### 5. 查询数据
+
+使用 `get()` 方法查询键对应的值：
+
+```python
+value = r.get('name')
+print(value)  # 输出: b'ZhangSan'
+```
+
+注意，返回的值是字节类型（`bytes`），如果需要字符串，可以使用 `.decode()` 方法：
+
+```python
+print(value.decode('utf-8'))  # 输出: ZhangSan
+```
+
+该方法用于获取字符串类型的键值 。
+
+---
+
+### 6. 选择数据库编号
+
+Redis 默认有 16 个逻辑数据库（编号从 `0` 到 `15`），可以通过 `db` 参数指定连接的数据库：
+
+```python
+r = redis.Redis(db=1)  # 连接到 db1
+```
+
+每个数据库的数据是隔离的，适用于多应用或多环境的场景 。
+
+---
+
+### 7. 关闭连接（可选）
+
+虽然 `redis.Redis()` 内部使用了连接池，通常不需要显式关闭连接。但在某些情况下（如使用 `StrictRedis`），可以调用 `connection_pool.disconnect()` 来释放资源 。
+
+---
+
+<h2 id="26.Gradio如何使用？">26.Gradio如何使用？</h2>
+
+**Gradio** 是一个开源的 **Python 库**，专门用于**快速构建机器学习模型或数据科学流程的交互式 Web 界面**。它的核心目标是让开发者能够轻松地将模型、算法或数据处理脚本转化为可分享的 Web 应用，而无需具备前端（HTML, CSS, JavaScript）或后端（Flask, Django）的开发经验。
+
+**Gradio 的核心特点和价值：**
+
+1.  **极简部署：**
+    *   只需几行 Python 代码，即可将你的函数（尤其是涉及输入/输出的函数，如模型预测）包装成一个带有 UI 的 Web 应用。
+    *   自动处理从用户输入到函数调用再到结果展示的整个流程。
+
+2.  **丰富的内置组件：**
+    *   提供各种现成的**输入组件**：文本框、滑块、下拉菜单、文件上传、图像上传、麦克风、摄像头、绘图板等。
+    *   提供各种**输出组件**：文本标签、JSON、图像、音频、视频、图表（matplotlib, plotly）、高亮文本、3D 模型等。
+    *   这些组件可以灵活组合，构建出适合不同任务的界面（如上传图片->分类模型->显示类别标签和置信度）。
+
+3.  **自动界面生成：**
+    *   只需定义你的函数 `fn(inputs)` 和输入/输出组件的类型，Gradio 就能**自动为你生成一个完整的、布局合理的 Web UI**。
+
+4.  **多种分享方式：**
+    *   **本地运行：** 在 Jupyter Notebook 或 Python 脚本中启动，在本地浏览器查看。
+    *   **临时公共链接：** 通过 `share=True` 参数生成一个有时效（通常 72 小时）的公共 URL，方便快速分享给他人测试（无需服务器部署）。
+    *   **Hugging Face Spaces：** 无缝集成 Hugging Face 平台，免费托管和分享 Gradio 应用。
+    *   **自托管：** 可以将 Gradio 应用部署到自己的服务器或云平台（如 AWS, GCP, Azure）上。
+
+5.  **支持复杂应用：**
+    *   支持**多选项卡**界面。
+    *   支持**输入流**（如实时麦克风输入处理）。
+    *   支持**输出流**（如实时生成文本或音频）。
+    *   支持**状态管理**（在用户会话间保持数据）。
+    *   支持**事件队列**（处理高并发请求）。
+    *   支持**主题和自定义 CSS**（改变界面外观）。
+
+
+**Gradio 的主要应用场景：**
+
+1.  **机器学习模型演示与测试：**
+    *   让非技术用户（客户、产品经理、研究员同事）上传数据并查看模型预测结果。
+    *   快速验证模型在真实输入上的表现。
+    *   创建模型卡或项目展示的一部分。
+
+2.  **算法原型验证：**
+    *   快速构建一个界面来测试和迭代你的数据处理或算法逻辑。
+
+3.  **内部工具开发：**
+    *   为数据标注、结果可视化、参数调试等任务构建简单的内部工具。
+
+4.  **教学与教程：**
+    *   让学生或读者通过交互界面直观理解概念或算法。
+
+**一个简单的 Gradio 示例 (图像分类)：**
+
+```python
+import gradio as gr
+import tensorflow as tf
+
+# 1. 加载你的模型 (这里用占位符)
+model = tf.keras.models.load_model('your_model.h5')
+
+# 2. 定义预测函数 (核心逻辑)
+def classify_image(inp):
+    # 预处理输入图像
+    inp = preprocess(inp)
+    # 进行预测
+    prediction = model.predict(inp)
+    # 后处理：获取类别标签和置信度
+    class_names = ['Cat', 'Dog']
+    confidences = {class_names[i]: float(prediction[0][i]) for i in range(len(class_names))}
+    return confidences
+
+# 3. 创建 Gradio 接口
+#   - inputs: 图像上传组件
+#   - outputs: 标签组件 (显示字典形式的置信度)
+#   - title/description: 界面标题和描述
+demo = gr.Interface(
+    fn=classify_image,
+    inputs=gr.Image(type="pil"),  # 上传图片作为输入
+    outputs=gr.Label(num_top_classes=2), # 显示前2个类别的置信度
+    title="Cat vs Dog Classifier",
+    description="Upload a photo of a cat or dog. The model will predict which it is."
+)
+
+# 4. 启动应用 (本地运行并生成公共链接)
+demo.launch(share=True)
+```
+
+运行这段代码，Gradio 会自动在你的浏览器打开一个界面，允许你上传图片并实时看到模型的分类结果和置信度。
+
+**总结：**
+
+Gradio 是机器学习工程师、数据科学家和研究员的强大工具，它极大地**降低了将模型和算法转化为可交互、可分享的演示应用的门槛**。它强调**快速原型设计**和**易用性**，是展示成果、获取反馈、构建简单工具的理想选择。如果你需要快速让模型“活”起来并与人交互，Gradio 是一个非常值得考虑的解决方案。
+
+<h2 id="27.Streamlit如何使用？">27.Streamlit如何使用？</h2>
+
+### 简介  
+**Streamlit** 是一个面向数据科学和机器学习的开源 Python 框架，能够快速构建交互式 Web 应用 。它通过简单的 Python 代码即可生成数据驱动的可视化界面，无需前端开发经验，适合快速开发和共享数据分析结果 。其核心特点包括：  
+1. **实时交互**：代码修改后自动刷新界面 。  
+2. **多样化组件**：支持文本、表格、图表、图像等多种数据展示形式 。  
+3. **轻量部署**：通过 `streamlit run app.py` 即可运行应用 。  
+
+---
+
+### 完整代码调用示例  
+
+#### 1. 安装 Streamlit  
+```bash
+pip install streamlit
+```
+
+#### 2. 示例：展示数据框与交互图表  
+以下代码创建一个包含用户输入框和动态图表的 Web 应用：  
+
+```python
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 设置页面标题
+st.title("Streamlit 示例：数据展示与交互")
+
+# 用户输入组件
+name = st.text_input("请输入你的名字")
+if name:
+    st.write(f"你好, {name}!")
+
+# 生成示例数据
+data = pd.DataFrame({
+    'x': np.arange(1, 11),
+    'y': np.random.rand(10)
+})
+
+# 展示数据框
+st.subheader("示例数据框")
+st.write(data)
+
+# 绘制动态图表
+st.subheader("动态折线图")
+fig, ax = plt.subplots()
+ax.plot(data['x'], data['y'], marker='o')
+st.pyplot(fig)
+
+# 条件更新（按钮触发）
+if st.button("重新生成数据"):
+    data = pd.DataFrame({
+        'x': np.arange(1, 11),
+        'y': np.random.rand(10)
+    })
+    st.write("数据已更新！")
+    st.line_chart(data.set_index('x'))
+```
+
+#### 3. 运行应用  
+将上述代码保存为 `app.py`，在终端运行：  
+```bash
+streamlit run app.py
+```
+浏览器会自动打开页面（默认地址 `http://localhost:8501`），显示交互式界面 。
