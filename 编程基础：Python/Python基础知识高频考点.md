@@ -42,6 +42,7 @@
 - [40.python中海象运算符的介绍](#40.python中海象运算符的介绍)
 - [41.Python中tuple、list和dict有什么区别？](#41.Python中tuple、list和dict有什么区别？)
 - [42.为什么说Python是动态语言？](#42.为什么说Python是动态语言？)
+- [43.介绍一下Python中logging库的作用](#43.介绍一下Python中logging库的作用)
 
 
 <h2 id="1.python是解释语言还是编译语言？">1.Python是解释语言还是编译语言？</h2>
@@ -2104,3 +2105,147 @@ d.wag_tail()    # 输出"Tail wagging!"
 | 代码简洁（减少类型声明冗余）        | 性能较低（类型检查在运行时完成）   |
 | 支持元编程（灵活修改程序结构）      | 维护成本高（大型项目可读性下降）   |
 
+
+<h2 id="43.介绍一下Python中logging库的作用">43.介绍一下Python中logging库的作用</h2>
+
+### 一、Logging库核心原理与作用
+
+#### 1. 日志系统架构
+Python的logging库采用分层设计，包含四大核心组件：
+```mermaid
+graph TD
+    A[Logger] -->|传递日志| B[Filter]
+    B -->|过滤后日志| C[Handler]
+    C -->|格式化| D[Formatter]
+    D -->|输出| E[存储介质]
+```
+
+#### 2. 核心组件功能
+| 组件 | 功能 | 关键特性 |
+|------|------|----------|
+| **Logger** | 日志记录入口 | 提供`debug()`, `info()`, `warning()`, `error()`, `critical()`方法 |
+| **Handler** | 日志输出目标 | 支持文件、控制台、网络、邮件等20+输出方式 |
+| **Formatter** | 日志格式控制 | 自定义时间、文件名、行号、进程ID等格式 |
+| **Filter** | 日志过滤 | 按级别、模块名、自定义条件过滤日志 |
+
+#### 3. 日志级别体系
+Python定义6级日志体系（数值越小越紧急）：
+| 级别 | 数值 | 适用场景 |
+|------|------|----------|
+| CRITICAL | 50 | 系统崩溃、致命错误 |
+| ERROR | 40 | 功能模块失败 |
+| WARNING | 30 | 潜在问题警告 |
+| INFO | 20 | 运行状态确认 |
+| DEBUG | 10 | 调试详细信息 |
+| NOTSET | 0 | 继承父Logger级别 |
+
+#### 4. 核心优势
+1. **异步日志记录**：避免阻塞主线程
+2. **进程安全**：支持多进程日志写入
+3. **动态配置**：运行时修改日志行为
+4. **日志回滚**：自动分割/清理历史日志
+
+### 二、通俗易懂的实际案例：电商订单系统
+
+#### 场景描述
+开发一个电商订单处理系统，需记录：
+- 用户下单关键信息
+- 支付处理状态
+- 库存更新异常
+- 系统错误警报
+
+#### 代码实现
+```python
+import logging
+from logging.handlers import TimedRotatingFileHandler
+
+# 创建订单系统Logger
+order_logger = logging.getLogger("order_system")
+order_logger.setLevel(logging.INFO)
+
+# 创建控制台Handler
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.WARNING)  # 只显示警告及以上
+
+# 创建文件Handler（按天分割）
+file_handler = TimedRotatingFileHandler(
+    "orders.log", 
+    when="midnight", 
+    backupCount=7
+)
+
+# 创建格式化器
+formatter = logging.Formatter(
+    "%(asctime)s | %(levelname)8s | %(module)s:%(lineno)d | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+
+# 设置格式化器
+console_handler.setFormatter(formatter)
+file_handler.setFormatter(formatter)
+
+# 添加Handler到Logger
+order_logger.addHandler(console_handler)
+order_logger.addHandler(file_handler)
+
+# 模拟业务逻辑
+def process_order(order):
+    order_logger.info(f"开始处理订单 {order['id']}")
+    
+    try:
+        # 支付处理
+        if not process_payment(order):
+            order_logger.warning(f"支付失败 {order['id']}")
+            return False
+        
+        # 库存更新
+        update_inventory(order)
+        order_logger.info(f"库存更新成功 {order['id']}")
+        
+    except InventoryError as e:
+        order_logger.error(f"库存不足: {e}", exc_info=True)
+        return False
+    except Exception as e:
+        order_logger.critical("系统错误", exc_info=True)
+        alert_admin()  # 通知管理员
+        return False
+        
+    return True
+
+# 使用示例
+process_order({"id": "ORD-1001", "items": [...]})
+```
+
+#### 日志输出示例
+```
+2023-08-15 14:30:22 |     INFO | order_processor:18 | 开始处理订单 ORD-1001
+2023-08-15 14:30:25 |  WARNING | payment:32 | 支付失败 ORD-1001
+2023-08-15 14:35:10 |    ERROR | inventory:45 | 库存不足: Item A out of stock
+  Traceback (most recent call last):
+    File "order_processor.py", line 25, in process_order
+      update_inventory(order)
+    File "inventory.py", line 15, in update_inventory
+      raise InventoryError(f"Item {item_id} out of stock")
+```
+
+## 三、Logging库在AI系统中的核心价值
+
+```mermaid
+graph LR
+    A[Logging库] --> B[系统可观测性]
+    A --> C[故障诊断]
+    A --> D[性能分析]
+    A --> E[合规审计]
+    
+    B --> F[实时监控]
+    C --> G[快速定位]
+    D --> H[优化资源]
+    E --> I[安全认证]
+    
+    F --> J[提高系统可用性]
+    G --> K[减少MTTR]
+    H --> L[降低成本]
+    I --> M[通过行业认证]
+```
+
+掌握Logging库不仅能提升开发效率，更是构建可靠AI系统的基石。在AIGC场景实现生成质量追踪，在深度学习训练中监控模型行为，在自动驾驶系统满足安全合规要求，专业级的日志管理是AI工程师的核心竞争力之一。
