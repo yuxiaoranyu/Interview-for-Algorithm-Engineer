@@ -9,6 +9,9 @@
 - [7.ComfyUI中节点（node）的设计架构是什么样的？](#7.ComfyUI中节点（node）的设计架构是什么样的？)
 - [8.热门AI绘画插件ADetailer的工作原理是什么样的？](#8.热门AI绘画插件ADetailer的工作原理是什么样的？)
 - [9.Stable Diffusion WebUI和ComfyUI有哪些区别？](#9.Stable-Diffusion-WebUI和ComfyUI有哪些区别？)
+- [10.ComfyUI中常用的核心节点类型和功能？](#10.ComfyUI中常用的核心节点类型和功能？)
+- [11.ComfyUI中SDXL和SD1.5模型的切换要注意什么?](#11.ComfyUI中SDXL和SD1.5模型的切换要注意什么?)
+- [12.ComfyUI中FLUX模型的正确加载方式和注意事项](#12.ComfyUI中FLUX模型的正确加载方式和注意事项)
 
 
 <h2 id="1.目前主流的AI绘画框架有哪些？">1.目前主流的AI绘画框架有哪些？</h2>
@@ -51,7 +54,7 @@ Rocky从AIGC时代的工业界、应用界、竞赛界以及学术界出发，�
    根据 **Variation Strength** 参数（取值范围 $[0,1]$ ），对两个噪声图进行线性插值：  
 
    $N_{\text{final}} = (1 - \alpha) \cdot N_{\text{original}} + \alpha \cdot N_{\text{variation}}$
-     
+   
    其中 $\alpha$ 为 Variation Strength 的值：
    - $\alpha=0$ ：完全使用原始种子噪声，结果与原始种子一致。
    - $\alpha=1$ ：完全使用变体种子噪声，等同于直接替换种子。
@@ -557,3 +560,125 @@ ControlNet的引入还能够解决高去噪强度下修复区域与全局图像�
   WebUI与ComfyUI的模型兼容性逐渐增强（如共享VAE、Lora），未来可能形成“WebUI快速原型+ComfyUI生产部署”的协作模式。
 
 通过以上分析，面试者可结合具体业务需求（如AIGC的创意效率 vs 自动驾驶的数据生成规模），深入阐述工具选型背后的技术逻辑。
+
+
+
+<h2 id="10.ComfyUI中常用的核心节点类型和功能？">10.ComfyUI中常用的核心节点类型和功能？</h2>
+
+ComfyUI提供了丰富的内置节点，覆盖了AI绘画生成的各个环节，理解这些核心节点是熟练使用ComfyUI的基础。
+
+**模型加载节点**：
+
+- **Load Checkpoint**：加载完整的SD模型（包含UNet、VAE、CLIP）
+- **Load LoRA**：加载LoRA适配器
+- **Load VAE**：单独加载VAE编码器/解码器
+- **Load ControlNet Model**：加载ControlNet控制模型
+
+**文本处理节点**：
+
+- **CLIP Text Encode (Prompt)**：将文本提示编码为条件向量
+- **Positive/Negative Prompt**：正向和负向提示词输入
+- **Text Concatenate**：文本拼接和组合
+
+**图像处理节点**：
+
+- **Load Image**：加载输入图像
+- **VAE Encode**：将图像编码到潜在空间
+- **VAE Decode**：将潜在向量解码为图像
+- **Image Scale**：图像尺寸调整
+
+**采样生成节点**：
+
+- **KSampler**：核心采样器节点
+- **KSampler Advanced**：高级采样器，支持更多参数
+- **SamplerCustom**：自定义采样流程
+
+**条件控制节点**：
+
+- **ControlNet Apply**：应用ControlNet控制
+- **IPAdapter Apply**：应用IP-Adapter图像提示
+- **ConditioningCombine**：条件合并
+
+**工具节点**：
+
+- **Preview Image**：图像预览显示
+- **Save Image**：保存生成结果
+- **Batch**：批处理相关节点
+- **Math**：数学运算节点
+
+**连接技巧**：
+
+- 理解数据类型匹配（IMAGE、CONDITIONING、MODEL等）
+- 掌握必需连接和可选连接的区别
+- 学会使用Reroute节点整理连线
+
+<h2 id="11.ComfyUI中SDXL和SD1.5模型的切换要注意什么？">11.ComfyUI中SDXL和SD1.5模型的切换要注意什么？</h2>
+
+**关键差异**：
+
+- **图像尺寸**：SD1.5推荐512x512，SDXL推荐1024x1024
+- **VAE兼容性**：SDXL需要专用VAE或内置VAE
+- **LoRA格式**：两者LoRA不通用
+- **生成步数**：SDXL通常需要更少步数(15-25步)
+
+**切换工作流调整**：
+
+```
+SD1.5 → SDXL：
+1. 修改Empty Latent Image尺寸：512x512 → 1024x1024
+2. 检查VAE兼容性，必要时加载SDXL VAE
+3. 移除SD1.5专用LoRA
+4. 调整采样步数：30-50 → 20-30
+5. CFG可以稍微降低：7-12 → 6-10
+```
+
+<h2 id="12.ComfyUI中FLUX模型的正确加载方式和注意事项">12.ComfyUI中FLUX模型的正确加载方式和注意事项</h2>
+
+FLUX模型**不能使用传统的Load Checkpoint节点**一次性加载，必须分组件单独加载！
+
+**正确的加载方式**：
+
+**1. 分组件加载（必须）**
+
+```
+❌ 错误：Load Checkpoint → 选择FLUX模型
+✅ 正确：
+- DualCLIPLoader → 加载文本编码器
+- UNETLoader → 加载FLUX UNet
+- VAELoader → 加载FLUX VAE
+```
+
+**2. 双文本编码器配置**
+
+```
+DualCLIPLoader节点设置：
+- clip_name1: clip_l.safetensors (CLIP-L编码器)
+- clip_name2: t5xxl_fp16.safetensors (T5-XXL编码器)
+- type: flux (选择FLUX类型)
+```
+
+**3. 工作流连接顺序**
+
+```
+DualCLIPLoader → CLIPTextEncode (正向提示)
+              → CLIPTextEncode (负向提示，可选)
+UNETLoader → BasicGuider
+VAELoader → VAEDecode
+```
+
+**与SD模型的区别**：
+
+```
+SD模型：Load Checkpoint → 一个文件包含所有组件
+FLUX模型：分离式架构 → 需要单独加载每个组件
+- UNet: flux1-dev.safetensors (~12GB)
+- CLIP: clip_l.safetensors (~250MB)  
+- T5: t5xxl_fp16.safetensors (~9GB)
+- VAE: ae.safetensors (~330MB)
+```
+
+**常见错误**：
+
+- 直接用Load Checkpoint加载FLUX → 报错或无法正常工作
+- 忘记加载T5编码器 → 文本理解能力严重下降
+- 使用SD的VAE → 图像质量异常

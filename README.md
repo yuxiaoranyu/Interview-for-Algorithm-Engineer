@@ -10,7 +10,7 @@
 
 同时，本项目也可作为高等学府AIGC相关专业的研究、教学、竞赛以及学习的参考用书；还可为AIGC、传统深度学习以及自动驾驶领域的初、中级技术人员提供思路参考，**尤其适合AIGC求职者和提供相关AICG算法岗位的面试官阅读研究**。
 
-**本项目构建和维护不容易，希望大家能多多star～。star本项目，你就获得了0.5个心仪的offer，再转发本项目，你就获得了0.75个心仪offer！持续star和分享本项目，你就获得了职场晋升和薪资上涨的50%必要条件。祝大家求职顺利、工作顺利！**
+**本项目构建和维护不容易，希望大家能多多star～。star本项目，你就获得了0.5个心仪的offer，再分享本项目，你就获得了0.75个心仪offer！持续star和分享本项目，你就获得了职场晋升和薪资上涨的50%必要条件。祝大家求职顺利、工作顺利！**
 
 ## 📖目录
 
@@ -69,6 +69,9 @@ Rocky最新撰写完成10万字的Stable Diffusion 3和FLUX.1系列模型全网�
 张一凡，资深AIGC算法专家，曾就职于国内top安防公司，专注于AIGC算法实现与落地部署，目前在国内某研究所主要从事AI大模型相关的研究。
 
 猫先生 副主编   
+<a href="https://mp.weixin.qq.com/s/93TT88Fize3IBSbidnEJiw"><img src="https://img.shields.io/badge/魔方AI空间-公众号-brightgreen"></a>
+<a href="https://blog.csdn.net/m_aigc2022?type=blog"><img src="https://img.shields.io/badge/猫先生-CSDN-red"></a>
+<a href="https://zhihu.com/people/m_aigc2022"><img src="https://img.shields.io/badge/猫先生-知乎-blue"></a>
 
 猫先生，公众号“魔方AI空间”主理人，资深AIGC算法专家，具有丰富AI模型部署及落地经验，多次参加赛事取得冠军成绩，专注于AIGC技术探索与商业案例应用。
 
