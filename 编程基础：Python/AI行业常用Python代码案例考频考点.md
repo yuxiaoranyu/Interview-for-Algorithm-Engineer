@@ -26,6 +26,8 @@
 - [25.Python中Redis安装及数据插入、查询](#25.Python中Redis安装及数据插入、查询)
 - [26.Gradio如何使用？](#26.Gradio如何使用？)
 - [27.Strreamlit如何使用？](#27.Streamlit如何使用？)
+- [28.pyproject.toml编译安装自定义库包？](#28.pyproject.toml编译安装自定义库包？)
+
 
 <h2 id='1.多进程multiprocessing基本使用代码段'>1.多进程multiprocessing基本使用代码段</h2>
 
@@ -3259,3 +3261,177 @@ if st.button("重新生成数据"):
 streamlit run app.py
 ```
 浏览器会自动打开页面（默认地址 `http://localhost:8501`），显示交互式界面 。
+
+
+<h2 id="28.pyproject.toml编译安装自定义库包？">28.pyproject.toml编译安装自定义库包？</h2>
+
+---
+
+## **1. 项目结构**
+确保项目目录符合标准布局（以 `my_package` 为例）：
+```bash
+my_package/
+├── src/
+│   └── my_package/
+│       ├── __init__.py
+│       └── module.py
+├── pyproject.toml
+├── README.md
+└── LICENSE
+```
+
+- **`src/`**：源代码根目录，包含主模块文件夹（如 `my_package/`）。
+- **`__init__.py`**：声明该目录为 Python 包。
+- **`pyproject.toml`**：标准化构建配置文件（替代 `setup.py` 和 `setup.cfg`）。
+
+---
+
+## **2. 配置 `pyproject.toml`**
+根据 PEP 517 和 PEP 621 标准定义包元数据和构建依赖。
+
+### **示例配置**
+```toml
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my_package"
+version = "0.1.0"
+authors = [
+    { name="Your Name", email="your.email@example.com" }
+]
+description = "A sample custom Python library"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+keywords = ["sample", "library"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    "numpy>=1.20",
+    "requests>=2.26"
+]
+
+[project.urls]
+Homepage = "https://example.com"
+Repository = "https://github.com/yourname/my_package"
+
+[project.scripts]
+# 定义命令行工具（可选）
+my_script = "my_package.module:main_function"
+```
+
+---
+
+## **3. 构建库**
+使用 `build` 工具生成可发布的包（Wheel 和 Source Distribution）。
+
+### **步骤**
+1. **安装构建工具**：
+   ```bash
+   pip install build
+   ```
+
+2. **生成构建文件**：
+   ```bash
+   python -m build
+   ```
+   输出结果：
+   ```
+   dist/
+   ├── my_package-0.1.0-py3-none-any.whl  # Wheel 文件
+   └── my_package-0.1.0.tar.gz            # 源码包
+   ```
+
+---
+
+## **4. 安装库**
+### **方法 1：直接安装生成的 Wheel**
+```bash
+pip install dist/my_package-0.1.0-py3-none-any.whl
+```
+
+### **方法 2：开发模式安装（推荐调试）**
+在项目根目录运行：
+```bash
+pip install -e .
+```
+- `-e` 表示“editable mode”（开发模式），修改源代码后无需重新安装。
+- 验证安装：
+  ```bash
+  python -c "import my_package; print(my_package.__version__)"
+  ```
+
+---
+
+## **5. 测试安装**
+### **验证模块导入**
+```python
+import my_package
+print(my_package.module.some_function())  # 假设 module.py 中有 some_function
+```
+
+### **验证命令行脚本（如有）**
+如果配置了 `[project.scripts]`，可直接运行：
+```bash
+my_script
+```
+
+---
+
+## **6. 常见问题与解决**
+### **问题 1：ModuleNotFoundError**
+- **原因**：未正确配置 `src/` 目录或未安装。
+- **解决**：
+  1. 确保 `pyproject.toml` 中的 `name` 与 `src/` 下的模块名一致。
+  2. 检查是否已运行 `pip install -e .` 或 `python -m build`。
+
+### **问题 2：构建时缺少依赖**
+- **原因**：未安装 `build` 工具或依赖未声明。
+- **解决**：
+  ```bash
+  pip install setuptools wheel build
+  ```
+
+### **问题 3：依赖版本冲突**
+- **解决**：在 `pyproject.toml` 的 `dependencies` 中明确指定版本范围，例如：
+  ```toml
+  dependencies = [
+      "numpy>=1.20,<1.24",
+      "requests~=2.26"
+  ]
+  ```
+
+---
+
+## **7. 与传统 `setup.py` 的对比**
+| **特性**               | **`pyproject.toml`**                          | **`setup.py`**                      |
+|------------------------|-----------------------------------------------|-------------------------------------|
+| **标准化**             | PEP 517/621 官方标准                         | 非标准化（需手动维护）              |
+| **依赖管理**           | 明确声明构建依赖（如 `setuptools`, `wheel`） | 隐式依赖（易导致环境不一致）        |
+| **可读性**             | 结构化 TOML 格式，易读易维护                 | Python 脚本，逻辑复杂时难以维护     |
+| **开发模式支持**       | 支持 `pip install -e .`                     | 同样支持，但依赖 `setup.py` 正确编写 |
+| **未来兼容性**         | 推荐方式，社区主流趋势                       | 逐步被取代                          |
+
+---
+
+## **8. 注意事项**
+1. **虚拟环境**：始终在虚拟环境中测试和安装，避免全局污染：
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/macOS
+   venv\Scripts\activate    # Windows
+   ```
+
+2. **许可证文件**：确保 `LICENSE` 文件存在并符合项目需求（如 MIT、Apache 等）。
+
+3. **版本管理**：遵循 [语义化版本控制](https://semver.org/)（SemVer）更新版本号。
+
+4. **文档和测试**：为包编写文档（如 `README.md`）和单元测试（如 `pytest`）。
+
+---
