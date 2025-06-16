@@ -60,6 +60,10 @@
 - [56.扩散模型中不同采样器（Sampler）的原理对比](#56.扩散模型中不同采样器（Sampler）的原理对比)
 - [57.扩散模型中噪声调度策略的设计原理？](#57.扩散模型中噪声调度策略的设计原理？)
 - [58.主流AI绘画大模型的完整训练流程是什么样的？](#58.主流AI绘画大模型的完整训练流程是什么样的？)
+- [59.LoRA和DreamBooth对比](#59.LoRA和DreamBooth对比)
+- [60.什么是SDXL Refiner？](#60.什么是SDXL Refiner？)
+- [61.什么是X-Flux？](#61.什么是X-Flux？)
+- [62.StableDiffusion的一些加速方法](#62.StableDiffusion的一些加速方法)
 
 ## 第二章 Midjourney高频考点
 
@@ -1398,6 +1402,266 @@ Kandinsky 3.0 的主要技术特点包括：
 ### 模型性能优化部署层面：
 1. 一致噪声期望：预测噪声分布，减少迭代。
 2. 重要性感知时间步采样：聚焦关键扩散步，跳过非关键步。
+
+<h2 id="59.LoRA和DreamBooth对比">59.LoRA和DreamBooth对比</h2>
+
+#### 核心原理
+
+DreamBooth通过在整个模型上进行微调来学习新概念：
+
+python
+
+```python
+# DreamBooth的损失函数
+L_dreambooth = E[||ε - ε_θ(x_t, t, c_text)||²] + λ * E[||ε - ε_θ(x_pr, t, c_pr)||²]
+```
+
+其中第二项是**先验保留损失（Prior Preservation Loss）**，防止模型遗忘原有知识。
+
+#### 技术特点
+
+1. **全模型微调**：更新UNet的所有参数
+2. **类别特定标识符**：使用独特的标识词（如"sks"）
+3. **先验保留**：生成类别图像以保持模型的泛化能力
+
+#### 训练流程
+
+python
+
+```python
+# 简化的DreamBooth训练流程
+def train_dreambooth(model, images, class_prompt, instance_prompt):
+    # 1. 生成先验图像
+    prior_images = generate_class_images(model, class_prompt, num=100)
+    
+    # 2. 准备训练数据
+    dataset = combine_datasets(
+        instance_data=(images, instance_prompt),
+        class_data=(prior_images, class_prompt)
+    )
+    
+    # 3. 微调整个模型
+    for batch in dataset:
+        loss = compute_dreambooth_loss(model, batch)
+        optimizer.step(loss)
+```
+
+### LoRA：
+
+#### 核心原理
+
+LoRA通过低秩矩阵分解来高效地适配预训练模型：
+
+python
+
+```python
+# LoRA的核心公式
+W' = W + ΔW = W + B·A
+# 其中 B ∈ R^(d×r), A ∈ R^(r×k), r << min(d,k)
+```
+
+#### 技术特点
+
+1. **参数高效**：只训练额外的低秩矩阵
+2. **模块化设计**：可以轻松切换和组合不同的LoRA
+3. **训练速度快**：参数量大幅减少
+
+#### 实现细节
+
+python
+
+```python
+class LoRALayer(nn.Module):
+    def __init__(self, in_features, out_features, rank=4):
+        super().__init__()
+        self.A = nn.Parameter(torch.randn(rank, in_features))
+        self.B = nn.Parameter(torch.zeros(out_features, rank))
+        self.scale = 1.0
+        
+    def forward(self, x, original_weight):
+        # 原始输出 + LoRA调整
+        return F.linear(x, original_weight) + self.scale * (x @ self.A.T @ self.B.T)
+```
+
+### 详细对比分析
+
+#### 1. 学习能力对比
+
+**DreamBooth的优势**：
+
+- 能够学习复杂的新概念
+- 对细节的捕捉更精确
+- 适合需要大幅改变模型行为的场景
+
+**LoRA的优势**：
+
+- 快速适配新风格
+- 可以组合多个LoRA实现复合效果
+- 保持原模型能力的同时添加新特性
+
+#### 2. 实际应用场景
+
+**DreamBooth适用于**：
+
+- 人物/宠物的个性化定制
+- 需要精确还原特定对象
+- 商业级的定制化需求
+
+**LoRA适用于**：
+
+- 艺术风格迁移
+- 快速原型开发
+- 需要频繁切换不同适配的场景
+
+<h2 id="60.什么是SDXL Refiner？">60.什么是SDXL Refiner？</h2>
+
+SDXL Refiner是Stability AI推出的图像精细化模型，作为SDXL生态系统的第二阶段，专门负责提升图像细节质量。它采用了"专家集成"的设计理念：Base模型生成基础结构，Refiner模型优化细节表现。
+
+![pipeline](./imgs/pipeline.png)
+
+### 核心工作原理
+
+#### 两种使用方式
+
+1. **标准流程**：Base模型完成80%去噪 → Refiner完成剩余20%精细化
+2. **SDEdit流程**：Base生成完整图像 → Refiner使用img2img技术优化
+
+### 技术特点
+
+- **双文本编码器**：OpenCLIP-ViT/G + CLIP-ViT/L，提供更好的语义理解
+- **专门优化**：针对低噪声水平的去噪过程进行特殊训练
+- **参数规模**：6.06B参数，专注于细节增强
+
+### 性能提升
+
+根据官方评测，SDXL Base + Refiner的组合相比之前版本：
+
+- 用户偏好度达到91%（远超SD 1.5/2.1）
+
+- 细节清晰度提升约20-30%
+
+- 整体图像质量显著改善
+
+- 
+
+  SDXL Refiner通过专门的精细化设计，成功解决了AI图像生成中的细节问题。它与Base模型的配合使用，让SDXL成为目前最优秀的开源图像生成方案之一。对于追求高质量图像输出的用户，Refiner是不可或缺的工具。
+
+<h2 id="61.什么是X-Flux？">61.什么是X-Flux？</h2>
+
+在AI图像生成领域，Black Forest Labs推出的Flux模型无疑是一个重要的里程碑。而今天要为大家介绍的X-Flux项目，则是为这个强大的扩散模型量身打造的一套完整工具包，让每个开发者都能轻松地对Flux模型进行微调和推理。
+
+X-Flux是一个开源代码库，专门为Flux扩散模型提供微调和推理脚本。它不仅仅是一个简单的工具集，更像是一个完整的生态系统，通过多种先进的适配技术，让用户能够根据特定需求来增强基础Flux模型的能力。
+
+无论是想要训练特定风格的图像生成器，还是需要精确控制生成过程，X-Flux都能提供专业级的解决方案。
+
+### 核心功能亮点
+
+#### 🎯 三大微调方法，各显神通
+
+**LoRA（低秩适配）** 这是一种参数高效的微调技术，能够让模型快速适应特定的艺术风格或应用领域。想象一下，你只需要用少量的训练数据，就能让Flux学会你喜欢的绘画风格——这就是LoRA的魅力所在。
+
+**ControlNet** 如果说LoRA是让模型学会"风格"，那么ControlNet就是教会模型"服从指令"。通过训练条件适配器，你可以精确控制图像生成的每一个细节，比如边缘检测、深度信息、姿态控制等。
+
+**IP-Adapter** 这是一个令人兴奋的功能——图像提示适配。你可以用一张参考图片来引导生成过程，让AI理解你想要的视觉效果，实现真正的"以图生图"。
+
+### 🖼️ 高分辨率生成支持
+
+在这个追求视觉质量的时代，X-Flux原生支持1024×1024甚至更高分辨率的图像生成。无论是用于商业设计还是艺术创作，都能满足专业级的画质需求。
+
+### 💻 多样化的使用界面
+
+**命令行界面** 适合喜欢脚本化操作和批量处理的技术用户，可以轻松集成到现有的工作流程中。
+
+**Gradio网页界面** 为那些偏爱图形化操作的用户提供了直观的交互体验，特别适合微调过程的可视化监控。
+
+**ComfyUI集成** 通过独立的代码库，X-Flux还支持与流行的ComfyUI工作流集成，进一步扩展了应用场景。
+
+### ⚡ 性能优化的艺术
+
+在AI模型训练中，性能优化往往是最大的挑战。X-Flux在这方面做得相当出色：
+
+- **DeepSpeed集成**：提供高效的分布式训练能力
+- **量化支持**：通过FP8量化技术显著降低内存占用
+- **模型卸载**：智能的内存管理，让有限的硬件资源发挥最大价值
+
+
+
+<h2 id="62.StableDiffusion的一些加速方法">62.StableDiffusion的一些加速方法</h2>
+
+Stable Diffusion 推理优化主要通过以下几种技术实现加速：
+
+### 1. 基础优化（立即见效）
+
+#### FP16 半精度
+
+```python
+pipe = StableDiffusionPipeline.from_pretrained(
+    "stable-diffusion-v1-5/stable-diffusion-v1-5",
+    torch_dtype=torch.float16
+).to("cuda")
+```
+
+- **效果**：速度提升 2-3 倍，显存减半
+
+#### 高效调度器
+
+```python
+from diffusers import DPMSolverMultistepScheduler
+pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+# 从 50 步减少到 20 步
+```
+
+- **效果**：推理步数减少 60%
+
+### 2. 注意力优化
+
+#### PyTorch 2.0 SDPA（推荐）
+
+- PyTorch 2.0 自动启用，无需额外配置
+- 性能与 xFormers 相当
+
+#### xFormers（备选）
+
+```python
+pipe.enable_xformers_memory_efficient_attention()
+```
+
+- **效果**：速度提升 20-100%，显存显著降低
+
+### 3. 高级优化
+
+#### torch.compile
+
+```python
+pipe.unet = torch.compile(pipe.unet, mode="reduce-overhead", fullgraph=True)
+```
+
+- **效果**：额外 5-50% 提升（A100）
+- **注意**：首次编译需要时间
+
+#### 模型蒸馏
+
+```python
+# 使用轻量级模型
+pipe = StableDiffusionPipeline.from_pretrained("nota-ai/bk-sdm-small", torch_dtype=torch.float16)
+```
+
+- **效果**：模型大小减少 51%，速度提升 43%
+
+### 4. 最佳实践组合
+
+```python
+# 1. FP16 + 2. 高效调度器 + 3. PyTorch 2.0
+pipe = StableDiffusionPipeline.from_pretrained(
+    "stable-diffusion-v1-5/stable-diffusion-v1-5",
+    torch_dtype=torch.float16
+).to("cuda")
+
+pipe.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+
+# 生成图像
+image = pipe("astronaut on mars", num_inference_steps=20).images[0]
+```
 
 
 
