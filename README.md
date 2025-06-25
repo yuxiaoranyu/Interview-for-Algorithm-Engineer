@@ -2,7 +2,7 @@
 
 【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、Deep Learning Interview、Algorithm Engineer Interview**
 
-**AIGC算法岗方向：** 涵盖AIGC、传统深度学习、自动驾驶、机器学习、计算机视觉、自然语言处理、强化学习、具身智能、元宇宙、AGI等。
+**AIGC算法岗方向：** 涵盖AIGC、传统深度学习、自动驾驶、AI Agent、机器学习、计算机视觉、自然语言处理、强化学习、具身智能、元宇宙、AGI等。
 
 **开发岗方向：** 涵盖Python、Java、C/C++、Go、嵌入式、前端、后端、测试、运维等。
 
