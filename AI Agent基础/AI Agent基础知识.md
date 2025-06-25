@@ -58,8 +58,12 @@ Rocky首先给大家讲解一下非AI Agent（Non-Agent），即常规AIGC大模
 基于上面的框架，接着再形成了5种主流的AI Agent设计模式：
 
 1. **反射模式（Reflection pattern）**：这个模式的**核心运作机制是构建自检-纠错迭代环**，AI Agent会审查其工作以发现错误并迭代，直到生成最终输出结果。
+![Agent反射模式](./imgs/Agent反射模式.gif)
 2. **工具使用模式（Tool use pattern）**：AI Agent允许LLM大模型通过使用外部工具获得更多信息，包括调用API、使用AI服务、查询矢量数据库、执行Python脚本等。**这使得LLM大模型不仅仅依赖于其内部知识，还可以获得互联网世界的庞大实时数据流来扩展知识边界**。
+![Agent工具使用模式](./imgs/Agent工具使用模式.gif)
 3. **ReAct模式（Reason and Act）**：**ReAct模式结合了反射模式和工具使用模式**，这使其成为当前AI Agent使用的最强大的模式之一。AI Agent既可以自我思考，自我纠错，还可以使用工具与世界交互。
+![Agent-ReAct模式](./imgs/Agent-ReAct模式.gif)
 4. **规划模式（Planning pattern）**：在这种模式下，**AI Agent根据任务的复杂程度，设计任务计划流程，对任务进行细分，再对细分子任务动用ReAct 模式进行处理**。可以说这种模式是一种战略思维，可以更有效地解决战略级复杂任务。
+![Agent规划模式](./imgs/Agent规划模式.gif)
 5. **多智能体模式（Multi-agent pattern）**：在这个模式中，**AI Agent系统中包含多个子Agent，每个子Agent都分配有一个专用的角色和任务，同时每个子Agent还可以访问外部工具进行综合工作**。最后，所有子Agent协同工作以提供最终结果，同时根据需要将细分任务委派给其他子Agent，形成一个复杂的“AI Agent协同社区”。
-
+![Agent多智能体模式](./imgs/Agent多智能体模式.gif)
