@@ -2,6 +2,7 @@
 
 - [1.什么是AI Agent（智能体）？](#1.什么是AI-Agent（智能体）？)
 - [2.AI Agent的主流设计模式有哪些？](#2.AI-Agent的主流设计模式有哪些？)
+- [3.什么是AI Agent中的function call？](#3.什么是AI-Agent中的function-call？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -76,3 +77,80 @@ Rocky首先给大家讲解一下非AI Agent（Non-Agent），即常规AIGC大模
 5. **多智能体模式（Multi-agent pattern）**：在这个模式中，**AI Agent系统中包含多个子Agent，每个子Agent都分配有一个专用的角色和任务，同时每个子Agent还可以访问外部工具进行综合工作**。最后，所有子Agent协同工作以提供最终结果，同时根据需要将细分任务委派给其他子Agent，形成一个复杂的“AI Agent协同社区”。
 
 ![Agent多智能体模式](./imgs/Agent多智能体模式.gif)
+
+
+<h2 id="3.什么是AI-Agent中的function-call？">3.什么是AI Agent中的function call？</h2>
+
+在AI Agent架构中，**Function Call（函数调用）本质上是智能体通过LLM大模型调用外部能力（API、AI服务、AI工具、数据库、搜索引擎等）并进行整合处理的闭环过程**。
+
+接下来，Rocky举一个生动形象的例子，让我们通俗易懂的领会Function Call的整个流程。
+
+假设我们已经有一个AI Agent系统，里面的核心LLM大模型是DeepSeek和GPT-4o，我们想要设计一个快速帮女朋友购买丝袜的AI服务-《丝袜选购服务》，实现AI Agent能够灵活帮女朋友选购丝袜的功能。
+
+这时，Function Call的整体流程如下所示：
+1. 需求解析阶段（Demand Analysis）：我们输入丝袜选购问题，LLM大模型（DeepSeek/GPT-4o）先解析用户自然语言请求（如“帮女友买波点黑丝”），识别核心参数：
+```python  
+{"品类": "丝袜", "风格": "波点", "颜色": "黑色", "用户身份": "送礼"}  
+``` 
+2. 工具决策阶段（Tool Orchestration）：如果问到了丝袜选购问题，LLM大模型则分析生成出需要调用丝袜选购服务function以及调用丝袜选购服务function要传入的参数，生成结构化调用JSON指令：
+```json  
+     {  
+       "function": "hosiery_selection_service",  
+       "parameters": {  
+         "material": "nylon-spandex",  
+         "opacity": "sheer",   
+         "color": "black",  
+         "purpose": "gift"  
+       }  
+     }  
+```  
+3. 服务执行阶段（Service Execution）：接着开始调用丝袜选购服务function，返回结构化结果：
+```json  
+     {  
+       "recommendations": [  
+         {"brand": "Wolford", "price": 189, "features": ["防勾丝", "微透明"]},  
+         {"brand": "Calzedonia", "price": 89, "features": ["简约塑形", "透气"]}  
+       ],  
+       "delivery_time": "当日达"  
+     }  
+ ```  
+5. 响应生成阶段（Response Synthesis）：最后将function返回的内容追加到输入提示词中，一起给到大模型，让它总结完善回答，并将答案整理好生成回复给我们：
+ 
+> “推荐两款高品质黑丝：  
+> 1. **Wolford透肉款**（189元）：顶级防勾丝工艺，微透明设计提升舒适度  
+> 2. **Calzedonia塑形款**（89元）：简约显瘦同时透气性强  
+> ⚡️均可今日送达，礼物建议选Wolford+礼盒包装”  
+
+### **全流程可视化图表**
+```mermaid
+graph TB
+    A[用户输入<br>“送女友的波点黑丝推荐”] --> B{需求解析}
+    B -->|DeepSeek/GPT-4o| C[参数结构化提取<br>▪ 材质：尼龙-氨纶<br>▪ 款式：波点<br>▪ 颜色：黑色<br>▪ 场景：送礼]
+    C --> D{工具决策}
+    D -->|函数匹配| E[调用丝袜选购服务<br>hosiery_selection_service<br>material='nylon-spandex', opacity='sheer', ...]
+    E --> F[电商API实时查询<br>▪ 品牌库存<br>▪ 价格区间<br>▪ 物流时效]
+    F --> G{结果整合}
+    G -->|LLM场景化重构| H[自然语言响应<br>▪ 产品对比<br>▪ 礼物建议<br>▪ 交付信息]
+```
+
+到这里，相信大家已经对AI Agent的Function Call有一个清晰的了解，接下来我们再总结一下Function Call与传统API调用的本质区别：
+
+   | **维度**         | 传统API调用               | Agent Function Call          |  
+   |------------------|--------------------------|------------------------------|  
+   | **输入格式**      | 结构化参数（JSON/XML）   | 自然语言指令                 |  
+   | **调用方**        | 开发者硬编码触发          | Agent自主决策触发            |  
+   | **错误处理**      | 显式异常捕获              | 反射机制自动重试/替换工具    |  
+   | **协议依赖**      | 固定通信协议（REST/gRPC） | 支持MCP等自适应协议          |  
+
+
+### 关键阶段解析：
+1. **意图识别**  
+   - 大模型解析“查询天气”语义，定位到工具类别  
+2. **参数抽取**  
+   - 从自然语言提取结构化参数（`材质`：`尼龙-氨纶`, `款式`：`波点`, `颜色`：`黑色`, `场景`：`送礼`）  
+3. **协议转换**  
+   - 生成工具要求的调用格式（如OpenAI Function Calling规范）  
+4. **结果整合**  
+   - 将工具返回的数据转化为自然语言响应  
+
+> **技术哲学启示**：当Function Call从技术组件进化为**AI Agent与现实的通用接口**，人类正将“行动权”赋予人工智能。这不仅是效率革命，更是认知范式的迁移——我们不再需要理解螺丝刀的结构，只需说：“请把画挂在墙上。”
