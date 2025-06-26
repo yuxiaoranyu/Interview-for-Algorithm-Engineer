@@ -4,6 +4,7 @@
 - [2.AI Agent的主流设计模式有哪些？](#2.AI-Agent的主流设计模式有哪些？)
 - [3.什么是AI Agent中的function call？](#3.什么是AI-Agent中的function-call？)
 - [4.什么是AI Agent中的MCP（Model Context Protocol）？](#4.什么是AI-Agent中的MCP（Model Context Protocol）？)
+- [5.AI Agent中function call和MCP的区别是什么？](#5.AI-Agent中function-call和MCP的区别是什么？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -178,3 +179,10 @@ Server：在这个例子中，丝袜购买方案 MCP Server 会被调用。它�
 这种架构设计使得AI Agent中的AIGC大模型可以在不同场景下灵活调用各种应用工具和数据源，而AIGC开发者只需专注于开发对应的 MCP Server，无需关心 Host 和 Client 的实现细节。
 
 ![MCP协议示意图.png](./imgs/MCP协议示意图.png)
+
+
+<h2 id="5.AI-Agent中function-call和MCP的区别是什么？">5.AI Agent中function call和MCP的区别是什么？</h2>
+
+在AI Agent领域视角来看，**MCP可以说是function call的更进一步延伸和封装**。
+
+function call解决了AIGC大模型与外部应用工具之间交互的问题；而MCP则在此基础上对交互的整个流程进行规范化，从而解决海量数据、AIGC大模型、AI应用工具之间的“孤岛”问题。
