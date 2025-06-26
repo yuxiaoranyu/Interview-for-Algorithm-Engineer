@@ -177,4 +177,4 @@ Server：在这个例子中，丝袜购买方案 MCP Server 会被调用。它�
 
 这种架构设计使得AI Agent中的AIGC大模型可以在不同场景下灵活调用各种应用工具和数据源，而AIGC开发者只需专注于开发对应的 MCP Server，无需关心 Host 和 Client 的实现细节。
 
-
+![MCP协议示意图.png](./imgs/MCP协议示意图.png)
