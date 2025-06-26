@@ -3,6 +3,7 @@
 - [1.什么是AI Agent（智能体）？](#1.什么是AI-Agent（智能体）？)
 - [2.AI Agent的主流设计模式有哪些？](#2.AI-Agent的主流设计模式有哪些？)
 - [3.什么是AI Agent中的function call？](#3.什么是AI-Agent中的function-call？)
+- [4.什么是AI Agent中的MCP（Model Context Protocol）？](#4.什么是AI-Agent中的MCP（Model Context Protocol）？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -154,3 +155,26 @@ graph TB
    - 将工具返回的数据转化为自然语言响应  
 
 > **技术哲学启示**：当Function Call从技术组件进化为**AI Agent与现实的通用接口**，人类正将“行动权”赋予人工智能。这不仅是效率革命，更是认知范式的迁移——我们不再需要理解螺丝刀的结构，只需说：“请把画挂在墙上。”
+
+
+<h2 id="4.什么是AI-Agent中的MCP（Model Context Protocol）？">4.什么是AI Agent中的MCP（Model Context Protocol）？</h2>
+
+2024年11月25日，Anthropic发布技术白皮书《Model Context Protocol: A Standardized Interface for AI Integration》，首次提出MCP（Model Context Protocol协议框架的概念。
+
+MCP（Model Context Protocol）构建了AI大模型与外部应用程序间的上下文交换规范，这使得AI开发者能够以一致的规范将各种实时数据源、AI工具和外接功能连接到AIGC大模型中，就像Type-C让不同设备能够通过相同的接口连接到主机一样。MCP的目标是创建一个通用标准，使 AI 应用程序的开发和集成变得更加简单和统一。
+
+在没有MCP之前，AIGC大模型和外部功能交互时的Function Calling是可以五花八门的，这样就导致了虽然有海量的应用程序和多样的AIGC大模型，但是他们之间却不一定能够兼容组合。而MCP就是以更标准的方式让AIGC大模型使用不同的外部工具，只要这些外部工具根据MCP协议定义输入输出规范。
+
+MCP由三个核心组件构成：Host、Client 和 Server。让我们通过一个实际案例来理解这些组件如何协同工作：
+
+假设我们正在使用AI Agent询问："帮我女朋友购买丝袜？"
+
+Host：AI Agent作为 Host，负责接收我们的提问并与其中的AIGC大模型交互。
+Client：当AIGC大模型需要确定丝袜购买方案时，Host 中内置的 MCP Client 会被激活。这个 Client 负责与适当的 MCP Server 建立连接。
+Server：在这个例子中，丝袜购买方案 MCP Server 会被调用。它负责执行实际的丝袜购买方案确定操作，访问对应的电商API，并返回找到的丝袜购买方案。
+
+整个流程是这样的：我们的问题 → AI Agent(Host) → AIGC大模型 → 需要丝袜购买信息 → MCP Client 连接 → 丝袜购买 MCP Server → 执行操作 → 返回结果 → AIGC大模型生成回答 → 显示在AI Agent上。
+
+这种架构设计使得AI Agent中的AIGC大模型可以在不同场景下灵活调用各种应用工具和数据源，而AIGC开发者只需专注于开发对应的 MCP Server，无需关心 Host 和 Client 的实现细节。
+
+
