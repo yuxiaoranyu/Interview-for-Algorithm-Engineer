@@ -7,6 +7,7 @@
 - [5.AI Agent中function call和MCP的区别是什么？](#5.AI-Agent中function-call和MCP的区别是什么？)
 - [6.AI Agent中的Agent2Agent(A2A)？](#6.AI-Agent中的Agent2Agent(A2A)？)
 - [7.AI Agent中的A2A和MCP的区别是什么？](#7.AI-Agent中的A2A和MCP的区别是什么？)
+- [8.当前AI Agent中的主流核心大模型有哪些？](#8.当前AI-Agent中的主流核心大模型有哪些？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -278,4 +279,13 @@ MCP协议解决的是AI Agent和各种外部工具/资源之间的交互问题�
 
 总的来说，它们是互补的，共同构建AI Agent的生态。
 
+
+<h2 id="8.当前AI-Agent中的主流核心大模型有哪些？">8.当前AI Agent中的主流核心大模型有哪些？</h2>
+
+Rockyu总结了当前AI Agent中的主流核心大模型，随着AI Agent领域的不断发展，相信未来会有更多核心大模型出现，Rocky也会持续更新本问答：
+1. claude-3.7/4-sonnet
+2. DeepSeek-R1/V3
+3. gemini-2.5系列
+4. qwen2.5系列
+5. 未来会有更多的LLM大模型和AIGC多模态大模型可以作为AI Agent的核心大模型
 
