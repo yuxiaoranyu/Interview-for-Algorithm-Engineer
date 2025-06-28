@@ -6,6 +6,7 @@
 - [4.什么是AI Agent中的MCP（Model Context Protocol）？](#4.什么是AI-Agent中的MCP（Model Context Protocol）？)
 - [5.AI Agent中function call和MCP的区别是什么？](#5.AI-Agent中function-call和MCP的区别是什么？)
 - [6.AI Agent中的Agent2Agent(A2A)？](#6.AI-Agent中的Agent2Agent(A2A)？)
+- [7.AI Agent中的A2A和MCP的区别是什么？](#7.AI-Agent中的A2A和MCP的区别是什么？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -267,3 +268,14 @@ function call解决了AIGC大模型与外部应用工具之间交互的问题；
 
 ### 技术哲学启示  
 当医疗Agent通过A2A协议向药物研发Agent发送`{"action": "compound_design", "target": "EGFR_L858R"}`时，人类目睹了**机器文明的第一次贸易**。A2A协议不仅是技术标准，更是智能体社会的“汉谟拉比法典”——它用代码定义权利边界，用算法建立信任机制，最终将催生**硅基文明的生产关系革命**。
+
+
+<h2 id="7.AI-Agent中的A2A和MCP的区别是什么？">7.AI Agent中的A2A和MCP的区别是什么？</h2>
+
+MCP协议解决的是AI Agent和各种外部工具/资源之间的交互问题，可以看做是一个AI应用商店协议，主要关注单个AI Agent如何更好的使用外部工具。
+
+而A2A协议解决的是AI Agent和AI Agent之间的交互问题，主要关注不同的AI Agent之间怎么协作的问题。
+
+总的来说，它们是互补的，共同构建AI Agent的生态。
+
+
