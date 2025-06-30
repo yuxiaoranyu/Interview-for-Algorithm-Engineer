@@ -64,16 +64,16 @@ Rocky Ding，AIGCmagic社区创始人，知乎AI领域知名博主（同名Rocky
 
 Rocky最新撰写完成10万字的Stable Diffusion 3和FLUX.1系列模型全网最详细讲解文章：[深入浅出完整解析Stable Diffusion 3（SD 3）和FLUX.1系列核心基础知识](https://zhuanlan.zhihu.com/p/684068402)
 
-张一凡 副主编
-
-张一凡，资深AIGC算法专家，曾就职于国内top安防公司，专注于AIGC算法实现与落地部署，目前在国内某研究所主要从事AI大模型相关的研究。
-
 猫先生 副主编   
 <a href="https://mp.weixin.qq.com/s/93TT88Fize3IBSbidnEJiw"><img src="https://img.shields.io/badge/魔方AI空间-公众号-brightgreen"></a>
 <a href="https://blog.csdn.net/m_aigc2022?type=blog"><img src="https://img.shields.io/badge/猫先生-CSDN-red"></a>
 <a href="https://zhihu.com/people/m_aigc2022"><img src="https://img.shields.io/badge/猫先生-知乎-blue"></a>
 
 猫先生，公众号“魔方AI空间”主理人，资深AIGC算法专家，具有丰富AI模型部署及落地经验，多次参加赛事取得冠军成绩，专注于AIGC技术探索与商业案例应用。
+
+张一凡 副主编
+
+张一凡，资深AIGC算法专家，曾就职于国内top安防公司，专注于AIGC算法实现与落地部署，目前在国内某研究所主要从事AI大模型相关的研究。
 
 徐晨轩 副主编
 
