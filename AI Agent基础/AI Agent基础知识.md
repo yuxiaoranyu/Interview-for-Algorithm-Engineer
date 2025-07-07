@@ -10,6 +10,7 @@
 - [8.当前AI Agent中的主流核心大模型有哪些？](#8.当前AI-Agent中的主流核心大模型有哪些？)
 - [9.AI Agent中的系统提示词有哪些作用？](#9.AI-Agent中的系统提示词有哪些作用？)
 - [10.在AI Agent中如何构建强大的系统提示词？](#10.在AI-Agent中如何构建强大的系统提示词？)
+- [11.System Prompt在AI Agent内部是如何生效的？](#11.System-Prompt在AI-Agent内部是如何生效的？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -361,3 +362,36 @@ Rockyu总结了当前AI Agent中的主流核心大模型，随着AI Agent领域�
 7. 安全、对齐、拒绝协议：负责任的AI Agent需要明确的界限。提示词需要界定负面的请求，并规定AI Agent应如何拒绝此类请求。也要确保如何正确安全地做事。
 8. 设定语气和互动风格：设定一致的角色定位（例如友善的专家、风趣的助手、直率的工程师）能打造更具可预测性和吸引力的用户体验。具体实施时，可从宽泛的指导原则延伸至非常细致的风格化指令。
 
+
+<h2 id="11.System-Prompt在AI-Agent内部是如何生效的？">11.System Prompt在AI Agent内部是如何生效的？</h2>
+
+在AI Agent主流框架设计中，定义了三种核心消息类型：System Prompt（System Message）、Assistant Prompt（Assistant Message）和User Prompt（User Message），三者功能明确区分：
+
+1. **User Prompt**：代表用户的直接输入的问题。
+2. **Assistant Prompt**：代表大模型生成的回复内容。
+3. **System Prompt**：用于设定大模型的角色、基础指令（如身份界定、安全约束）等核心配置。
+
+那么，**System Prompt是如何在AI Agent中生效的呢？**
+
+在AI Agent中，System Prompt主要起到静默提示的作用，通常被置于用户输入之前，与Assistant Prompt和User Prompt组合输入到大模型中。
+
+System Prompt与User Prompt的关键区别在于其位置与优先级：System Prompt固定设置在输入文本序列的开端。由于注意力机制的特性（序列首尾信息通常更受关注），该位置的内容更容易被模型识别和遵循。因此，一个完整的多轮对话提示词（Prompts）通常按以下模式拼接：
+
+```python
+System Prompt -> User Prompt -> Assistant Prompt -> User Prompt ... -> Assistant Prompt
+```
+
+在此结构中，Assistant Prompt的主要作用是向大模型展示历史对话记录，并明确标注其中哪些内容源于用户的输入。经过这种结构模式数据预训练和微调的大模型能够理解：这些并非即时用户输入，而是对话历史。这有助于大模型更好地把握上下文信息，从而更准确地回应后续问题。
+
+那么，有读者可能会问，为何不将System Prompt与User Prompt合并呢？一个重要考量在于安全性和可控性。通过在微调阶段区分消息类型，有助于防御提示词注入（Prompt Injection）等攻击手段。具体来说：
+
+1. 将核心角色定义和规则置于System Prompt中。
+2. 用户交互内容则放在User Prompt里。
+
+上述这种分离机制能有效防范某些简单的提示词攻击或信息泄露风险。特别是在实际应用中，System Prompt对用户通常是不可见的。其定义的规则和角色经过充分训练，因而在模型中享有最高优先级。这显著提高了大模型遵循开发者意图的可能性，降低了因用户输入变化导致输出偏离预期的风险。
+
+当然，仅依赖System Prompt并不能完全抵御攻击（例如，GPT-4 曾出现过System Prompt被诱导泄露的案例）。因此，对用户输入或模型输出进行二次校验，是更为稳妥的安全增强方案。
+
+接下来，Rocky举一个详细的例子，让大家更加通俗易懂的理解三种Prompt是如何拼接用户问题，并作为上下文输入给大模型的：
+
+![System prompt、Assistant Prompt、User Prompt三种提示词拼接](./imgs/System-prompt、Assistant-Prompt、User-Prompt三种提示词拼接.png)
