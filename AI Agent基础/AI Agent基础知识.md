@@ -16,7 +16,7 @@
 - [14.AI Agent和AI Workflow的区别在哪里？](#14.AI-Agent和AI-Workflow的区别在哪里？)
 - [15.在AI Agent中，function call如何把外部工具变成大模型可以理解的方式？](#15.在AI-Agent中，function-call如何把外部工具变成大模型可以理解的方式？)
 - [16.在AI Agent中，大模型如何学习到Function Calling能力？](#16.在AI-Agent中，大模型如何学习到Function-Calling能力？)
-- [17.当前AI Agent有哪些局限性？](#16.当前AI-Agent有哪些局限性？)
+- [17.当前AI Agent有哪些局限性？](#17.当前AI-Agent有哪些局限性？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
