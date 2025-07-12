@@ -15,6 +15,7 @@
 - [13.什么是DeepSearch？](#13.什么是DeepSearch？)
 - [14.AI Agent和AI Workflow的区别在哪里？](#14.AI-Agent和AI-Workflow的区别在哪里？)
 - [15.在AI Agent中，function call如何把外部工具变成大模型可以理解的方式？](#15.在AI-Agent中，function-call如何把外部工具变成大模型可以理解的方式？)
+- [16.在AI Agent中，大模型如何学习到Function Calling能力？](#16.在AI-Agent中，大模型如何学习到Function-Calling能力？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -544,3 +545,67 @@ Rocky认为，AI Agent是AI Workflow的进化版，AI Agent和AI Workflow在广�
 
 **注：** MCP（Model Control Plane）的核心功能即在于实现上述的**接口标准化**描述与执行逻辑衔接。
 
+
+<h2 id="16.在AI-Agent中，大模型如何学习到Function-Calling能力？">16.在AI Agent中，大模型如何学习到Function Calling能力？</h2>
+
+Function Calling能力不是LLM/AIGC大模型原生具备的，我们该如何让LLM/AIGC大模型学习到Function Calling能力呢？
+
+当前AI业界主流的方法是通过监督微调（Supervised Fine-tuning, SFT）来实现LLM/AIGC大模型对Function Calling能力的学习，而不是在预训练阶段从零开始专门训练。当前AI业界具备Function Calling能力的大模型包括DeepSeek、GPT-4o、Claude、Qwen、Gemini等。
+
+同时在微调训练前，LLM/AIGC基础大模型需要先具备良好的指令遵循和代码/结构化数据生成能力。
+
+Function Calling能力微调训练的核心思想：
+1. 获取识别意图（Intent Recognition）能力：理解用户的请求是否需要借助外部工具/函数来完成，而不是直接生成文本回答。
+2. 获取参数提取与格式化（Argument Extraction & Formatting）能力：如果需要调用函数，正确地从用户请求中抽取出所需的参数，并按照预先定义的格式（JSON、XML等）生成函数调用的指令。
+
+接下来，我们再梳理一下Function Calling的微调过程：
+
+1.数据集制作：可以说数据集整理是整个微调过程最重要的一步，因为我们需要构建一个包含Function Calling场景的指令微调数据集，让基础大模型能够充分的学习参数与格式化内容。每个数据样本通常包含以下内容：
+
+**用户输入（Input/Query）**：一个用户请求，可以是包含调用函数的内容，也可以是不包含调用函数的内容。比如：“查询今天腾讯股票的涨跌幅？”或者“给我写一首大气磅薄的诗词”。
+**可用函数/工具描述（Available Functions/Tools Description）**：一个结构化的描述，告知大模型当前有哪些函数可用，每个函数的用途、所需参数及其类型和描述。这个描述本身通常就是文本，需要设计一种清晰的格式（JSON、XML等）。
+**期望的输出（Desired Output）**：（1）如果需要调用函数：一个特定格式的字符串，通常是包含函数名和提取出的参数的JSON、XML对象。（2）如果不需要调用函数：大模型直接生成文本回答。例如：“好的，我写了一首大气磅薄的诗词：...”
+**数据集整体质量要求**：（1）数据多样性：需要足够多、覆盖各种场景（需要/不需要调用Function、调用不同Function、Function参数变化、模糊表达等）的高质量数据。（2）函数描述的清晰度：函数描述的质量直接影响模型能否正确理解和使用函数。（3）负样本：需要包含足够多明确不需要调用Function的样本，防止模型“过度触发”Function调用。
+
+下面是Function参数结构化格式的样例：
+```python
+{
+  "name": "get_stock_change",
+  "arguments": {
+    "stock_name": "腾讯股票",
+  }
+}
+```
+
+下面是数据集格式的样例：
+
+```python
+{
+    "conversations": [
+        {
+            "from": "human",
+            "value": "帮我查询一下今天股票的涨跌幅情况?"
+        },
+        {
+            "from": "gpt",
+            "value": "当然，我可以帮忙，请问你对哪只股票感情兴趣?"
+        },
+        {
+            "from": "human",
+            "value": "腾讯股票"
+        },
+        {
+            "from": "gpt",
+            "value": "{\n\"function\": \"get_stock_change\",\n\"arguments\": {\n\"stock_name\": \"腾讯股票\"\n}\n}"
+        }
+    ]
+}
+```
+
+2.选择基础模型：选择一个具备强大指令遵循能力的预训练LLM/AIGC大模型(例如DeepSeek等)。
+
+3.格式化训练数据：将每条数据样本组合成大模型可以理解的格式。通常是将数据集中的“用户输入”和“可用函数/工具描述”拼接起来作为模型的输入(Prompt)，将“期望的输出”（无论是JSON、XML函数调用还是文本回答）作为目标输出(Completion/Target/Label)。需要使用特定的分隔符或模板来区分不同部分。
+
+4.进行微调训练：使用标准的SFT方法（全参数微调或训练LoRA）在特定数据集上进行微调训练。大模型的优化目标是最小化预测输出和期望输出之间的差异（例如使用交叉熵损失）。大模型通过学习这些样本，学会根据用户输入和可用函数描述，决定是直接回答还是生成特定格式的函数调用JSON、XML。
+
+经过上述的微调训练流程，我们就能获得具备Function Calling能力的LLM/AIGC大模型了。
