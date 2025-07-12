@@ -612,7 +612,7 @@ Function Calling能力微调训练的核心思想：
 经过上述的微调训练流程，我们就能获得具备Function Calling能力的LLM/AIGC大模型了。
 
 
-<h2 id="17.当前AI Agent有哪些局限性？">17.当前AI-Agent有哪些局限性？</h2>
+<h2 id="17.当前AI-Agent有哪些局限性？">17.当前AI Agent有哪些局限性？</h2>
 
 1. AI Agent的幻觉问题（Hallucination）：AI Agent中的核心LLM/AIGC大模型可能会生成不准确的信息。
 2. 上下文长度与规划缺陷：LLM/AIGC大模型的上下文窗口有限，导致AI Agent难以处理长期任务规划和自我反思。
