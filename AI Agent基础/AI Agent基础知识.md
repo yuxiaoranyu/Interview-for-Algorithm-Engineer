@@ -14,6 +14,7 @@
 - [12.AI-Search和普通Search有什么区别？](#12.AI-Search和普通Search有什么区别)
 - [13.什么是DeepSearch？](#13.什么是DeepSearch？)
 - [14.AI Agent和AI Workflow的区别在哪里？](#14.AI-Agent和AI-Workflow的区别在哪里？)
+- [15.在AI Agent中，function call如何把外部工具变成大模型可以理解的方式？](#15.在AI-Agent中，function-call如何把外部工具变成大模型可以理解的方式？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -517,3 +518,29 @@ Rocky认为，AI Agent是AI Workflow的进化版，AI Agent和AI Workflow在广�
 随着AIGC时代的持续发展，AI Agent系统更有可能采用Agent+Workflow的混合架构，AI Agent 是"思考者"，解决做什么(What)的问题；AI Workflow则是"执行者"，解决怎么做(How)的问题。  
 
 所以两者并不存在高低之分，黑猫白猫，只要在适当的场景中抓到耗子，那就是好猫。
+
+
+<h2 id="15.在AI-Agent中，function-call如何把外部工具变成大模型可以理解的方式？">15.在AI Agent中，function call如何把外部工具变成大模型可以理解的方式？</h2>
+
+**将外部工具转化为大模型可理解方式的核心机制：接口描述标准化与执行逻辑衔接**
+
+实现LLM/AIGC大模型理解并调用外部工具、插件或API的核心，在于**建立一套标准化的接口描述机制**，并构建一个可靠的执行桥梁。该过程包含两个关键环节：
+
+1.  **接口描述标准化 (Standardized Interface Description):**
+    *   **定义结构化描述 (Schema):** 为每个工具设计一个符合特定调用格式（常用如 JSON/XML Schema）的结构化接口定义。该 Schema 必须清晰包含以下要素：
+        *   **唯一标识符 (Unique Name):** 用于模型精确识别所需调用的外部工具。
+        *   **功能说明书 (Functional Description):** 以自然、准确、无歧义的语言详细阐述工具的核心作用、所需输入参数、预期输出结果以及适用场景。**这是大模型理解外部工具功能并匹配用户意图的关键依据。** 避免使用过于技术化或模糊的术语。
+        *   **参数规格 (Parameter Specification):** 明确列出工具运行所需的每一个参数项，包括参数名称、数据类型、是否强制要求（必需性）以及具体的参数含义说明。
+
+2.  **执行逻辑衔接 (Execution Bridging):**
+    *   **向大模型提供工具目录 (Providing Tool Directory to LLM Model):** 在每次模型交互时，将当前所有可用工具的标准化描述作为上下文信息，整合到提示词信息（Prompt）的特定部分传递给大模型。
+    *   **解析模型调用指令 (Parsing Model Output):** 应用程序持续监听模型的输出响应。一旦检测到符合预定义格式（如特定 JSON/XML 结构）的函数调用指令（Function Call），立即进行解析。
+    *   **定位并执行目标工具 (Invoking the Actual Tool):** 根据解析出的工具标识符（Name），定位到对应的外部工具/插件/API实现。
+    *   **参数映射与校验 (Parameter Mapping & Validation):** 从调用指令的参数列表（Arguments）中提取参数值，执行必要的类型转换和有效性校验，**最终调用实际工具的接口**。
+    *   **获取与处理执行结果 (Result Handling):** 捕获工具执行后返回的结果（无论是成功响应还是错误信息）。
+    *   **结果反馈闭环 (Feeding Back Results to Model):** 将工具执行的结果格式化为文本信息，再次输入给大模型。这使得大模型能够基于该结果信息继续生成后续回复或决定下一步操作（如调用其他工具）。
+
+**本质概括：** 该机制的核心是为每个外部工具创建一份清晰易懂的“自然语言说明书”（即 Schema/描述），使模型能够理解其功能。同时，建立一个“翻译与执行层”，负责将大模型依据说明书生成的“操作指令”（JSON/XML Call）翻译并转化为对实际工具的具体调用动作，并将工具的“操作结果报告”翻译回大模型能够处理的信息。
+
+**注：** MCP（Model Control Plane）的核心功能即在于实现上述的**接口标准化**描述与执行逻辑衔接。
+
