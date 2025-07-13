@@ -631,7 +631,7 @@ Function Calling能力微调训练的核心思想：
 4. 用户满意度（User Satisfaction）
 
 
-<h2 id="19.AI Agent如何具备长期记忆能力？">19.AI Agent如何具备长期记忆能力？</h2>
+<h2 id="19.AI-Agent如何具备长期记忆能力？">19.AI Agent如何具备长期记忆能力？</h2>
 
 要让AI Agent具备长期记忆能力，需要解决LLM/AIGC大模型固有的“上下文窗口限制”和“无状态缺陷”。
 
