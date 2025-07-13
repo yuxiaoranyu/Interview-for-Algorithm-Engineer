@@ -17,6 +17,7 @@
 - [15.在AI Agent中，function call如何把外部工具变成大模型可以理解的方式？](#15.在AI-Agent中，function-call如何把外部工具变成大模型可以理解的方式？)
 - [16.在AI Agent中，大模型如何学习到Function Calling能力？](#16.在AI-Agent中，大模型如何学习到Function-Calling能力？)
 - [17.当前AI Agent有哪些局限性？](#17.当前AI-Agent有哪些局限性？)
+- [18.当前AI Agent有哪些主流的评价指标？](#18.当前AI-Agent有哪些主流的评价指标？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -619,5 +620,14 @@ Function Calling能力微调训练的核心思想：
 3. 多模态处理能力不成熟：不管是B端还是C端场景，很多需求都要处理图像、文本、视频、音频等异构数据，但多数AI Agent仍以文本这个单一模态为主。
 4. 行业适配困难：企业级场景要求“零失误”，但通用AI Agent容错率高，难以满足医疗、金融等高风险领域需求。垂直行业业务逻辑复杂，需深度绑定数据与流程。
 5. 计算成本仍然较高：AI Agent的运行推理过程仍然会消耗大量计算资源。
+
+
+<h2 id="18.当前AI-Agent有哪些主流的评价指标？">18.当前AI Agent有哪些主流的评价指标？</h2>
+
+1. 任务成攻率（Task Completion Rate）：层级化任务完成率，过程轨迹精确度，长周期策略稳定性等。
+2. 工具调用准确率（Tool Usage Accuracy）
+3. 推理质量（Reasoning Quality）
+4. 用户满意度（User Satisfaction）
+
 
 
