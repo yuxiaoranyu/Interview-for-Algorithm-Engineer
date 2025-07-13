@@ -18,6 +18,7 @@
 - [16.在AI Agent中，大模型如何学习到Function Calling能力？](#16.在AI-Agent中，大模型如何学习到Function-Calling能力？)
 - [17.当前AI Agent有哪些局限性？](#17.当前AI-Agent有哪些局限性？)
 - [18.当前AI Agent有哪些主流的评价指标？](#18.当前AI-Agent有哪些主流的评价指标？)
+- [19.AI Agent如何具备长期记忆能力？](#19.AI-Agent如何具备长期记忆能力？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -630,4 +631,41 @@ Function Calling能力微调训练的核心思想：
 4. 用户满意度（User Satisfaction）
 
 
+<h2 id="19.AI Agent如何具备长期记忆能力？">19.AI Agent如何具备长期记忆能力？</h2>
 
+要让AI Agent具备长期记忆能力，需要解决LLM/AIGC大模型固有的“上下文窗口限制”和“无状态缺陷”。
+
+具备长期记忆的AI Agent需采用“分层存储+智能检索”架构，核心是通过 **向量化、摘要压缩、混合数据库** 打破上下文窗口限制。
+
+###  🔧 一、长期记忆的架构设计
+1. **分层记忆系统**  
+   AI Agent 的记忆需模拟人脑结构，分为三层协同工作：  
+   - **短期记忆（STM）**：通过上下文窗口（如 Transformer 的 Token 限制）维持当前对话连贯性，但容量有限（通常 4K-128K Token）。  
+   - **中期记忆（MTM）**：将对话关键信息压缩为摘要或嵌入向量，存储于向量数据库（如 FAISS、Pinecone），支持语义检索。  
+   - **长期记忆（LTM）**：持久化存储用户画像、行为习惯等结构化数据，使用 SQL/NoSQL 数据库或知识图谱实现跨会话记忆。
+
+2. **混合存储引擎**  
+   - **向量数据库**：处理非结构化文本的相似性搜索（如用户偏好“喜欢科幻电影”）。  
+   - **时序数据库**：记录事件链（如“用户上周询问过机票价格”）。  
+   - **图数据库**：构建知识关联网络（如“用户A是程序员→可能关注算法更新”）。
+
+###  ⚙️ 二、关键实现技术
+1. **记忆生成与压缩**  
+   - **摘要提炼（Summarization）**：  
+     每次对话结束后，用专用 LLM 生成摘要（例：双 LLM 架构中分离对话与总结模型）。  
+   - **嵌入向量化（Embedding）**：  
+     通过 BERT 或 OpenAI Embeddings 将文本转为向量，便于高效检索。
+
+2. **记忆检索与更新**  
+   - **多模态检索**：结合语义搜索（向量相似度）+ 时间过滤（最近事件优先）+ 规则筛选（如重要度评分）。  
+   - **冲突消解**：当新旧记忆矛盾时（如用户口味变化），由 LLM 裁决或设置衰减权重。
+
+3. **记忆集成至 Agent**  
+   将检索结果动态注入 Prompt：  
+   ```python
+   # Mem0 API 示例：添加和搜索记忆
+   m.add(user_query, user_id="Alice")  # 存储记忆
+   related_memories = m.search("推荐电影", user_id="Alice")  # 检索相关记忆
+   prompt = f"User's historical preferences: {related_memories}. Current query: {new_query}"
+   response = llm.generate(prompt)
+   ```
