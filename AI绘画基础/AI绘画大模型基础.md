@@ -88,6 +88,7 @@
 - [3.介绍一下长宽比分桶训练策略（Aspect Ratio Bucketing）的具体流程](#3.介绍一下长宽比分桶训练策略（AspectRatioBucketing）的具体流程)
 - [4.介绍一下OFT(Orthogonal Finetuning)微调技术](#4.介绍一下OFT(Orthogonal-Finetuning)微调技术)
 - [5.Flow Matching和DDPM之间有什么区别？](#5.Flow-Matching和DDPM之间有什么区别？)
+- [6.Stable Diffusion的模型融合原理？](#6.Stable-Diffusion的模型融合原理？)
 
 ## 第四章 其他主流AI绘画大模型高频考点
 
@@ -2604,6 +2605,48 @@ DDPM通过随机扩散和去噪过程生成数据，强调概率建模；Flow Ma
 | **采样速度**       | 慢（多步迭代）                | 快（少步或一步）               |
 | **路径性质**       | 随机噪声扰动                  | 确定性最优路径                 |
 | **数学复杂度**     | 中等（马尔可夫链）            | 高（ODE求解/最优传输）         |
+
+
+<h2 id="6.Stable-Diffusion的模型融合原理？">6.Stable Diffusion的模型融合原理？</h2>
+
+Stable Diffusion的模型融合主要通过 **Merge Block Weight（块权重融合）** 这种精细化的模型参数整合技术实现，通过分层处理U-Net/Transformer内部不同功能模块层的权重，实现多个Stable Diffusion模型特点优势的定向组合。
+
+### 🔧 一、**核心原理：分层权重插值**
+
+模型融合的目标是合并多个训练好的Stable Diffusion模型（如风格模型+主体模型），生成兼具各方优势的新模型。Merge Block Weight的核心创新在于**分块处理U-Net/Transformer结构**，而非整体融合：
+1. **U-Net结构解构**  
+   Stable Diffusion的U-Net包含多个功能模块：
+   - **ResBlock**：负责基础特征提取与残差连接
+   - **Spatial Transformer（Cross-Attention）**：融合文本与图像语义
+   - **DownSample/UpSample**：控制特征图分辨率变换
+2. **分块独立融合**  
+   对每个模块的权重独立计算插值，公式为：
+    
+   $$
+   W_{\text{merged}}^{(i)} = \alpha \cdot W_A^{(i)} + (1 - \alpha) \cdot W_B^{(i)}
+   $$
+   
+   其中 $W_A^{(i)}$ 和 $W_B^{(i)}$ 是待融合模型在模块 $i$ 的权重，$\alpha$ 为该模块的融合系数（0~1）。
+
+### ⚙️ 二、**技术实现流程**
+#### 1. **权重归一化（关键预处理）**
+   - 目的：解决不同模型参数分布差异导致的融合冲突
+   - 方法：对每个模型的权重进行LayerNorm或Min-Max缩放，使其处于相近数值范围
+
+#### 2. **插值算法选择**
+   | **算法**       | 适用场景                  | 优势                          | 缺点               |
+   |----------------|-------------------------|-----------------------------|-------------------|
+   | **线性插值（LERP）** | 简单融合、硬件资源有限     | 计算效率高                    | 可能丢失非线性特征  |
+   | **球面线性插值（SLERP）** | 高质量风格融合（如艺术风格） | 保持权重向量方向一致性，避免特征坍缩 | 计算复杂度高 | 
+
+#### 3. **分层系数配置**
+   不同模块需设置差异化融合系数，例如：
+   - **ResBlock**：$\alpha=0.5$（平衡底层特征）
+   - **Spatial Transformer**：$\alpha=0.8$（侧重模型A的文本控制力）
+   - **UpSample层**：$\alpha=0.3$（侧重模型B的细节生成能力）
+
+### 💎 总结
+Merge Block Weight通过解构U-Net并分层融合权重，实现了模型能力的精准嫁接，成为解决单一模型局限性问题的关键技术。随着Stable Diffusion 3等新架构对多模态权重的分离设计（如MMDiT），模型融合将进一步向**模态感知融合**（Modality-Aware Merging）演进，在艺术创作、工业设计等领域释放更大潜力。
 
 ---
 
