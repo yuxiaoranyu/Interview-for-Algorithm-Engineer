@@ -36,7 +36,7 @@
 - [34.IFadapter的框架和原理](#34.IFadapter的框架和原理)
 - [35.LAW-Diffusion的框架和原理](#35.LAW-Diffusion的框架和原理)
 - [36.Check, Locate, Rectify（A Training-Free Layout Calibration System for Text-to-Image Generation）的框架和原理](#36.Check,Locate,Rectify（A-Training-Free-Layout-Calibration-System-for-Text-to-Image-Generation）的框架和原理)
-- [37.Conceptrol: Concept Control of Zero-shot Personalized Image Generation的框架和原理](#37.Conceptrol: Concept Control of Zero-shot Personalized Image Generation的框架和原理)
+- [37.Conceptrol的框架和原理](#37.Conceptrol的框架和原理)
 - [38.EasyPhoto中应用到了哪些人脸特征处理算法？](#38.EasyPhoto中应用到了哪些人脸特征处理算法？)
 
 
@@ -976,7 +976,7 @@ SimM采用“检查-定位-纠正”流程，无需额外训练即可干预生�
 
 该技术可以改善创意应用中的用户控制，允许在文本到图像生成中更精确地指定布局，而无需具备布局技术知识或额外训练。
 
-<h2 id="37.Conceptrol: Concept Control of Zero-shot Personalized Image Generation的框架和原理">37.Conceptrol: Concept Control of Zero-shot Personalized Image Generation的框架和原理</h2>
+<h2 id="37.Conceptrol的框架和原理">37.Conceptrol的框架和原理</h2>
 
 个性化图像生成面临着一个根本性的困境：如何在遵循创意文本提示的同时，平衡从参考图像中保留对象身份。目前的方法主要分为两类：
 
