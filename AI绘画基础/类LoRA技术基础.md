@@ -7,6 +7,8 @@
 - [5.DiffLoRA是什么？](#5.DiffLoRA是什么？)
 - [6.AutoLoRA是什么？](#6.AutoLoRA是什么？)
 - [7.LoRA of Change是什么？](#7.LoRAofChange是什么？)
+- [8.什么是Textual Inversion(文本反演)？](#8.什么是Textual-Inversion(文本反演)？)
+- [9.LoRA和DreamBooth对比](#9.LoRA和DreamBooth对比)
 
 
 <h2 id="1.使用lora微调Stable_Diffusion模型">1.使用lora微调Stable Diffusion模型</h2>
@@ -202,3 +204,172 @@ AutoLoRA 结合了这两者的思路，通过让基础模型与 LoRA 微调模�
    - **随机交换操作**：在训练中随机交换前后图像对顺序，增强模型对输入顺序的鲁棒性，防止信息泄漏。
 3. **解耦编辑指令与图像内容**
    - LoRA `Δ` 封装了脱离原始图像内容的抽象编辑指令，可通过复用同一Δ实现跨图像的相同编辑效果，增强模型的泛化性.
+
+
+<h2 id="8.什么是Textual-Inversion(文本反演)？">8.什么是Textual Inversion(文本反演)？</h2>
+
+### 理解 Textual Inversion 的核心思想
+
+Textual Inversion（文本反演）是一种新颖且高效的方法，用于让文本到图像生成模型（例如 Stable Diffusion）快速学习和生成全新的视觉概念，而无需重新训练整个模型。具体来说，这种方法通过优化特殊的文本嵌入来代表新概念，使得模型能够生成包含用户个性化元素的图像。
+
+![image-20250518102329271](./imgs/textual inversion.png)
+
+### Textual Inversion 的实现流程
+
+具体过程包括以下几个步骤：
+
+1. **收集输入图像** 用户提供3-5张代表某个新概念的图片，例如特定的雕塑、玩具或独特的艺术风格。这些图像作为模型的学习基础。
+
+2. **创建伪词** 为了表示这个新概念，方法会引入一个全新的伪词（在论文中通常标记为S*）。例如，如果你想要教会模型一个特定的雕塑，你可能引入一个词如“雕塑X”。
+
+3. **优化词嵌入** 与重新训练整个模型不同，文本反演只优化这个新伪词在文本嵌入空间中的位置。具体优化过程包括最小化两个方面的差异：
+
+   - 模型使用包含伪词的文本提示生成的图像
+   - 用户提供的实际参考图像
+
+   通过优化，这个伪词的嵌入向量最终能准确表示新的视觉概念。
+
+4. **集成应用** 一旦伪词优化完成，就可以和已有的自然语言提示结合使用，让模型生成包含这个个性化元素的新图像。例如，你可以输入“一个戴着‘雕塑X’风格帽子的女孩”，模型就能生成符合你定制需求的图片。
+
+### 为什么 Textual Inversion 如此高效？
+
+Textual Inversion 的最大创新点在于它无需修改文本到图像模型的架构或全面重新训练，而是巧妙地利用了模型已有的嵌入空间。具体来说，模型本身包括两个关键组件：
+
+- **文本编码器**：将自然语言提示转化为嵌入向量。
+- **扩散模型**：根据嵌入向量生成或逐步优化图像。
+
+Textual Inversion 通过优化特定概念对应的嵌入向量，精准地将新概念融入模型已有的知识体系中。
+
+### 数学原理解析
+
+- 从数学上讲，该方法可以描述为：
+
+  1. 对于由占位符 S* 表示的新概念，目标是找到一个最佳嵌入向量 v*，它在文本嵌入空间中表示该概念。
+  2. 这被形式化为一个优化问题：
+
+  ```
+  v* = argmin_v L(v, {I_1, I_2, ..., I_n})
+  ```
+
+  其中 L 是损失函数，用于衡量使用嵌入 v 生成的图像与参考图像 {I_1, I_2, ..., I_n} 的匹配程度。
+
+使用扩散损失作为优化指标，可以确保学习到的嵌入既准确捕捉新概念的视觉特征，又保持与原模型良好的兼容性。
+
+
+
+OmniGen的设计目标可用两个关键词概括：**统一（Unification）与简洁（Simplicity）**。
+
+- **统一**：无论是文本生成图像、图像编辑、条件控制生成还是主客体泛化，OmniGen都能用一个模型、一套流程完成，无需任何额外插件或中间步骤。
+- **简洁**：彻底抛弃了冗余的输入编码器（如CLIP、检测器等），仅保留**两个“组件”**：`VAE(图像变分自编码器)` 和 `Transformer(大模型)`。
+
+
+<h2 id="9.LoRA和DreamBooth对比">9.LoRA和DreamBooth对比</h2>
+
+#### 核心原理
+
+DreamBooth通过在整个模型上进行微调来学习新概念：
+
+python
+
+```python
+# DreamBooth的损失函数
+L_dreambooth = E[||ε - ε_θ(x_t, t, c_text)||²] + λ * E[||ε - ε_θ(x_pr, t, c_pr)||²]
+```
+
+其中第二项是**先验保留损失（Prior Preservation Loss）**，防止模型遗忘原有知识。
+
+#### 技术特点
+
+1. **全模型微调**：更新UNet的所有参数
+2. **类别特定标识符**：使用独特的标识词（如"sks"）
+3. **先验保留**：生成类别图像以保持模型的泛化能力
+
+#### 训练流程
+
+python
+
+```python
+# 简化的DreamBooth训练流程
+def train_dreambooth(model, images, class_prompt, instance_prompt):
+    # 1. 生成先验图像
+    prior_images = generate_class_images(model, class_prompt, num=100)
+    
+    # 2. 准备训练数据
+    dataset = combine_datasets(
+        instance_data=(images, instance_prompt),
+        class_data=(prior_images, class_prompt)
+    )
+    
+    # 3. 微调整个模型
+    for batch in dataset:
+        loss = compute_dreambooth_loss(model, batch)
+        optimizer.step(loss)
+```
+
+### LoRA：
+
+#### 核心原理
+
+LoRA通过低秩矩阵分解来高效地适配预训练模型：
+
+python
+
+```python
+# LoRA的核心公式
+W' = W + ΔW = W + B·A
+# 其中 B ∈ R^(d×r), A ∈ R^(r×k), r << min(d,k)
+```
+
+#### 技术特点
+
+1. **参数高效**：只训练额外的低秩矩阵
+2. **模块化设计**：可以轻松切换和组合不同的LoRA
+3. **训练速度快**：参数量大幅减少
+
+#### 实现细节
+
+python
+
+```python
+class LoRALayer(nn.Module):
+    def __init__(self, in_features, out_features, rank=4):
+        super().__init__()
+        self.A = nn.Parameter(torch.randn(rank, in_features))
+        self.B = nn.Parameter(torch.zeros(out_features, rank))
+        self.scale = 1.0
+        
+    def forward(self, x, original_weight):
+        # 原始输出 + LoRA调整
+        return F.linear(x, original_weight) + self.scale * (x @ self.A.T @ self.B.T)
+```
+
+### 详细对比分析
+
+#### 1. 学习能力对比
+
+**DreamBooth的优势**：
+
+- 能够学习复杂的新概念
+- 对细节的捕捉更精确
+- 适合需要大幅改变模型行为的场景
+
+**LoRA的优势**：
+
+- 快速适配新风格
+- 可以组合多个LoRA实现复合效果
+- 保持原模型能力的同时添加新特性
+
+#### 2. 实际应用场景
+
+**DreamBooth适用于**：
+
+- 人物/宠物的个性化定制
+- 需要精确还原特定对象
+- 商业级的定制化需求
+
+**LoRA适用于**：
+
+- 艺术风格迁移
+- 快速原型开发
+- 需要频繁切换不同适配的场景
+
