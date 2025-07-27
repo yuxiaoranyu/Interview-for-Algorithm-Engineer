@@ -18,6 +18,16 @@
 - [17.在基于Python的AI服务中，如何规范API请求和数据交互的格式？](#17.在基于Python的AI服务中，如何规范API请求和数据交互的格式？)
 - [18.Python中处理GLB文件的操作大全](#18.Python中处理GLB文件的操作大全)
 - [19.Python中处理OBJ文件的操作大全](#19.Python中处理OBJ文件的操作大全)
+- [20.Python中日志模块loguru的使用](#20.Python中日志模块loguru的使用)
+- [21.Python中连接MySQL数据库](#21.Python中连接MySQL数据库)
+- [22.Python中使用Pandas连接MySQL数据库](#22.Python中使用Pandas连接MySQL数据库)
+- [23.使用Pandas与Pymysql连接数据库的对比](#23.使用Pandas与Pymysql连接数据库的对比)
+- [24.Python中如何编译安装自定义包](#24.Python中如何编译安装自定义包)
+- [25.Python中Redis安装及数据插入、查询](#25.Python中Redis安装及数据插入、查询)
+- [26.Gradio如何使用？](#26.Gradio如何使用？)
+- [27.Strreamlit如何使用？](#27.Streamlit如何使用？)
+- [28.pyproject.toml编译安装自定义库包？](#28.pyproject.toml编译安装自定义库包？)
+
 
 <h2 id='1.多进程multiprocessing基本使用代码段'>1.多进程multiprocessing基本使用代码段</h2>
 
@@ -1232,7 +1242,6 @@ print(folder_paths.models_dir)
 #### **2.4. 可维护性**
 - **文档与注释：**
   - 为复杂的模块和函数提供清晰的注释和文档。
-  
 - **版本兼容性：**
   - 检查所使用的 PyTorch 版本及其依赖库是否兼容。
 
@@ -1270,6 +1279,7 @@ print(folder_paths.models_dir)
 - **形状差异：** PyTorch 使用 $(C, H, W)$ ，其他通常使用 $(H, W, C)$ 。
 - **归一化：** Tensor 格式通常使用归一化范围 $[0, 1]$ ，而 Numpy 和 OpenCV 通常为整数范围 $[0, 255]$ 。
 
+  
 ### **2. 转换方法**
 
 #### **2.1. PyTorch Tensor <-> Numpy**
@@ -2358,3 +2368,1070 @@ ax.plot_trisurf(
 )
 plt.show()
 ```
+
+<h2 id="20.Python中日志模块loguru的使用">20.Python中日志模块loguru的使用</h2>
+
+在服务开发中，日志模块是**核心基础设施**之一，它解决了以下关键问题：
+
+---
+
+### **1. 问题定位与故障排查**
+- **场景**：服务崩溃、请求超时、数据异常。
+- **作用**：
+  - 记录关键步骤的执行路径（如请求参数、中间结果）。
+  - 自动捕获未处理的异常（如 `loguru.catch`）。
+  - 通过日志级别（DEBUG/INFO/WARNING/ERROR）快速过滤问题。
+- **示例**：
+  ```python
+  @logger.catch
+  def process_request(data):
+      logger.info(f"Processing request: {data}")
+      # ...业务逻辑...
+  ```
+
+---
+
+### **2. 系统监控与健康检查**
+- **场景**：服务运行时的性能、资源占用、错误率监控。
+- **作用**：
+  - 统计请求量、响应时间、错误频率（结合日志分析工具如 ELK）。
+  - 发现潜在风险（如高频错误日志触发告警）。
+- **示例**：
+  ```python
+  start_time = time.time()
+  # ...处理请求...
+  logger.info(f"Request processed in {time.time() - start_time:.2f}s")
+  ```
+
+---
+
+### **3. 行为审计与合规性**
+- **场景**：金融交易、用户隐私操作等敏感场景。
+- **作用**：
+  - 记录用户关键操作（如登录、支付、数据修改）。
+  - 满足法律法规（如 GDPR、HIPAA 的审计要求）。
+- **示例**：
+  ```python
+  logger.info(f"User {user_id} updated profile: {changes}")
+  ```
+
+---
+
+### **4. 性能分析与优化**
+- **场景**：接口响应慢、资源瓶颈。
+- **作用**：
+  - 通过日志统计耗时操作（如数据库查询、外部 API 调用）。
+  - 定位代码热点（结合 `logging` 的计时功能）。
+- **示例**：
+  ```python
+  with logger.catch(message="Database query"):
+      result = db.query("SELECT * FROM large_table")
+  ```
+
+---
+`loguru` 是一个 Python 日志库，设计简洁且功能强大，相比标准库的 `logging` 模块更易用。以下是 `loguru` 的核心用法：
+
+---
+
+### **1. 安装**
+```bash
+pip install loguru
+```
+
+---
+
+### **2. 基础用法**
+直接导入 `logger` 实例即可使用，无需复杂配置：
+```python
+from loguru import logger
+
+logger.debug("Debug message")
+logger.info("Info message")
+logger.warning("Warning message")
+logger.error("Error message")
+logger.critical("Critical message")
+```
+
+---
+
+### **3. 自动捕获异常**
+使用 `logger.catch()` 自动记录异常：
+```python
+@logger.catch
+def risky_function():
+    return 1 / 0
+
+risky_function()  # 异常会被自动记录
+```
+
+---
+
+### **4. 配置日志格式**
+通过 `add()` 方法自定义日志格式：
+```python
+logger.add(
+    "app.log",  # 输出到文件
+    format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}",
+    level="INFO",
+    rotation="10 MB",  # 文件达到 10MB 后轮转
+    compression="zip"   # 压缩旧日志
+)
+```
+
+---
+
+### **5. 日志级别控制**
+动态调整日志级别：
+```python
+logger.remove()  # 移除默认输出
+logger.add(sys.stderr, level="WARNING")  # 只输出 WARNING 及以上级别
+```
+
+---
+
+### **6. 高级功能**
+#### **文件轮转与压缩**
+```python
+logger.add(
+    "runtime_{time}.log",
+    rotation="00:00",  # 每天午夜轮转
+    retention="30 days",  # 保留30天日志
+    compression="zip"
+)
+```
+
+#### **自定义颜色**
+```python
+logger.add(sys.stderr, colorize=True, format="<green>{time}</green> <level>{message}</level>")
+```
+
+---
+
+### **7. 多模块使用**
+直接在入口文件配置一次，全局生效：
+```python
+# main.py
+from loguru import logger
+
+logger.add("app.log")
+import submodule  # 子模块直接使用同一 logger
+
+# submodule.py
+from loguru import logger
+logger.info("Message from submodule")
+```
+
+---
+
+### **8. 禁用默认输出**
+```python
+logger.remove(handler_id=None)  # 移除所有已添加的处理器
+```
+
+---
+
+### **示例：完整配置**
+```python
+from loguru import logger
+
+# 自定义日志格式和文件输出
+logger.add(
+    "app.log",
+    level="DEBUG",
+    format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}",
+    rotation="10 MB",
+    retention="10 days",
+    compression="zip"
+)
+
+# 控制台输出带颜色
+logger.add(
+    sys.stderr,
+    level="INFO",
+    format="<green>{time}</green> | <level>{level: <8}</level> | <cyan>{message}</cyan>",
+    colorize=True
+)
+
+logger.info("Loguru is ready!")
+```
+
+---
+
+### **注意事项**
+- 默认会输出到 `stderr`，通过 `logger.remove()` 可移除。
+- 支持结构化日志（JSON 格式）和异步日志。
+- 可通过 `enqueue=True` 参数保证多进程/线程安全。
+
+<h2 id="21.Python中连接MySQL数据库">21.Python中连接MySQL数据库</h2>
+
+在 Python 中读取 MySQL 数据库，通常需要以下步骤：
+
+---
+
+### **1. 安装 MySQL 驱动库**
+推荐使用 `mysql-connector-python` 或 `PyMySQL`（任选其一）：
+```bash
+# 官方驱动（Oracle 官方维护）
+pip install mysql-connector-python
+
+# 或使用纯 Python 实现的 PyMySQL（推荐）
+pip install pymysql
+```
+
+---
+
+### **2. 连接数据库**
+使用 `connect()` 方法建立连接，需提供数据库地址、用户名、密码、数据库名等信息。
+
+#### **示例代码**：
+```python
+import mysql.connector
+
+# 配置数据库连接参数
+config = {
+    "host": "localhost",    # 数据库服务器地址
+    "user": "root",         # 用户名
+    "password": "123456",   # 密码
+    "database": "test_db",  # 数据库名
+    "port": 3306            # 端口（默认3306）
+}
+
+try:
+    # 建立数据库连接
+    connection = mysql.connector.connect(**config)
+    print("数据库连接成功！")
+
+    # 创建游标对象（用于执行SQL）
+    cursor = connection.cursor()
+
+except mysql.connector.Error as err:
+    print(f"连接失败: {err}")
+
+finally:
+    # 关闭连接
+    if 'connection' in locals() and connection.is_connected():
+        cursor.close()
+        connection.close()
+        print("数据库连接已关闭")
+```
+
+---
+
+### **3. 执行查询并读取数据**
+通过游标执行 SQL 查询，并用 `fetchall()` 或 `fetchone()` 获取结果。
+
+#### **示例：读取表中所有数据**
+```python
+try:
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+
+    # 执行查询
+    cursor.execute("SELECT * FROM users")
+
+    # 获取所有数据（返回列表格式）
+    results = cursor.fetchall()
+
+    # 遍历结果
+    for row in results:
+        print(f"ID: {row[0]}, 用户名: {row[1]}, 邮箱: {row[2]}")
+
+except mysql.connector.Error as err:
+    print(f"查询失败: {err}")
+```
+
+---
+
+### **4. 参数化查询（防止 SQL 注入）**
+使用占位符 `%s` 传递参数，避免直接拼接 SQL 语句。
+
+#### **示例：条件查询**
+```python
+user_id = 1  # 假设用户输入的参数
+
+try:
+    cursor.execute("SELECT * FROM users WHERE id = %s", (user_id,))
+    result = cursor.fetchone()
+    print(result)
+
+except mysql.connector.Error as err:
+    print(f"参数查询失败: {err}")
+```
+
+---
+
+### **5. 使用上下文管理器（自动关闭连接）**
+通过 `with` 语句自动管理资源，无需手动关闭连接和游标。
+
+#### **示例**：
+```python
+import mysql.connector
+
+config = {
+    "host": "localhost",
+    "user": "root",
+    "password": "123456",
+    "database": "test_db"
+}
+
+try:
+    with mysql.connector.connect(**config) as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM products")
+            for row in cursor.fetchall():
+                print(row)
+
+except mysql.connector.Error as err:
+    print(f"错误: {err}")
+```
+
+---
+
+### **6. 使用 ORM 框架（如 SQLAlchemy）**
+对于复杂项目，推荐使用 ORM（对象关系映射）库，例如 **SQLAlchemy**。
+
+#### **安装 SQLAlchemy**：
+```bash
+pip install sqlalchemy
+```
+
+#### **示例代码**：
+```python
+from sqlalchemy import create_engine, text
+
+# 创建数据库引擎（格式：mysql+驱动://用户名:密码@地址:端口/数据库名）
+engine = create_engine("mysql+pymysql://root:123456@localhost:3306/test_db")
+
+# 执行原生 SQL
+with engine.connect() as connection:
+    result = connection.execute(text("SELECT * FROM users"))
+    for row in result:
+        print(row)
+```
+
+<h2 id="22.Python中使用Pandas连接MySQL数据库">22.Python中使用Pandas连接MySQL数据库</h2>
+
+以下是使用 **pandas** 连接 MySQL 数据库并执行查询和插入操作的详细步骤：
+
+---
+
+### **1. 安装依赖库**
+确保已安装以下库：
+```bash
+pip install pandas sqlalchemy pymysql
+```
+- **`pandas`**：数据处理核心库。
+- **`SQLAlchemy`**：用于创建数据库引擎（ORM 工具）。
+- **`PyMySQL`**：纯 Python 实现的 MySQL 驱动。
+
+---
+
+### **2. 连接 MySQL 数据库**
+使用 `SQLAlchemy` 创建数据库引擎，格式为：  
+`mysql+pymysql://用户名:密码@地址:端口/数据库名`
+
+```python
+from sqlalchemy import create_engine
+
+# 创建数据库引擎
+engine = create_engine("mysql+pymysql://root:123456@localhost:3306/test_db")
+```
+
+---
+
+### **3. 查询数据到 DataFrame**
+使用 `pandas.read_sql()` 直接读取 SQL 查询结果到 DataFrame。
+
+#### **示例：查询表中所有数据**
+```python
+import pandas as pd
+
+# 定义 SQL 查询语句
+sql_query = "SELECT * FROM users"
+
+# 执行查询并加载到 DataFrame
+df = pd.read_sql(sql_query, engine)
+print("查询结果：")
+print(df.head())  # 显示前5行
+```
+
+#### **带参数的查询（防止 SQL 注入）**
+```python
+user_id = 1  # 动态参数
+sql_query = "SELECT * FROM users WHERE id = %s"
+df = pd.read_sql(sql_query, engine, params=(user_id,))
+```
+
+---
+
+### **4. 插入数据到 MySQL**
+使用 `DataFrame.to_sql()` 将数据写入数据库。
+
+#### **示例：插入 DataFrame 到新表**
+```python
+# 创建示例 DataFrame
+data = {
+    "name": ["Alice", "Bob"],
+    "age": [25, 30],
+    "email": ["alice@example.com", "bob@example.com"]
+}
+df = pd.DataFrame(data)
+
+# 写入数据库（表名：new_users）
+df.to_sql(
+    name="new_users",      # 表名
+    con=engine,            # 数据库引擎
+    index=False,           # 不写入行索引
+    if_exists="append"     # 如果表存在，追加数据
+)
+print("数据插入成功！")
+```
+
+#### **关键参数说明**
+| 参数         | 说明                                                                 |
+|--------------|----------------------------------------------------------------------|
+| `name`       | 目标表名                                                             |
+| `con`        | 数据库引擎对象                                                       |
+| `index`      | 是否写入 DataFrame 的索引列（默认 `True`，通常设为 `False`）          |
+| `if_exists`  | 表存在时的行为：`fail`（报错）, `replace`（覆盖表）, `append`（追加） |
+| `dtype`      | 可选，指定列的数据类型（如 `{'age': INTEGER}`）                      |
+
+
+<h2 id="23.使用Pandas与Pymysql连接数据库的对比">23.使用Pandas与Pymysql连接数据库的对比</h2>
+
+使用 **pandas 结合 SQLAlchemy/PyMySQL** 与直接使用 **PyMySQL** 操作 MySQL 数据库的主要区别体现在 **开发效率、功能定位、适用场景** 上。以下是详细对比：
+
+---
+
+### **1. 核心区别对比**
+| **特性**               | **PyMySQL**（直接使用）                            | **pandas + SQLAlchemy**                     |
+|------------------------|--------------------------------------------------|--------------------------------------------|
+| **定位**               | 直接操作数据库的底层驱动库                        | 基于数据库操作的高层数据分析工具             |
+| **语法复杂度**         | 需要手动编写 SQL，管理游标和连接                  | 通过 DataFrame 抽象化 SQL 操作，语法更简洁  |
+| **数据交互形式**       | 返回原始元组（Tuple）或字典                       | 返回结构化 DataFrame，支持列名和数据类型    |
+| **数据操作能力**       | 需自行处理数据过滤、聚合、转换等逻辑              | 内置丰富的数据处理函数（如 `groupby`、`merge`） |
+| **性能**               | 适合小规模数据的精细控制，高频操作性能更高        | 大数据批量操作优化（如 `chunksize` 分块写入） |
+| **适用场景**           | 需要直接控制 SQL、执行复杂事务或存储过程          | 数据分析、快速原型开发、ETL 流程            |
+
+---
+
+### **2. 代码示例对比**
+#### **场景：查询数据并插入到另一张表**
+
+##### **（1）直接使用 PyMySQL**
+```python
+import pymysql
+
+# 连接数据库
+conn = pymysql.connect(
+    host="localhost",
+    user="root",
+    password="123456",
+    database="test_db"
+)
+cursor = conn.cursor()
+
+# 查询数据
+cursor.execute("SELECT id, name, age FROM users WHERE age > 20")
+rows = cursor.fetchall()
+
+# 处理数据并插入新表
+for row in rows:
+    new_age = row[2] + 1  # 年龄加1
+    cursor.execute(
+        "INSERT INTO updated_users (id, name, age) VALUES (%s, %s, %s)",
+        (row[0], row[1], new_age)
+    )
+
+# 提交事务并关闭连接
+conn.commit()
+cursor.close()
+conn.close()
+```
+
+##### **（2）使用 pandas + SQLAlchemy**
+```python
+from sqlalchemy import create_engine
+import pandas as pd
+
+# 创建数据库引擎
+engine = create_engine("mysql+pymysql://root:123456@localhost/test_db")
+
+# 查询数据到 DataFrame
+df = pd.read_sql("SELECT id, name, age FROM users WHERE age > 20", engine)
+
+# 处理数据（年龄加1）
+df["age"] = df["age"] + 1
+
+# 插入到新表
+df.to_sql(
+    name="updated_users",
+    con=engine,
+    index=False,
+    if_exists="append"
+)
+```
+
+---
+
+### **3. 核心优势对比**
+#### **PyMySQL 的优势**
+1. **精细控制**：
+   - 直接编写 SQL，支持复杂事务、存储过程、动态 SQL 拼接。
+   - 适合需要严格管理数据库连接、事务提交/回滚的场景。
+2. **轻量级**：
+   - 依赖库少，适合小型项目或资源受限环境。
+3. **高频操作性能**：
+   - 对于简单、高频的插入/查询操作，性能优于 pandas 的批量写入。
+
+#### **pandas + SQLAlchemy 的优势**
+1. **开发效率**：
+   - 通过 `DataFrame` 抽象化数据操作，避免手动处理游标和结果集。
+   - 内置数据清洗、转换、分析功能（如 `pandas` 的 `merge`、`groupby`）。
+2. **数据科学友好**：
+   - 查询结果直接转为 DataFrame，可无缝衔接机器学习库（如 Scikit-learn、TensorFlow）。
+3. **批量写入优化**：
+   - `to_sql` 支持分块写入（`chunksize`），适合处理大数据量。
+4. **避免 SQL 注入**：
+   - 参数化查询通过 DataFrame 自动处理，减少手动拼接 SQL 的风险。
+
+---
+
+### **4. 性能对比**
+| **操作类型**         | **PyMySQL**                          | **pandas + SQLAlchemy**           |
+|----------------------|--------------------------------------|-----------------------------------|
+| **单条插入 1000 行** | 快（直接逐条执行 SQL）               | 慢（默认逐行插入）                |
+| **批量插入 10 万行** | 需要手动优化（如 `executemany`）      | 快（使用 `chunksize` 分块批量插入） |
+| **复杂查询+分析**    | 需手动处理结果集                     | 快（内置向量化操作，如聚合、过滤） |
+
+---
+
+### **5. 适用场景推荐**
+#### **选择 PyMySQL 的场景**
+- 需要执行动态 SQL 或复杂事务（如银行转账逻辑）。
+- 对数据库连接和性能有极致要求（如高频交易系统）。
+- 项目规模小，无需复杂数据处理。
+
+#### **选择 pandas 的场景**
+- 数据分析和探索（如统计、可视化）。
+- 需要将数据库数据与本地数据（如 CSV、Excel）结合处理。
+- 快速实现 ETL（数据抽取、转换、加载）流程。
+- 机器学习/数据科学项目的前期数据处理。
+
+
+<h2 id="24.Python中如何编译安装自定义包">24.Python中如何编译安装自定义包</h2>
+
+要通过 `setup.py` 安装自定义的 Python 库包，请按以下步骤操作：
+
+---
+
+### 1. **准备项目结构**
+确保你的项目包含以下基本结构（示例）：
+```bash
+my_package/
+├── setup.py              # 安装脚本
+├── my_package/           # 包目录（与包名一致）
+│   ├── __init__.py       # 标识为Python包
+│   └── module.py         # 自定义模块
+└── README.md             # 可选说明文件
+```
+
+---
+
+### 2. **编写 `setup.py`**
+创建 `setup.py` 文件并配置元数据（示例）：
+```python
+from setuptools import setup, find_packages
+
+setup(
+    name="my_package",          # 包名称
+    version="0.1.0",            # 版本号
+    packages=find_packages(),   # 自动查找包目录
+    # 显式指定包：packages=['my_package']  
+    install_requires=[          # 依赖库
+        "requests>=2.25.1",
+        "numpy"
+    ],
+    author="Your Name",
+    description="A custom Python package",
+    long_description=open("README.md").read(),
+    url="https://github.com/yourusername/my_package"
+)
+```
+
+---
+
+### 3. **安装包**
+在项目根目录（含 `setup.py` 的位置）打开终端，执行：
+
+#### 方式一：常规安装（全局/虚拟环境）
+```bash
+pip install .
+```
+
+#### 方式二：开发模式安装（代码修改实时生效）
+```bash
+pip install -e .
+```
+> ✅ 推荐开发时使用：修改代码后无需重新安装
+
+---
+
+### 4. **验证安装**
+在 Python 中测试导入：
+```python
+import my_package
+print(my_package.__version__)  # 如果 version 在 __init__.py 中定义
+```
+
+---
+
+### 关键配置说明
+| **参数**           | **作用**                                                                 |
+|--------------------|--------------------------------------------------------------------------|
+| `packages`         | 指定包含的包目录（推荐 `find_packages()` 自动查找）                       |
+| `install_requires` | 声明依赖库，安装时自动解决依赖                                           |
+| `entry_points`     | 创建命令行工具（如 `'console_scripts': ['mycmd=my_package.cli:main']`） |
+| `package_data`     | 包含非代码文件（如数据、配置文件）                                       |
+
+---
+
+通过以上步骤，你可以将自定义库包安装到 Python 环境中，并进行使用或分发。
+
+编译wheel包：
+```bash
+python setup.py bdist_wheel
+```
+
+安装wheel包：
+```bash
+pip install dist/my_package-0.1.0-py3-none-any.whl
+```
+
+<h2 id="25.Python中Redis安装及数据插入、查询">25.Python中Redis安装及数据插入、查询</h2>
+
+### 1. 安装 Redis**
+```
+sudo apt update
+sudo apt install redis-server
+```
+安装完成后，Redis服务将会自动启动。想要检查服务的状态，输入下面的命令：
+```
+sudo systemctl status redis-server
+```
+可看到如下输出：
+```
+● redis-server.service - Advanced key-value store
+     Loaded: loaded (/lib/systemd/system/redis-server.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sat 2020-06-06 20:03:08 UTC; 10s ago
+...
+```
+在 Python 中，可以通过 `redis-py` 库来连接 Redis 数据库，并执行插入和查询等操作。以下是详细的步骤说明：
+
+### 2. 安装 `redis-py` 库
+```bash
+pip install redis
+```
+
+这是官方推荐的安装方式 。
+
+---
+
+### 3. 导入模块并连接 Redis 数据库
+
+使用 `redis.Redis()` 方法连接到 Redis 服务器。默认情况下，它会连接到本地主机（`localhost`）的 6379 端口，并选择默认数据库 `db0`：
+
+```python
+import redis
+
+# 默认连接到本地 Redis
+r = redis.Redis()
+
+# 或者指定连接参数
+# r = redis.Redis(host='127.0.0.1', port=6379, db=0)
+```
+
+如果连接远程 Redis 服务器，可以分别使用 `host` 和 `port` 参数指定主机地址和端口号 。
+
+---
+
+### 4. 插入数据
+
+Redis 支持多种数据结构，最常用的是字符串类型。可以使用 `set()` 方法插入键值对：
+
+```python
+r.set('name', 'ZhangSan')
+```
+
+该操作将键 `'name'` 的值设置为 `'ZhangSan'` 。
+
+---
+
+### 5. 查询数据
+
+使用 `get()` 方法查询键对应的值：
+
+```python
+value = r.get('name')
+print(value)  # 输出: b'ZhangSan'
+```
+
+注意，返回的值是字节类型（`bytes`），如果需要字符串，可以使用 `.decode()` 方法：
+
+```python
+print(value.decode('utf-8'))  # 输出: ZhangSan
+```
+
+该方法用于获取字符串类型的键值 。
+
+---
+
+### 6. 选择数据库编号
+
+Redis 默认有 16 个逻辑数据库（编号从 `0` 到 `15`），可以通过 `db` 参数指定连接的数据库：
+
+```python
+r = redis.Redis(db=1)  # 连接到 db1
+```
+
+每个数据库的数据是隔离的，适用于多应用或多环境的场景 。
+
+---
+
+### 7. 关闭连接（可选）
+
+虽然 `redis.Redis()` 内部使用了连接池，通常不需要显式关闭连接。但在某些情况下（如使用 `StrictRedis`），可以调用 `connection_pool.disconnect()` 来释放资源 。
+
+---
+
+<h2 id="26.Gradio如何使用？">26.Gradio如何使用？</h2>
+
+**Gradio** 是一个开源的 **Python 库**，专门用于**快速构建机器学习模型或数据科学流程的交互式 Web 界面**。它的核心目标是让开发者能够轻松地将模型、算法或数据处理脚本转化为可分享的 Web 应用，而无需具备前端（HTML, CSS, JavaScript）或后端（Flask, Django）的开发经验。
+
+**Gradio 的核心特点和价值：**
+
+1.  **极简部署：**
+    *   只需几行 Python 代码，即可将你的函数（尤其是涉及输入/输出的函数，如模型预测）包装成一个带有 UI 的 Web 应用。
+    *   自动处理从用户输入到函数调用再到结果展示的整个流程。
+
+2.  **丰富的内置组件：**
+    *   提供各种现成的**输入组件**：文本框、滑块、下拉菜单、文件上传、图像上传、麦克风、摄像头、绘图板等。
+    *   提供各种**输出组件**：文本标签、JSON、图像、音频、视频、图表（matplotlib, plotly）、高亮文本、3D 模型等。
+    *   这些组件可以灵活组合，构建出适合不同任务的界面（如上传图片->分类模型->显示类别标签和置信度）。
+
+3.  **自动界面生成：**
+    *   只需定义你的函数 `fn(inputs)` 和输入/输出组件的类型，Gradio 就能**自动为你生成一个完整的、布局合理的 Web UI**。
+
+4.  **多种分享方式：**
+    *   **本地运行：** 在 Jupyter Notebook 或 Python 脚本中启动，在本地浏览器查看。
+    *   **临时公共链接：** 通过 `share=True` 参数生成一个有时效（通常 72 小时）的公共 URL，方便快速分享给他人测试（无需服务器部署）。
+    *   **Hugging Face Spaces：** 无缝集成 Hugging Face 平台，免费托管和分享 Gradio 应用。
+    *   **自托管：** 可以将 Gradio 应用部署到自己的服务器或云平台（如 AWS, GCP, Azure）上。
+
+5.  **支持复杂应用：**
+    *   支持**多选项卡**界面。
+    *   支持**输入流**（如实时麦克风输入处理）。
+    *   支持**输出流**（如实时生成文本或音频）。
+    *   支持**状态管理**（在用户会话间保持数据）。
+    *   支持**事件队列**（处理高并发请求）。
+    *   支持**主题和自定义 CSS**（改变界面外观）。
+
+
+**Gradio 的主要应用场景：**
+
+1.  **机器学习模型演示与测试：**
+    *   让非技术用户（客户、产品经理、研究员同事）上传数据并查看模型预测结果。
+    *   快速验证模型在真实输入上的表现。
+    *   创建模型卡或项目展示的一部分。
+
+2.  **算法原型验证：**
+    *   快速构建一个界面来测试和迭代你的数据处理或算法逻辑。
+
+3.  **内部工具开发：**
+    *   为数据标注、结果可视化、参数调试等任务构建简单的内部工具。
+
+4.  **教学与教程：**
+    *   让学生或读者通过交互界面直观理解概念或算法。
+
+**一个简单的 Gradio 示例 (图像分类)：**
+
+```python
+import gradio as gr
+import tensorflow as tf
+
+# 1. 加载你的模型 (这里用占位符)
+model = tf.keras.models.load_model('your_model.h5')
+
+# 2. 定义预测函数 (核心逻辑)
+def classify_image(inp):
+    # 预处理输入图像
+    inp = preprocess(inp)
+    # 进行预测
+    prediction = model.predict(inp)
+    # 后处理：获取类别标签和置信度
+    class_names = ['Cat', 'Dog']
+    confidences = {class_names[i]: float(prediction[0][i]) for i in range(len(class_names))}
+    return confidences
+
+# 3. 创建 Gradio 接口
+#   - inputs: 图像上传组件
+#   - outputs: 标签组件 (显示字典形式的置信度)
+#   - title/description: 界面标题和描述
+demo = gr.Interface(
+    fn=classify_image,
+    inputs=gr.Image(type="pil"),  # 上传图片作为输入
+    outputs=gr.Label(num_top_classes=2), # 显示前2个类别的置信度
+    title="Cat vs Dog Classifier",
+    description="Upload a photo of a cat or dog. The model will predict which it is."
+)
+
+# 4. 启动应用 (本地运行并生成公共链接)
+demo.launch(share=True)
+```
+
+运行这段代码，Gradio 会自动在你的浏览器打开一个界面，允许你上传图片并实时看到模型的分类结果和置信度。
+
+**总结：**
+
+Gradio 是机器学习工程师、数据科学家和研究员的强大工具，它极大地**降低了将模型和算法转化为可交互、可分享的演示应用的门槛**。它强调**快速原型设计**和**易用性**，是展示成果、获取反馈、构建简单工具的理想选择。如果你需要快速让模型“活”起来并与人交互，Gradio 是一个非常值得考虑的解决方案。
+
+<h2 id="27.Streamlit如何使用？">27.Streamlit如何使用？</h2>
+
+### 简介  
+**Streamlit** 是一个面向数据科学和机器学习的开源 Python 框架，能够快速构建交互式 Web 应用 。它通过简单的 Python 代码即可生成数据驱动的可视化界面，无需前端开发经验，适合快速开发和共享数据分析结果 。其核心特点包括：  
+1. **实时交互**：代码修改后自动刷新界面 。  
+2. **多样化组件**：支持文本、表格、图表、图像等多种数据展示形式 。  
+3. **轻量部署**：通过 `streamlit run app.py` 即可运行应用 。  
+
+---
+
+### 完整代码调用示例  
+
+#### 1. 安装 Streamlit  
+```bash
+pip install streamlit
+```
+
+#### 2. 示例：展示数据框与交互图表  
+以下代码创建一个包含用户输入框和动态图表的 Web 应用：  
+
+```python
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 设置页面标题
+st.title("Streamlit 示例：数据展示与交互")
+
+# 用户输入组件
+name = st.text_input("请输入你的名字")
+if name:
+    st.write(f"你好, {name}!")
+
+# 生成示例数据
+data = pd.DataFrame({
+    'x': np.arange(1, 11),
+    'y': np.random.rand(10)
+})
+
+# 展示数据框
+st.subheader("示例数据框")
+st.write(data)
+
+# 绘制动态图表
+st.subheader("动态折线图")
+fig, ax = plt.subplots()
+ax.plot(data['x'], data['y'], marker='o')
+st.pyplot(fig)
+
+# 条件更新（按钮触发）
+if st.button("重新生成数据"):
+    data = pd.DataFrame({
+        'x': np.arange(1, 11),
+        'y': np.random.rand(10)
+    })
+    st.write("数据已更新！")
+    st.line_chart(data.set_index('x'))
+```
+
+#### 3. 运行应用  
+将上述代码保存为 `app.py`，在终端运行：  
+```bash
+streamlit run app.py
+```
+浏览器会自动打开页面（默认地址 `http://localhost:8501`），显示交互式界面 。
+
+
+<h2 id="28.pyproject.toml编译安装自定义库包？">28.pyproject.toml编译安装自定义库包？</h2>
+
+---
+
+## **1. 项目结构**
+确保项目目录符合标准布局（以 `my_package` 为例）：
+```bash
+my_package/
+├── src/
+│   └── my_package/
+│       ├── __init__.py
+│       └── module.py
+├── pyproject.toml
+├── README.md
+└── LICENSE
+```
+
+- **`src/`**：源代码根目录，包含主模块文件夹（如 `my_package/`）。
+- **`__init__.py`**：声明该目录为 Python 包。
+- **`pyproject.toml`**：标准化构建配置文件（替代 `setup.py` 和 `setup.cfg`）。
+
+---
+
+## **2. 配置 `pyproject.toml`**
+根据 PEP 517 和 PEP 621 标准定义包元数据和构建依赖。
+
+### **示例配置**
+```toml
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my_package"
+version = "0.1.0"
+authors = [
+    { name="Your Name", email="your.email@example.com" }
+]
+description = "A sample custom Python library"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.8"
+keywords = ["sample", "library"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    "numpy>=1.20",
+    "requests>=2.26"
+]
+
+[project.urls]
+Homepage = "https://example.com"
+Repository = "https://github.com/yourname/my_package"
+
+[project.scripts]
+# 定义命令行工具（可选）
+my_script = "my_package.module:main_function"
+```
+
+---
+
+## **3. 构建库**
+使用 `build` 工具生成可发布的包（Wheel 和 Source Distribution）。
+
+### **步骤**
+1. **安装构建工具**：
+   ```bash
+   pip install build
+   ```
+
+2. **生成构建文件**：
+   ```bash
+   python -m build
+   ```
+   输出结果：
+   ```
+   dist/
+   ├── my_package-0.1.0-py3-none-any.whl  # Wheel 文件
+   └── my_package-0.1.0.tar.gz            # 源码包
+   ```
+
+---
+
+## **4. 安装库**
+### **方法 1：直接安装生成的 Wheel**
+```bash
+pip install dist/my_package-0.1.0-py3-none-any.whl
+```
+
+### **方法 2：开发模式安装（推荐调试）**
+在项目根目录运行：
+```bash
+pip install -e .
+```
+- `-e` 表示“editable mode”（开发模式），修改源代码后无需重新安装。
+- 验证安装：
+  ```bash
+  python -c "import my_package; print(my_package.__version__)"
+  ```
+
+---
+
+## **5. 测试安装**
+### **验证模块导入**
+```python
+import my_package
+print(my_package.module.some_function())  # 假设 module.py 中有 some_function
+```
+
+### **验证命令行脚本（如有）**
+如果配置了 `[project.scripts]`，可直接运行：
+```bash
+my_script
+```
+
+---
+
+## **6. 常见问题与解决**
+### **问题 1：ModuleNotFoundError**
+- **原因**：未正确配置 `src/` 目录或未安装。
+- **解决**：
+  1. 确保 `pyproject.toml` 中的 `name` 与 `src/` 下的模块名一致。
+  2. 检查是否已运行 `pip install -e .` 或 `python -m build`。
+
+### **问题 2：构建时缺少依赖**
+- **原因**：未安装 `build` 工具或依赖未声明。
+- **解决**：
+  ```bash
+  pip install setuptools wheel build
+  ```
+
+### **问题 3：依赖版本冲突**
+- **解决**：在 `pyproject.toml` 的 `dependencies` 中明确指定版本范围，例如：
+  ```toml
+  dependencies = [
+      "numpy>=1.20,<1.24",
+      "requests~=2.26"
+  ]
+  ```
+
+---
+
+## **7. 与传统 `setup.py` 的对比**
+| **特性**               | **`pyproject.toml`**                          | **`setup.py`**                      |
+|------------------------|-----------------------------------------------|-------------------------------------|
+| **标准化**             | PEP 517/621 官方标准                         | 非标准化（需手动维护）              |
+| **依赖管理**           | 明确声明构建依赖（如 `setuptools`, `wheel`） | 隐式依赖（易导致环境不一致）        |
+| **可读性**             | 结构化 TOML 格式，易读易维护                 | Python 脚本，逻辑复杂时难以维护     |
+| **开发模式支持**       | 支持 `pip install -e .`                     | 同样支持，但依赖 `setup.py` 正确编写 |
+| **未来兼容性**         | 推荐方式，社区主流趋势                       | 逐步被取代                          |
+
+---
+
+## **8. 注意事项**
+1. **虚拟环境**：始终在虚拟环境中测试和安装，避免全局污染：
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Linux/macOS
+   venv\Scripts\activate    # Windows
+   ```
+
+2. **许可证文件**：确保 `LICENSE` 文件存在并符合项目需求（如 MIT、Apache 等）。
+
+3. **版本管理**：遵循 [语义化版本控制](https://semver.org/)（SemVer）更新版本号。
+
+4. **文档和测试**：为包编写文档（如 `README.md`）和单元测试（如 `pytest`）。
+
+---
