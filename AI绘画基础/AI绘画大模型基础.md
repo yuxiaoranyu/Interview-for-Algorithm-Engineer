@@ -2,6 +2,23 @@
 
 ## 第一章 Stable Diffusion系列核心高频考点
 
+### 【一】Diffusion Model核心基础知识高频考点
+
+- [1.介绍一下Diffusion Model的核心思想和工作原理？](#1.介绍一下Diffusion-Model的核心思想和工作原理？)
+- [2.介绍一下马尔可夫链的原理？](#2.介绍一下马尔可夫链的原理？)
+- [3.介绍一下Disco Diffusion的原理？](#3.介绍一下Disco-Diffusion的原理？)
+- [4.经典的Pixel Diffusion有哪些？](#4.经典的Pixel-Diffusion有哪些？)
+- [5.Diffusion Models和VAE之间有哪些联系和区别？](#5.Diffusion-Models和VAE之间有哪些联系和区别？)
+- [6.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？](#6.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？)
+- [7.Diffusion和GAN的区别有哪些？](#7.Diffusion和GAN的区别有哪些？)
+- [8.介绍一下DDPM的原理、算法流程？](#8.介绍一下DDPM的原理、算法流程？)
+- [9.推导一下DDPM的公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？](#9.推导一下DDPM的公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？)
+- [10.什么是DDIM?](#10.什么是DDIM?)
+- [11.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?](#11.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?)
+- [12.Latent Diffusion相比DDPM有哪些改进?](#12.Latent-Diffusion相比DDPM有哪些改进?)
+
+### 【二】Stable Diffusion 1.5高频考点
+
 - [1.目前主流的AI绘画大模型（文生图大模型）有哪些？](#1.目前主流的AI绘画大模型（文生图大模型）有哪些？)
 - [2.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？](#2.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？)
 - [3.SD模型中的CFGClassifier-Free-Guidance的原理？](#3.SD模型中的CFG(Classifier-Free-Guidance)的原理？)
@@ -19,7 +36,7 @@
 - [15.Stable-Diffusion-3有哪些改进点？](#15.Stable-Diffusion-3有哪些改进点？)
 - [16.Cross-Attention在SD系列模型中起什么作用？](#16.Cross-Attention在SD系列模型中起什么作用？)
 - [17.扩散模型中的引导技术：CG与CFG](#17.扩散模型中的引导技术：CG与CFG)
-- [18.什么是DDIM?](#18.什么是DDIM?)
+- 
 - [19.Stable Diffusion 3中数据标签工程的具体流程是什么样的？](#19.Stable-Diffusion-3中数据标签工程的具体流程是什么样的？)
 - [20.FLUX.1系列模型有哪些创新点？](#20.FLUX.1系列模型有哪些创新点？)
 - [21.介绍一下DiT模型的基本概念](#21.介绍一下DiT模型的基本概念)
@@ -49,29 +66,29 @@
 - [45.关于GPT4O生成的看法（技术路线未公布）](#45.关于GPT4O生成的看法（技术路线未公布）)
 - [46.什么是REAL（新的评价基准）？](#46.什么是REAL（新的评价基准）？)
 - [47.什么是ImageGen-CoT（思维链条）？](#47.什么是ImageGen-CoT（思维链条）？)
-- [48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？](#48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？)
-- [49.什么是Textual Inversion(文本反演)？](#49.什么是Textual Inversion(文本反演)？)
+- 
+- 
 - [50.什么是OminGen？](#50.什么是OminGen？)
-- [51.介绍一下PAG（Perturbed-Attention Guidance）](#51.介绍一下PAG（Perturbed-Attention Guidance）)
-- [52.介绍一下Kandinsky 2.1](#52.介绍一下Kandinsky 2.1)
-- [53.介绍一下Kandinsky 2.2](#53.介绍一下Kandinsky 2.2)
+- [51.介绍一下PAG（Perturbed-Attention Guidance）](#51.介绍一下PAG（Perturbed-Attention-Guidance）)
+- [52.介绍一下Kandinsky 2.1](#52.介绍一下Kandinsky-2.1)
+- [53.介绍一下Kandinsky 2.2](#53.介绍一下Kandinsky-2.2)
 - [54.介绍一下Kandinsky3](#54.介绍一下Kandinsky3)
 - [55.SD模型中的VAE和单纯的VAE生成模型的区别是什么？](#55.SD模型中的VAE和单纯的VAE生成模型的区别是什么？)
 - [56.扩散模型中不同采样器（Sampler）的原理对比](#56.扩散模型中不同采样器（Sampler）的原理对比)
 - [57.扩散模型中噪声调度策略的设计原理？](#57.扩散模型中噪声调度策略的设计原理？)
 - [58.主流AI绘画大模型的完整训练流程是什么样的？](#58.主流AI绘画大模型的完整训练流程是什么样的？)
-- [59.LoRA和DreamBooth对比](#59.LoRA和DreamBooth对比)
-- [60.什么是SDXL Refiner？](#60.什么是SDXL Refiner？)
+- 
+- [60.什么是SDXL Refiner？](#60.什么是SDXL-Refiner？)
 - [61.什么是X-Flux？](#61.什么是X-Flux？)
 - [62.StableDiffusion的一些加速方法](#62.StableDiffusion的一些加速方法)
 - [63.VAE和AE的区别是什么？](#63.VAE和AE的区别是什么？)
 - [64.扩散模型是如何引入控制条件的？](#64.扩散模型是如何引入控制条件的？)
 - [65.什么是风格漂移？](#65.什么是风格漂移？)
-- [66.什么是flow matching？](#66.什么是flow matching？)
-- [67.DDPM 和 Flow Matching 区别？](#67.DDPM 和 Flow Matching 区别？)
+- [66.什么是flow matching？](#66.什么是flow-matching？)
+- [67.DDPM和Flow Matching区别？](#67.DDPM和Flow-Matching区别？)
 - [68.DMD2蒸馏是怎么做的？](#68.DMD2蒸馏是怎么做的？)
 
-## 第二章 Midjourney高频考点
+## 第三章 Midjourney高频考点
 
 - [1.Midjourney是什么？](#1.Midjourney是什么？)
 - [2.Midjourney的应用领域是什么？](#2.Midjourney的应用领域是什么？)
@@ -81,15 +98,17 @@
 - [6.Midjourney迭代至今有哪些优秀的特点？](#6.Midjourney迭代至今有哪些优秀的特点？)
 - [7.Midjourney有哪些关键的参数？](#7.Midjourney有哪些关键的参数？)
 
-## 第三章 AI绘画大模型优化技术高频考点
+## 第四章 AI绘画大模型优化技术高频考点
 
 - [1.什么是DreamBooth技术？](#1.什么是DreamBooth技术？)
 - [2.长宽比分桶训练策略（Aspect Ratio Bucketing）有什么作用?](#2.长宽比分桶训练策略（AspectRatioBucketing）有什么作用?)
 - [3.介绍一下长宽比分桶训练策略（Aspect Ratio Bucketing）的具体流程](#3.介绍一下长宽比分桶训练策略（AspectRatioBucketing）的具体流程)
 - [4.介绍一下OFT(Orthogonal Finetuning)微调技术](#4.介绍一下OFT(Orthogonal-Finetuning)微调技术)
 - [5.Flow Matching和DDPM之间有什么区别？](#5.Flow-Matching和DDPM之间有什么区别？)
+- [6.Stable Diffusion的模型融合原理？](#6.Stable-Diffusion的模型融合原理？)
+- [7.Stable Diffusion进行模型融合的技巧有哪些？](#7.Stable-Diffusion进行模型融合的技巧有哪些？)
 
-## 第四章 其他主流AI绘画大模型高频考点
+## 第五章 其他主流AI绘画大模型高频考点
 
 - [1.Playground V2模型有哪些特点？](#1.Playground-V2模型有哪些特点？)
 - [2.Imagen模型有什么特点?](#2.Imagen模型有什么特点?)
@@ -97,7 +116,68 @@
 
 ---
 
-## 第一章 Stable Diffusion系列核心高频考点正文
+## 第一章 Diffusion Model核心基础知识高频考点
+
+<h2 id="1.介绍一下Diffusion-Model的核心思想和工作原理？">1.介绍一下Diffusion Model的核心思想和工作原理？</h2>
+
+
+<h2 id="2.介绍一下马尔可夫链的原理？">2.介绍一下马尔可夫链的原理？</h2>
+
+
+<h2 id="3.介绍一下Disco-Diffusion的原理？">3.介绍一下Disco Diffusion的原理？</h2>
+
+
+<h2 id="4.经典的Pixel-Diffusion有哪些？">4.经典的Pixel Diffusion有哪些？</h2>
+
+
+<h2 id="5.Diffusion-Models和VAE之间有哪些联系和区别？">5.Diffusion Models和VAE之间有哪些联系和区别？</h2>
+
+
+<h2 id="6.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？">6.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？</h2>
+
+**这个问题最本质的回答是：传统深度学习时代的VAE是单独作为生成模型；而在AIGC时代，VAE只是作为特征编码器，提供特征给Diffusion用于图像的生成。其实两者的本质作用已经发生改变。**
+
+同时传统深度学习时代的VAE的重构损失只使用了平方误差，而Stable Diffusion中的VAE使用了平方误差 + Perceptual损失 + 对抗损失。在正则项方面，传统深度学习时代的VAE使用了完整的KL散度项，而Stable Diffusion中的VAE使用了弱化的KL散度项。同时传统深度学习时代的VAE将图像压缩成单个向量，而Stable Diffusion中的VAE则将图像压缩成一个 $N\times M$ 的特征矩阵。
+
+上述的差别都导致了传统深度学习时代的VAE生成效果不佳。
+
+
+<h2 id="7.Diffusion和GAN的区别有哪些？">7.Diffusion和GAN的区别有哪些？</h2>
+
+
+<h2 id="8.介绍一下DDPM的原理、算法流程？">8.介绍一下DDPM的原理、算法流程？</h2>
+
+
+<h2 id="9.推导一下DDPM的公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？">9.推导一下DDPM的公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？</h2>
+
+
+<h2 id="10.什么是DDIM?">10.什么是DDIM?</h2>
+
+论文链接：https://arxiv.org/pdf/2010.02502.pdf
+
+### 1. 概述
+
+Denoising Diffusion Implicit Models（DDIM）是一种基于Denoising Diffusion Probabilistic Models（DDPM）的改进模型，通过引入非马尔可夫（Non-Markovian）扩散过程来实现更快的样本生成。DDIM在训练过程与DDPM相同，但通过简化生成过程，大大加速了样本的产生速度。
+
+![DDIM](./imgs/DDIM.png)
+
+### 2. DDPM与DDIM的对比
+
+DDPM通过模拟马尔可夫链来逐步生成样本，这一过程虽然可以生成高质量的图像，但需要较长的时间。DDIM通过以下方式改进了这一过程：
+
+- **非马尔可夫扩散过程**：DDIM采用非马尔可夫扩散过程，使得生成过程可以是确定性的，而非随机。
+- **加速样本生成**：DDIM能够在更短的时间内生成高质量的样本，与DDPM相比，生成速度提升了10倍到50倍。
+- **计算与样本质量的权衡**：DDIM允许在计算资源和样本质量之间进行权衡，用户可以根据需要调整生成速度和质量。
+- **语义图像插值与重建**：DDIM支持在潜在空间中进行语义有意义的图像插值，并且能够以极低的误差重建观察结果。
+
+
+<h2 id="11.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?">11.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?</h2>
+
+
+<h2 id="12.Latent-Diffusion相比DDPM有哪些改进?">12.Latent Diffusion相比DDPM有哪些改进?</h2>
+
+
+## 第二章 Stable Diffusion系列核心高频考点正文
 
 <h2 id="1.目前主流的AI绘画大模型（文生图大模型）有哪些？">1.目前主流的AI绘画大模型（文生图大模型）有哪些？</h2>
 
@@ -445,26 +525,6 @@ $$
 - CFG是当前扩散模型中的主流方法
 - CG提供了根据真实标签引导生成样本特定属性的优势
 - 两种方法并不相互排斥，可以结合使用以获得更好的效果
-
-
-<h2 id="18.什么是DDIM?">18.什么是DDIM?</h2>
-
-论文链接：https://arxiv.org/pdf/2010.02502.pdf
-
-### 1. 概述
-
-Denoising Diffusion Implicit Models（DDIM）是一种基于Denoising Diffusion Probabilistic Models（DDPM）的改进模型，通过引入非马尔可夫（Non-Markovian）扩散过程来实现更快的样本生成。DDIM在训练过程与DDPM相同，但通过简化生成过程，大大加速了样本的产生速度。
-
-![DDIM](./imgs/DDIM.png)
-
-### 2. DDPM与DDIM的对比
-
-DDPM通过模拟马尔可夫链来逐步生成样本，这一过程虽然可以生成高质量的图像，但需要较长的时间。DDIM通过以下方式改进了这一过程：
-
-- **非马尔可夫扩散过程**：DDIM采用非马尔可夫扩散过程，使得生成过程可以是确定性的，而非随机。
-- **加速样本生成**：DDIM能够在更短的时间内生成高质量的样本，与DDPM相比，生成速度提升了10倍到50倍。
-- **计算与样本质量的权衡**：DDIM允许在计算资源和样本质量之间进行权衡，用户可以根据需要调整生成速度和质量。
-- **语义图像插值与重建**：DDIM支持在潜在空间中进行语义有意义的图像插值，并且能够以极低的误差重建观察结果。
 
 
 <h2 id="19.Stable-Diffusion-3中数据标签工程的具体流程是什么样的？">19.Stable Diffusion 3中数据标签工程的具体流程是什么样的？</h2>
@@ -1088,74 +1148,6 @@ ImageGen-CoT框架在图像生成之前引入了结构化思维过程，帮助ML
 ![image-20250420205954326](./imgs/image-cot.png)
 
 
-<h2 id="48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？">48.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？</h2>
-
-**这个问题最本质的回答是：传统深度学习时代的VAE是单独作为生成模型；而在AIGC时代，VAE只是作为特征编码器，提供特征给Diffusion用于图像的生成。其实两者的本质作用已经发生改变。**
-
-同时传统深度学习时代的VAE的重构损失只使用了平方误差，而Stable Diffusion中的VAE使用了平方误差 + Perceptual损失 + 对抗损失。在正则项方面，传统深度学习时代的VAE使用了完整的KL散度项，而Stable Diffusion中的VAE使用了弱化的KL散度项。同时传统深度学习时代的VAE将图像压缩成单个向量，而Stable Diffusion中的VAE则将图像压缩成一个 $N\times M$ 的特征矩阵。
-
-上述的差别都导致了传统深度学习时代的VAE生成效果不佳。
-
-
-
-<h2 id="49.什么是Textual Inversion(文本反演)？">49.什么是Textual Inversion(文本反演)？</h2>
-
-### 理解 Textual Inversion 的核心思想
-
-Textual Inversion（文本反演）是一种新颖且高效的方法，用于让文本到图像生成模型（例如 Stable Diffusion）快速学习和生成全新的视觉概念，而无需重新训练整个模型。具体来说，这种方法通过优化特殊的文本嵌入来代表新概念，使得模型能够生成包含用户个性化元素的图像。
-
-![image-20250518102329271](./imgs/textual inversion.png)
-
-### Textual Inversion 的实现流程
-
-具体过程包括以下几个步骤：
-
-1. **收集输入图像** 用户提供3-5张代表某个新概念的图片，例如特定的雕塑、玩具或独特的艺术风格。这些图像作为模型的学习基础。
-
-2. **创建伪词** 为了表示这个新概念，方法会引入一个全新的伪词（在论文中通常标记为S*）。例如，如果你想要教会模型一个特定的雕塑，你可能引入一个词如“雕塑X”。
-
-3. **优化词嵌入** 与重新训练整个模型不同，文本反演只优化这个新伪词在文本嵌入空间中的位置。具体优化过程包括最小化两个方面的差异：
-
-   - 模型使用包含伪词的文本提示生成的图像
-   - 用户提供的实际参考图像
-
-   通过优化，这个伪词的嵌入向量最终能准确表示新的视觉概念。
-
-4. **集成应用** 一旦伪词优化完成，就可以和已有的自然语言提示结合使用，让模型生成包含这个个性化元素的新图像。例如，你可以输入“一个戴着‘雕塑X’风格帽子的女孩”，模型就能生成符合你定制需求的图片。
-
-### 为什么 Textual Inversion 如此高效？
-
-Textual Inversion 的最大创新点在于它无需修改文本到图像模型的架构或全面重新训练，而是巧妙地利用了模型已有的嵌入空间。具体来说，模型本身包括两个关键组件：
-
-- **文本编码器**：将自然语言提示转化为嵌入向量。
-- **扩散模型**：根据嵌入向量生成或逐步优化图像。
-
-Textual Inversion 通过优化特定概念对应的嵌入向量，精准地将新概念融入模型已有的知识体系中。
-
-### 数学原理解析
-
-- 从数学上讲，该方法可以描述为：
-
-  1. 对于由占位符 S* 表示的新概念，目标是找到一个最佳嵌入向量 v*，它在文本嵌入空间中表示该概念。
-  2. 这被形式化为一个优化问题：
-
-  ```
-  v* = argmin_v L(v, {I_1, I_2, ..., I_n})
-  ```
-
-  其中 L 是损失函数，用于衡量使用嵌入 v 生成的图像与参考图像 {I_1, I_2, ..., I_n} 的匹配程度。
-
-使用扩散损失作为优化指标，可以确保学习到的嵌入既准确捕捉新概念的视觉特征，又保持与原模型良好的兼容性。
-
-
-
-OmniGen的设计目标可用两个关键词概括：**统一（Unification）与简洁（Simplicity）**。
-
-- **统一**：无论是文本生成图像、图像编辑、条件控制生成还是主客体泛化，OmniGen都能用一个模型、一套流程完成，无需任何额外插件或中间步骤。
-- **简洁**：彻底抛弃了冗余的输入编码器（如CLIP、检测器等），仅保留**两个“组件”**：`VAE(图像变分自编码器)` 和 `Transformer(大模型)`。
-
-
-
 <h2 id="50.什么是OminGen？">50.什么是OminGen？</h2>
 
 ![image-20250518110022944](./imgs/OmniGen.png)
@@ -1188,7 +1180,7 @@ OmniGen的设计目标可用两个关键词概括：**统一（Unification）与
 
 
 
-<h2 id="51.介绍一下PAG（Perturbed-Attention Guidance）">51.介绍一下PAG（Perturbed-Attention Guidance）</h2>
+<h2 id="51.介绍一下PAG（Perturbed-Attention-Guidance）">51.介绍一下PAG（Perturbed-Attention Guidance）</h2>
 
 [Perturbed-Attention Guidance (PAG)](https://ku-cvlab.github.io/Perturbed-Attention-Guidance/) 是一种新的扩散采样指南，可提高无条件和有条件设置的样本质量，无需进一步培训或集成外部模块即可实现这一目标。PAG 旨在通过考虑自注意力机制捕获结构信息的能力，在整个去噪过程中逐步增强合成样本的结构。它涉及通过用单位矩阵替换扩散 U-Net 中选定的自注意力图来生成具有降解结构的中间样品，并引导去噪过程远离这些降解的样品。
 
@@ -1217,7 +1209,7 @@ PAG 选择扰动扩散 U-Net 中的自注意力图，是因为自注意力机制
 
 
 
-<h2 id="52.介绍一下Kandinsky 2.1">52.介绍一下Kandinsky 2.1</h2>
+<h2 id="52.介绍一下Kandinsky-2.1">52.介绍一下Kandinsky 2.1</h2>
 
 Kandinsky 2.1 是由俄罗斯 AI 团队 AI Forever 开发的开源文本到图像生成模型，继承了 DALL·E 2 和 Latent Diffusion 的最佳实践，并引入了新的架构创新，显著提升了图像生成质量和多语言支持能力。[Kandinsky 2.1](https://huggingface.co/docs/diffusers/api/pipelines/kandinsky) 更改了体系结构，以包括图像先验模型 （[`CLIP`](https://huggingface.co/docs/transformers/model_doc/clip)），以生成文本和图像嵌入之间的映射。该映射提供了更好的文本-图像对齐，并在训练期间与文本嵌入一起使用，从而获得更高质量的结果。最后，Kandinsky 2.1 使用[调制量子化向量 （MoVQ）](https://huggingface.co/papers/2209.09002) 解码器（它添加了空间条件归一化层以提高照片级真实感）将潜在因素解码为图像。
 
@@ -1242,7 +1234,7 @@ Kandinsky 2.1 支持多种图像生成和编辑功能，包括：
 - **图像修复**：根据提供的蒙版和提示，修复或替换图像中的特定区域。
 - **图像到图像转换**：在保留原始图像结构的同时，根据文本提示修改图像风格或内容。
 
-<h2 id="53.介绍一下Kandinsky 2.2">53.介绍一下Kandinsky 2.2</h2>
+<h2 id="53.介绍一下Kandinsky-2.2">53.介绍一下Kandinsky 2.2</h2>
 
 [Kandinsky 2.2](https://huggingface.co/docs/diffusers/api/pipelines/kandinsky_v22) 对以前的模型进行了改进，将图像先验模型的图像编码器替换为更大的 CLIP-ViT-G 模型以提高质量。图像先验模型还在具有不同分辨率和纵横比的图像上进行了重新训练，以生成更高分辨率的图像和不同的图像尺寸。
 
@@ -1409,117 +1401,8 @@ Kandinsky 3.0 的主要技术特点包括：
 1. 一致噪声期望：预测噪声分布，减少迭代。
 2. 重要性感知时间步采样：聚焦关键扩散步，跳过非关键步。
 
-<h2 id="59.LoRA和DreamBooth对比">59.LoRA和DreamBooth对比</h2>
 
-#### 核心原理
-
-DreamBooth通过在整个模型上进行微调来学习新概念：
-
-python
-
-```python
-# DreamBooth的损失函数
-L_dreambooth = E[||ε - ε_θ(x_t, t, c_text)||²] + λ * E[||ε - ε_θ(x_pr, t, c_pr)||²]
-```
-
-其中第二项是**先验保留损失（Prior Preservation Loss）**，防止模型遗忘原有知识。
-
-#### 技术特点
-
-1. **全模型微调**：更新UNet的所有参数
-2. **类别特定标识符**：使用独特的标识词（如"sks"）
-3. **先验保留**：生成类别图像以保持模型的泛化能力
-
-#### 训练流程
-
-python
-
-```python
-# 简化的DreamBooth训练流程
-def train_dreambooth(model, images, class_prompt, instance_prompt):
-    # 1. 生成先验图像
-    prior_images = generate_class_images(model, class_prompt, num=100)
-    
-    # 2. 准备训练数据
-    dataset = combine_datasets(
-        instance_data=(images, instance_prompt),
-        class_data=(prior_images, class_prompt)
-    )
-    
-    # 3. 微调整个模型
-    for batch in dataset:
-        loss = compute_dreambooth_loss(model, batch)
-        optimizer.step(loss)
-```
-
-### LoRA：
-
-#### 核心原理
-
-LoRA通过低秩矩阵分解来高效地适配预训练模型：
-
-python
-
-```python
-# LoRA的核心公式
-W' = W + ΔW = W + B·A
-# 其中 B ∈ R^(d×r), A ∈ R^(r×k), r << min(d,k)
-```
-
-#### 技术特点
-
-1. **参数高效**：只训练额外的低秩矩阵
-2. **模块化设计**：可以轻松切换和组合不同的LoRA
-3. **训练速度快**：参数量大幅减少
-
-#### 实现细节
-
-python
-
-```python
-class LoRALayer(nn.Module):
-    def __init__(self, in_features, out_features, rank=4):
-        super().__init__()
-        self.A = nn.Parameter(torch.randn(rank, in_features))
-        self.B = nn.Parameter(torch.zeros(out_features, rank))
-        self.scale = 1.0
-        
-    def forward(self, x, original_weight):
-        # 原始输出 + LoRA调整
-        return F.linear(x, original_weight) + self.scale * (x @ self.A.T @ self.B.T)
-```
-
-### 详细对比分析
-
-#### 1. 学习能力对比
-
-**DreamBooth的优势**：
-
-- 能够学习复杂的新概念
-- 对细节的捕捉更精确
-- 适合需要大幅改变模型行为的场景
-
-**LoRA的优势**：
-
-- 快速适配新风格
-- 可以组合多个LoRA实现复合效果
-- 保持原模型能力的同时添加新特性
-
-#### 2. 实际应用场景
-
-**DreamBooth适用于**：
-
-- 人物/宠物的个性化定制
-- 需要精确还原特定对象
-- 商业级的定制化需求
-
-**LoRA适用于**：
-
-- 艺术风格迁移
-- 快速原型开发
-- 需要频繁切换不同适配的场景
-
-<h2 id="60.什么是SDXL Refiner？">60.什么是SDXL Refiner？</h2>
+<h2 id="60.什么是SDXL-Refiner？">60.什么是SDXL Refiner？</h2>
 
 SDXL Refiner是Stability AI推出的图像精细化模型，作为SDXL生态系统的第二阶段，专门负责提升图像细节质量。它采用了"专家集成"的设计理念：Base模型生成基础结构，Refiner模型优化细节表现。
 
@@ -1816,7 +1699,7 @@ image = pipe("astronaut on mars", num_inference_steps=20).images[0]
 
 
 
-<h2 id="66.什么是flow matching？">66.什么是flow matching？</h2
+<h2 id="66.什么是flow-matching？">66.什么是flow matching？</h2
 
 ## 概览
 
@@ -1859,7 +1742,7 @@ $$
 
 
 
-<h2 id="67.DDPM 和 Flow Matching 区别？">67.DDPM 和 Flow Matching 区别？</h2
+<h2 id="67.DDPM和Flow-Matching区别？">67.DDPM和Flow Matching区别？</h2
 
 DDPM（去噪扩散概率模型）通过千次以上的噪声注入与逐步去噪，能够生成高质量图像，但采样过程需要大量的数值仿真和迭代，速度较慢 [arxiv.org](https://arxiv.org/abs/2006.11239?utm_source=chatgpt.com)。Flow Matching（流匹配）则将生成过程视作在预定义概率路径上的连续正规流，以模拟无关的方式直接回归向量场，训练中无需仿真步骤，采样时也可用少量 ODE 步骤完成 [arxiv.org](https://arxiv.org/abs/2210.02747?utm_source=chatgpt.com)。
 
@@ -2604,6 +2487,68 @@ DDPM通过随机扩散和去噪过程生成数据，强调概率建模；Flow Ma
 | **采样速度**       | 慢（多步迭代）                | 快（少步或一步）               |
 | **路径性质**       | 随机噪声扰动                  | 确定性最优路径                 |
 | **数学复杂度**     | 中等（马尔可夫链）            | 高（ODE求解/最优传输）         |
+
+
+<h2 id="6.Stable-Diffusion的模型融合原理？">6.Stable Diffusion的模型融合原理？</h2>
+
+Stable Diffusion的模型融合主要通过 **Merge Block Weight（块权重融合）** 这种精细化的模型参数整合技术实现，通过分层处理U-Net/Transformer内部不同功能模块层的权重，实现多个Stable Diffusion模型特点优势的定向组合。
+
+### 🔧 一、**核心原理：分层权重插值**
+
+模型融合的目标是合并多个训练好的Stable Diffusion模型（如风格模型+主体模型），生成兼具各方优势的新模型。Merge Block Weight的核心创新在于**分块处理U-Net/Transformer结构**，而非整体融合：
+1. **U-Net结构解构**  
+   Stable Diffusion的U-Net包含多个功能模块：
+   - **ResBlock**：负责基础特征提取与残差连接
+   - **Spatial Transformer（Cross-Attention）**：融合文本与图像语义
+   - **DownSample/UpSample**：控制特征图分辨率变换
+2. **分块独立融合**  
+   对每个模块的权重独立计算插值，公式为：
+    
+   $$
+   W_{\text{merged}}^{(i)} = \alpha \cdot W_A^{(i)} + (1 - \alpha) \cdot W_B^{(i)}
+   $$
+   
+   其中 $W_A^{(i)}$ 和 $W_B^{(i)}$ 是待融合模型在模块 $i$ 的权重，$\alpha$ 为该模块的融合系数（0~1）。
+
+### ⚙️ 二、**技术实现流程**
+#### 1. **权重归一化（关键预处理）**
+   - 目的：解决不同模型参数分布差异导致的融合冲突
+   - 方法：对每个模型的权重进行LayerNorm或Min-Max缩放，使其处于相近数值范围
+
+#### 2. **插值算法选择**
+   | **算法**       | 适用场景                  | 优势                          | 缺点               |
+   |----------------|-------------------------|-----------------------------|-------------------|
+   | **线性插值（LERP）** | 简单融合、硬件资源有限     | 计算效率高                    | 可能丢失非线性特征  |
+   | **球面线性插值（SLERP）** | 高质量风格融合（如艺术风格） | 保持权重向量方向一致性，避免特征坍缩 | 计算复杂度高 | 
+
+#### 3. **分层系数配置**
+   不同模块需设置差异化融合系数，例如：
+   - **ResBlock**：$\alpha=0.5$（平衡底层特征）
+   - **Spatial Transformer**：$\alpha=0.8$（侧重模型A的文本控制力）
+   - **UpSample层**：$\alpha=0.3$（侧重模型B的细节生成能力）
+
+### 💎 总结
+Merge Block Weight通过解构U-Net并分层融合权重，实现了模型能力的精准嫁接，成为解决单一模型局限性问题的关键技术。随着Stable Diffusion 3等新架构对多模态权重的分离设计（如MMDiT），模型融合将进一步向**模态感知融合**（Modality-Aware Merging）演进，在艺术创作、工业设计等领域释放更大潜力。
+
+
+<h2 id="7.Stable-Diffusion进行模型融合的技巧有哪些？">7.Stable Diffusion进行模型融合的技巧有哪些？</h2>
+
+我们在进行几个Stable Diffusion的融合时，可以调整U-Net架构中每一层模型的融合权重，从而能够进行模型融合的进阶整合：
+
+在MBW插件中，将U-Net分层了25个可调层，开源社区将其分为:
+IN区：有12层
+M区：有1层
+OUT区：有12层
+
+IN区影响下采样过程对特征的提取，层数从00到11，感受野越来越大，影响的程度越来越大。IN区块负责平面构成的相关工作（构图元素以及生成图像背景），特别是6-11层，总的来说层数越高影响效果越明显，更改层数越多影响效果越明显。比如：各个物体的大小、位置以及基本轮廓。其中在画面中占比越小的物体受到越浅层的参数控制，占比大的物体受到更深层的参数控制。浅层权重越高，小物体的表现效果就越向该模型靠拢；深层权重越高，较大物体的表现效果就越向该模型靠拢。
+
+OUT区影响上采样过程对特征进行还原，层数从00到11，感受野越来越小，影响的程度越来越小。OUT区块负责色彩构成和画风的相关工作，主要是0-4层起核心作用，同时如果是人物图像，2-7层可以控制脸部的微调。
+
+在IN区中编号越高，对平面构成的影响就越偏向大体。在OUT区中，编号越高，对细化过程的影响就越局域化，对上色过程的影响就越大体化。比如：基本色调，色彩丰富或单一，皮肤质感，光影，线条。深层参数负责大区域的色彩，比如基本色调、色彩丰富度与光影；浅层参数负责细节的色彩，比如线条是否清晰，通过浅层可以调整手指；深层与浅层之间的中层则负责区域的色彩，区域内色彩的不同变化程度可以体现出不同的皮肤质感和区域光影效果。
+
+同时如果IN层和OUT层只改变其中的某一层，几乎不会产生影响效果。
+
+M区：影响最大的一层，甚至比IN11层的影响更大，起到了类似IN层的作用，可以看作IN12层，但也只能起到一层的作用，不如IN层中多层叠加后的影响大。该层越大，构图越向该模型靠拢。
 
 ---
 
