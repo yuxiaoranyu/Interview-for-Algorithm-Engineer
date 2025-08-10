@@ -19,7 +19,7 @@
 - :clapper: [AI视频基础](AI视频基础)
 - :sparkler: [大模型基础](大模型基础)
 - :trident: [AI多模态基础](AI多模态基础)
-- :video_game: [AI Agent基础](AI-Agent基础)
+- :video_game: [AI Agent基础](AI Agent基础)
 - :shipit: [数字人基础](数字人基础)
 - :closed_book: [深度学习基础](深度学习基础)
 - :blue_book: [机器学习基础](机器学习基础)
