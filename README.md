@@ -2,7 +2,7 @@
   
 # 🔥【三年面试五年模拟】AIGC算法岗/开发岗的面试求职秘籍
 
-【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、Deep Learning Interview、Algorithm Engineer Interview**
+【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、AI Agent Interview、Deep Learning Interview、Algorithm Engineer Interview**
 
 </div>
 
@@ -12,7 +12,7 @@
 
 🏆**AIGC开发岗方向：** 涵盖Python、Java、C/C++、Go、嵌入式、前端、后端、测试、运维等。
 
-🚀**本项目凝聚了AIGC时代众多一线AIGC算法专家的行业经验与深度洞察**，涵盖AIGC大厂内推、AIGC面试经验、AIGC公司指南/辛秘、AI校招时间表、AIGC面试准备、AIGC薪资、AIGC刷题指南、AIGC求职答疑等干货资源。本项目的核心内容均取材于编者们在AI行业中的工作、研究、竞赛以及各大AIGC公司经典的AIGC岗位笔试/面试题。
+🚀**本项目凝聚了AIGC时代众多一线AIGC算法专家的行业经验与深度洞察**，涵盖AIGC大厂内推、AIGC面试经验、AIGC公司指南/辛秘、AI校招时间表、AIGC面试准备、AIGC薪资、AIGC刷题指南、AIGC求职答疑等干货资源。本项目的核心内容均取材于编者们在AI行业中的工作、研究、竞赛经验以及对各大AIGC公司经典的AIGC岗位笔试/面试题提炼。
 
 💡同时，本项目也可作为高等学府AIGC相关专业的研究、教学、竞赛以及学习的参考用书；还可为AIGC、传统深度学习以及自动驾驶领域的初、中级技术人员提供思路参考，**尤其适合AIGC求职者和提供相关AICG算法岗位的面试官阅读研究**。
 
