@@ -1,5 +1,5 @@
 <div align=center>
-  
+
 # 🔥【三年面试五年模拟】AIGC算法岗/开发岗的面试求职秘籍
 
 【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、AI Agent Interview、Deep Learning Interview、Algorithm Engineer Interview**
@@ -98,6 +98,10 @@ Rocky最新撰写完成10万字的Stable Diffusion 3和FLUX.1系列模型全网�
 >Elliot Qi 副主编
 
 Elliot Qi，互联网大厂AIGC算法工程师，在计算机视觉顶会发表多篇论文，曾多次获得天池、顶会Challenge冠亚季军，主要研究方向为扩散模型、可控图像生成和视频生成等。
+
+>初街夜话 副主编
+
+初街夜话，计算机视觉方向的在读博士，主要研究目标检测，也会折腾一些 AIGC 技术，享受探索人工智能前沿的过程。
 
 ## 💡AIGC行业技术交流群
 
