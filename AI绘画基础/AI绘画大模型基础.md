@@ -1,6 +1,43 @@
 # 目录
 
-## 第一章 Stable Diffusion系列核心高频考点
+## 第一章 Diffusion Model核心基础知识高频考点
+
+### Diffusion Model核心高频考点
+
+- [1.介绍一下Diffusion Model的原理和本质](#1.介绍一下Diffusion-Model的原理和本质)
+- [2.介绍一下Disco Diffusion的原理](#2.介绍一下Disco-Diffusion的原理)
+- [3.经典的Pixel Diffusion有哪些？](#3.经典的Pixel-Diffusion有哪些？)
+- [4.Diffusion Models和VAE之间有哪些联系和区别？](#4.Diffusion-Models和VAE之间有哪些联系和区别？)
+- [5.Diffusion和GAN的区别有哪些？](#5.Diffusion和GAN的区别有哪些？)
+- [6.Latent Diffusion相比DDPM有哪些改进?](#6.Latent-Diffusion相比DDPM有哪些改进?)
+- [7.介绍一下什么是马尔可夫链](#7.介绍一下什么是马尔可夫链)
+- [8.扩散模型中添加的是高斯噪声，能否使用其他噪声的加噪方式？](#8.扩散模型中添加的是高斯噪声，能否使用其他噪声的加噪方式？)
+- [9.在Diffusion中常见的条件注入的方法有哪些?Diffusion是如何添加timestep信息的?](#9.在Diffusion中常见的条件注入的方法有哪些?Diffusion是如何添加timestep信息的?)
+- [10.训练Diffusion Models的时候，当Loss收敛后是否意味着训练应该结束？](#10.训练Diffusion-Models的时候，当Loss收敛后是否意味着训练应该结束？)
+- [11.VAE和Diffusion Models中的变分推断是什么?](#11.VAE和Diffusion-Models中的变分推断是什么?)
+
+### Diffusion Model的采样（Sample）高频考点
+
+- [1.什么是DDPM，推导公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？](#1.什么是DDPM，推导公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？)
+- [2.什么是马尔可夫过程?DDPM中的马尔可夫链是如何定义的?](#2.什么是马尔可夫过程?DDPM中的马尔可夫链是如何定义的?)
+- [3.DDPM是预测噪声还是预测当前分布？](#3.DDPM是预测噪声还是预测当前分布？)
+- [4.为什么DDPM前向过程中前期加噪少,后期加噪多?](#4.为什么DDPM前向过程中前期加噪少,后期加噪多?)
+- [5.DDPM存在什么问题？](#5.DDPM存在什么问题？)
+- [6.介绍一下DDIM的核心原理](#6.介绍一下DDIM的核心原理)
+- [7.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?](#7.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?)
+- [8.DDIM是不是确定性生成？为什么？](#8.DDIM是不是确定性生成？为什么？)
+- [9.扩散模型有哪些常见的采样方式？其原理是什么样的？（DDPM、DDIM、DPM++、lcm turbo等）](#9.扩散模型有哪些常见的采样方式？其原理是什么样的？（DDPM、DDIM、DPM++、lcm-turbo等）)
+- [10.classifier-free guidance和classifier guidance有哪些区别？](#10.classifier-free-guidance和classifier-guidance有哪些区别？)
+- [11.什么是noisescheduler?Cos Noisescheduler有什么优点?](#11.什么是noisescheduler?Cos-Noisescheduler有什么优点?)
+- [12.为什么扩散模型要对X0步加上的噪声算L2损失？这和Xt-1步的状态有什么联系？](#12.为什么扩散模型要对X0步加上的噪声算L2损失？这和Xt-1步的状态有什么联系？)
+- [13.为什么Q_forward过程能够一步写出表达式？重参数化的前提是什么？](#13.为什么Q_forward过程能够一步写出表达式？重参数化的前提是什么？)
+- [14.GuidanceScale较大为什么会破坏噪声预测分布?](#14.GuidanceScale较大为什么会破坏噪声预测分布?)
+- [15.增加采样步数有什么影响?](#15.增加采样步数有什么影响?)
+- [16.常见的采样器有哪些?（Euler、Euler a、DDIM、LMS、LMS Karras、Heun、DPM、UniPC、Karras、PLMS、UniPC、UniPC variant等）](#16.常见的采样器有哪些?（Euler、Euler-a、DDIM、LMS、LMS-Karras、Heun、DPM、UniPC、Karras、PLMS、UniPC、UniPC-variant等）)
+- [17.不同采样器之间的区别是什么？如何选择合适的采样器？](#17.不同采样器之间的区别是什么？如何选择合适的采样器？)
+- [18.不同采样方法的优缺点是什么？](#18.不同采样方法的优缺点是什么？)
+
+## 第二章 Stable Diffusion系列核心高频考点
 
 ### 【一】Diffusion Model核心基础知识高频考点
 
