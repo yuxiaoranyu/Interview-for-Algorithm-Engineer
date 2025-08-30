@@ -2,7 +2,7 @@
 
 ## 第一章 Diffusion Model核心基础知识高频考点
 
-### Diffusion Model核心高频考点
+### 【一】Diffusion Model核心高频考点
 
 - [1.介绍一下Diffusion Model的原理和本质](#1.介绍一下Diffusion-Model的原理和本质)
 - [2.介绍一下Disco Diffusion的原理](#2.介绍一下Disco-Diffusion的原理)
@@ -16,7 +16,7 @@
 - [10.训练Diffusion Models的时候，当Loss收敛后是否意味着训练应该结束？](#10.训练Diffusion-Models的时候，当Loss收敛后是否意味着训练应该结束？)
 - [11.VAE和Diffusion Models中的变分推断是什么?](#11.VAE和Diffusion-Models中的变分推断是什么?)
 
-### Diffusion Model的采样（Sample）高频考点
+### 【二】Diffusion Model的采样（Sample）高频考点
 
 - [1.什么是DDPM，推导公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？](#1.什么是DDPM，推导公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？)
 - [2.什么是马尔可夫过程?DDPM中的马尔可夫链是如何定义的?](#2.什么是马尔可夫过程?DDPM中的马尔可夫链是如何定义的?)
