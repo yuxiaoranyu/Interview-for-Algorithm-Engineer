@@ -61,22 +61,66 @@
 - [17.介绍一下长宽比分桶训练策略（Aspect Ratio Bucketing）的具体流程](#17.介绍一下长宽比分桶训练策略（AspectRatioBucketing）的具体流程)
 - [18.Stable Diffusion进行模型融合的技巧有哪些？](#18.Stable-Diffusion进行模型融合的技巧有哪些？)
 
+
 ### 【二】Stable Diffusion VAE高频考点
+
+- [1.VAE在Stable Diffusiuon中的作用](#1.VAE在Stable-Diffusiuon中的作用)
+- [2.VAE为什么会导致图像变模糊？](#2.VAE为什么会导致图像变模糊？)
+- [3.为什么VAE的图像生成效果不好，但是VAE+Diffusion的图像生成效果就很好？](#3.为什么VAE的图像生成效果不好，但是VAE+Diffusion的图像生成效果就很好？)
+- [4.SD模型中的VAE和单纯的VAE生成模型的区别是什么？](#4.SD模型中的VAE和单纯的VAE生成模型的区别是什么？)
+
+### 【三】Stable Diffusion Backbone高频考点
+
+- [1.如何将文本与图像的语义信息进行Attention机制，因为Text Condition是三维的，而Latent Feature是四维的？](#1.如何将文本与图像的语义信息进行Attention机制，因为Text-Condition是三维的，而Latent-Feature是四维的？)
+- [2.介绍一下Stable Diffusion中的交叉注意力机制](#2.介绍一下Stable-Diffusion中的交叉注意力机制)
+- [3.Stable Diffusion中cross_attention的qkv分别是什么？为什么图像隐变量作为q，文本prompt作为kv](#3.Stable-Diffusion中cross_attention的qkv分别是什么？为什么图像隐变量作为q，文本prompt作为kv)
+- [4.为什么使用U-Net作为扩散模型的核心架构？](#4.为什么使用U-Net作为扩散模型的核心架构？)
+- [5.介绍一下Stable Diffusion中U-Net的架构](#5.介绍一下Stable-Diffusion中U-Net的架构)
+- [6.扩散U-Net中的免费午餐（FreeU）是什么？](#6.扩散U-Net中的免费午餐（FreeU）是什么？)
+
+
+### 【四】Stable Diffusion Text Encoder高频考点
+
+- [1.举例介绍一下Stable Diffusion模型进行文本编码的全过程](#1.举例介绍一下Stable-Diffusion模型进行文本编码的全过程)
+- [2.Stable Diffusion如何通过文本来实现对图像生成内容的控制?Stable Diffusion中是如何注入文本信息的?](#2.Stable-Diffusion如何通过文本来实现对图像生成内容的控制?Stable-Diffusion中是如何注入文本信息的?)
+- [3.Negative Prompt实现的原理是什么?](#3.Negative-Prompt实现的原理是什么?)
+- [4.如何处理Prompt和生成的图像不对齐的问题？](#4.如何处理Prompt和生成的图像不对齐的问题？)
+- [5.文本编码器和扩散模型，哪一个模型容量变化对生成的结果影响更大？](#5.文本编码器和扩散模型，哪一个模型容量变化对生成的结果影响更大？)
+- [6.扩散模型是如何引入控制条件的？](#6.扩散模型是如何引入控制条件的？)
+
+
+## 第三章 Stable Diffusion XL核心高频考点
+
+- [1.与Stable Diffusion相比，Stable Diffusion XL的核心优化有哪些？](#1.与Stable-Diffusion相比，Stable-Diffusion-XL的核心优化有哪些？)
+- [2.Stable Diffusion XL的VAE部分有哪些创新？详细分析改进意图](#2.Stable-Diffusion-XL的VAE部分有哪些创新？详细分析改进意图)
+- [3.Stable Diffusion XL的Backbone部分有哪些创新？详细分析改进意图](#3.Stable-Diffusion-XL的Backbone部分有哪些创新？详细分析改进意图)
+- [4.Stable Diffusion XL的Text Encoder部分有哪些创新？详细分析改进意图](#4.Stable-Diffusion-XL的Text-Encoder部分有哪些创新？详细分析改进意图)
+- [5.Stable Diffusion XL中使用的训练方法有哪些创新点？](#5.Stable-Diffusion-XL中使用的训练方法有哪些创新点？)
+- [6.训练Stable Diffusion XL时为什么要使用offset Noise？](#6.训练Stable-Diffusion-XL时为什么要使用offset-Noise？)
+- [7.介绍一下Stable Diffusion XL Turbo的原理](#7.介绍一下Stable-Diffusion-XL-Turbo的原理)
+- [8.SDXL-Turbo用的蒸馏方法是什么？](#8.SDXL-Turbo用的蒸馏方法是什么？)
+- [9.什么是SDXL Refiner？](#9.什么是SDXL-Refiner？)
+
+
+## 第四章 Stable Diffusion 3系列核心高频考点
+
+- [1.介绍一下Stable Diffusion 3的整体架构](#1.介绍一下Stable-Diffusion-3的整体架构)
+- [2.与Stable Diffusion XL相比，Stable Diffusion 3的核心优化有哪些？](#2.与Stable-Diffusion-XL相比，Stable-Diffusion-3的核心优化有哪些？)
+- [3.Stable Diffusion 3的VAE部分有哪些创新？详细分析改进意图](#3.Stable-Diffusion-3的VAE部分有哪些创新？详细分析改进意图)
+- [4.Stable Diffusion 3中使用的训练方法有哪些创新点？](#4.Stable-Diffusion-3中使用的训练方法有哪些创新点？)
+- [5.Stable Diffusion 3的Backbone部分有哪些创新？详细分析改进意图](#5.Stable-Diffusion-3的Backbone部分有哪些创新？详细分析改进意图)
+- [6.Stable Diffusion 3的Text Encoder部分有哪些创新？详细分析改进意图](#6.Stable-Diffusion-3的Text-Encoder部分有哪些创新？详细分析改进意图)
+- [7.训练Stable Diffusion过程中官方使用了哪些训练技巧？](#7.训练Stable-Diffusion过程中官方使用了哪些训练技巧？)
+- [8.介绍一下Stable Diffusion 3.5系列的原理](#8.介绍一下Stable-Diffusion-3.5系列的原理)
+- [9.为什么Stable Diffusion 3使用三个文本编码器?](#9.为什么Stable-Diffusion-3使用三个文本编码器?)
+- [10.Stable Diffusion 3中数据标签工程的具体流程是什么样的？](#10.Stable-Diffusion-3中数据标签工程的具体流程是什么样的？)
+
+### 【三】Stable Diffusion VAE高频考点
 
 - [5.SD中潜在一致性模型LCM、LCM-lora加速原理](#5.SD中潜在一致性模型LCM、LCM-lora加速原理)
 - [6.正则化技术在AI绘画模型中的作用？](#6.正则化技术在AI绘画模型中的作用？)
 - [7.AI生成图像的常用评价指标](#7.AI生成图像的常用评价指标)
-- [8.SDXL相比SD有那些改进](#8.SDXL相比SD有那些改进)
-
-- [11.介绍一下Stable_Diffusion中的Unet模型](#11.介绍一下Stable_Diffusion中的Unet模型)
 - [12.cfg参数的介绍](#12.cfg参数的介绍)
-
-- [14.为什么StableDiffusion3使用三个文本编码器?](#14.为什么StableDiffusion3使用三个文本编码器?)
-- [15.Stable-Diffusion-3有哪些改进点？](#15.Stable-Diffusion-3有哪些改进点？)
-- [16.Cross-Attention在SD系列模型中起什么作用？](#16.Cross-Attention在SD系列模型中起什么作用？)
-
-- [19.Stable Diffusion 3中数据标签工程的具体流程是什么样的？](#19.Stable-Diffusion-3中数据标签工程的具体流程是什么样的？)
-- [20.FLUX.1系列模型有哪些创新点？](#20.FLUX.1系列模型有哪些创新点？)
 - [21.介绍一下DiT模型的基本概念](#21.介绍一下DiT模型的基本概念)
 - [22.DiT输入图像的Patch化过程是什么样的？](#22.DiT输入图像的Patch化过程是什么样的？)
 - [23.AI绘画大模型的数据预处理都包含哪些步骤？](#23.AI绘画大模型的数据预处理都包含哪些步骤？)
@@ -84,45 +128,27 @@
 - [25.Scaling Law在AI绘画领域成立吗？](#25.Scaling_Law在AI绘画领域成立吗？)
 - [26.Prompt-to-Prompt是什么方法？](#26.Prompt-to-Prompt是什么方法？)
 - [27.InstructPix2Pix的训练和推理流程是什么样的？](#27.InstructPix2Pix的训练和推理流程是什么样的？)
-- [28.SDXL-Turbo用的蒸馏方法是什么？](#28.SDXL-Turbo用的蒸馏方法是什么？)
 - [29.SD3-Turbo用的蒸馏方法是什么？](#29.SD3-Turbo用的蒸馏方法是什么？)
 - [30.介绍一下Stable Diffusion 3中的VAE模型](#30.介绍一下Stable-Diffusion-3中的VAE模型)
-- [31.介绍一下FLUX.1系列中的VAE模型](#31.介绍一下FLUX.1系列中的VAE模型)
 - [32.AIGC面试中必考的Stable Diffusion系列模型版本有哪些？](#32.AIGC面试中必考的Stable-Diffusion系列模型版本有哪些？)
 - [33.AIGC面试中必考的AI绘画技术框架脉络是什么样的？](#33.AIGC面试中必考的AI绘画技术框架脉络是什么样的？)
 - [34.Stable Diffusion 3的Text Encoder有哪些改进？](#34.Stable-Diffusion-3的Text-Encoder有哪些改进？)
 - [35.Stable Diffusion 3的图像特征和文本特征在训练前缓存策略有哪些优缺点？](#35.Stable-Diffusion-3的图像特征和文本特征在训练前缓存策略有哪些优缺点？)
 - [36.Stable Diffusion中的Inpaint和Outpaint分别是什么?](#36.Stable-Diffusion中的Inpaint（局部修复）和Outpaint（边界扩展）分别是什么？)
-- [37.扩散U-Net中的免费午餐（FreeU）是什么？](#37.扩散U-Net中的免费午餐（FreeU）是什么？)
 - [38.Stable Diffusion3.5的改进在哪里？](#38.Stable-Diffusion3.5的改进在哪里?)
 - [39.介绍一下FasterDiT(DiT加速版本)](#39.介绍一下FasterDiT)
 - [40.介绍一下SiT(DiT加速版本)](#40.介绍一下SiT)
 - [41.介绍一下LightningDiT(DiT加速版本)](#41.介绍一下LightningDiT)
 - [42.Stable Diffusion中的safety_checker是什么?](#42.StableDiffusion中的safetychecker是什么?)
-
 - [46.什么是REAL（新的评价基准）？](#46.什么是REAL（新的评价基准）？)
 - [47.什么是ImageGen-CoT（思维链条）？](#47.什么是ImageGen-CoT（思维链条）？)
 - [50.什么是OminGen？](#50.什么是OminGen？)
 - [51.介绍一下PAG（Perturbed-Attention Guidance）](#51.介绍一下PAG（Perturbed-Attention-Guidance）)
-
-- [55.SD模型中的VAE和单纯的VAE生成模型的区别是什么？](#55.SD模型中的VAE和单纯的VAE生成模型的区别是什么？)
-
 - [58.主流AI绘画大模型的完整训练流程是什么样的？](#58.主流AI绘画大模型的完整训练流程是什么样的？)
-- [60.什么是SDXL Refiner？](#60.什么是SDXL-Refiner？)
-- [61.什么是X-Flux？](#61.什么是X-Flux？)
 - [62.StableDiffusion的一些加速方法](#62.StableDiffusion的一些加速方法)
 - [63.VAE和AE的区别是什么？](#63.VAE和AE的区别是什么？)
-- [64.扩散模型是如何引入控制条件的？](#64.扩散模型是如何引入控制条件的？)
 - [65.什么是风格漂移？](#65.什么是风格漂移？)
-- [66.什么是flow matching？](#66.什么是flow-matching？)
-- [67.DDPM和Flow Matching区别？](#67.DDPM和Flow-Matching区别？)
 - [68.DMD2蒸馏是怎么做的？](#68.DMD2蒸馏是怎么做的？)
-
-## 第四章 AI绘画大模型优化技术高频考点
-
-
-
-- [5.Flow Matching和DDPM之间有什么区别？](#5.Flow-Matching和DDPM之间有什么区别？)
 
 ---
 
@@ -642,29 +668,13 @@ M区：影响最大的一层，甚至比IN11层的影响更大，起到了类似
 
 ### 【二】Stable Diffusion VAE高频考点
 
-<h2 id="5.SD中潜在一致性模型LCM、LCM-lora加速原理">5.SD中潜在一致性模型LCM、LCM-lora加速原理 </h2>
-
-### 1. CM模型：
-OpenAI 的宋飏博士提出的一致性模型（Consistency Model，CM）为解决多步采样问题提供了一个思路。一致性模型并不依赖于预训练的扩散模型，是一种独立的新型生成模型。一致性函数f的核心为这样一个性质：对于任意一个输入xt，经过f输出后，其输出是一致的。
-
-![](./imgs/CM.png)
-
-缺点：一致性模型局限于无条件图片生成，导致包括文生图、图生图等在内的许多实际应用还难以享受这一模型的潜在优势。
-
-### 2. LCM模型
-关键技术点：
-
-（1）使用预训练的自动编码器将原始图片编码到潜在空间，在压缩图片中冗余信息的同时让图片在语义上具有更好的一致性；
-
-（2）将无分类器引导（CFG）作为模型的一个输入参数蒸馏进潜在一致性模型中，在享受无分类器引导带来的更好的图片 - 文本的一致性的同时，由于无分类器引导幅度被作为输入参数蒸馏进了潜在一致性模型，从而能够减少推理时的所需要的计算开销；
-
-（3）使用跳步策略来计算一致性损失，大大加快了潜在一致性模型的蒸馏过程。
-潜在一致性模型的蒸馏算法的伪代码见下图。
-
-![](./imgs/LCM.png)
+<h2 id="1.VAE在Stable-Diffusiuon中的作用">1.VAE在Stable Diffusiuon中的作用</h2>
 
 
-<h2 id="6.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？">6.为什么VAE生成效果不好，但是VAE+Diffusion整体效果就很好？</h2>
+<h2 id="2.VAE为什么会导致图像变模糊？">2.VAE为什么会导致图像变模糊？</h2>
+
+
+<h2 id="3.为什么VAE的图像生成效果不好，但是VAE+Diffusion的图像生成效果就很好？">3.为什么VAE的图像生成效果不好，但是VAE+Diffusion的图像生成效果就很好？</h2>
 
 **这个问题最本质的回答是：传统深度学习时代的VAE是单独作为生成模型；而在AIGC时代，VAE只是作为特征编码器，提供特征给Diffusion用于图像的生成。其实两者的本质作用已经发生改变。**
 
@@ -672,66 +682,49 @@ OpenAI 的宋飏博士提出的一致性模型（Consistency Model，CM）为解
 
 上述的差别都导致了传统深度学习时代的VAE生成效果不佳。
 
+<h2 id="4.SD模型中的VAE和单纯的VAE生成模型的区别是什么？">4.SD模型中的VAE和单纯的VAE生成模型的区别是什么？</h2>
+
+### 传统VAE生成模型
+
+- **完整的生成系统**：从噪声直接生成数据
+- **核心机制**：变分推断 + 重参数化技巧
+- **目标**：学习数据分布，实现无条件生成
+- **挑战**：生成质量与多样性的平衡
+
+### SD模型中的VAE
+
+- **功能组件**：数据压缩器和重建器
+- **核心作用**：将图像压缩到潜在空间，降低计算成本
+- **目标**：高保真度重建，为扩散过程提供高效空间
+- **优势**：专注重建质量，与扩散模型协同工作
 
 
-<h2 id="6.正则化技术在AI绘画模型中的作用？">6.正则化技术在AI绘画模型中的作用？ </h2>
+### 【三】Stable Diffusion Backbone高频考点
 
-在生成式模型的训练中，正则化技术是一种常用的方法，用于增强模型的泛化能力，防止过拟合，以及在一些情况下，帮助模型更稳定和可靠地训练。正则化对生成式模型的主要作用包括：
-
-### 1. 防止过拟合
-生成式模型，特别是参数众多的模型（如Stable Diffusion、GAN和VAE），容易在训练数据上过度拟合，从而导致模型在未见过的数据上性能下降。通过使用正则化技术，如L1或L2正则化（权重衰减），可以惩罚模型权重的大值，从而限制模型复杂度，帮助模型在保留训练数据重要特性的同时，防止过分依赖特定训练样本的噪声或非代表性特征。
-
-### 2. 提高模型的稳定性
-在生成对抗网络（GAN）等生成式模型中，训练过程中的稳定性是一个重要问题。正则化技术，如梯度惩罚（gradient penalty）和梯度裁剪（gradient clipping），可以防止梯度爆炸或消失，从而帮助模型更稳定地训练。这些技术通过控制权重更新的幅度，确保训练过程中的数值稳定性。
-
-### 3. 改善收敛性
-正则化技术有助于改善生成式模型的收敛性，特别是在对抗性的训练环境中。例如，在GANs中，使用梯度惩罚或Batch Normalization可以帮助生成器和判别器更均衡地训练，避免一方过早地主导训练过程，从而促进整个模型的稳健收敛。
-
-### 4. 增加输出的多样性
-尤其在GAN中，模式坍塌（mode collapse）是一个常见的问题，其中生成器倾向于生成非常相似的输出样本，忽视输入的多样性。这意味着生成器无法覆盖到数据分布的多样性，仅在潜在空间中的某个点或几个点上“坍塌”。通过应用正则化技术，如Mini-batch discrimination或使用dropout，可以鼓励生成器探索更多的数据分布，从而提高生成样本的多样性。
-
-### 5. 防止梯度消失或爆炸
-在视觉大模型中，梯度消失或爆炸（Gradient Vanishing/Exploding）是常见问题，特别是在训练复杂的生成式模型时。正则化技术，如Batch Normalization和Layer Normalization，通过规范化中间层的输出，帮助控制梯度的规模，从而避免这两种问题，使训练过程更加稳定。
-
-### 6. 减少训练过程中的噪声敏感性
-生成式模型可能对训练数据中的噪声过于敏感，导致生成的图像或数据质量低下。通过应用正则化，如Dropout或添加一定量的噪声，模型可以对不重要的输入变化更鲁棒，从而提高生成数据的质量和稳健性。
-
-正则化技术在生成式模型中的运用有助于优化模型性能，提高模型的泛化能力和输出质量，同时确保训练过程的稳定性和效率。这些技术是设计和训练高效、可靠生成式模型的重要组成部分。
+<h2 id="1.如何将文本与图像的语义信息进行Attention机制，因为Text-Condition是三维的，而Latent-Feature是四维的？">1.如何将文本与图像的语义信息进行Attention机制，因为Text Condition是三维的，而Latent Feature是四维的？ </h2>
 
 
-<h2 id="7.AI生成图像的常用评价指标">7.AI生成图像的常用评价指标 </h2>
+<h2 id="2.介绍一下Stable-Diffusion中的交叉注意力机制">2.介绍一下Stable Diffusion中的交叉注意力机制 </h2>
 
-随着图像生成AI的发展，如Stable Diffusion和Midjourney，能够根据自然语言生成“高品质”的图像。然而，“高品质”图像的定义和评价并不简单，目前有多种评价指标来衡量图像的质量和相关性。
+### 1. 简介
+属于Transformer常见Attention机制，用于合并两个不同的sequence embedding。两个sequence是：Query、Key/Value。
+![](./imgs/cross-attention-detail-perceiver-io.png)Cross-Attention和Self-Attention的计算过程一致，区别在于输入的差别，通过上图可以看出，两个embedding的sequence length 和embedding_dim都不一样，故具备更好的扩展性，能够融合两个不同的维度向量，进行信息的计算交互。而Self-Attention的输入仅为一个。
 
-#### 1. FID（Frechet Inception Distance）
-
-FID是用于评估生成图像与真实图像相似度的量化指标。它使用Inception网络将生成图像和真实图像转换为特征向量，假设这些特征向量的分布为高斯分布，并计算其均值和协方差矩阵。通过测量这两个高斯分布之间的“距离”来评估相似性，值越小，图像质量越高。
-
-#### 2. CLIP Score
-
-CLIP Score通过学习自然语言和图像对之间的语义关系来评估图像和文本的匹配度。它将自然语言和图像分别转换为特征向量，然后计算它们之间的余弦相似度。CLIP Score越高，图像和文本对之间的相关性越高。
-
-#### 3. Inception Score（IS）
-
-Inception Score评估生成图像的质量和多样性。它使用Inception网络对生成图像进行分类，正确分类结果越集中，质量越高。同时，当生成图像被分类为不同标签时，多样性越大。IS综合考虑了图像的质量和多样性，得分越高表示质量和多样性越好。
+### 2. 作用
+Cross-Attention可以用于将图像与文本之间的关联建立，在stable-diffusion中的Unet部分使用Cross-Attention将文本prompt和图像信息融合交互，控制U-Net把噪声矩阵的某一块与文本里的特定信息相对应。
 
 
-<h2 id="8.SDXL相比SD有那些改进">8.SDXL相比SD有那些改进 </h2>
-
-1、模型参数更大。SDXL 基础模型所使用的 Unet 包含了2.6B（26亿）的参数，对比 SD1.5的 860M（8600万），相差超过三倍。因此从模型参数来看，SDXL 相比 SD 有显著优势。
-
-2、语义理解能力更强。使用了两个 CLIP 模型的组合，包括 OpenClip 最大的模型 ViT-G/14 和在 SD v1 中使用的 CLIP ViT-L，既保证了对旧提示词的兼容，也提高了 SDXL 对语言的理解能力
-
-3、训练数据库更大。由于 SDXL 将图片尺寸也作为指导参数，因此可以使用更低分辨率的图片作为训练数据，比如小于256x256分辨率的图片。如果没有这项改进，数据库中高达39%的图片都不能用来训练 SDXL，原因是其分辨率过低。但通过改进训练方法，将图片尺寸也作为训练参数，大大扩展了训练 SDXL 的图片数量，这样训练出来的模型具有更强的性能表现。
-
-4、生图流程改进。SDXL 采用的是两阶段生图，第一阶段使用 base model（基础模型）生成，第二阶段则使用 refiner model（细化模型）进一步提升画面的细节表现。当然只使用 SDXL 基础模型进行绘图也是可以的。
+<h2 id="3.Stable-Diffusion中cross_attention的qkv分别是什么？为什么图像隐变量作为q，文本prompt作为kv">3.Stable Diffusion中cross_attention的qkv分别是什么？为什么图像隐变量作为q，文本prompt作为kv </h2>
 
 
-<h2 id="11.介绍一下Stable_Diffusion中的Unet模型">11.介绍一下Stable_Diffusion中的Unet模型</h2>
+<h2 id="4.为什么使用U-Net作为扩散模型的核心架构？">4.为什么使用U-Net作为扩散模型的核心架构？ </h2>
 
-### 1. UNet的结构具有以下特点：
 
-- **整体结构**：UNet由多个大层组成。在每个大层中，特征首先通过下采样变为更小尺寸的特征，然后通过上采样恢复到原来的尺寸，形成一个U形的结构。
+<h2 id="5.介绍一下Stable-Diffusion中U-Net的架构">5.介绍一下Stable Diffusion中U-Net的架构 </h2>
+
+### 1. U-Net的结构具有以下特点：
+
+- **整体结构**：U-Net由多个大层组成。在每个大层中，特征首先通过下采样变为更小尺寸的特征，然后通过上采样恢复到原来的尺寸，形成一个U形的结构。
 - **特征通道变化**：在下采样过程中，特征图的尺寸减半，但通道数翻倍；上采样过程则相反。
 - **信息保留机制**：为了防止在下采样过程中丢失信息，UNet的每个大层在下采样前的输出会被拼接到相应的大层上采样时的输入上，这类似于ResNet中的“shortcut”.
 
@@ -744,24 +737,245 @@ Inception Score评估生成图像的质量和多样性。它使用Inception网�
 ![image-20240611200630350](./imgs/LDMs.png)
 
 
-<h2 id="12.cfg参数的介绍">12.cfg参数的介绍</h2>
+<h2 id="6.扩散U-Net中的免费午餐（FreeU）是什么？">6.扩散U-Net中的免费午餐（FreeU）是什么？</h2>
 
-Classifier Guidance，使得扩散模型可以按图像、按文本和多模态条件来生成。Classifier Guidance 需要训练噪声数据版本的classifier网络，推理时每一步都需要额外计算classifier的梯度
+论文链接：[[2309.11497\] FreeU: Free Lunch in Diffusion U-Net](https://arxiv.org/abs/2309.11497)
 
-Classifier Guidance 使用显式的分类器引导条件生成有几个问题：一是需要额外训练一个噪声版本的图像分类器。二是该分类器的质量会影响按类别生成的效果。三是通过梯度更新图像会导致对抗攻击效应，生成图像可能会通过人眼不可察觉的细节欺骗分类器，实际上并没有按条件生成。
+FreeU (Free Lunch in Diffusion U-Net) 是一种针对扩散模型中U-Net架构的增强方法，旨在提升生成质量而无需额外训练或计算成本。其核心原理通过对U-Net的主干网络与跳跃连接的特征贡献进行动态平衡，优化去噪过程。
 
-Classifier-Free Guidance方案，可以规避上述问题，而且可以通过调节引导权重，控制生成图像的逼真性和多样性的平衡。Classifier-Free Guidance的核心是通过一个隐式分类器来替代显示分类器，而无需直接计算显式分类器及其梯度。
+### 框架设计
 
-训练时，Classifier-Free Guidance需要训练两个模型，一个是无条件生成模型，另一个是条件生成模型。但这两个模型可以用同一个模型表示，训练时只需要以一定概率将条件置空即可。
+![image-20250223201133239](./imgs/freeU.jpg)
 
-推理时，最终结果可以由条件生成和无条件生成的线性外推获得，生成效果可以引导系数可以调节，控制生成样本的逼真性和多样性的平衡。
+**核心问题**
 
-在Stable Diffusion模型中，CFG Scale参数用于控制CFG模型捕捉上下文信息的能力。该参数决定了上下文信息的提取范围，对生成文本的质量具有重要影响。当CFG Scale参数设置较高时，模型会更注重捕捉全局信息，从而在生成文本时考虑到更多的上下文关联；而当CFG Scale参数设置较低时，模型更倾向于关注局部信息，可能导致生成文本的上下文连贯性降低。
+作者通过分析U-Net在扩散模型中的作用，发现：
 
-简单说：通过cfg参数控制图像生成内容和文本之间的关联性
+- **主干网络（Backbone）**：主要负责去噪任务，但可能因权重分配问题未能完全发挥潜力 。
+- **跳跃连接（Skip Connections）**：主要向解码器引入高频特征（如细节纹理），但在某些情况下会干扰主干网络的去噪能力 。
+
+**改进策略**
+ FreeU通过引入两个可调节的缩放因子：
+
+- **主干特征缩放因子**：增强主干网络输出的特征，强化去噪能力。
+- **跳跃特征缩放因子**：抑制跳跃连接引入的高频噪声，同时保留必要的细节 。
+
+### 原理分析
+
+1. **频域视角**
+   通过傅里叶分析发现：
+   - 扩散模型的去噪过程中，高频成分波动更剧烈，可能导致噪声残留 。
+   - FreeU通过调整跳跃连接的特征权重，显著减少了去噪过程中的高频干扰 。
+2. **特征图可视化**
+   实验表明：
+   - 使用FreeU的特征图包含更清晰的结构信息，表明主干网络的去噪有效性提升 。
+   - 高放大倍率下，模型能同步保留细节与整体结构（如毛发纹理和物体轮廓）。
+3. **兼容性设计**
+    FreeU不修改模型参数，可直接集成至Stable Diffusion、ControlNet等主流框架，且在图像/视频生成、微调模型（如Dreambooth）中均有效，无额外计算开销。
 
 
-<h2 id="14.为什么StableDiffusion3使用三个文本编码器?">14.为什么StableDiffusion3使用三个文本编码器?</h2>
+### 【四】Stable Diffusion Text Encoder高频考点
+
+<h2 id="1.举例介绍一下Stable-Diffusion模型进行文本编码的全过程">1.举例介绍一下Stable Diffusion模型进行文本编码的全过程</h2>
+
+
+<h2 id="2.Stable-Diffusion如何通过文本来实现对图像生成内容的控制?Stable-Diffusion中是如何注入文本信息的?">2.Stable Diffusion如何通过文本来实现对图像生成内容的控制?Stable Diffusion中是如何注入文本信息的?</h2>
+
+
+<h2 id="3.Negative-Prompt实现的原理是什么?">3.Negative Prompt实现的原理是什么?</h2>
+
+
+<h2 id="4.如何处理Prompt和生成的图像不对齐的问题？">4.如何处理Prompt和生成的图像不对齐的问题？</h2>
+
+
+<h2 id="4.如何处理Prompt和生成的图像不对齐的问题？">4.如何处理Prompt和生成的图像不对齐的问题？</h2>
+
+
+<h2 id="5.文本编码器和扩散模型，哪一个模型容量变化对生成的结果影响更大？">5.文本编码器和扩散模型，哪一个模型容量变化对生成的结果影响更大？</h2>
+
+
+<h2 id="6.扩散模型是如何引入控制条件的？">6.扩散模型是如何引入控制条件的？</h2>
+
+在现代扩散模型中，引入控制条件的方式主要分为两大类：**采样阶段的引导（Guidance）与网络结构级的条件融合（Architectural Conditioning）**。前者通过调整去噪过程中的梯度方向，在不改动模型参数的前提下实现条件控制；后者则在模型内部直接注入额外信息，包括跨注意力（Cross‐Attention）和时间嵌入（Time Embedding）的多路拼接。下面我们将从这两大类出发，详细介绍包括交叉注意力注入、时间步嵌入拼接、类别嵌入拼接以及 ControlNet 等多种常见的条件引入技术。
+
+### 一、采样阶段的引导方法
+
+#### 1.1 分类器引导（Classifier Guidance）
+
+- **原理**：额外训练一个图像分类器，对去噪过程中的中间图像计算类别概率梯度 ∇log p(y|x)，并将其与扩散模型的去噪梯度相加，以朝着目标类别 y 的方向更强地去噪。
+- **特点**：无需改变原扩散模型结构，可后期直接应用；但需额外训练分类器，且计算开销较大。
+
+#### 1.2 无分类器引导（Classifier‐Free Guidance）
+
+- **原理**：在同一模型中联合训练“有条件”（带 y 输入）与“无条件”（不带 y）的分支，采样时按比例 s 调整两者的去噪预测：
+  $$
+  \hat{\epsilon}=\left(1+s\right)\epsilon_{\mathrm{cond}}-s\:\epsilon_{\mathrm{uncond}}.
+  $$
+  通过增大 s，可在样本质量与多样性间权衡。
+
+- **优势**：无需单独训练分类器，已成为文本到图像任务的主流引导策略。
+
+### 二、网络结构级的条件融合
+
+#### 2.1 跨注意力（Cross‐Attention）注入
+
+- **文本到图像**：在每个 U-Net 模块的中间，使用跨注意力层将文本嵌入（如 CLIP 编码）作为键/值，图像特征作为查询，实现与自然语言条件的交互。
+- **多模态扩展**：可将其它概念 token（如布局、分割图等）也作为条件序列，通过相同机制注入，支持更灵活的条件输入。
+
+#### 2.2 时间步嵌入（Time Embedding）拼接
+
+- **位置编码**：采用类似 Transformer 的正余弦编码映射时间步 t 到向量 pos(t)，然后通过线性层得到时间嵌入。
+- **融合方式**：除常见的**加法融合**外，也可将时间嵌入与其它条件（如类别 embedding 或空间特征）在通道维度上**拼接**，再一起输入至卷积层或注意力模块中。
+
+#### 2.3 类别嵌入（Class Embedding）拼接
+
+- **方法**：将类别 embedding（CEN）在每层噪声估计器（noise estimator）中与特征张量**串联**（concatenate），使得扩散的重建过程同时感知图像内容与类别信息。
+- **效果**：在多类别生成任务中，可显著提升类别一致性，同时保持图像质量。
+
+#### 2.4 ControlNet：条件分支并行注入
+
+- **原理**：在预训练 U-Net 的每个编码器层复制一份“可训练”分支，并通过零初始化卷积（ZeroConv）接收额外条件（如边缘图、深度图），其输出再**加回**主干层，确保不破坏原模型能力。
+- **应用**：广泛用于 Stable Diffusion，为图像生成提供细粒度空间控制，如姿态、分割或布局指令。
+
+### 三、其他控制技术
+
+- **Cross‐Attention Score 调整**：在生成时对跨注意力分数进行训练无关的修改，以强化局部概念在图像中的表现，同时避免语义混合（concept bleeding）。
+- **CFG++等高级引导**：在无分类器引导基础上优化 off-manifold 轨迹，提升高引导尺度下的可逆性与样本质量。
+
+
+## 第三章 Stable Diffusion XL核心高频考点
+
+<h2 id="1.与Stable-Diffusion相比，Stable-Diffusion-XL的核心优化有哪些？">1.与Stable Diffusion相比，Stable Diffusion XL的核心优化有哪些？ </h2>
+
+1、模型参数更大。SDXL 基础模型所使用的 Unet 包含了2.6B（26亿）的参数，对比 SD1.5的 860M（8600万），相差超过三倍。因此从模型参数来看，SDXL 相比 SD 有显著优势。
+
+2、语义理解能力更强。使用了两个 CLIP 模型的组合，包括 OpenClip 最大的模型 ViT-G/14 和在 SD v1 中使用的 CLIP ViT-L，既保证了对旧提示词的兼容，也提高了 SDXL 对语言的理解能力
+
+3、训练数据库更大。由于 SDXL 将图片尺寸也作为指导参数，因此可以使用更低分辨率的图片作为训练数据，比如小于256x256分辨率的图片。如果没有这项改进，数据库中高达39%的图片都不能用来训练 SDXL，原因是其分辨率过低。但通过改进训练方法，将图片尺寸也作为训练参数，大大扩展了训练 SDXL 的图片数量，这样训练出来的模型具有更强的性能表现。
+
+4、生图流程改进。SDXL 采用的是两阶段生图，第一阶段使用 base model（基础模型）生成，第二阶段则使用 refiner model（细化模型）进一步提升画面的细节表现。当然只使用 SDXL 基础模型进行绘图也是可以的。
+
+
+<h2 id="2.Stable-Diffusion-XL的VAE部分有哪些创新？详细分析改进意图">2.Stable Diffusion XL的VAE部分有哪些创新？详细分析改进意图 </h2>
+
+
+<h2 id="3.Stable-Diffusion-XL的Backbone部分有哪些创新？详细分析改进意图">3.Stable Diffusion XL的Backbone部分有哪些创新？详细分析改进意图 </h2>
+
+
+<h2 id="4.Stable-Diffusion-XL的Text-Encoder部分有哪些创新？详细分析改进意图">4.Stable Diffusion XL的Text Encoder部分有哪些创新？详细分析改进意图 </h2>
+
+
+<h2 id="5.Stable-Diffusion-XL中使用的训练方法有哪些创新点？">5.Stable Diffusion XL中使用的训练方法有哪些创新点？ </h2>
+
+
+<h2 id="6.训练Stable-Diffusion-XL时为什么要使用offset-Noise？">6.训练Stable Diffusion XL时为什么要使用offset Noise？ </h2>
+
+
+<h2 id="7.介绍一下Stable-Diffusion-XL-Turbo的原理">7.介绍一下Stable Diffusion XL Turbo的原理 </h2>
+
+
+<h2 id="8.SDXL-Turbo用的蒸馏方法是什么？">8.SDXL-Turbo用的蒸馏方法是什么？</h2>
+
+论文链接：[adversarial_diffusion_distillation.pdf](https://static1.squarespace.com/static/6213c340453c3f502425776e/t/65663480a92fba51d0e1023f/1701197769659/adversarial_diffusion_distillation.pdf)
+
+### 方法结构
+
+ADD 模型的结构包括三个核心组件：
+
+1. **ADD 学生模型 (Student Model)**：这是一个预训练的扩散模型，负责生成图像样本。
+2. **判别器 (Discriminator)**：用来区分生成的样本和真实图像，通过对抗性训练来提升生成图像的真实感。
+3. **DM 教师模型 (Teacher Model)**：这是一个冻结权重的扩散模型，作为知识的教师，为学生模型提供目标图像来实现知识蒸馏。
+
+![image-20241104175829951](./imgs/SD-Turbo.jpg)
+
+### 核心原理
+
+ADD 的核心原理是通过两个损失函数的结合实现蒸馏过程：
+
+1. **对抗性损失 (Adversarial Loss)**：学生模型生成的样本被输入判别器，判别器尝试将生成的样本与真实图像区分开。学生模型则优化生成图像，使其更难被判别器检测到为假，从而提升图像的细节和逼真度。
+2. **蒸馏损失 (Distillation Loss)**：ADD 使用另一个扩散模型作为教师模型，并通过蒸馏损失指导学生模型生成与教师模型相似的图像。教师模型对学生生成的噪声数据进行去噪，从而提供高质量的生成目标。这样，学生模型能够利用教师模型的大量知识来保持生成图像的质量和一致性
+
+ADD 模型具有以下优势：
+
+- **高速生成**：仅需 1-4 步采样即可生成高质量图像，显著减少了生成时间，适用于实时应用。
+- **高质量图像**：通过结合对抗性损失和蒸馏损失，生成的图像在细节和逼真度上优于现有的快速生成模型，如单步 GAN 和一些少步扩散模型。
+- **灵活性**：支持进一步的多步采样，从而在单步生成的基础上通过迭代增强图像细节。
+
+
+<h2 id="9.什么是SDXL-Refiner？">9.什么是SDXL Refiner？</h2>
+
+SDXL Refiner是Stability AI推出的图像精细化模型，作为SDXL生态系统的第二阶段，专门负责提升图像细节质量。它采用了"专家集成"的设计理念：Base模型生成基础结构，Refiner模型优化细节表现。
+
+![pipeline](./imgs/pipeline.png)
+
+### 核心工作原理
+
+#### 两种使用方式
+
+1. **标准流程**：Base模型完成80%去噪 → Refiner完成剩余20%精细化
+2. **SDEdit流程**：Base生成完整图像 → Refiner使用img2img技术优化
+
+### 技术特点
+
+- **双文本编码器**：OpenCLIP-ViT/G + CLIP-ViT/L，提供更好的语义理解
+- **专门优化**：针对低噪声水平的去噪过程进行特殊训练
+- **参数规模**：6.06B参数，专注于细节增强
+
+### 性能提升
+
+根据官方评测，SDXL Base + Refiner的组合相比之前版本：
+
+- 用户偏好度达到91%（远超SD 1.5/2.1）
+
+- 细节清晰度提升约20-30%
+
+- 整体图像质量显著改善
+
+- 
+
+  SDXL Refiner通过专门的精细化设计，成功解决了AI图像生成中的细节问题。它与Base模型的配合使用，让SDXL成为目前最优秀的开源图像生成方案之一。对于追求高质量图像输出的用户，Refiner是不可或缺的工具。
+
+
+
+## 第四章 Stable Diffusion 3系列核心高频考点
+
+<h2 id="1.介绍一下Stable-Diffusion-3的整体架构">1.介绍一下Stable Diffusion 3的整体架构 </h2>
+
+
+<h2 id="2.与Stable-Diffusion-XL相比，Stable-Diffusion-3的核心优化有哪些？">2.与Stable Diffusion XL相比，Stable Diffusion 3的核心优化有哪些？ </h2>
+
+Rocky认为Stable Diffusion 3的价值和传统深度学习时代的“YOLOv4”一样，在AIGC时代的工业界、应用界、竞赛界以及学术界，都有非常大的学习借鉴价值，以下是SD 3相比之前系列的改进点汇总：
+
+1. 使用多模态DiT作为扩散模型核心：多模态DiT（MM-DiT）将图像的Latent tokens和文本的tokens拼接在一起，并采用两套独立的权重处理，但是在进行Attention机制时统一处理。
+2. 改进VAE：通过增加VAE通道数来提升图像的重建质量。
+3. 3个文本编码器：SD 3中使用了三个文本编码器，分别是CLIP ViT-L（参数量约124M）、OpenCLIP ViT-bigG（参数量约695M）和T5-XXL encoder（参数量约4.7B）。
+4. 采用优化的Rectified Flow：采用Rectified Flow来作为SD 3的采样方法，并在此基础上通过对中间时间步加权能进一步提升效果。
+5. 采用QK-Normalization：当模型变大，而且在高分辨率图像上训练时，attention层的attention-logit（Q和K的矩阵乘）会变得不稳定，导致训练出现NAN，为了提升混合精度训练的稳定性，MM-DiT的self-attention层采用了QK-Normalization。
+6. 多尺寸位置编码：SD 3会先在256x256尺寸下预训练，再以1024x1024为中心的多尺度上进行微调，这就需要MM-DiT的位置编码需要支持多尺度。
+7. timestep schedule进行shift：对高分辨率的图像，如果采用和低分辨率图像的一样的noise schedule，会出现对图像的破坏不够的情况，所以SD 3中对noise schedule进行了偏移。
+8. 强大的模型Scaling能力：SD 3中因为核心使用了transformer架构，所以有很强的scaling能力，当模型变大后，性能稳步提升。
+9. 训练细节：数据预处理（去除离群点数据、去除低质量数据、去除NSFW数据）、图像Caption精细化、预计算图像和文本特征、Classifier-Free Guidance技术、DPO（Direct Preference Optimization）技术
+
+
+<h2 id="3.Stable-Diffusion-3的VAE部分有哪些创新？详细分析改进意图">3.Stable Diffusion 3的VAE部分有哪些创新？详细分析改进意图 </h2>
+
+
+<h2 id="4.Stable-Diffusion-3中使用的训练方法有哪些创新点？">4.Stable Diffusion 3中使用的训练方法有哪些创新点？ </h2>
+
+
+<h2 id="5.Stable-Diffusion-3的Backbone部分有哪些创新？详细分析改进意图">5.Stable Diffusion 3的Backbone部分有哪些创新？详细分析改进意图 </h2>
+
+
+<h2 id="6.Stable-Diffusion-3的Text-Encoder部分有哪些创新？详细分析改进意图">6.Stable Diffusion 3的Text Encoder部分有哪些创新？详细分析改进意图 </h2>
+
+
+<h2 id="7.训练Stable-Diffusion过程中官方使用了哪些训练技巧？">7.训练Stable Diffusion过程中官方使用了哪些训练技巧？ </h2>
+
+
+<h2 id="8.介绍一下Stable-Diffusion-3.5系列的原理">8.介绍一下Stable Diffusion 3.5系列的原理 </h2>
+
+
+<h2 id="9.为什么Stable-Diffusion-3使用三个文本编码器?">9.为什么Stable Diffusion 3使用三个文本编码器?</h2>
 
 Stable Diffusion 3作为一款先进的文本到图像模型,采用了三重文本编码器的方法。这一设计选择显著提升了模型的性能和灵活性。
 
@@ -818,32 +1032,7 @@ Stable Diffusion 3使用以下三个文本编码器:
 3. **可扩展性**: 多编码器方法允许在模型的未来迭代中轻松集成新的或改进的文本编码器。
 
 
-<h2 id="15.Stable-Diffusion-3有哪些改进点？">15.Stable-Diffusion-3有哪些改进点？</h2>
-
-Rocky认为Stable Diffusion 3的价值和传统深度学习时代的“YOLOv4”一样，在AIGC时代的工业界、应用界、竞赛界以及学术界，都有非常大的学习借鉴价值，以下是SD 3相比之前系列的改进点汇总：
-
-1. 使用多模态DiT作为扩散模型核心：多模态DiT（MM-DiT）将图像的Latent tokens和文本的tokens拼接在一起，并采用两套独立的权重处理，但是在进行Attention机制时统一处理。
-2. 改进VAE：通过增加VAE通道数来提升图像的重建质量。
-3. 3个文本编码器：SD 3中使用了三个文本编码器，分别是CLIP ViT-L（参数量约124M）、OpenCLIP ViT-bigG（参数量约695M）和T5-XXL encoder（参数量约4.7B）。
-4. 采用优化的Rectified Flow：采用Rectified Flow来作为SD 3的采样方法，并在此基础上通过对中间时间步加权能进一步提升效果。
-5. 采用QK-Normalization：当模型变大，而且在高分辨率图像上训练时，attention层的attention-logit（Q和K的矩阵乘）会变得不稳定，导致训练出现NAN，为了提升混合精度训练的稳定性，MM-DiT的self-attention层采用了QK-Normalization。
-6. 多尺寸位置编码：SD 3会先在256x256尺寸下预训练，再以1024x1024为中心的多尺度上进行微调，这就需要MM-DiT的位置编码需要支持多尺度。
-7. timestep schedule进行shift：对高分辨率的图像，如果采用和低分辨率图像的一样的noise schedule，会出现对图像的破坏不够的情况，所以SD 3中对noise schedule进行了偏移。
-8. 强大的模型Scaling能力：SD 3中因为核心使用了transformer架构，所以有很强的scaling能力，当模型变大后，性能稳步提升。
-9. 训练细节：数据预处理（去除离群点数据、去除低质量数据、去除NSFW数据）、图像Caption精细化、预计算图像和文本特征、Classifier-Free Guidance技术、DPO（Direct Preference Optimization）技术
-
-
-<h2 id="16.Cross-Attention在SD系列模型中起什么作用？">16.Cross-Attention在SD系列模型中起什么作用？</h2>
-
-### 1. 简介
-属于Transformer常见Attention机制，用于合并两个不同的sequence embedding。两个sequence是：Query、Key/Value。
-![](./imgs/cross-attention-detail-perceiver-io.png)Cross-Attention和Self-Attention的计算过程一致，区别在于输入的差别，通过上图可以看出，两个embedding的sequence length 和embedding_dim都不一样，故具备更好的扩展性，能够融合两个不同的维度向量，进行信息的计算交互。而Self-Attention的输入仅为一个。
-
-### 2. 作用
-Cross-Attention可以用于将图像与文本之间的关联建立，在stable-diffusion中的Unet部分使用Cross-Attention将文本prompt和图像信息融合交互，控制U-Net把噪声矩阵的某一块与文本里的特定信息相对应。
-
-
-<h2 id="19.Stable-Diffusion-3中数据标签工程的具体流程是什么样的？">19.Stable Diffusion 3中数据标签工程的具体流程是什么样的？</h2>
+<h2 id="10.Stable-Diffusion-3中数据标签工程的具体流程是什么样的？">10.Stable Diffusion 3中数据标签工程的具体流程是什么样的？</h2>
 
 **目前AI绘画大模型存在一个很大的问题是模型的文本理解能力不强**，主要是指AI绘画大模型生成的图像和输入文本Prompt的一致性不高。举个例子，如果说输入的文本Prompt非常精细复杂，那么生成的图像内容可能会缺失这些精细的信息，导致图像与文本的内容不一致。这也是AI绘画大模型Prompt Following能力的体现。
 
@@ -864,15 +1053,87 @@ SD 3借鉴了DALL-E 3的数据标注方法，使用**多模态大模型CogVLM**�
 ![SD 3数据标注工程](./imgs/SD3数据标注工程.png)
 
 
-<h2 id="20.FLUX.1系列模型有哪些创新点？">20.FLUX.1系列模型有哪些创新点？</h2>
+### 【三】Stable Diffusion VAE高频考点
 
-FLUX.1系列模型是基于Stable Diffuson 3进行了升级优化，是目前性能最强的开源AI绘画大模型，其主要的创新点如下所示：
+<h2 id="5.SD中潜在一致性模型LCM、LCM-lora加速原理">5.SD中潜在一致性模型LCM、LCM-lora加速原理 </h2>
 
-1. FLUX.1系列模型将VAE的通道数扩展至64，比SD3的VAE通道数足足增加了4倍（16）。
-2. 目前公布的两个FLUX.1系列模型都是经过指引蒸馏的产物，这样我们就无需使用Classifier-Free Guidance技术，只需要把指引强度当成一个约束条件输入进模型，就能在推理过程中得到带指定指引强度的输出。
-3. FLUX.1系列模型继承了Stable Diffusion 3 的噪声调度机制，对于分辨率越高的图像，把越多的去噪迭代放在了高噪声的时刻上。但和Stable Diffusion 3不同的是，FLUX.1不仅在训练时有这种设计，采样时也使用了这种技巧。
-4. FLUX.1系列模型中在DiT架构中设计了双流DiT结构和单流DiT结构，同时加入了二维旋转式位置编码 (RoPE) 策略。
-5. FLUX.1系列模型在单流的DiT中引入了并行注意力层的设计，注意力层和MLP并联执行，执行速度有所提升。
+### 1. CM模型：
+OpenAI 的宋飏博士提出的一致性模型（Consistency Model，CM）为解决多步采样问题提供了一个思路。一致性模型并不依赖于预训练的扩散模型，是一种独立的新型生成模型。一致性函数f的核心为这样一个性质：对于任意一个输入xt，经过f输出后，其输出是一致的。
+
+![](./imgs/CM.png)
+
+缺点：一致性模型局限于无条件图片生成，导致包括文生图、图生图等在内的许多实际应用还难以享受这一模型的潜在优势。
+
+### 2. LCM模型
+关键技术点：
+
+（1）使用预训练的自动编码器将原始图片编码到潜在空间，在压缩图片中冗余信息的同时让图片在语义上具有更好的一致性；
+
+（2）将无分类器引导（CFG）作为模型的一个输入参数蒸馏进潜在一致性模型中，在享受无分类器引导带来的更好的图片 - 文本的一致性的同时，由于无分类器引导幅度被作为输入参数蒸馏进了潜在一致性模型，从而能够减少推理时的所需要的计算开销；
+
+（3）使用跳步策略来计算一致性损失，大大加快了潜在一致性模型的蒸馏过程。
+潜在一致性模型的蒸馏算法的伪代码见下图。
+
+![](./imgs/LCM.png)
+
+
+<h2 id="6.正则化技术在AI绘画模型中的作用？">6.正则化技术在AI绘画模型中的作用？ </h2>
+
+在生成式模型的训练中，正则化技术是一种常用的方法，用于增强模型的泛化能力，防止过拟合，以及在一些情况下，帮助模型更稳定和可靠地训练。正则化对生成式模型的主要作用包括：
+
+### 1. 防止过拟合
+生成式模型，特别是参数众多的模型（如Stable Diffusion、GAN和VAE），容易在训练数据上过度拟合，从而导致模型在未见过的数据上性能下降。通过使用正则化技术，如L1或L2正则化（权重衰减），可以惩罚模型权重的大值，从而限制模型复杂度，帮助模型在保留训练数据重要特性的同时，防止过分依赖特定训练样本的噪声或非代表性特征。
+
+### 2. 提高模型的稳定性
+在生成对抗网络（GAN）等生成式模型中，训练过程中的稳定性是一个重要问题。正则化技术，如梯度惩罚（gradient penalty）和梯度裁剪（gradient clipping），可以防止梯度爆炸或消失，从而帮助模型更稳定地训练。这些技术通过控制权重更新的幅度，确保训练过程中的数值稳定性。
+
+### 3. 改善收敛性
+正则化技术有助于改善生成式模型的收敛性，特别是在对抗性的训练环境中。例如，在GANs中，使用梯度惩罚或Batch Normalization可以帮助生成器和判别器更均衡地训练，避免一方过早地主导训练过程，从而促进整个模型的稳健收敛。
+
+### 4. 增加输出的多样性
+尤其在GAN中，模式坍塌（mode collapse）是一个常见的问题，其中生成器倾向于生成非常相似的输出样本，忽视输入的多样性。这意味着生成器无法覆盖到数据分布的多样性，仅在潜在空间中的某个点或几个点上“坍塌”。通过应用正则化技术，如Mini-batch discrimination或使用dropout，可以鼓励生成器探索更多的数据分布，从而提高生成样本的多样性。
+
+### 5. 防止梯度消失或爆炸
+在视觉大模型中，梯度消失或爆炸（Gradient Vanishing/Exploding）是常见问题，特别是在训练复杂的生成式模型时。正则化技术，如Batch Normalization和Layer Normalization，通过规范化中间层的输出，帮助控制梯度的规模，从而避免这两种问题，使训练过程更加稳定。
+
+### 6. 减少训练过程中的噪声敏感性
+生成式模型可能对训练数据中的噪声过于敏感，导致生成的图像或数据质量低下。通过应用正则化，如Dropout或添加一定量的噪声，模型可以对不重要的输入变化更鲁棒，从而提高生成数据的质量和稳健性。
+
+正则化技术在生成式模型中的运用有助于优化模型性能，提高模型的泛化能力和输出质量，同时确保训练过程的稳定性和效率。这些技术是设计和训练高效、可靠生成式模型的重要组成部分。
+
+
+<h2 id="7.AI生成图像的常用评价指标">7.AI生成图像的常用评价指标 </h2>
+
+随着图像生成AI的发展，如Stable Diffusion和Midjourney，能够根据自然语言生成“高品质”的图像。然而，“高品质”图像的定义和评价并不简单，目前有多种评价指标来衡量图像的质量和相关性。
+
+#### 1. FID（Frechet Inception Distance）
+
+FID是用于评估生成图像与真实图像相似度的量化指标。它使用Inception网络将生成图像和真实图像转换为特征向量，假设这些特征向量的分布为高斯分布，并计算其均值和协方差矩阵。通过测量这两个高斯分布之间的“距离”来评估相似性，值越小，图像质量越高。
+
+#### 2. CLIP Score
+
+CLIP Score通过学习自然语言和图像对之间的语义关系来评估图像和文本的匹配度。它将自然语言和图像分别转换为特征向量，然后计算它们之间的余弦相似度。CLIP Score越高，图像和文本对之间的相关性越高。
+
+#### 3. Inception Score（IS）
+
+Inception Score评估生成图像的质量和多样性。它使用Inception网络对生成图像进行分类，正确分类结果越集中，质量越高。同时，当生成图像被分类为不同标签时，多样性越大。IS综合考虑了图像的质量和多样性，得分越高表示质量和多样性越好。
+
+
+<h2 id="12.cfg参数的介绍">12.cfg参数的介绍</h2>
+
+Classifier Guidance，使得扩散模型可以按图像、按文本和多模态条件来生成。Classifier Guidance 需要训练噪声数据版本的classifier网络，推理时每一步都需要额外计算classifier的梯度
+
+Classifier Guidance 使用显式的分类器引导条件生成有几个问题：一是需要额外训练一个噪声版本的图像分类器。二是该分类器的质量会影响按类别生成的效果。三是通过梯度更新图像会导致对抗攻击效应，生成图像可能会通过人眼不可察觉的细节欺骗分类器，实际上并没有按条件生成。
+
+Classifier-Free Guidance方案，可以规避上述问题，而且可以通过调节引导权重，控制生成图像的逼真性和多样性的平衡。Classifier-Free Guidance的核心是通过一个隐式分类器来替代显示分类器，而无需直接计算显式分类器及其梯度。
+
+训练时，Classifier-Free Guidance需要训练两个模型，一个是无条件生成模型，另一个是条件生成模型。但这两个模型可以用同一个模型表示，训练时只需要以一定概率将条件置空即可。
+
+推理时，最终结果可以由条件生成和无条件生成的线性外推获得，生成效果可以引导系数可以调节，控制生成样本的逼真性和多样性的平衡。
+
+在Stable Diffusion模型中，CFG Scale参数用于控制CFG模型捕捉上下文信息的能力。该参数决定了上下文信息的提取范围，对生成文本的质量具有重要影响。当CFG Scale参数设置较高时，模型会更注重捕捉全局信息，从而在生成文本时考虑到更多的上下文关联；而当CFG Scale参数设置较低时，模型更倾向于关注局部信息，可能导致生成文本的上下文连贯性降低。
+
+简单说：通过cfg参数控制图像生成内容和文本之间的关联性
 
 
 <h2 id="21.介绍一下DiT模型的基本概念">21.介绍一下DiT模型的基本概念</h2>
@@ -1021,34 +1282,6 @@ Rocky为大家总结了AI绘画大模型的主要训练流程，其中包括：
    - 每张图像的编辑过程在 **A100 GPU** 上大约需要 **9 秒**，使用 **100** 个去噪步骤。
 
 
-<h2 id="28.SDXL-Turbo用的蒸馏方法是什么？">28.SDXL-Turbo用的蒸馏方法是什么？</h2>
-
-论文链接：[adversarial_diffusion_distillation.pdf](https://static1.squarespace.com/static/6213c340453c3f502425776e/t/65663480a92fba51d0e1023f/1701197769659/adversarial_diffusion_distillation.pdf)
-
-### 方法结构
-
-ADD 模型的结构包括三个核心组件：
-
-1. **ADD 学生模型 (Student Model)**：这是一个预训练的扩散模型，负责生成图像样本。
-2. **判别器 (Discriminator)**：用来区分生成的样本和真实图像，通过对抗性训练来提升生成图像的真实感。
-3. **DM 教师模型 (Teacher Model)**：这是一个冻结权重的扩散模型，作为知识的教师，为学生模型提供目标图像来实现知识蒸馏。
-
-![image-20241104175829951](./imgs/SD-Turbo.jpg)
-
-### 核心原理
-
-ADD 的核心原理是通过两个损失函数的结合实现蒸馏过程：
-
-1. **对抗性损失 (Adversarial Loss)**：学生模型生成的样本被输入判别器，判别器尝试将生成的样本与真实图像区分开。学生模型则优化生成图像，使其更难被判别器检测到为假，从而提升图像的细节和逼真度。
-2. **蒸馏损失 (Distillation Loss)**：ADD 使用另一个扩散模型作为教师模型，并通过蒸馏损失指导学生模型生成与教师模型相似的图像。教师模型对学生生成的噪声数据进行去噪，从而提供高质量的生成目标。这样，学生模型能够利用教师模型的大量知识来保持生成图像的质量和一致性
-
-ADD 模型具有以下优势：
-
-- **高速生成**：仅需 1-4 步采样即可生成高质量图像，显著减少了生成时间，适用于实时应用。
-- **高质量图像**：通过结合对抗性损失和蒸馏损失，生成的图像在细节和逼真度上优于现有的快速生成模型，如单步 GAN 和一些少步扩散模型。
-- **灵活性**：支持进一步的多步采样，从而在单步生成的基础上通过迭代增强图像细节。
-
-
 <h2 id="29.SD3-Turbo如何用的蒸馏方法是什么？">29.SD3-Turbo用的蒸馏方法是什么？</h2>
 
 论文链接:[2403.12015](https://arxiv.org/pdf/2403.12015)
@@ -1102,47 +1335,6 @@ LADD（潜在对抗扩散蒸馏）与ADD（对抗扩散蒸馏）有几个关键�
 **下面是Rocky梳理的Stable Diffusion 3 VAE完整结构图**，大家可以感受一下其魅力。希望能让大家对这个在Stable DIffusion系列中持续繁荣的模型有一个更直观的认识，在学习时也更加的得心应手：
 
 ![Stable Diffusion 3 VAE完整结构图](./imgs/Stable-Diffusion-3-VAE完整结构图.png)
-
-
-<h2 id="31.介绍一下FLUX.1系列中的VAE模型">31.介绍一下FLUX.1系列中的VAE模型</h2>
-
-**FLUX.1系列中，FLUX.1 VAE架构依然继承了SD 3 VAE的8倍下采样和输入通道数（16）。在FLUX.1 VAE输出Latent特征，并在Latent特征输入扩散模型前，还进行了Pack_Latents操作，一下子将Latent特征通道数提高到64（16 -> 64），换句话说，FLUX.1系列的扩散模型部分输入通道数为64，是SD 3的四倍**。这也代表FLUX.1要学习拟合的内容比起SD 3也增加了4倍，所以官方大幅增加FLUX.1模型的参数量级来提升模型容量（model capacity）。下面是Pack_Latents操作的详细代码，让大家能够更好的了解其中的含义：
-
-```
-@staticmethod
-def _pack_latents(latents, batch_size, num_channels_latents, height, width):
-    latents = latents.view(batch_size, num_channels_latents, height // 2, 2, width // 2, 2)
-    latents = latents.permute(0, 2, 4, 1, 3, 5)
-    latents = latents.reshape(batch_size, (height // 2) * (width // 2), num_channels_latents * 4)
-
-    return latents
-```
-
-**可以看到FLUX.1模型的Latent特征Patch化方法是将 $2\times2$ 像素块直接在通道维度上堆叠。这种做法保留了每个像素块的原始分辨率，只是将它们从空间维度移动到了通道维度。与之相对应的，SD 3使用下采样卷积来实现Latent特征Patch化，但这种方式会通过卷积减少空间分辨率从而损失一定的特征信息。**
-
-Rocky再举一个形象的例子来解释SD 3和FLUX.1的Patch化方法的不同：
-1. SD 3（下采样卷积）：想象我们有一个大蛋糕，SD 3的方法就像用一个方形模具，从蛋糕上切出一个 $2\times2$ 的小方块。在这个过程中，我们提取了蛋糕的部分信息，但是由于进行了压缩，Patch块的大小变小了，信息会有所丢失。
-2. FLUX.1（通道堆叠）：FLUX.1 的方法更像是直接把蛋糕的 $2\times2$ 块堆叠起来，不进行任何压缩或者切割。我们仍然保留了蛋糕的所有部分，但是它们不再分布在平面上，而是被一层层堆叠起来，像是三明治的层次。这样一来，蛋糕块的大小没有改变，只是它们的空间位置被重新组织了。
-
-总的来说，**相比SD 3，FLUX.1将 $2\times2$ 特征Patch化操作应用于扩散模型之前**。这也表明FLUX.1系列模型认可了SD 3做出的贡献，并进行了继承与优化。
-
-目前发布的FLUX.1-dev和FLUX.1-schnell两个版本的VAE结构是完全一致的。**同时与SD 3相比，FLUX.1 VAE并不是直接沿用SD 3的VAE，而是基于相同结构进行了重新训练，两者的参数权重是不一样的**。并且SD 3和FLUX.1的VAE会对编码后的Latent特征做平移和缩放，而之前的SD系列中VAE仅做缩放：
-
-```
-def encode(self, x: Tensor) -> Tensor:
-    z = self.reg(self.encoder(x))
-    z = self.scale_factor * (z - self.shift_factor)
-    return z
-```
-
-平移和缩放操作能将Latent特征分布的均值和方差归一化到0和1，和扩散过程加的高斯噪声在同一范围内，更加严谨和合理。
-
-下面是**Rocky梳理的FLUX.1-dev/schnell系列模型的VAE完整结构图**，希望能让大家对这个从SD系列到FLUX.1系列都持续繁荣的模型有一个更直观的认识，在学习时也更加的得心应手：
-
-![FLUX.1-dev/schnell VAE完整结构图](./imgs/FLUX.1-VAE完整结构图.png)
-
-**Rocky认为Stable Diffusion系列和FLUX.1系列中VAE模型的改进历程，为工业界、学术界、竞赛界以及应用界都带来了很多灵感，有很好的借鉴价值。Rocky也相信AI绘画中针对VAE的优化是学术界一个非常重要的论文录用点！**
-
 
 <h2 id="32.AIGC面试中必考的Stable-Diffusion系列模型版本有哪些？">32.AIGC面试中必考的Stable Diffusion系列模型版本有哪些？</h2>
 
@@ -1231,41 +1423,6 @@ SD 3与之前的版本相比，整体的参数量级大幅增加，这无疑也�
 
 两者均基于 Stable Diffusion 的潜在扩散模型，但目标不同：Inpaint 聚焦于“内部修正”，而 Outpaint 致力于“外部延展”，共同拓展了生成式 AI 在图像编辑中的灵活性。
 
-<h2 id="37.扩散U-Net中的免费午餐（FreeU）是什么？">37.扩散U-Net中的免费午餐（FreeU）是什么？</h2>
-
-论文链接：[[2309.11497\] FreeU: Free Lunch in Diffusion U-Net](https://arxiv.org/abs/2309.11497)
-
-FreeU (Free Lunch in Diffusion U-Net) 是一种针对扩散模型中U-Net架构的增强方法，旨在提升生成质量而无需额外训练或计算成本。其核心原理通过对U-Net的主干网络与跳跃连接的特征贡献进行动态平衡，优化去噪过程。
-
-### 框架设计
-
-![image-20250223201133239](./imgs/freeU.jpg)
-
-**核心问题**
-
-作者通过分析U-Net在扩散模型中的作用，发现：
-
-- **主干网络（Backbone）**：主要负责去噪任务，但可能因权重分配问题未能完全发挥潜力 。
-- **跳跃连接（Skip Connections）**：主要向解码器引入高频特征（如细节纹理），但在某些情况下会干扰主干网络的去噪能力 。
-
-**改进策略**
- FreeU通过引入两个可调节的缩放因子：
-
-- **主干特征缩放因子**：增强主干网络输出的特征，强化去噪能力。
-- **跳跃特征缩放因子**：抑制跳跃连接引入的高频噪声，同时保留必要的细节 。
-
-### 原理分析
-
-1. **频域视角**
-   通过傅里叶分析发现：
-   - 扩散模型的去噪过程中，高频成分波动更剧烈，可能导致噪声残留 。
-   - FreeU通过调整跳跃连接的特征权重，显著减少了去噪过程中的高频干扰 。
-2. **特征图可视化**
-   实验表明：
-   - 使用FreeU的特征图包含更清晰的结构信息，表明主干网络的去噪有效性提升 。
-   - 高放大倍率下，模型能同步保留细节与整体结构（如毛发纹理和物体轮廓）。
-3. **兼容性设计**
-    FreeU不修改模型参数，可直接集成至Stable Diffusion、ControlNet等主流框架，且在图像/视频生成、微调模型（如Dreambooth）中均有效，无额外计算开销。
 
 <h2 id="38.Stable-Diffusion3.5的改进在哪里?">38.Stable Diffusion3.5的改进在哪里？</h2>
 
@@ -1469,23 +1626,6 @@ PAG 的工作流程大致如下：
 PAG 选择扰动扩散 U-Net 中的自注意力图，是因为自注意力机制负责捕捉结构信息，而“值（Value）”分量负责捕捉外观信息。 通过只扰动自注意力图，PAG 旨在最大限度地减少对原始样本外观的改变，并避免出现超出分布（out-of-distribution）的问题。
 
 
-<h2 id="55.SD模型中的VAE和单纯的VAE生成模型的区别是什么？">55.SD模型中的VAE和单纯的VAE生成模型的区别是什么？</h2>
-
-### 传统VAE生成模型
-
-- **完整的生成系统**：从噪声直接生成数据
-- **核心机制**：变分推断 + 重参数化技巧
-- **目标**：学习数据分布，实现无条件生成
-- **挑战**：生成质量与多样性的平衡
-
-### SD模型中的VAE
-
-- **功能组件**：数据压缩器和重建器
-- **核心作用**：将图像压缩到潜在空间，降低计算成本
-- **目标**：高保真度重建，为扩散过程提供高效空间
-- **优势**：专注重建质量，与扩散模型协同工作
-
-
 <h2 id="58.主流AI绘画大模型的完整训练流程是什么样的？">58.主流AI绘画大模型的完整训练流程是什么样的？</h2>
 
 理解主流AI绘画大模型的完整训练流程，在AIGC时代种是非常关键的，不管是算法、研发、产品、运营还是其他工种，都需要学习了解。
@@ -1509,79 +1649,6 @@ PAG 选择扰动扩散 U-Net 中的自注意力图，是因为自注意力机制
 ### 模型性能优化部署层面：
 1. 一致噪声期望：预测噪声分布，减少迭代。
 2. 重要性感知时间步采样：聚焦关键扩散步，跳过非关键步。
-
-
-<h2 id="60.什么是SDXL-Refiner？">60.什么是SDXL Refiner？</h2>
-
-SDXL Refiner是Stability AI推出的图像精细化模型，作为SDXL生态系统的第二阶段，专门负责提升图像细节质量。它采用了"专家集成"的设计理念：Base模型生成基础结构，Refiner模型优化细节表现。
-
-![pipeline](./imgs/pipeline.png)
-
-### 核心工作原理
-
-#### 两种使用方式
-
-1. **标准流程**：Base模型完成80%去噪 → Refiner完成剩余20%精细化
-2. **SDEdit流程**：Base生成完整图像 → Refiner使用img2img技术优化
-
-### 技术特点
-
-- **双文本编码器**：OpenCLIP-ViT/G + CLIP-ViT/L，提供更好的语义理解
-- **专门优化**：针对低噪声水平的去噪过程进行特殊训练
-- **参数规模**：6.06B参数，专注于细节增强
-
-### 性能提升
-
-根据官方评测，SDXL Base + Refiner的组合相比之前版本：
-
-- 用户偏好度达到91%（远超SD 1.5/2.1）
-
-- 细节清晰度提升约20-30%
-
-- 整体图像质量显著改善
-
-- 
-
-  SDXL Refiner通过专门的精细化设计，成功解决了AI图像生成中的细节问题。它与Base模型的配合使用，让SDXL成为目前最优秀的开源图像生成方案之一。对于追求高质量图像输出的用户，Refiner是不可或缺的工具。
-
-<h2 id="61.什么是X-Flux？">61.什么是X-Flux？</h2>
-
-在AI图像生成领域，Black Forest Labs推出的Flux模型无疑是一个重要的里程碑。而今天要为大家介绍的X-Flux项目，则是为这个强大的扩散模型量身打造的一套完整工具包，让每个开发者都能轻松地对Flux模型进行微调和推理。
-
-X-Flux是一个开源代码库，专门为Flux扩散模型提供微调和推理脚本。它不仅仅是一个简单的工具集，更像是一个完整的生态系统，通过多种先进的适配技术，让用户能够根据特定需求来增强基础Flux模型的能力。
-
-无论是想要训练特定风格的图像生成器，还是需要精确控制生成过程，X-Flux都能提供专业级的解决方案。
-
-### 核心功能亮点
-
-#### 🎯 三大微调方法，各显神通
-
-**LoRA（低秩适配）** 这是一种参数高效的微调技术，能够让模型快速适应特定的艺术风格或应用领域。想象一下，你只需要用少量的训练数据，就能让Flux学会你喜欢的绘画风格——这就是LoRA的魅力所在。
-
-**ControlNet** 如果说LoRA是让模型学会"风格"，那么ControlNet就是教会模型"服从指令"。通过训练条件适配器，你可以精确控制图像生成的每一个细节，比如边缘检测、深度信息、姿态控制等。
-
-**IP-Adapter** 这是一个令人兴奋的功能——图像提示适配。你可以用一张参考图片来引导生成过程，让AI理解你想要的视觉效果，实现真正的"以图生图"。
-
-### 🖼️ 高分辨率生成支持
-
-在这个追求视觉质量的时代，X-Flux原生支持1024×1024甚至更高分辨率的图像生成。无论是用于商业设计还是艺术创作，都能满足专业级的画质需求。
-
-### 💻 多样化的使用界面
-
-**命令行界面** 适合喜欢脚本化操作和批量处理的技术用户，可以轻松集成到现有的工作流程中。
-
-**Gradio网页界面** 为那些偏爱图形化操作的用户提供了直观的交互体验，特别适合微调过程的可视化监控。
-
-**ComfyUI集成** 通过独立的代码库，X-Flux还支持与流行的ComfyUI工作流集成，进一步扩展了应用场景。
-
-### ⚡ 性能优化的艺术
-
-在AI模型训练中，性能优化往往是最大的挑战。X-Flux在这方面做得相当出色：
-
-- **DeepSpeed集成**：提供高效的分布式训练能力
-- **量化支持**：通过FP8量化技术显著降低内存占用
-- **模型卸载**：智能的内存管理，让有限的硬件资源发挥最大价值
-
 
 
 <h2 id="62.StableDiffusion的一些加速方法">62.StableDiffusion的一些加速方法</h2>
@@ -1700,57 +1767,6 @@ image = pipe("astronaut on mars", num_inference_steps=20).images[0]
   - 异常检测，通过潜在分布概率评估样本是否偏离训练分布
 
 
-
-<h2 id="64.扩散模型是如何引入控制条件的？">64.扩散模型是如何引入控制条件的？</h2
-
-在现代扩散模型中，引入控制条件的方式主要分为两大类：**采样阶段的引导（Guidance）与网络结构级的条件融合（Architectural Conditioning）**。前者通过调整去噪过程中的梯度方向，在不改动模型参数的前提下实现条件控制；后者则在模型内部直接注入额外信息，包括跨注意力（Cross‐Attention）和时间嵌入（Time Embedding）的多路拼接。下面我们将从这两大类出发，详细介绍包括交叉注意力注入、时间步嵌入拼接、类别嵌入拼接以及 ControlNet 等多种常见的条件引入技术。
-
-### 一、采样阶段的引导方法
-
-#### 1.1 分类器引导（Classifier Guidance）
-
-- **原理**：额外训练一个图像分类器，对去噪过程中的中间图像计算类别概率梯度 ∇log p(y|x)，并将其与扩散模型的去噪梯度相加，以朝着目标类别 y 的方向更强地去噪。
-- **特点**：无需改变原扩散模型结构，可后期直接应用；但需额外训练分类器，且计算开销较大。
-
-#### 1.2 无分类器引导（Classifier‐Free Guidance）
-
-- **原理**：在同一模型中联合训练“有条件”（带 y 输入）与“无条件”（不带 y）的分支，采样时按比例 s 调整两者的去噪预测：
-  $$
-  \hat{\epsilon}=\left(1+s\right)\epsilon_{\mathrm{cond}}-s\:\epsilon_{\mathrm{uncond}}.
-  $$
-  通过增大 s，可在样本质量与多样性间权衡。
-
-- **优势**：无需单独训练分类器，已成为文本到图像任务的主流引导策略。
-
-### 二、网络结构级的条件融合
-
-#### 2.1 跨注意力（Cross‐Attention）注入
-
-- **文本到图像**：在每个 U-Net 模块的中间，使用跨注意力层将文本嵌入（如 CLIP 编码）作为键/值，图像特征作为查询，实现与自然语言条件的交互。
-- **多模态扩展**：可将其它概念 token（如布局、分割图等）也作为条件序列，通过相同机制注入，支持更灵活的条件输入。
-
-#### 2.2 时间步嵌入（Time Embedding）拼接
-
-- **位置编码**：采用类似 Transformer 的正余弦编码映射时间步 t 到向量 pos(t)，然后通过线性层得到时间嵌入。
-- **融合方式**：除常见的**加法融合**外，也可将时间嵌入与其它条件（如类别 embedding 或空间特征）在通道维度上**拼接**，再一起输入至卷积层或注意力模块中。
-
-#### 2.3 类别嵌入（Class Embedding）拼接
-
-- **方法**：将类别 embedding（CEN）在每层噪声估计器（noise estimator）中与特征张量**串联**（concatenate），使得扩散的重建过程同时感知图像内容与类别信息。
-- **效果**：在多类别生成任务中，可显著提升类别一致性，同时保持图像质量。
-
-#### 2.4 ControlNet：条件分支并行注入
-
-- **原理**：在预训练 U-Net 的每个编码器层复制一份“可训练”分支，并通过零初始化卷积（ZeroConv）接收额外条件（如边缘图、深度图），其输出再**加回**主干层，确保不破坏原模型能力。
-- **应用**：广泛用于 Stable Diffusion，为图像生成提供细粒度空间控制，如姿态、分割或布局指令。
-
-### 三、其他控制技术
-
-- **Cross‐Attention Score 调整**：在生成时对跨注意力分数进行训练无关的修改，以强化局部概念在图像中的表现，同时避免语义混合（concept bleeding）。
-- **CFG++等高级引导**：在无分类器引导基础上优化 off-manifold 轨迹，提升高引导尺度下的可逆性与样本质量。
-
-
-
 <h2 id="65.什么是风格漂移？">65.什么是风格漂移？</h2
 
 在使用 AI 模型生成图像时，如果输出的风格与用户在提示词中指定的风格（如“油画风”“日系”“赛博朋克”）不符，就会出现**风格漂移**。表现为色调、笔触、构图等关键元素与预期风格相去甚远，影响作品的整体一致性和艺术效果。
@@ -1807,76 +1823,6 @@ image = pipe("astronaut on mars", num_inference_steps=20).images[0]
    - 在超分辨率放大、去噪等后处理环节，引入风格保持模块，避免“抹平”原有风格细节。
 
 
-
-<h2 id="66.什么是flow-matching？">66.什么是flow matching？</h2
-
-## 概览
-
-Flow Matching（流匹配）是一种基于连续可正规流（Continuous Normalizing Flows, CNFs）的模拟无关训练范式，它通过回归在预设概率路径上的向量场来学习生成模型，无需在训练时进行繁重的数值仿真 。在高斯路径（包括传统扩散模型路径）上应用 Flow Matching，不仅可获得与扩散模型相当的生成质量，还能实现更稳定的训练和更高效的采样 。
-
-### 原理简述
-
-#### 条件概率路径
-
-在 Flow Matching 中，我们预先指定一条从噪声分布 $$p_0$$ 到数据分布$$ p_1$$ 的连续概率路径
-$$
-p_t(x)\propto\exp\biggl(-\frac{||x-\mu(t)||^2}{2\sigma(t)^2}\biggr)\:,
-$$
-其中 $$\mu(t)$$ 和 $$\sigma(t) $$控制路径的均值与方差 。
-
-#### 向量场回归
-
-给定路径 $$p_t$$ 和其对应的真实流场$$u(x,t)$$，我们训练一个神经网络 $$v_\theta(x,t) $$来最小化
-$$
-\mathbb{E}_{t\sim U(0,1),\:x\sim p_t}\|v_\theta(x,t)-u(x,t)\|^2
-$$
-的均方误差，无需在训练迭代中求解 ODE/SDE 。
-
-#### 采样流程
-
-1. 从简单噪声 $$z_0\sim p_0 $$开始。
-
-2. 通过离散化 ODE：
-   $$
-   z_{t+\Delta t}=z_{t}+v_{\theta}(z_{t},t)\:\Delta t
-   $$
-   沿时间轴 $$t=0\to1$$ 迭代，最终得到 $$z_1 $$作为生成样本 
-
-### 优势与实践
-
-- **稳定高效**：与基于 SDE 的扩散模型相比，Flow Matching 训练过程无仿真步骤，更少误差累积，训练更稳定、收敛更快 ([mlg.eng.cam.ac.uk](https://mlg.eng.cam.ac.uk/blog/2024/01/20/flow-matching.html?utm_source=chatgpt.com))。
-- **灵活路径设计**：除扩散路径外，还可采用最优传输（Optimal Transport）等路径，实现更短、更平滑的生成轨迹，进一步加速采样 ([openreview.net](https://openreview.net/forum?id=PqvMRDCJT9t&utm_source=chatgpt.com))。
-- **潜在空间应用**：将 Flow Matching 应用于预训练自动编码器的潜在空间，可大幅降低计算资源需求，同时在高分辨率图像生成中保持高质量 ([github.com](https://github.com/VinAIResearch/LFM?utm_source=chatgpt.com))。
-- **开源资源**：可参考官方论文（arXiv:2210.02747）和最新的 Flow Matching Guide（arXiv:2412.06264）获取详尽理论与示例代码 ([arxiv.org](https://arxiv.org/abs/2412.06264?utm_source=chatgpt.com))。
-
-
-
-<h2 id="67.DDPM和Flow-Matching区别？">67.DDPM和Flow Matching区别？</h2
-
-DDPM（去噪扩散概率模型）通过千次以上的噪声注入与逐步去噪，能够生成高质量图像，但采样过程需要大量的数值仿真和迭代，速度较慢 [arxiv.org](https://arxiv.org/abs/2006.11239?utm_source=chatgpt.com)。Flow Matching（流匹配）则将生成过程视作在预定义概率路径上的连续正规流，以模拟无关的方式直接回归向量场，训练中无需仿真步骤，采样时也可用少量 ODE 步骤完成 [arxiv.org](https://arxiv.org/abs/2210.02747?utm_source=chatgpt.com)。
-
-### DDPM 回顾
-
-- **正向扩散**：从干净图像逐步添加高斯噪声，通常分为 1000 步以上，每一步都有固定的噪声系数schedule 。
-- **逆向去噪**：训练一个 U-Net 风格的分数网络，通过最小化变分下界（ELBO）或等价的去噪目标，学习逐步去噪的参数 。
-- **采样开销**：高质量样本通常需要数百至上千次模型评估与 SDE/ODE 仿真，导致推理速度瓶颈。
-
-### Flow Matching 简述
-
-- **模拟无关训练**：不再依赖反向仿真，在预设的高斯概率路径 $$p_t $$上直接回归真实流场 $$u(x,t)$$，训练目标为
-
-  $$\mathbb{E}_{t\sim U(0,1),\:x\sim p_t}\|v_\theta(x,t)-u(x,t)\|^2$$
-
-  从而无需在训练中求解 ODE/SDE。
-
-- **连续正规流框架**：本质上是一种大规模可正规流（CNF）训练范式，兼容多种路径（包括扩散路径和最优传输路径）。
-
-核心区别
-
-- **训练仿真依赖**：DDPM 训练时依赖 SDE/ODE 仿真累积误差；Flow Matching 训练全程不需数值仿真，减少函数评估次数。
-- **采样步数**：DDPM 通常需要上百至上千步；Flow Matching 可通过简化路径或最优传输设计，将采样步数降至几十步，大幅提速。
-- **路径灵活性**：DDPM 固定使用扩散过程；Flow Matching 支持多种高斯或最优传输路径，便于针对任务优化生成轨迹.
-
 <h2 id="68.DMD2蒸馏是怎么做的？">68.DMD2蒸馏是怎么做的？</h2
 
 DMD2（Improved Distribution Matching Distillation）是针对扩散模型蒸馏的一种改进方法，通过一系列技术提升了原始分布匹配蒸馏（DMD）的稳定性和效率，同时能在极少步数下生成高质量图像。相较于原始DMD，DMD2取消了昂贵的回归损失和数据集构建，**引入双时间尺度更新规则**以稳定训练，并**整合GAN损失**以增强分布匹配，最终实现一步或少步生成器的高效训练和推理。
@@ -1913,85 +1859,5 @@ DMD2的总体训练流程如下：
 
 整体流程如图所示，红色箭头表示分布匹配梯度，绿色箭头表示GAN损失，蓝色箭头表示评分网络更新([tianweiy.github.io](https://tianweiy.github.io/dmd2/?ref=aiartweekly&utm_source=chatgpt.com))。
 
-
----
-
-## 第三章 AI绘画大模型优化技术高频考点正文
-
-<h2 id="5.Flow-Matching和DDPM之间有什么区别？">5.Flow Matching和DDPM之间有什么区别？</h2>
-
-Flow Matching和去噪扩散概率模型（DDPM）都是生成模型，但它们在理论基础、训练目标和生成过程上都有显著区别。
-
-**核心区别**：  
-DDPM通过随机扩散和去噪过程生成数据，强调概率建模；Flow Matching通过确定性ODE路径直接匹配目标分布，追求高效的最优传输。前者生成质量高但速度慢，后者在速度上更具优势，同时理论更简洁。
-
-### **1. 理论基础**
-- **DDPM**：
-  - 基于**扩散过程**，属于概率模型，通过马尔可夫链的前向（加噪）和反向（去噪）过程建模。
-  - 前向过程逐步添加高斯噪声，将数据转化为纯噪声；反向过程通过神经网络学习逐步去噪。
-  - 数学上对应 **随机微分方程（SDE）** 的离散化。
-
-- **Flow Matching**：
-  - 基于 **连续归一化流（CNF）** 或 **最优传输（Optimal Transport, OT）** ，通过常微分方程（ODE）定义确定性路径。
-  - 目标是从噪声分布到数据分布构建一条平滑的概率路径，通常通过匹配向量场实现。
-  - 数学上对应 **确定性ODE** ，强调路径的直线性或最优性。
-
-### **2. 过程类型**
-- **DDPM**：
-  - **随机过程**：每一步添加或去除的噪声是随机的高斯噪声。
-  - 前向和反向过程均为马尔可夫链，依赖多步迭代。
-
-- **Flow Matching**：
-  - **确定性过程**：生成路径由ODE定义，通常为确定性映射（如Rectified Flow）。
-  - 可能通过最优传输直接规划最小能量路径，减少随机性。
-
-### **3. 训练目标**
-- **DDPM**：
-  - 优化**变分下界（ELBO）**，简化为预测每一步的噪声（均方误差损失）。
-  - 需要模拟所有时间步的噪声扰动，训练复杂但稳定。
-
-- **Flow Matching**：
-  - 直接匹配**条件概率路径**或**向量场**（如条件流匹配，CFM）。
-  - 损失函数设计为最小化预测路径与目标路径的差异（如Wasserstein距离），训练更高效。
-
-### **4. 采样过程**
-- **DDPM**：
-  - **多步迭代采样**：通常需要几十到几百步去噪，速度较慢。
-  - 依赖设计的噪声调度（Noise Schedule）控制加噪/去噪速度。
-
-- **Flow Matching**：
-  - **高效采样**：通过ODE求解器可加速，甚至实现少步或一步生成（如Rectified Flow的直线路径）。
-  - 路径设计更灵活（如直线化路径减少采样步数）。
-
-### **5. 数学形式对比**
-- **DDPM**：
-  - 前向过程： $q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_t I)$
-  - 反向过程： $p_\theta(x_{t-1} | x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_t)$
-
-- **Flow Matching**：
-  - 生成路径： $\frac{d}{dt}x(t) = v_\theta(x(t), t)$ ，其中 $v_\theta$ 是学习的向量场。
-  - 目标是最小化 $\mathbb{E}_{t, x(t)} \|v_\theta(x(t), t) - u_t(x(t))\|^2$ ， $u_t$ 为目标路径的瞬时速度。
-
-### **6. 优缺点对比**
-- **DDPM**：
-  - **优点**：生成质量高，训练稳定。
-  - **缺点**：采样速度慢，依赖大量时间步。
-
-- **Flow Matching**：
-  - **优点**：采样速度快，路径设计灵活（可直线化），理论更简洁。
-  - **缺点**：可能需要复杂ODE求解器，训练技巧要求高。
-
-### **7. 典型应用**
-- **DDPM**：图像生成（如Stable Diffusion）、音频合成。
-- **Flow Matching**：快速图像生成（如Rectified Flow）、3D形状生成、基于最优传输的任务。
-
-### **8. 总结**
-| 维度               | DDPM                          | Flow Matching                  |
-|--------------------|-------------------------------|--------------------------------|
-| **理论基础**       | 随机扩散（SDE）               | 确定性流（ODE/OT）             |
-| **训练目标**       | 变分下界（预测噪声）          | 条件流匹配（匹配向量场）        |
-| **采样速度**       | 慢（多步迭代）                | 快（少步或一步）               |
-| **路径性质**       | 随机噪声扰动                  | 确定性最优路径                 |
-| **数学复杂度**     | 中等（马尔可夫链）            | 高（ODE求解/最优传输）         |
 
 ---
