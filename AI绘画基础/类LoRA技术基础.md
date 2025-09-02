@@ -18,7 +18,7 @@
 - [16.LoRA模型有哪些特性？](#16.LoRA模型有哪些特性？)
 - [17.LoRA模型有哪些高阶用法？](#17.LoRA模型有哪些高阶用法？)
 - [18.LoRA模型的融合方式有哪些？](#18.LoRA模型的融合方式有哪些？)
-- [19.LoRA模型的融合方式有哪些？](#19.LoRA模型的融合方式有哪些？)
+- [19.训练U-Net LoRA和Text Encoder LoRA的区别是什么？](#19.训练U-Net-LoRA和Text-Encoder-LoRA的区别是什么？)
 - [20.Dreambooth的微调训练流程一般包含哪几部分核心内容？](#20.Dreambooth的微调训练流程一般包含哪几部分核心内容？)
 - [21.Dreambooth的微调训练流程中有哪些关键参数？](#21.Dreambooth的微调训练流程中有哪些关键参数？)
 - [22.介绍一下Textual Inversion技术的原理](#22.介绍一下Textual-Inversion技术的原理)
@@ -457,7 +457,7 @@ class LoRALayer(nn.Module):
 <h2 id="18.LoRA模型的融合方式有哪些？">18.LoRA模型的融合方式有哪些？</h2>
 
 
-<h2 id="19.LoRA模型的融合方式有哪些？">19.LoRA模型的融合方式有哪些？</h2>
+<h2 id="19.训练U-Net-LoRA和Text-Encoder-LoRA的区别是什么？">19.训练U-Net LoRA和Text Encoder LoRA的区别是什么？</h2>
 
 
 <h2 id="20.Dreambooth的微调训练流程一般包含哪几部分核心内容？">20.Dreambooth的微调训练流程一般包含哪几部分核心内容？</h2>
