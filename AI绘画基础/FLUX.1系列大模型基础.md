@@ -16,12 +16,15 @@
 - [12.什么是flow matching？](#12.什么是flow-matching？)
 - [13.Flow Matching和DDPM之间有什么区别？](#13.Flow-Matching和DDPM之间有什么区别？)
 
+
 ## 第二章 FLUX.1 Kontext系列核心高频考点
 
 - [1.介绍一下FLUX.1 Kontext的原理](#1.介绍一下FLUX.1-Kontext的原理)
 - [2.FLUX.1 Kontext能够执行哪些AIGC任务？](#2.FLUX.1-Kontext能够执行哪些AIGC任务？)
 - [3.FLUX.1 Kontext和FLUX.1相比，有哪些核心优化？详细分析改进的意图](#3.FLUX.1-Kontext和FLUX.1相比，有哪些核心优化？详细分析改进的意图)
+- [4.介绍一下FLUX.1 Kontext的提示词构建技巧](#4.介绍一下FLUX.1-Kontext的提示词构建技巧)
 
+---
 
 ## 第一章 FLUX.1系列核心高频考点
 
@@ -37,6 +40,7 @@ FLUX.1系列模型是基于Stable Diffuson 3进行了升级优化，是目前性
 3. FLUX.1系列模型继承了Stable Diffusion 3 的噪声调度机制，对于分辨率越高的图像，把越多的去噪迭代放在了高噪声的时刻上。但和Stable Diffusion 3不同的是，FLUX.1不仅在训练时有这种设计，采样时也使用了这种技巧。
 4. FLUX.1系列模型中在DiT架构中设计了双流DiT结构和单流DiT结构，同时加入了二维旋转式位置编码 (RoPE) 策略。
 5. FLUX.1系列模型在单流的DiT中引入了并行注意力层的设计，注意力层和MLP并联执行，执行速度有所提升。
+
 
 <h2 id="3.介绍一下FLUX.1中VAE部分的特点，比起Stable-Diffusion-3有哪些改进？详细分析改进的意图">3.介绍一下FLUX.1中VAE部分的特点，比起Stable Diffusion 3有哪些改进？详细分析改进的意图</h2>
 
@@ -231,3 +235,8 @@ DDPM通过随机扩散和去噪过程生成数据，强调概率建模；Flow Ma
 
 
 <h2 id="3.FLUX.1-Kontext和FLUX.1相比，有哪些核心优化？详细分析改进的意图">3.FLUX.1 Kontext和FLUX.1相比，有哪些核心优化？详细分析改进的意图</h2>
+
+
+<h2 id="3.介绍一下FLUX.1-Kontext的提示词构建技巧">3.介绍一下FLUX.1 Kontext的提示词构建技巧</h2>
+
+---
