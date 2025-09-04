@@ -6,6 +6,20 @@
 - [4.生成对抗网络GAN与传统神经网络有何不同？](#4.生成对抗网络GAN与传统神经网络有何不同？)
 - [5.GAN和Stable Diffusion有哪些差异？](#5.GAN和Stable-Diffusion有哪些差异？)
 - [6.什么是GAN模型的Mode collapse(模式坍塌)问题？有哪些解决方法？](#6.什么是GAN模型的Mode-collapse(模式坍塌)问题？有哪些解决方法？)
+- [7.GAN的训练过程是什么样的？](#7.GAN的训练过程是什么样的？)
+- [8.为什么GAN中输入的是随机噪声？](#8.为什么GAN中输入的是随机噪声？)
+- [9.为什么GAN训练不稳定？](#9.为什么GAN训练不稳定？)
+- [10.训练GAN有哪些主流的技巧？](#10.训练GAN有哪些主流的技巧？)
+- [11.介绍一下Pix2Pix系列模型的原理](#11.介绍一下Pix2Pix系列模型的原理)
+- [12.介绍一下GigaGAN/AuraSR模型的原理](#12.介绍一下GigaGAN/AuraSR模型的原理)
+- [13.介绍一下GAN和Diffusion各自的优势](#13.介绍一下GAN和Diffusion各自的优势)
+- [14.介绍一下StyleGAN模型的原理](#14.介绍一下StyleGAN模型的原理)
+- [15.介绍一下CycleGAN模型的原理](#15.介绍一下CycleGAN模型的原理)
+- [16.介绍一下RealESRGAN模型的原理](#16.介绍一下RealESRGAN模型的原理)
+- [17.介绍一下GFPGAN模型的原理](#17.介绍一下GFPGAN模型的原理)
+- [18.在AIGC时代，GAN有哪些优缺点？](#18.在AIGC时代，GAN有哪些优缺点？)
+- [19.Stable Diffusion和GAN哪个更容易出现collapse的问题?](#19.Stable-Diffusion和GAN哪个更容易出现collapse的问题?)
+- [20.GAN模型有哪些主流落地应用的方向？](#20.GAN模型有哪些主流落地应用的方向？)
 
 
 <h2 id="1.哪些经典的GAN模型跨过了周期，在AIGC时代继续落地使用？">1.哪些经典的GAN模型跨过了周期，在AIGC时代继续落地使用？</h2>
@@ -58,7 +72,7 @@ GAN由生成器$G$和判别器$D$组成。其中，生成器主要负责生成�
 8. SRGAN系列
 
 
-<h1 id="4.生成对抗网络GAN与传统神经网络有何不同？">4.生成对抗网络GAN与传统神经网络有何不同？</h1>
+<h1 id="4.生成对抗网络GAN与传统神经网络有何不同？">4.生成对抗网络GAN与传统神经网络有何不同？</h2>
 
 **生成对抗网络（GAN）的定义**
    - 生成对抗网络（Generative Adversarial Network，GAN）是一种深度学习架构，由生成器（Generator）和判别器（Discriminator）两个部分组成。
@@ -81,7 +95,7 @@ GAN由生成器$G$和判别器$D$组成。其中，生成器主要负责生成�
      - **GAN**：主要用于生成数据，如生成图像、音频、文本等。可以用于数据扩充，例如在医疗图像数据较少的情况下，通过GAN生成更多的类似图像来扩充数据集；还可以用于图像风格转换，如将真实照片转换为油画风格的图像等。
 
 
-<h1 id="5.GAN和Stable-Diffusion有哪些差异？">5.GAN和Stable Diffusion有哪些差异？</h1>
+<h2 id="5.GAN和Stable-Diffusion有哪些差异？">5.GAN和Stable Diffusion有哪些差异？</h2>
 
 GAN（生成对抗网络）和Stable Diffusion（稳定扩散模型）都是AIGC、传统深度学习、自动驾驶领域的核心模型之一，其核心差异体现在模型架构、训练机制、生成质量及应用场景等方面。以下是Rocky总结的详细对比：
 
@@ -123,7 +137,7 @@ GAN（生成对抗网络）和Stable Diffusion（稳定扩散模型）都是AIGC
   - **数据增强**：生成合成数据集提升下游任务性能（如《Stable Diffusion for Data Augmentation》）。
 
 
-<h1 id="6.什么是GAN模型的Mode-collapse(模式坍塌)问题？有哪些解决方法？">6.什么是GAN模型的Mode collapse(模式坍塌)问题？有哪些解决方法？</h1>
+<h2 id="6.什么是GAN模型的Mode-collapse(模式坍塌)问题？有哪些解决方法？">6.什么是GAN模型的Mode collapse(模式坍塌)问题？有哪些解决方法？</h2>
 
 ### **一、模式坍塌的定义与成因**
 **模式坍塌（Mode Collapse）** 是GAN训练中的常见问题，指生成器（Generator）仅能生成有限种类的样本，无法覆盖真实数据的所有分布模式。例如，训练生成人脸时，生成器可能反复生成同一张人脸，而忽略其他特征（如不同肤色、年龄、表情等）。
@@ -191,3 +205,47 @@ GAN（生成对抗网络）和Stable Diffusion（稳定扩散模型）都是AIGC
   - 提及新兴技术（如扩散模型对GAN的替代趋势，但GAN在实时性上仍有优势）。  
 
 通过以上结构化分析，可展现对GAN理论深度与工程落地的全面理解，契合AI算法岗对问题拆解与跨领域迁移能力的要求。
+
+
+<h2 id="7.GAN的训练过程是什么样的？">7.GAN的训练过程是什么样的？</h2>
+
+
+<h2 id="8.为什么GAN中输入的是随机噪声？">8.为什么GAN中输入的是随机噪声？</h2>
+
+
+<h2 id="9.为什么GAN训练不稳定？">9.为什么GAN训练不稳定？</h2>
+
+
+<h2 id="10.训练GAN有哪些主流的技巧？">10.训练GAN有哪些主流的技巧？</h2>
+
+
+<h2 id="11.介绍一下Pix2Pix系列模型的原理">11.介绍一下Pix2Pix系列模型的原理</h2>
+
+
+<h2 id="12.介绍一下GigaGAN/AuraSR模型的原理">12.介绍一下GigaGAN/AuraSR模型的原理</h2>
+
+
+<h2 id="13.介绍一下GAN和Diffusion各自的优势">13.介绍一下GAN和Diffusion各自的优势</h2>
+
+
+<h2 id="14.介绍一下StyleGAN模型的原理">14.介绍一下StyleGAN模型的原理</h2>
+
+
+<h2 id="15.介绍一下CycleGAN模型的原理">15.介绍一下CycleGAN模型的原理</h2>
+
+
+<h2 id="16.介绍一下RealESRGAN模型的原理">16.介绍一下RealESRGAN模型的原理</h2>
+
+
+<h2 id="17.介绍一下GFPGAN模型的原理">17.介绍一下GFPGAN模型的原理</h2>
+
+
+<h2 id="18.在AIGC时代，GAN有哪些优缺点？">18.在AIGC时代，GAN有哪些优缺点？</h2>
+
+
+<h2 id="19.Stable Diffusion和GAN哪个更容易出现collapse的问题?">19.Stable Diffusion和GAN哪个更容易出现collapse的问题?</h2>
+
+
+<h2 id="20.GAN模型有哪些主流落地应用的方向？">20.GAN模型有哪些主流落地应用的方向？</h2>
+
+---
