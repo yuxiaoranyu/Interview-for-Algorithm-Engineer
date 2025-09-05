@@ -1,11 +1,11 @@
 # 目录
 
 - [1.Ip-adapter的模型结构与原理](#1.Ip-adapter的模型结构与原理)
-- [2.Controlnet的模型结构与原理](#2.Controlnet的模型结构与原理)
+- [2.ControlNet的模型结构与原理](#2.ControlNet的模型结构与原理)
 - [3.人物一致性模型PhotoMaker原理](#3.人物一致性模型PhotoMaker原理)
 - [4.人物一致性模型InstantID原理](#4.人物一致性模型InstantID原理)
 - [5.单ID图像为什么InstantID人物一致性比Photomaker效果好](#5.单ID图像为什么InstantID人物一致性比Photomaker效果好)
-- [6.Controlnet++的模型结构和原理](#6.Controlnet++的模型结构和原理)
+- [6.ControlNet++的模型结构和原理](#6.ControlNet++的模型结构和原理)
 - [7.Controlnext的模型结构和原理](#7.Controlnext的模型结构和原理)
 - [8.ODGEN的模型结构和原理](#8.ODGEN的模型结构和原理)
 - [9.Controlnet如何处理条件图的？](#9.Controlnet如何处理条件图的？)
@@ -38,6 +38,36 @@
 - [36.Check, Locate, Rectify（A Training-Free Layout Calibration System for Text-to-Image Generation）的框架和原理](#36.Check,Locate,Rectify（A-Training-Free-Layout-Calibration-System-for-Text-to-Image-Generation）的框架和原理)
 - [37.Conceptrol的框架和原理](#37.Conceptrol的框架和原理)
 - [38.EasyPhoto中应用到了哪些人脸特征处理算法？](#38.EasyPhoto中应用到了哪些人脸特征处理算法？)
+- [39.Prompt-to-Prompt是什么方法？](#39.Prompt-to-Prompt是什么方法？)
+- [40.InstructPix2Pix的训练和推理流程是什么样的？](#40.InstructPix2Pix的训练和推理流程是什么样的？)
+- [41.ControlNet系列模型有多少种控制条件？](#41.ControlNet系列模型有多少种控制条件？)
+- [42.ControlNet的最小单元是什么样的？](#42.ControlNet的最小单元是什么样的？)
+- [43.ControlNet中的zero卷积层初始权重为什么是0?zero卷积层为什么有效？](#43.ControlNet中的zero卷积层初始权重为什么是0?zero卷积层为什么有效？)
+- [44.ConrtolNet是如何训练的？](#44.ConrtolNet是如何训练的？)
+- [45.ControlNet的损失函数是什么？](#45.ControlNet的损失函数是什么？)
+- [46.ControlNet有哪些高阶用法？](#46.ControlNet有哪些高阶用法？)
+- [47.ControlNet中"Balanced"、"My prompt is more important"、"ControlNet is more important"三种模式的区别是什么？](#47.ControlNet中"Balanced"、"My-prompt-is-more-important"、"ControlNet-is-more-important"三种模式的区别是什么？)
+- [48.ControlNet 1.1与ControlNet相比，有哪些改进？](#48.ControlNet-1.1与ControlNet相比，有哪些改进？)
+- [49.介绍一下ControlNet Canny条件控制的原理](#49.介绍一下ControlNet-Canny条件控制的原理)
+- [50.介绍一下ControlNet Depth控制条件的原理](#50.介绍一下ControlNet-Depth控制条件的原理)
+- [51.介绍一下ControlNet NormalMap控制条件的原理](#51.介绍一下ControlNet-NormalMap控制条件的原理)
+- [52.介绍一下ControlNet OpenPose控制条件的原理](#52.介绍一下ControlNet-OpenPose控制条件的原理)
+- [53.介绍一下ControlNet MLSD控制条件的原理](#53.介绍一下ControlNet-MLSD控制条件的原理)
+- [54.介绍一下ControlNet Lineart控制条件的原理](#54.介绍一下ControlNet-Lineart控制条件的原理)
+- [55.介绍一下ControlNet SoftEdge控制条件的原理](#55.介绍一下ControlNet-SoftEdge控制条件的原理)
+- [56.介绍一下ControlNet Scribble/Sketch控制条件的原理](#56.介绍一下ControlNet-Scribble/Sketch控制条件的原理)
+- [57.介绍一下ControlNet Segmentation控制条件的原理](#57.介绍一下ControlNet-Segmentation控制条件的原理)
+- [58.介绍一下ControlNet Shuffle控制条件的原理](#58.介绍一下ControlNet-Shuffle控制条件的原理)
+- [59.介绍一下ControlNet Tile/Blur控制条件的原理](#59.介绍一下ControlNet-Tile/Blur控制条件的原理)
+- [60.介绍一下Controlnet Inpaint控制条件的原理](#60.介绍一下Controlnet-Inpaint控制条件的原理)
+- [61.介绍一下ControlNet InstryctP2P控制条件的原理](#61.介绍一下ControlNet-InstryctP2P控制条件的原理)
+- [62.介绍一下一下ControlNet Reference-only控制条件的原理](#62.介绍一下一下ControlNet-Reference-only控制条件的原理)
+- [63.介绍一下ControlNet Recolor控制条件的原理](#63.介绍一下ControlNet-Recolor控制条件的原理)
+- [64.训练ControlNet模型的流程中有哪些关键参数？](#64.训练ControlNet模型的流程中有哪些关键参数？)
+- [65.ControlNet模型的训练流程一般包含哪几部分核心内容？](#65.ControlNet模型的训练流程一般包含哪几部分核心内容？)
+- [66.ControlNet有哪些万金油级应用案例？](#66.ControlNet有哪些万金油级应用案例？)
+- [67.SD/SDXL/FLUX.1 ControlNet之间有哪些区别？](#67.SD/SDXL/FLUX.1-ControlNet之间有哪些区别？)
+- [68.介绍一下Controlnet-Union的原理](#68.介绍一下Controlnet-Union的原理)
 
 
 <h2 id="1.Ip-adapter的模型结构与原理">1.Ip-adapter的模型结构与原理 </h2>
@@ -51,7 +81,7 @@ IP-Adapter 采用了一种解耦的交叉注意力机制，将文本特征和图
 适配模块：IP-Adapter 包含一个图像编码器和包含解耦交叉注意力机制的适配器。这个适配器允许模型在生成图像时，同时考虑文本提示和图像提示，生成与文本描述相匹配的图像。
 
 
-<h2 id="2.Controlnet的模型结构与原理">2.Controlnet的模型结构与原理 </h2>
+<h2 id="2.ControlNet的模型结构与原理">2.ControlNet的模型结构与原理 </h2>
 
 ![](./imgs/Controlnet.png)
 
@@ -97,7 +127,7 @@ ControlNet：InstantID还使用了ControlNet来增强面部特征提取，进一
 3.Photomaker是先将文本特征和图像特征通过MLPs融合，再做CrossAttention加入U-net.InstantID是图像特征和文本特征分开做CrossAttention,再融合。（可以认为是区别，不要一定是效果好的原因）
 
 
-<h2 id="6.Controlnet++的模型结构和原理">6.Controlnet++的模型结构和原理</h2>
+<h2 id="6.ControlNet++的模型结构和原理">6.ControlNet++的模型结构和原理</h2>
 
 论文链接：https://arxiv.org/pdf/2404.07987.pdf
 
@@ -1091,3 +1121,162 @@ EasyPhoto作为一款基于Stable Diffusion的AI写真生成工具，深度融�
 
 > 纵观其技术体系，EasyPhoto的核心竞争力在于将学术界前沿算法（如CurricularFace、GPEN）工程化为端到端流程，推动AI写真从“专家可用”迈向“大众可玩”。其开源生态（GitHub Star超9k）亦加速了工业级AI视觉应用的普惠化进程。
 
+
+<h2 id="39.Prompt-to-Prompt是什么方法？">39.Prompt-to-Prompt是什么方法？</h2>
+
+### 1. 方法概述
+
+**Prompt-to-Prompt (P2P)**是一种基于文本的图像编辑方法，通过操控跨注意力机制，实现仅通过文本提示即可进行精细化图像编辑，而无需额外的用户输入（如遮罩或手动编辑）。核心思想在于利用扩散模型中的**跨注意力层**，操控像素与文本标记之间的交互关系，从而在生成过程中保留原始图像的结构和布局。![image-20241021170146517](./imgs/P2P.png)
+
+### 2. 方法细节
+
+1. **跨注意力机制的作用**:
+    - 在图像生成过程中，扩散模型通过跨注意力层将文本嵌入和视觉特征融合，每个文本标记会生成对应的空间注意力图，决定了文本中每个词汇对图像不同区域的影响。
+    - 通过控制这些跨注意力图，研究人员能够保留图像的原始结构，同时在不同的生成步骤中调整文本对生成结果的影响。
+
+2. **编辑策略**:
+    - **单词替换**: 通过将跨注意力图从原始提示转移到新的文本提示，方法能够在替换部分内容（如“狗”替换为“猫”）的同时保持场景的整体布局。
+    - **添加新短语**: 当用户在原始提示上增加描述（如增加风格或颜色），方法会将未改变的部分的注意力图保持一致，使新元素自然融入图像。
+    - **调整单词权重**: 方法允许调整某个词的影响程度，实现类似“滑块控制”的效果，使得用户可以增强或减弱某些特定词汇对图像生成的作用。
+
+3. **编辑流程**:
+    - 编辑的核心步骤是通过注入原始图像的跨注意力图，将其与新提示中的注意力图结合，并在扩散过程的不同阶段应用这些调整。
+    - 通过**时间戳参数**，方法还能调节注意力图的影响范围，从而控制生成图像的保真度和平滑度。
+
+### 3. 应用示例
+
+1. **局部编辑**:
+    - 通过调整文本提示中的单词，可以局部替换图像中的特定对象，如将“柠檬蛋糕”变成“南瓜蛋糕”。
+    - 这种方法无需用户提供遮罩，能够自然地改变图像中的纹理和物体形状。
+
+2. **全局编辑**:
+    - 添加新描述词语使得可以实现全局风格转换或环境变化，例如为图像添加“雪”或改变光照效果。
+    - 方法能够保留图像的整体构图，确保新的风格或背景不会破坏原有的视觉结构。
+
+3. **风格化**:
+    - 通过在提示中添加风格描述，方法可以将草图转换为照片真实感图像，或生成各种艺术风格的图像。
+
+### 4. 方法优势
+
+- **仅需文本控制**: 不依赖用户手动输入的遮罩或结构化标记，仅通过修改提示文本即可实现多样化和精细化的图像编辑。
+- **高保真度**: 方法能够在保持原始图像结构和布局的同时，准确生成与修改提示相符的图像。
+- **实时性**: 相比于传统的训练或微调模型，这种基于扩散模型内部跨注意力的操控方法不需要额外的数据或优化步骤。
+
+本文的方法展示了通过文本操控生成模型内部机制来实现图像编辑的新可能性，为未来更加智能、直观的图像生成和编辑工具奠定了基础。
+
+
+<h2 id="40.InstructPix2Pix的训练和推理流程是什么样的？">40.InstructPix2Pix的训练和推理流程是什么样的？</h2>
+
+论文链接：[2211.09800](https://arxiv.org/pdf/2211.09800)
+
+![image-20241021152129263](./imgs/ip2p.png)
+
+### 1. 训练流程
+
+1. **生成训练数据**：
+   - 使用 **GPT-3** 生成文本三元组，包括输入图像描述、编辑指令、编辑后的图像描述。
+   - 利用 **Stable Diffusion** 和 **Prompt-to-Prompt** 方法，根据文本生成配对的图像（编辑前和编辑后），并通过 **CLIP** 过滤确保图像质量和一致性。
+2. **训练 InstructPix2Pix 模型**：
+   - 使用 **Stable Diffusion** 的预训练权重进行初始化。
+   - 输入原始图像、编辑指令和目标编辑后的图像。
+   - 训练目标是最小化潜在扩散目标函数，应用无分类器引导技术以平衡图像和文本指令的影响。
+
+### 2. 推理流程
+
+1. **输入**：
+   - 一张待编辑的真实图像和一条人类编写的编辑指令。
+
+2. **处理**：
+   - 将输入图像编码到潜在空间。
+   - 应用条件扩散模型，根据输入图像和文本指令生成编辑后的潜在表示。
+   - 使用无分类器引导，通过调整两个引导尺度（s_I 和 s_T）平衡图像和指令的影响。
+
+3. **输出**：
+   - 将生成的潜在表示解码为编辑后的图像，通常生成 **512x512** 分辨率的结果。
+   - 每张图像的编辑过程在 **A100 GPU** 上大约需要 **9 秒**，使用 **100** 个去噪步骤。
+
+
+<h2 id="41.ControlNet系列模型有多少种控制条件？">41.ControlNet系列模型有多少种控制条件？</h2>
+
+
+<h2 id="42.ControlNet的最小单元是什么样的？">42.ControlNet的最小单元是什么样的？</h2>
+
+
+<h2 id="43.ControlNet中的zero卷积层初始权重为什么是0?zero卷积层为什么有效？">43.ControlNet中的zero卷积层初始权重为什么是0?zero卷积层为什么有效？</h2>
+
+
+<h2 id="44.ConrtolNet是如何训练的？">44.ConrtolNet是如何训练的？</h2>
+
+
+<h2 id="45.ControlNet的损失函数是什么？">45.ControlNet的损失函数是什么？</h2>
+
+
+<h2 id="46.ControlNet有哪些高阶用法？">46.ControlNet有哪些高阶用法？</h2>
+
+
+<h2 id="47.ControlNet中"Balanced"、"My-prompt-is-more-important"、"ControlNet-is-more-important"三种模式的区别是什么？">47.ControlNet中"Balanced"、"My prompt is more important"、"ControlNet is more important"三种模式的区别是什么？</h2>
+
+
+<h2 id="48.ControlNet-1.1与ControlNet相比，有哪些改进？">48.ControlNet 1.1与ControlNet相比，有哪些改进？</h2>
+
+
+<h2 id="49.介绍一下ControlNet-Canny条件控制的原理">49.介绍一下ControlNet Canny条件控制的原理</h2>
+
+
+<h2 id="50.介绍一下ControlNet-Depth控制条件的原理">50.介绍一下ControlNet Depth控制条件的原理</h2>
+
+
+<h2 id="51.介绍一下ControlNet-NormalMap控制条件的原理">51.介绍一下ControlNet NormalMap控制条件的原理</h2>
+
+
+<h2 id="52.介绍一下ControlNet-OpenPose控制条件的原理">52.介绍一下ControlNet OpenPose控制条件的原理</h2>
+
+
+<h2 id="53.介绍一下ControlNet-MLSD控制条件的原理">53.介绍一下ControlNet MLSD控制条件的原理</h2>
+
+
+<h2 id="54.介绍一下ControlNet-Lineart控制条件的原理">54.介绍一下ControlNet Lineart控制条件的原理</h2>
+
+
+<h2 id="55.介绍一下ControlNet-SoftEdge控制条件的原理">55.介绍一下ControlNet SoftEdge控制条件的原理</h2>
+
+
+<h2 id="56.介绍一下ControlNet-Scribble/Sketch控制条件的原理">56.介绍一下ControlNet Scribble/Sketch控制条件的原理</h2>
+
+
+<h2 id="57.介绍一下ControlNet-Segmentation控制条件的原理">57.介绍一下ControlNet Segmentation控制条件的原理</h2>
+
+
+<h2 id="58.介绍一下ControlNet-Shuffle控制条件的原理">58.介绍一下ControlNet Shuffle控制条件的原理</h2>
+
+
+<h2 id="59.介绍一下ControlNet-Tile/Blur控制条件的原理">59.介绍一下ControlNet Tile/Blur控制条件的原理</h2>
+
+
+<h2 id="60.介绍一下Controlnet-Inpaint控制条件的原理">60.介绍一下Controlnet Inpaint控制条件的原理</h2>
+
+
+<h2 id="61.介绍一下ControlNet-InstryctP2P控制条件的原理">61.介绍一下ControlNet InstryctP2P控制条件的原理</h2>
+
+
+<h2 id="62.介绍一下一下ControlNet-Reference-only控制条件的原理">62.介绍一下一下ControlNet Reference-only控制条件的原理</h2>
+
+
+<h2 id="63.介绍一下ControlNet-Recolor控制条件的原理">63.介绍一下ControlNet Recolor控制条件的原理</h2>
+
+
+<h2 id="64.训练ControlNet模型的流程中有哪些关键参数？">64.训练ControlNet模型的流程中有哪些关键参数？</h2>
+
+
+<h2 id="65.ControlNet模型的训练流程一般包含哪几部分核心内容？">65.ControlNet模型的训练流程一般包含哪几部分核心内容？</h2>
+
+
+<h2 id="66.ControlNet有哪些万金油级应用案例？">66.ControlNet有哪些万金油级应用案例？</h2>
+
+
+<h2 id="67.SD/SDXL/FLUX.1-ControlNet之间有哪些区别？">67.SD/SDXL/FLUX.1 ControlNet之间有哪些区别？</h2>
+
+
+<h2 id="68.介绍一下Controlnet-Union的原理">68.介绍一下Controlnet-Union的原理</h2>
+
+---

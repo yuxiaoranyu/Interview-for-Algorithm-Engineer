@@ -1,16 +1,22 @@
+<div align=center>
+
 # 🔥【三年面试五年模拟】AIGC算法岗/开发岗的面试求职秘籍
 
-【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、Deep Learning Interview、Algorithm Engineer Interview**
+【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、AI Agent Interview、Deep Learning Interview、Algorithm Engineer Interview**
 
-**AIGC算法岗方向：** 涵盖AIGC、传统深度学习、自动驾驶、AI Agent、机器学习、计算机视觉、自然语言处理、强化学习、具身智能、元宇宙、AGI等。
+</div>
 
-**AIGC开发岗方向：** 涵盖Python、Java、C/C++、Go、嵌入式、前端、后端、测试、运维等。
+# 
 
-**本项目凝聚了AIGC时代众多一线AIGC算法专家的行业经验与深度洞察**，涵盖AIGC大厂内推、AIGC面试经验、AIGC公司指南/辛秘、AI校招时间表、AIGC面试准备、AIGC薪资、AIGC刷题指南、AIGC求职答疑等干货资源。本项目的核心内容均取材于编者们在AI行业中的工作、研究、竞赛以及各大AIGC公司经典的AIGC岗位笔试/面试题。
+🏆**AIGC算法岗方向：** 涵盖AIGC、传统深度学习、自动驾驶、AI Agent、机器学习、计算机视觉、自然语言处理、强化学习、具身智能、元宇宙、AGI等。
 
-同时，本项目也可作为高等学府AIGC相关专业的研究、教学、竞赛以及学习的参考用书；还可为AIGC、传统深度学习以及自动驾驶领域的初、中级技术人员提供思路参考，**尤其适合AIGC求职者和提供相关AICG算法岗位的面试官阅读研究**。
+🏆**AIGC开发岗方向：** 涵盖Python、Java、C/C++、Go、嵌入式、前端、后端、测试、运维等。
 
-**本项目构建和维护不容易，希望大家能多多star～。star本项目，你就获得了0.5个心仪的offer，再分享本项目，你就获得了0.75个心仪offer！持续star和分享本项目，你就获得了职场晋升和薪资上涨的50%必要条件。祝大家求职顺利、工作顺利！**
+🚀**本项目凝聚了AIGC时代众多一线AIGC算法专家的行业经验与深度洞察**，涵盖AIGC完整知识架构、AIGC大厂内推、AIGC面试经验、AIGC公司指南/辛秘、AI校招时间表、AIGC面试准备、AIGC薪资爆料、AIGC刷题指南、AIGC求职答疑等干货资源。本项目的核心内容均取材于编者们在AI行业中的工作、研究、竞赛经验以及对各大AIGC公司主流的AIGC岗位笔试/面试题提炼。
+
+💡同时，本项目也可作为高等学府AIGC相关专业的研究、教学、竞赛以及学习的参考用书；还可为AIGC、传统深度学习以及自动驾驶领域的初、中级技术人员提供思路参考，**尤其适合AIGC求职者和提供相关AICG算法岗位的面试官阅读研究**。
+
+👍**本项目的持续构建/维护十分不易，希望大家能多多star～。Star本项目，你就获得了0.5个心仪的offer；再分享本项目，你就获得了0.75个心仪offer！持续star和分享本项目，你就获得了升职加薪的50%必要条件。在这里，Rocky祝大家求职顺利、工作顺利！**
 
 ## 📖目录
 
@@ -19,6 +25,7 @@
 - :clapper: [AI视频基础](AI视频基础)
 - :sparkler: [大模型基础](大模型基础)
 - :trident: [AI多模态基础](AI多模态基础)
+- :video_game: [AI Agent基础](AI%20Agent基础)
 - :shipit: [数字人基础](数字人基础)
 - :closed_book: [深度学习基础](深度学习基础)
 - :blue_book: [机器学习基础](机器学习基础)
@@ -60,7 +67,7 @@
 <a href="imgs/WeThinkIn公众号.jpg"><img src="https://img.shields.io/badge/WeThinkIn-公众号-brightgreen"></a>
 <a href="https://rockyding.blog.csdn.net"><img src="https://img.shields.io/badge/Rocky Ding-CSDN-red"></a>
 
-Rocky Ding，AIGCmagic社区创始人，知乎AI领域知名博主（同名Rocky Ding），公众号《WeThinkIn》主理人，全网文章阅读量300万+。资深AIGC算法专家，专注于AIGC产品与AI算法解决方案的商业应用。在互联网大厂、AI独角兽、传统科技公司以及国企研究院有丰富的工作经验与创业经验。多次带队获得CVPR、AAAI、Kaggle等AI领域顶级竞赛的冠军成绩。发表多篇AI领域论文和专利。
+Rocky Ding，AIGCmagic社区创始人，知乎AI领域知名博主（同名Rocky Ding），公众号《WeThinkIn》主理人，全网文章阅读量600万+。资深AIGC算法专家，专注于AIGC产品与AI算法解决方案的商业应用。在互联网大厂、AI独角兽、传统科技公司以及国企研究院有丰富的工作经验与创业经验。多次带队获得CVPR、AAAI、Kaggle等AI领域顶级竞赛的冠军成绩。发表多篇AI领域论文和专利。
 
 Rocky最新撰写完成10万字的Stable Diffusion 3和FLUX.1系列模型全网最详细讲解文章：[深入浅出完整解析Stable Diffusion 3（SD 3）和FLUX.1系列核心基础知识](https://zhuanlan.zhihu.com/p/684068402)
 
@@ -87,6 +94,14 @@ Rocky最新撰写完成10万字的Stable Diffusion 3和FLUX.1系列模型全网�
 >玉箫然 副主编
 
 玉箫然，资深高级算法工程师，在CV、AIGC、大模型等多个领域经验丰富，在国内头部金融投顾公司任职，主要从事大模型相关的应用落地、性能优化。
+
+>Elliot Qi 副主编
+
+Elliot Qi，互联网大厂AIGC算法工程师，在计算机视觉顶会发表多篇论文，曾多次获得天池、顶会Challenge冠亚季军，主要研究方向为扩散模型、可控图像生成和视频生成等。
+
+>初街夜话 副主编
+
+初街夜话，计算机视觉方向的在读博士，主要研究目标检测，也会折腾一些 AIGC 技术，享受探索人工智能前沿的过程。
 
 ## 💡AIGC行业技术交流群
 

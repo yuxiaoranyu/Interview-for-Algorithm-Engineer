@@ -8,8 +8,26 @@
 - [6.AutoLoRA是什么？](#6.AutoLoRA是什么？)
 - [7.LoRA of Change是什么？](#7.LoRAofChange是什么？)
 - [8.什么是Textual Inversion(文本反演)？](#8.什么是Textual-Inversion(文本反演)？)
-- [9.LoRA和DreamBooth对比](#9.LoRA和DreamBooth对比)
-
+- [9.什么是DreamBooth技术？](#9.什么是DreamBooth技术？)
+- [10.LoRA和DreamBooth对比](#10.LoRA和DreamBooth对比)
+- [11.介绍一下LoRA技术的原理](#11.介绍一下LoRA技术的原理)
+- [12.Stable Diffusion直接微调训练和LoRA微调训练有哪些区别？](#12.Stable-Diffusion直接微调训练和LoRA微调训练有哪些区别？)
+- [13.LoRA训练过程是什么样的？推理过程中有额外计算吗？](#13.LoRA训练过程是什么样的？推理过程中有额外计算吗？)
+- [14.LoRA模型的微调训练流程一般包含哪几部分核心内容？](#14.LoRA模型的微调训练流程一般包含哪几部分核心内容？)
+- [15.LoRA模型的微调训练流程中有哪些关键参数？](#15.LoRA模型的微调训练流程中有哪些关键参数？)
+- [16.LoRA模型有哪些特性？](#16.LoRA模型有哪些特性？)
+- [17.LoRA模型有哪些高阶用法？](#17.LoRA模型有哪些高阶用法？)
+- [18.LoRA模型的融合方式有哪些？](#18.LoRA模型的融合方式有哪些？)
+- [19.训练U-Net LoRA和Text Encoder LoRA的区别是什么？](#19.训练U-Net-LoRA和Text-Encoder-LoRA的区别是什么？)
+- [20.Dreambooth的微调训练流程一般包含哪几部分核心内容？](#20.Dreambooth的微调训练流程一般包含哪几部分核心内容？)
+- [21.Dreambooth的微调训练流程中有哪些关键参数？](#21.Dreambooth的微调训练流程中有哪些关键参数？)
+- [22.介绍一下Textual Inversion技术的原理](#22.介绍一下Textual-Inversion技术的原理)
+- [23.LoRA和Dreambooth/Textual Inversion/Hypernetworks之间的差异有哪些？](#23.LoRA和Dreambooth/Textual-Inversion/Hypernetworks之间的差异有哪些？)
+- [24.LoRA有哪些主流的变体模型？](#24.LoRA有哪些主流的变体模型？)
+- [25.介绍一下LCM LoRA的原理](#25.介绍一下LCM-LoRA的原理)
+- [26.介绍一下LoCon的原理](#26.介绍一下LoCon的原理)
+- [27.介绍一下LoHa的原理](#27.介绍一下LoHa的原理)
+- [28.介绍一下B-LoRA的原理](#28.介绍一下B-LoRA的原理)
 
 <h2 id="1.使用lora微调Stable_Diffusion模型">1.使用lora微调Stable Diffusion模型</h2>
 
@@ -262,8 +280,49 @@ OmniGen的设计目标可用两个关键词概括：**统一（Unification）与
 - **统一**：无论是文本生成图像、图像编辑、条件控制生成还是主客体泛化，OmniGen都能用一个模型、一套流程完成，无需任何额外插件或中间步骤。
 - **简洁**：彻底抛弃了冗余的输入编码器（如CLIP、检测器等），仅保留**两个“组件”**：`VAE(图像变分自编码器)` 和 `Transformer(大模型)`。
 
+<h2 id="9.什么是DreamBooth技术？">9.什么是DreamBooth技术？ </h2>
 
-<h2 id="9.LoRA和DreamBooth对比">9.LoRA和DreamBooth对比</h2>
+### 1. 基本原理
+
+DreamBooth是由Google于2022年发布的一种通过将自定义主题注入扩散模型的微调训练技术，它通过少量数据集微调Stable Diffusion系列模型，让其学习到稀有或个性化的图像特征。DreamBooth技术使得SD系列模型能够在生成图像时，更加精确地反映特定的主题、对象或风格。
+
+DreamBooth首先为特定的概念寻找一个特定的描述词[V]，这个特定的描述词一般需要是稀有的，DreamBooth需要对SD系列模型的U-Net部分进行微调训练，同时DreamBooth技术也可以和LoRA模型结合，用于训练DreamBooth_LoRA模型。
+
+在微调训练完成后，Stable Diffusion系列模型或者LoRA模型能够在生成图片时更好地响应特定的描述词（prompts），这些描述词与自定义主题相关联。这种方法可以被视为在视觉大模型的知识库中添加或强化特定的“记忆”。
+
+同时为了防止过拟合，DreamBooth技术在训练时增加了一个class-specific prior preservation loss（基于SD模型生成相同class的图像加入batch里面一起训练）来进行正则化。
+
+![Dreambooth原理示意图](./imgs/Dreambooth原理.png)
+
+### 2. 微调训练过程
+
+DreamBooth技术在微调训练过程中，主要涉及以下几个关键步骤：
+
+1. **选择目标实体**：在开始训练之前，首先需要明确要生成的目标实体或主题。这通常是一组代表性强、特征明显的图像，可以是人物、宠物、艺术品等。例如，如果目标是生成特定人物的图像，那么这些参考图像应该从不同角度捕捉该人物。
+
+2. **训练数据准备**：收集与目标实体相关的图像。这些图像不需要非常多，但应该从多个角度展示目标实体，以便模型能够学习到尽可能多的细节。此外，还需要收集一些通用图像作为负样本，帮助模型理解哪些特征是独特的，哪些是普遍存在的。
+
+3. **数据标注**：为了帮助模型更好地识别和学习特定的目标实体，DreamBooth技术使用特定的描述词[V]来标注当前训练任务的数据。这些标注将与目标实体的图像一起输入模型，以此强调这些图像中包含的特定特征。
+
+4. **模型微调**：使用这些特定的训练样本，对Stable Diffusion模型或者LoRA模型进行微调训练，并在微调训练过程中增加class-specific prior preservation loss来进行正则化。
+
+5. **验证测试**：微调完成后，使用不同于训练时的文本提示词（但是包含特定的描述词[V]），验证模型是否能够根据新的文本提示词生成带有目标实体特征的图像。这一步骤是检验微调效果的重要环节。
+
+6. **调整和迭代**：基于生成的图像进行评估，如果生成结果未达到预期，可能需要调整微调策略，如调整学习率、增加训练图像数量或进一步优化特殊标签的使用。
+
+DreamBooth技术的关键在于通过微调Stable Diffusion模型，令其能够在不失去原有生成能力的同时，添加一定程度的个性化特征。
+
+### 3. 应用
+
+DreamBooth技术的应用非常广泛，包括但不限于：
+
+- **个性化内容创作**：为特定个体或品牌创建独特的视觉内容。
+- **艺术创作**：艺术家可以使用这种技术来探索新的视觉风格或加深特定主题的表达。
+
+总体来说，DreamBooth 是一项令人兴奋的技术，它扩展了生成模型的应用范围，使得个性化和定制化的图像生成成为可能。这种技术的发展有望在多个领域带来创新的应用。
+
+
+<h2 id="10.LoRA和DreamBooth对比">10.LoRA和DreamBooth对比</h2>
 
 #### 核心原理
 
@@ -372,4 +431,58 @@ class LoRALayer(nn.Module):
 - 艺术风格迁移
 - 快速原型开发
 - 需要频繁切换不同适配的场景
+
+
+<h2 id="11.介绍一下LoRA技术的原理">11.介绍一下LoRA技术的原理</h2>
+
+
+<h2 id="12.Stable-Diffusion直接微调训练和LoRA微调训练有哪些区别？">12.Stable Diffusion直接微调训练和LoRA微调训练有哪些区别？</h2>
+
+
+<h2 id="13.LoRA训练过程是什么样的？推理过程中有额外计算吗？">13.LoRA训练过程是什么样的？推理过程中有额外计算吗？</h2>
+
+
+<h2 id="14.LoRA模型的微调训练流程一般包含哪几部分核心内容？">14.LoRA模型的微调训练流程一般包含哪几部分核心内容？</h2>
+
+
+<h2 id="15.LoRA模型的微调训练流程中有哪些关键参数？">15.LoRA模型的微调训练流程中有哪些关键参数？</h2>
+
+
+<h2 id="16.LoRA模型有哪些特性？">16.LoRA模型有哪些特性？</h2>
+
+
+<h2 id="17.LoRA模型有哪些高阶用法？">17.LoRA模型有哪些高阶用法？</h2>
+
+
+<h2 id="18.LoRA模型的融合方式有哪些？">18.LoRA模型的融合方式有哪些？</h2>
+
+
+<h2 id="19.训练U-Net-LoRA和Text-Encoder-LoRA的区别是什么？">19.训练U-Net LoRA和Text Encoder LoRA的区别是什么？</h2>
+
+
+<h2 id="20.Dreambooth的微调训练流程一般包含哪几部分核心内容？">20.Dreambooth的微调训练流程一般包含哪几部分核心内容？</h2>
+
+
+<h2 id="21.Dreambooth的微调训练流程中有哪些关键参数？">21.Dreambooth的微调训练流程中有哪些关键参数？</h2>
+
+
+<h2 id="22.介绍一下Textual-Inversion技术的原理">22.介绍一下Textual Inversion技术的原理</h2>
+
+
+<h2 id="23.LoRA和Dreambooth/Textual-Inversion/Hypernetworks之间的差异有哪些？">23.LoRA和Dreambooth/Textual Inversion/Hypernetworks之间的差异有哪些？</h2>
+
+
+<h2 id="24.LoRA有哪些主流的变体模型？">24.LoRA有哪些主流的变体模型？</h2>
+
+
+<h2 id="25.介绍一下LCM-LoRA的原理">25.介绍一下LCM LoRA的原理</h2>
+
+
+<h2 id="26.介绍一下LoCon的原理">26.介绍一下LoCon的原理</h2>
+
+
+<h2 id="27.介绍一下LoHa的原理">27.介绍一下LoHa的原理</h2>
+
+
+<h2 id="28.介绍一下B-LoRA的原理">28.介绍一下B-LoRA的原理</h2>
 
