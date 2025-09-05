@@ -1,15 +1,45 @@
 # 目录
 
-## 第一章 图像生成领域的主流训练技术
+## 第一章 AIGC图像生成领域的主流训练技术
 
 - [1.介绍一下OFT(Orthogonal Finetuning)微调技术](#1.介绍一下OFT(Orthogonal-Finetuning)微调技术)
+- [2.图像生成领域主流的微调训练方法有哪些?](#2.图像生成领域主流的微调训练方法有哪些?)
+- [3.介绍一下图像生成领域的SFT训练的过程](#3.介绍一下图像生成领域的SFT训练的过程)
+- [4.介绍一下图像生成领域的RLHF训练的过程](#4.介绍一下图像生成领域的RLHF训练的过程)
+- [5.介绍一下Accelerate加速训练框架](#5.介绍一下Accelerate加速训练框架)
+- [6.介绍一下DeepSpeed加速训练框架](#6.介绍一下DeepSpeed加速训练框架)
+- [7.如何在Accelerate框架中使用DeepSpeed？](#7.如何在Accelerate框架中使用DeepSpeed？)
+- [8.为什么有了Accelerate还需要DeepSpeed？](#8.为什么有了Accelerate还需要DeepSpeed？)
+- [9.DeepSpeed中Stage 1/Stage 2/Stage 3有哪些区别？](#9.DeepSpeed中Stage-1/Stage-2/Stage-3有哪些区别？)
+- [10.分布式训练框架DeepSpeed相较于Pytorch原生的torchrun有什么优点？](#10.分布式训练框架DeepSpeed相较于Pytorch原生的torchrun有什么优点？)
+- [11.如何将训练代码迁移到Accelerate/DeepSpeed框架下？](#11.如何将训练代码迁移到Accelerate/DeepSpeed框架下？)
+- [12.图像生成领域主流的分布式训练技术有哪些？](#12.图像生成领域主流的分布式训练技术有哪些？)
+- [13.在DDP训练中，n_nodes，world_size，rank，local_rank，n_nodes，node_rank，nproc_per_node参数各代表什么含义？](#13.在DDP训练中，n_nodes，world_size，rank，local_rank，n_nodes，node_rank，nproc_per_node参数各代表什么含义？)
+- [14.介绍一下MoE技术及其变体](#14.介绍一下MoE技术及其变体)
 
 
-### 第二章 图像生成领域的性能优化技术
+### 第二章 AIGC图像生成领域的性能优化技术
 
 - [1.SD中潜在一致性模型LCM、LCM-lora加速原理](#1.SD中潜在一致性模型LCM、LCM-lora加速原理)
 - [2.Stable Diffusion的一些加速方法](#2.Stable-Diffusion的一些加速方法)
 - [3.DMD2蒸馏是怎么做的？](#3.DMD2蒸馏是怎么做的？)
+- [4.目前有哪些主流的图像生成模型量化方法？](#4.目前有哪些主流的图像生成模型量化方法？)
+- [5.目前有哪些主流的图像生成模型蒸馏方法？](#5.目前有哪些主流的图像生成模型蒸馏方法？)
+- [6.目前有哪些主流的图像生成模型剪枝方法？](#6.目前有哪些主流的图像生成模型剪枝方法？)
+- [7.介绍一下OneDiff加速技术的原理](#7.介绍一下OneDiff加速技术的原理)
+- [8.介绍一下SVDQuant量化技术的原理](#8.介绍一下SVDQuant量化技术的原理)
+- [9.介绍一下xfomers加速技术的原理](#9.介绍一下xfomers加速技术的原理)
+- [10.介绍一下Token Merging加速技术的原理](#10.介绍一下Token-Merging加速技术的原理)
+- [11.介绍一下TensorRT加速技术的原理](#11.介绍一下TensorRT加速技术的原理)
+- [12.介绍一下TeaCache加速技术的原理](#12.介绍一下TeaCache加速技术的原理)
+- [13.介绍一下wavespeed加速技术的原理](#13.介绍一下wavespeed加速技术的原理)
+
+### 第三章 AIGC图像生成领域的端侧部署技术
+
+- [1.目前有哪些主流的端侧部署框架？](#1.目前有哪些主流的端侧部署框架？)
+- [2.介绍一下NCNN、MNN、TNN等端侧部署框架](#2.介绍一下NCNN、MNN、TNN等端侧部署框架)
+- [3.介绍一下ONNXRuntime部署推理框架](#3.介绍一下ONNXRuntime部署推理框架)
+- [4.图像生成模型的端侧部署流程是什么样的？](#4.图像生成模型的端侧部署流程是什么样的？)
 
 ## 第一章 图像生成领域的主流训练技术正文
 
@@ -134,6 +164,46 @@ $$
 3. **对大规模任务的扩展性**：
    - 在特别大的模型（如 GPT-4）或任务中，如何高效地应用 OFT 是一个研究方向。
 
+
+<h2 id="2.图像生成领域主流的微调训练方法有哪些?">2.图像生成领域主流的微调训练方法有哪些? </h2>
+
+
+<h2 id="3.介绍一下图像生成领域的SFT训练的过程">3.介绍一下图像生成领域的SFT训练的过程 </h2>
+
+
+<h2 id="4.介绍一下图像生成领域的RLHF训练的过程">4.介绍一下图像生成领域的RLHF训练的过程 </h2>
+
+
+<h2 id="5.介绍一下Accelerate加速训练框架">5.介绍一下Accelerate加速训练框架 </h2>
+
+
+<h2 id="6.介绍一下DeepSpeed加速训练框架">6.介绍一下DeepSpeed加速训练框架 </h2>
+
+
+<h2 id="7.如何在Accelerate框架中使用DeepSpeed？">7.如何在Accelerate框架中使用DeepSpeed？ </h2>
+
+
+<h2 id="8.为什么有了Accelerate还需要DeepSpeed？">8.为什么有了Accelerate还需要DeepSpeed？ </h2>
+
+
+<h2 id="9.DeepSpeed中Stage-1/Stage-2/Stage-3有哪些区别？">9.DeepSpeed中Stage 1/Stage 2/Stage 3有哪些区别？ </h2>
+
+
+<h2 id="10.分布式训练框架DeepSpeed相较于Pytorch原生的torchrun有什么优点？">10.分布式训练框架DeepSpeed相较于Pytorch原生的torchrun有什么优点？ </h2>
+
+
+<h2 id="11.如何将训练代码迁移到Accelerate/DeepSpeed框架下？">11.如何将训练代码迁移到Accelerate/DeepSpeed框架下？ </h2>
+
+
+<h2 id="12.图像生成领域主流的分布式训练技术有哪些？">12.图像生成领域主流的分布式训练技术有哪些？ </h2>
+
+
+<h2 id="13.在DDP训练中，n_nodes，world_size，rank，local_rank，n_nodes，node_rank，nproc_per_node参数各代表什么含义？">13.在DDP训练中，n_nodes，world_size，rank，local_rank，n_nodes，node_rank，nproc_per_node参数各代表什么含义？ </h2>
+
+
+<h2 id="14.介绍一下MoE技术及其变体">14.介绍一下MoE技术及其变体 </h2>
+
+
 ---
 
 ### 第二章 图像生成领域的性能优化技术
@@ -238,7 +308,7 @@ image = pipe("astronaut on mars", num_inference_steps=20).images[0]
 ```
 
 
-<h2 id="3.DMD2蒸馏是怎么做的？">3.DMD2蒸馏是怎么做的？</h2
+<h2 id="3.DMD2蒸馏是怎么做的？">3.DMD2蒸馏是怎么做的？</h2>
 
 DMD2（Improved Distribution Matching Distillation）是针对扩散模型蒸馏的一种改进方法，通过一系列技术提升了原始分布匹配蒸馏（DMD）的稳定性和效率，同时能在极少步数下生成高质量图像。相较于原始DMD，DMD2取消了昂贵的回归损失和数据集构建，**引入双时间尺度更新规则**以稳定训练，并**整合GAN损失**以增强分布匹配，最终实现一步或少步生成器的高效训练和推理。
 
@@ -274,3 +344,49 @@ DMD2的总体训练流程如下：
 
 整体流程如图所示，红色箭头表示分布匹配梯度，绿色箭头表示GAN损失，蓝色箭头表示评分网络更新([tianweiy.github.io](https://tianweiy.github.io/dmd2/?ref=aiartweekly&utm_source=chatgpt.com))。
 
+
+<h2 id="4.图像生成模型的端侧部署流程是什么样的？">4.图像生成模型的端侧部署流程是什么样的？</h2>
+
+
+<h2 id="5.目前有哪些主流的图像生成模型蒸馏方法？">5.目前有哪些主流的图像生成模型蒸馏方法？</h2>
+
+
+<h2 id="6.目前有哪些主流的图像生成模型剪枝方法？">6.目前有哪些主流的图像生成模型剪枝方法？</h2>
+
+
+<h2 id="7.介绍一下OneDiff加速技术的原理">7.介绍一下OneDiff加速技术的原理</h2>
+
+
+<h2 id="8.介绍一下SVDQuant量化技术的原理">8.介绍一下SVDQuant量化技术的原理</h2>
+
+
+<h2 id="9.介绍一下xfomers加速技术的原理">9.介绍一下xfomers加速技术的原理</h2>
+
+
+<h2 id="10.介绍一下Token-Merging加速技术的原理">10.介绍一下Token Merging加速技术的原理</h2>
+
+
+<h2 id="11.介绍一下TensorRT加速技术的原理">11.介绍一下TensorRT加速技术的原理</h2>
+
+
+<h2 id="12.介绍一下TeaCache加速技术的原理">12.介绍一下TeaCache加速技术的原理</h2>
+
+
+<h2 id="13.介绍一下wavespeed加速技术的原理">13.介绍一下wavespeed加速技术的原理</h2>
+
+---
+
+### 第三章 AIGC图像生成领域的端侧部署技术
+
+<h2 id="1.目前有哪些主流的端侧部署框架？">1.目前有哪些主流的端侧部署框架？</h2>
+
+
+<h2 id="2.介绍一下NCNN、MNN、TNN等端侧部署框架">2.介绍一下NCNN、MNN、TNN等端侧部署框架</h2>
+
+
+<h2 id="3.介绍一下ONNXRuntime部署推理框架">3.介绍一下ONNXRuntime部署推理框架</h2>
+
+
+<h2 id="4.图像生成模型的端侧部署流程是什么样的？">4.图像生成模型的端侧部署流程是什么样的？</h2>
+
+---
