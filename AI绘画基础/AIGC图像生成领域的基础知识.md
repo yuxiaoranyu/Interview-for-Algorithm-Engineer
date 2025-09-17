@@ -46,12 +46,35 @@
 
 - [1.正则化技术在AI绘画模型中的作用？](#1.正则化技术在AI绘画模型中的作用？)
 - [2.Scaling Law在AI绘画领域成立吗？](#2.Scaling_Law在AI绘画领域成立吗？)
-
+- [3.Diffusion/VAE/GAN/Flow模型在生成图像过程中有什么异同？](#3.Diffusion/VAE/GAN/Flow模型在生成图像过程中有什么异同？)
+- [4.什么是基于分数的生成模型?](#4.什么是基于分数的生成模型?)
+- [5.什么是自回归生成模型？](#5.什么是自回归生成模型？)
+- [6.图文预训练有哪些常用的做法？](#6.图文预训练有哪些常用的做法？)
+- [7.假设用户输入的prompt是中文，有什么办法不用翻译将中文和英文对齐？](#7.假设用户输入的prompt是中文，有什么办法不用翻译将中文和英文对齐？)
+- [8.如何训练让图像生成大模型获得精准的文字生成能力？](#8.如何训练让图像生成大模型获得精准的文字生成能力？)
+- [9.在Image-to-Image任务中，如何尽可能地保持住原始输入图像的特征？](#9.在Image-to-Image任务中，如何尽可能地保持住原始输入图像的特征？)
+- [10.对inpainting了解吗?介绍一下原理](#10.对inpainting了解吗?介绍一下原理)
+- [11.对outpainting了解吗？介绍一下原理](#11.对outpainting了解吗？介绍一下原理)
+- [12.对Image Variation了解吗？介绍一下原理](#12.对Image-Variation了解吗？介绍一下原理)
+- [13.介绍一下Transformer和CNN的区别](#13.介绍一下Transformer和CNN的区别)
+- [14.介绍一下Self-attention和Cross-attention的区别](#14.介绍一下Self-attention和Cross-attention的区别)
 
 ## 第五章 AIGC图像生成领域的评价指标
 
 - [1.AI生成图像的常用评价指标](#1.AI生成图像的常用评价指标)
 - [2.什么是REAL评价指标？](#2.什么是REAL评价指标？)
+- [3.介绍一下Aesthetic Score Predictor、Aesthetic Predictor V2.5评价指标的原理](#3.介绍一下Aesthetic-Score-Predictor、Aesthetic-Predictor-V2.5评价指标的原理)
+- [4.介绍一下FID指标的原理](#4.介绍一下FID指标的原理)
+- [5.介绍一下CLIP score指标的原理](#5.介绍一下CLIP-score指标的原理)
+- [6.介绍一下PartiPrompts指标的原理](#6.介绍一下PartiPrompts指标的原理)
+
+
+## 第六章 AIGC图像特征分析技术
+
+- [1.介绍一下Insightface系列技术的原理与功能](#1.介绍一下Insightface系列技术的原理与功能)
+- [2.介绍一下人脸属性分析技术的原理](#2.介绍一下人脸属性分析技术的原理)
+- [3.介绍一下人脸美颜技术的原理](#3.介绍一下人脸美颜技术的原理)
+- [4.有哪些主流的数据自动化标注技术？（joy-caption、Qwen2-VL、Florence、Moondream2、WD14、BLIP、Janus等）](#4.有哪些主流的数据自动化标注技术？（joy-caption、Qwen2-VL、Florence、Moondream2、WD14、BLIP、Janus等）)
 
 ---
 
@@ -1089,7 +1112,7 @@ $$ PSNR = 20 \log_{10}(\frac{MAX_{pixel}}{\sqrt{MSE}}) $$
 
 ## 第四章 AIGC图像生成基础概念
 
-<h2 id="6.正则化技术在AI绘画模型中的作用？">6.正则化技术在AI绘画模型中的作用？ </h2>
+<h2 id="1.正则化技术在AI绘画模型中的作用？">1.正则化技术在AI绘画模型中的作用？ </h2>
 
 在生成式模型的训练中，正则化技术是一种常用的方法，用于增强模型的泛化能力，防止过拟合，以及在一些情况下，帮助模型更稳定和可靠地训练。正则化对生成式模型的主要作用包括：
 
@@ -1124,6 +1147,43 @@ $$ PSNR = 20 \log_{10}(\frac{MAX_{pixel}}{\sqrt{MSE}}) $$
 
 总的来说，SD 3论文中的整个实验过程也完全证明了Scaling Law在AI绘画领域依旧成立，特别是在基于DiT架构的AI绘画大模型上。**Rocky判断未来在工业界、学术界、应用界以及竞赛界，AI绘画领域的Scaling Law的价值会持续凸显与放大**。
 
+
+<h2 id="3.Diffusion/VAE/GAN/Flow模型在生成图像过程中有什么异同？">3.Diffusion/VAE/GAN/Flow模型在生成图像过程中有什么异同？</h2>
+
+
+<h2 id="4.什么是基于分数的生成模型?">4.什么是基于分数的生成模型?</h2>
+
+
+<h2 id="5.什么是自回归生成模型？">5.什么是自回归生成模型？</h2>
+
+
+<h2 id="6.图文预训练有哪些常用的做法？">6.图文预训练有哪些常用的做法？</h2>
+
+
+<h2 id="7.假设用户输入的prompt是中文，有什么办法不用翻译将中文和英文对齐？">7.假设用户输入的prompt是中文，有什么办法不用翻译将中文和英文对齐？</h2>
+
+
+<h2 id="8.如何训练让图像生成大模型获得精准的文字生成能力？">8.如何训练让图像生成大模型获得精准的文字生成能力？</h2>
+
+
+<h2 id="9.在Image-to-Image任务中，如何尽可能地保持住原始输入图像的特征？">9.在Image-to-Image任务中，如何尽可能地保持住原始输入图像的特征？</h2>
+
+
+<h2 id="10.对inpainting了解吗?介绍一下原理">10.对inpainting了解吗?介绍一下原理</h2>
+
+
+<h2 id="11.对outpainting了解吗？介绍一下原理">11.对outpainting了解吗？介绍一下原理</h2>
+
+
+<h2 id="12.对Image Variation了解吗？介绍一下原理">12.对Image Variation了解吗？介绍一下原理</h2>
+
+
+<h2 id="13.介绍一下Transformer和CNN的区别">13.介绍一下Transformer和CNN的区别</h2>
+
+
+<h2 id="14.介绍一下Self-attention和Cross-attention的区别">14.介绍一下Self-attention和Cross-attention的区别</h2>
+
+---
 
 ## 第五章 AIGC图像生成领域的评价指标
 
@@ -1184,3 +1244,31 @@ REAL 框架通过三个互补维度评估 T2I 生成图像中的真实性：
 
 REAL 框架代表了 T2I 生成模型评估方面的一项重大进步，它将焦点从单纯的文本-图像对齐转移到图像现实主义的关键维度。通过提供与人类判断非常吻合的现实主义的多维度评估，REAL 能够实现更有效的数据增强策略，并为模型选择和改进提供有价值的见解。
 
+
+<h2 id="3.介绍一下Aesthetic-Score-Predictor、Aesthetic-Predictor-V2.5评价指标的原理">3.介绍一下Aesthetic Score Predictor、Aesthetic Predictor V2.5评价指标的原理</h2>
+
+
+<h2 id="4.介绍一下FID指标的原理">4.介绍一下FID指标的原理</h2>
+
+
+<h2 id="5.介绍一下CLIP-score指标的原理">5.介绍一下CLIP-score指标的原理</h2>
+
+
+<h2 id="6.介绍一下PartiPrompts指标的原理">6.介绍一下PartiPrompts指标的原理</h2>
+
+---
+
+## 第六章 AIGC图像特征分析技术
+
+<h2 id="1.介绍一下Insightface系列技术的原理与功能">1.介绍一下Insightface系列技术的原理与功能</h2>
+
+
+<h2 id="2.介绍一下人脸属性分析技术的原理">2.介绍一下人脸属性分析技术的原理</h2>
+
+
+<h2 id="3.介绍一下人脸美颜技术的原理">3.介绍一下人脸美颜技术的原理</h2>
+
+
+<h2 id="4.有哪些主流的数据自动化标注技术？（joy-caption、Qwen2-VL、Florence、Moondream2、WD14、BLIP、Janus等）">4.有哪些主流的数据自动化标注技术？（joy-caption、Qwen2-VL、Florence、Moondream2、WD14、BLIP、Janus等）</h2>
+
+---
