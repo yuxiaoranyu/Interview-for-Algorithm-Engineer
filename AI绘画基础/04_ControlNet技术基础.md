@@ -16,7 +16,7 @@
 - [14.BeyondScene的模型结构和原理](#14.BeyondScene的模型结构和原理)
 - [15.HiCo的模型结构和原理](#15.HiCo的模型结构和原理)
 - [16.LayoutDM的模型结构和原理](#16.LayoutDM的模型结构和原理)
-- [17.LayoutDIffusion的模型结构和原理](#[17.LayoutDIffusion的模型结构和原理]())
+- [17.LayoutDIffusion的模型结构和原理](#17.LayoutDIffusion的模型结构和原理)
 - [18.LayoutDiffuse的模型结构和原理](#18.LayoutDiffuse的模型结构和原理)
 - [19.LayoutDM的模型结构和原理](#19.LayoutDM的模型结构和原理)
 - [20.AnyScene的模型结构和原理](#20.AnyScene的模型结构和原理)
@@ -68,6 +68,7 @@
 - [66.ControlNet有哪些万金油级应用案例？](#66.ControlNet有哪些万金油级应用案例？)
 - [67.SD/SDXL/FLUX.1 ControlNet之间有哪些区别？](#67.SD/SDXL/FLUX.1-ControlNet之间有哪些区别？)
 - [68.介绍一下Controlnet-Union的原理](#68.介绍一下Controlnet-Union的原理)
+
 
 
 <h2 id="1.Ip-adapter的模型结构与原理">1.Ip-adapter的模型结构与原理 </h2>
