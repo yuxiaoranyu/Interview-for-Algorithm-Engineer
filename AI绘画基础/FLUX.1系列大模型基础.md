@@ -28,10 +28,10 @@
 
 ## 第一章 FLUX.1系列核心高频考点
 
-<h2 id="1.介绍一下FLUX.1的整体架构">1.介绍一下FLUX.1的整体架构</h2>
+<h3 id="1.介绍一下FLUX.1的整体架构">1.介绍一下FLUX.1的整体架构</h3>
 
 
-<h2 id="2.与Stable-Diffusion-3相比，FLUX.1的核心优化有哪些？">2.与Stable Diffusion 3相比，FLUX.1的核心优化有哪些？</h2>
+<h3 id="2.与Stable-Diffusion-3相比，FLUX.1的核心优化有哪些？">2.与Stable Diffusion 3相比，FLUX.1的核心优化有哪些？</h3>
 
 FLUX.1系列模型是基于Stable Diffuson 3进行了升级优化，是目前性能最强的开源AI绘画大模型，其主要的创新点如下所示：
 
@@ -42,7 +42,7 @@ FLUX.1系列模型是基于Stable Diffuson 3进行了升级优化，是目前性
 5. FLUX.1系列模型在单流的DiT中引入了并行注意力层的设计，注意力层和MLP并联执行，执行速度有所提升。
 
 
-<h2 id="3.介绍一下FLUX.1中VAE部分的特点，比起Stable-Diffusion-3有哪些改进？详细分析改进的意图">3.介绍一下FLUX.1中VAE部分的特点，比起Stable Diffusion 3有哪些改进？详细分析改进的意图</h2>
+<h3 id="3.介绍一下FLUX.1中VAE部分的特点，比起Stable-Diffusion-3有哪些改进？详细分析改进的意图">3.介绍一下FLUX.1中VAE部分的特点，比起Stable Diffusion 3有哪些改进？详细分析改进的意图</h3>
 
 **FLUX.1系列中，FLUX.1 VAE架构依然继承了SD 3 VAE的8倍下采样和输入通道数（16）。在FLUX.1 VAE输出Latent特征，并在Latent特征输入扩散模型前，还进行了Pack_Latents操作，一下子将Latent特征通道数提高到64（16 -> 64），换句话说，FLUX.1系列的扩散模型部分输入通道数为64，是SD 3的四倍**。这也代表FLUX.1要学习拟合的内容比起SD 3也增加了4倍，所以官方大幅增加FLUX.1模型的参数量级来提升模型容量（model capacity）。下面是Pack_Latents操作的详细代码，让大家能够更好的了解其中的含义：
 
@@ -82,31 +82,31 @@ def encode(self, x: Tensor) -> Tensor:
 **Rocky认为Stable Diffusion系列和FLUX.1系列中VAE模型的改进历程，为工业界、学术界、竞赛界以及应用界都带来了很多灵感，有很好的借鉴价值。Rocky也相信AI绘画中针对VAE的优化是学术界一个非常重要的论文录用点！**
 
 
-<h2 id="4.介绍一下FLUX.1中Backbone部分的特点，比起Stable-Diffusion-3有哪些改进？详细分析改进的意图">4.介绍一下FLUX.1中Backbone部分的特点，比起Stable Diffusion 3有哪些改进？详细分析改进的意图</h2>
+<h3 id="4.介绍一下FLUX.1中Backbone部分的特点，比起Stable-Diffusion-3有哪些改进？详细分析改进的意图">4.介绍一下FLUX.1中Backbone部分的特点，比起Stable Diffusion 3有哪些改进？详细分析改进的意图</h3>
 
 
-<h2 id="5.介绍一下FLUX.1中Text-Encoder部分的特点，比起Stable-Diffusion-3有哪些改进？详细分析改进的意图">5.介绍一下FLUX.1中Text Encoder部分的特点，比起Stable Diffusion 3有哪些改进？详细分析改进的意图</h2>
+<h3 id="5.介绍一下FLUX.1中Text-Encoder部分的特点，比起Stable-Diffusion-3有哪些改进？详细分析改进的意图">5.介绍一下FLUX.1中Text Encoder部分的特点，比起Stable Diffusion 3有哪些改进？详细分析改进的意图</h3>
 
 
-<h2 id="6.介绍一下Rectified-Flow的原理，Rectified-Flow相比于DDPM、DDIM有哪些优点？">6.介绍一下Rectified Flow的原理，Rectified Flow相比于DDPM、DDIM有哪些优点？</h2>
+<h3 id="6.介绍一下Rectified-Flow的原理，Rectified-Flow相比于DDPM、DDIM有哪些优点？">6.介绍一下Rectified Flow的原理，Rectified Flow相比于DDPM、DDIM有哪些优点？</h3>
 
 
-<h2 id="7.FLUX.1系列不同版本模型之间的差异是什么？">7.FLUX.1系列不同版本模型之间的差异是什么？</h2>
+<h3 id="7.FLUX.1系列不同版本模型之间的差异是什么？">7.FLUX.1系列不同版本模型之间的差异是什么？</h3>
 
 
-<h2 id="8.训练FLUX.1过程中官方使用了哪些训练技巧？">8.训练FLUX.1过程中官方使用了哪些训练技巧？</h2>
+<h3 id="8.训练FLUX.1过程中官方使用了哪些训练技巧？">8.训练FLUX.1过程中官方使用了哪些训练技巧？</h3>
 
 
-<h2 id="9.FLUX.1模型的微调训练流程一般包含哪几部分核心内容？">9.FLUX.1模型的微调训练流程一般包含哪几部分核心内容？</h2>
+<h3 id="9.FLUX.1模型的微调训练流程一般包含哪几部分核心内容？">9.FLUX.1模型的微调训练流程一般包含哪几部分核心内容？</h3>
 
 
-<h2 id="10.FLUX.1模型的微调训练流程中有哪些关键参数？">10.FLUX.1模型的微调训练流程中有哪些关键参数？</h2>
+<h3 id="10.FLUX.1模型的微调训练流程中有哪些关键参数？">10.FLUX.1模型的微调训练流程中有哪些关键参数？</h3>
 
 
-<h2 id="11.介绍一下FLUX.1-Lite与FLUX.1的异同">11.介绍一下FLUX.1-Lite与FLUX.1的异同</h2>
+<h3 id="11.介绍一下FLUX.1-Lite与FLUX.1的异同">11.介绍一下FLUX.1-Lite与FLUX.1的异同</h3>
 
 
-<h2 id="12.什么是flow-matching？">12.什么是flow matching？</h2
+<h3 id="12.什么是flow-matching？">12.什么是flow matching？</h2
 
 ## 概览
 
@@ -148,7 +148,7 @@ $$
 - **开源资源**：可参考官方论文（arXiv:2210.02747）和最新的 Flow Matching Guide（arXiv:2412.06264）获取详尽理论与示例代码 ([arxiv.org](https://arxiv.org/abs/2412.06264?utm_source=chatgpt.com))。
 
 
-<h2 id="13.Flow-Matching和DDPM之间有什么区别？">13.Flow Matching和DDPM之间有什么区别？</h2>
+<h3 id="13.Flow-Matching和DDPM之间有什么区别？">13.Flow Matching和DDPM之间有什么区别？</h3>
 
 Flow Matching和去噪扩散概率模型（DDPM）都是生成模型，但它们在理论基础、训练目标和生成过程上都有显著区别。
 
@@ -228,15 +228,15 @@ DDPM通过随机扩散和去噪过程生成数据，强调概率建模；Flow Ma
 
 ## 第二章 FLUX.1 Kontext系列核心高频考点
 
-<h2 id="1.介绍一下FLUX.1-Kontext的原理">1.介绍一下FLUX.1 Kontext的原理</h2>
+<h3 id="1.介绍一下FLUX.1-Kontext的原理">1.介绍一下FLUX.1 Kontext的原理</h3>
 
 
-<h2 id="2.FLUX.1-Kontext能够执行哪些AIGC任务？">2.FLUX.1 Kontext能够执行哪些AIGC任务？</h2>
+<h3 id="2.FLUX.1-Kontext能够执行哪些AIGC任务？">2.FLUX.1 Kontext能够执行哪些AIGC任务？</h3>
 
 
-<h2 id="3.FLUX.1-Kontext和FLUX.1相比，有哪些核心优化？详细分析改进的意图">3.FLUX.1 Kontext和FLUX.1相比，有哪些核心优化？详细分析改进的意图</h2>
+<h3 id="3.FLUX.1-Kontext和FLUX.1相比，有哪些核心优化？详细分析改进的意图">3.FLUX.1 Kontext和FLUX.1相比，有哪些核心优化？详细分析改进的意图</h3>
 
 
-<h2 id="3.介绍一下FLUX.1-Kontext的提示词构建技巧">3.介绍一下FLUX.1 Kontext的提示词构建技巧</h2>
+<h3 id="4.介绍一下FLUX.1-Kontext的提示词构建技巧">4.介绍一下FLUX.1 Kontext的提示词构建技巧</h3>
 
 ---
