@@ -18,7 +18,6 @@
 - [16.LayoutDM的模型结构和原理](#16.LayoutDM的模型结构和原理)
 - [17.LayoutDIffusion的模型结构和原理](#17.LayoutDIffusion的模型结构和原理)
 - [18.LayoutDiffuse的模型结构和原理](#18.LayoutDiffuse的模型结构和原理)
-- [19.LayoutDM的模型结构和原理](#19.LayoutDM的模型结构和原理)
 - [20.AnyScene的模型结构和原理](#20.AnyScene的模型结构和原理)
 - [21.MIGC的模型框架和原理](#21.MIGC的模型框架和原理)
 - [22.介绍一下Training-free Composite Scene Generation for Layout-to-Image Synthesis](#22.介绍一下Training-free-Composite-Scene-Generation-for-Layout-to-Image-Synthesis)
@@ -46,7 +45,7 @@
 - [44.ConrtolNet是如何训练的？](#44.ConrtolNet是如何训练的？)
 - [45.ControlNet的损失函数是什么？](#45.ControlNet的损失函数是什么？)
 - [46.ControlNet有哪些高阶用法？](#46.ControlNet有哪些高阶用法？)
-- [47.ControlNet中"Balanced"、"My prompt is more important"、"ControlNet is more important"三种模式的区别是什么？](#47.ControlNet中"Balanced"、"My-prompt-is-more-important"、"ControlNet-is-more-important"三种模式的区别是什么？)
+- [47.ControlNet中Balanced、My prompt is more important、ControlNet is more important三种模式的区别是什么？](#47.ControlNet中Balanced、My-prompt-is-more-important、ControlNet-is-more-important三种模式的区别是什么？)
 - [48.ControlNet 1.1与ControlNet相比，有哪些改进？](#48.ControlNet-1.1与ControlNet相比，有哪些改进？)
 - [49.介绍一下ControlNet Canny条件控制的原理](#49.介绍一下ControlNet-Canny条件控制的原理)
 - [50.介绍一下ControlNet Depth控制条件的原理](#50.介绍一下ControlNet-Depth控制条件的原理)
@@ -435,34 +434,6 @@ LayoutDiffuse 基于 Latent Diffusion Model (LDM)，通过以下两个关键组�
    整体结构：
 
 ![image-20241118201401444](./imgs/layoutdiffuse.png)
-
-
-<h2 id="19.LayoutDM的模型结构和原理<">19.LayoutDM的模型结构和原理</h2>
-
-论文链接：[LayoutDM: Precision Multi-Scale Diffusion for Layout-to-Image](https://www.computer.org/csdl/proceedings-article/icme/2024/10688052/20F0CkVbfHy)
-
-#### 模型结构
-
-LayoutDM 的主要结构如下：
-
-1. **并行采样模块 (Parallel Sampling Module, PSM)**：
-   - 提供局部精细控制，通过并行处理不同掩膜区域的梯度指导生成，改进了区域细节的生成质量。
-   - 通过基于扩散的自适应方法生成非掩膜区域。
-2. **语义一致性模块 (Semantic Coherence Module, SCM)**：
-   - 提供全局语义一致性支持，通过全局梯度引导保证生成的各区域在语义上的连贯性。
-3. **区域融合方法 (Region Fusion Method, RFM)**：
-   - 针对前景与背景区域的重叠问题，通过梯度融合与区域均值计算实现平滑过渡。
-
-![image-20241118201707587](./imgs/layoutdm-2024.png)
-
-**生成流程**：
-
-- 从布局中提取掩膜和文本提示作为输入。
-- 以随机噪声初始化图像，通过逆扩散过程逐步生成图像。
-- 采用以下机制在生成中逐步细化：
-  - 掩膜区域：PSM 对掩膜区域进行局部引导，优化每个区域与文本提示的对齐程度。
-  - 非掩膜区域：基于当前生成状态加入噪声，保留全局背景信息。
-  - 全局一致性：SCM 在生成后期（t < 200 时）通过语义信息调整图像整体质量。
 
 
 <h2 id="20.AnyScene的模型结构和原理">20.AnyScene的模型结构和原理</h2>
@@ -1215,7 +1186,7 @@ EasyPhoto作为一款基于Stable Diffusion的AI写真生成工具，深度融�
 <h2 id="46.ControlNet有哪些高阶用法？">46.ControlNet有哪些高阶用法？</h2>
 
 
-<h2 id="47.ControlNet中"Balanced"、"My-prompt-is-more-important"、"ControlNet-is-more-important"三种模式的区别是什么？">47.ControlNet中"Balanced"、"My prompt is more important"、"ControlNet is more important"三种模式的区别是什么？</h2>
+<h2 id="47.ControlNet中Balanced、My-prompt-is-more-important、ControlNet-is-more-important三种模式的区别是什么？">47.ControlNet中Balanced、My prompt is more important、ControlNet is more important三种模式的区别是什么？</h2>
 
 
 <h2 id="48.ControlNet-1.1与ControlNet相比，有哪些改进？">48.ControlNet 1.1与ControlNet相比，有哪些改进？</h2>
