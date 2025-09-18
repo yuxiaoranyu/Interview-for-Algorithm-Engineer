@@ -243,7 +243,7 @@ GAN（生成对抗网络）和Stable Diffusion（稳定扩散模型）都是AIGC
 <h2 id="18.在AIGC时代，GAN有哪些优缺点？">18.在AIGC时代，GAN有哪些优缺点？</h2>
 
 
-<h2 id="19.Stable Diffusion和GAN哪个更容易出现collapse的问题?">19.Stable Diffusion和GAN哪个更容易出现collapse的问题?</h2>
+<h2 id="19.Stable-Diffusion和GAN哪个更容易出现collapse的问题?">19.Stable Diffusion和GAN哪个更容易出现collapse的问题?</h2>
 
 
 <h2 id="20.GAN模型有哪些主流落地应用的方向？">20.GAN模型有哪些主流落地应用的方向？</h2>
