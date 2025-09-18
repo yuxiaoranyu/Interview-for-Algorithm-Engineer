@@ -136,58 +136,58 @@
 
 ### 【一】Diffusion Model核心高频考点
 
-<h4 id="1.介绍一下Diffusion-Model的原理和本质">1.介绍一下Diffusion Model的原理和本质</h4>
+<h3 id="1.介绍一下Diffusion-Model的原理和本质">1.介绍一下Diffusion Model的原理和本质</h3>
 
 
-<h2 id="2.介绍一下Disco-Diffusion的原理">2.介绍一下Disco Diffusion的原理</h2>
+<h3 id="2.介绍一下Disco-Diffusion的原理">2.介绍一下Disco Diffusion的原理</h3>
 
 
-<h2 id="3.经典的Pixel-Diffusion有哪些？">3.经典的Pixel Diffusion有哪些？</h2>
+<h3 id="3.经典的Pixel-Diffusion有哪些？">3.经典的Pixel Diffusion有哪些？</h3>
 
 
-<h2 id="4.Diffusion-Models和VAE之间有哪些联系和区别？">4.Diffusion Models和VAE之间有哪些联系和区别？</h2>
+<h3 id="4.Diffusion-Models和VAE之间有哪些联系和区别？">4.Diffusion Models和VAE之间有哪些联系和区别？</h3>
 
 
-<h2 id="5.Diffusion和GAN的区别有哪些？">5.Diffusion和GAN的区别有哪些？</h2>
+<h3 id="5.Diffusion和GAN的区别有哪些？">5.Diffusion和GAN的区别有哪些？</h3>
 
 
-<h2 id="6.Latent-Diffusion相比DDPM有哪些改进?">6.Latent Diffusion相比DDPM有哪些改进?</h2>
+<h3 id="6.Latent-Diffusion相比DDPM有哪些改进?">6.Latent Diffusion相比DDPM有哪些改进?</h3>
 
 
-<h2 id="7.介绍一下什么是马尔可夫链">7.介绍一下什么是马尔可夫链</h2>
+<h3 id="7.介绍一下什么是马尔可夫链">7.介绍一下什么是马尔可夫链</h3>
 
 
-<h2 id="8.扩散模型中添加的是高斯噪声，能否使用其他噪声的加噪方式？">8.扩散模型中添加的是高斯噪声，能否使用其他噪声的加噪方式？</h2>
+<h3 id="8.扩散模型中添加的是高斯噪声，能否使用其他噪声的加噪方式？">8.扩散模型中添加的是高斯噪声，能否使用其他噪声的加噪方式？</h3>
 
 
-<h2 id="9.在Diffusion中常见的条件注入的方法有哪些?Diffusion是如何添加timestep信息的?">9.在Diffusion中常见的条件注入的方法有哪些?Diffusion是如何添加timestep信息的?</h2>
+<h3 id="9.在Diffusion中常见的条件注入的方法有哪些?Diffusion是如何添加timestep信息的?">9.在Diffusion中常见的条件注入的方法有哪些?Diffusion是如何添加timestep信息的?</h3>
 
 
-<h2 id="10.训练Diffusion-Models的时候，当Loss收敛后是否意味着训练应该结束？">10.训练Diffusion-Models的时候，当Loss收敛后是否意味着训练应该结束？</h2>
+<h3 id="10.训练Diffusion-Models的时候，当Loss收敛后是否意味着训练应该结束？">10.训练Diffusion-Models的时候，当Loss收敛后是否意味着训练应该结束？</h3>
 
 
-<h2 id="11.VAE和Diffusion-Models中的变分推断是什么?">11.VAE和Diffusion-Models中的变分推断是什么?</h2>
+<h3 id="11.VAE和Diffusion-Models中的变分推断是什么?">11.VAE和Diffusion-Models中的变分推断是什么?</h3>
 
 ---
 
 ### 【二】Diffusion Model的采样（Sample）高频考点
 
-<h2 id="1.什么是DDPM，推导公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？">1.什么是DDPM，推导公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？</h2>
+<h3 id="1.什么是DDPM，推导公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？">1.什么是DDPM，推导公式，实现DDPM需要什么条件？为什么DDPM加噪声的幅度是不一致的？</h3>
 
 
-<h2 id="2.什么是马尔可夫过程?DDPM中的马尔可夫链是如何定义的?">2.什么是马尔可夫过程?DDPM中的马尔可夫链是如何定义的?</h2>
+<h3 id="2.什么是马尔可夫过程?DDPM中的马尔可夫链是如何定义的?">2.什么是马尔可夫过程?DDPM中的马尔可夫链是如何定义的?</h3>
 
 
-<h2 id="3.DDPM是预测噪声还是预测当前分布？">3.DDPM是预测噪声还是预测当前分布？</h2>
+<h3 id="3.DDPM是预测噪声还是预测当前分布？">3.DDPM是预测噪声还是预测当前分布？</h3>
 
 
-<h2 id="4.为什么DDPM前向过程中前期加噪少,后期加噪多?">4.为什么DDPM前向过程中前期加噪少,后期加噪多?</h2>
+<h3 id="4.为什么DDPM前向过程中前期加噪少,后期加噪多?">4.为什么DDPM前向过程中前期加噪少,后期加噪多?</h3>
 
 
-<h2 id="5.DDPM存在什么问题？">5.DDPM存在什么问题？</h2>
+<h3 id="5.DDPM存在什么问题？">5.DDPM存在什么问题？</h3>
 
 
-<h2 id="6.介绍一下DDIM的核心原理">6.介绍一下DDIM的核心原理</h2>
+<h3 id="6.介绍一下DDIM的核心原理">6.介绍一下DDIM的核心原理</h3>
 
 论文链接：https://arxiv.org/pdf/2010.02502.pdf
 
@@ -207,16 +207,16 @@ DDPM通过模拟马尔可夫链来逐步生成样本，这一过程虽然可以�
 - **语义图像插值与重建**：DDIM支持在潜在空间中进行语义有意义的图像插值，并且能够以极低的误差重建观察结果。
 
 
-<h2 id="7.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?">7.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?</h2>
+<h3 id="7.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?">7.DDPM和DDIM的之间的关系？DDIM是怎样加速采样的(简述DDIM的原理)?</h3>
 
 
-<h2 id="8.DDIM是不是确定性生成？为什么？">8.DDIM是不是确定性生成？为什么？</h2>
+<h3 id="8.DDIM是不是确定性生成？为什么？">8.DDIM是不是确定性生成？为什么？</h3>
 
 
-<h2 id="9.扩散模型有哪些常见的采样方式？其原理是什么样的？（DDPM、DDIM、DPM++、lcm-turbo等）">9.扩散模型有哪些常见的采样方式？其原理是什么样的？（DDPM、DDIM、DPM++、lcm turbo等）</h2>
+<h3 id="9.扩散模型有哪些常见的采样方式？其原理是什么样的？（DDPM、DDIM、DPM++、lcm-turbo等）">9.扩散模型有哪些常见的采样方式？其原理是什么样的？（DDPM、DDIM、DPM++、lcm turbo等）</h3>
 
 
-<h2 id="10.classifier-free-guidance和classifier-guidance有哪些区别？">10.classifier-free guidance和classifier guidance有哪些区别？</h2>
+<h3 id="10.classifier-free-guidance和classifier-guidance有哪些区别？">10.classifier-free guidance和classifier guidance有哪些区别？</h3>
 
 在扩散模型的逆向过程中，引导技术被广泛应用于可控生成。目前主要有两种引导技术：分类器引导（Classifier Guidance, CG）和无分类器引导（Classifier-Free Guidance, CFG）。
 
@@ -276,25 +276,25 @@ $$
 - 两种方法并不相互排斥，可以结合使用以获得更好的效果
 
 
-<h2 id="11.什么是noisescheduler?Cos-Noisescheduler有什么优点?">11.什么是noisescheduler?Cos Noisescheduler有什么优点?</h2>
+<h3 id="11.什么是noisescheduler?Cos-Noisescheduler有什么优点?">11.什么是noisescheduler?Cos Noisescheduler有什么优点?</h3>
 
 
-<h2 id="12.为什么扩散模型要对X0步加上的噪声算L2损失？这和Xt-1步的状态有什么联系？">12.为什么扩散模型要对X0步加上的噪声算L2损失？这和Xt-1步的状态有什么联系？</h2>
+<h3 id="12.为什么扩散模型要对X0步加上的噪声算L2损失？这和Xt-1步的状态有什么联系？">12.为什么扩散模型要对X0步加上的噪声算L2损失？这和Xt-1步的状态有什么联系？</h3>
 
 
-<h2 id="13.为什么Q_forward过程能够一步写出表达式？重参数化的前提是什么？">13.为什么Q_forward过程能够一步写出表达式？重参数化的前提是什么？</h2>
+<h3 id="13.为什么Q_forward过程能够一步写出表达式？重参数化的前提是什么？">13.为什么Q_forward过程能够一步写出表达式？重参数化的前提是什么？</h3>
 
 
-<h2 id="14.GuidanceScale较大为什么会破坏噪声预测分布?">14.GuidanceScale较大为什么会破坏噪声预测分布?</h2>
+<h3 id="14.GuidanceScale较大为什么会破坏噪声预测分布?">14.GuidanceScale较大为什么会破坏噪声预测分布?</h3>
 
 
-<h2 id="15.增加采样步数有什么影响?">15.增加采样步数有什么影响?</h2>
+<h3 id="15.增加采样步数有什么影响?">15.增加采样步数有什么影响?</h3>
 
 
-<h2 id="16.常见的采样器有哪些?（Euler、Euler-a、DDIM、LMS、LMS-Karras、Heun、DPM、UniPC、Karras、PLMS、UniPC、UniPC-variant等）">16.常见的采样器有哪些?（Euler、Euler a、DDIM、LMS、LMS Karras、Heun、DPM、UniPC、Karras、PLMS、UniPC、UniPC variant等）</h2>
+<h3 id="16.常见的采样器有哪些?（Euler、Euler-a、DDIM、LMS、LMS-Karras、Heun、DPM、UniPC、Karras、PLMS、UniPC、UniPC-variant等）">16.常见的采样器有哪些?（Euler、Euler a、DDIM、LMS、LMS Karras、Heun、DPM、UniPC、Karras、PLMS、UniPC、UniPC variant等）</h3>
 
 
-<h2 id="17.不同采样器之间的区别是什么？如何选择合适的采样器？">17.不同采样器之间的区别是什么？如何选择合适的采样器？</h2>
+<h3 id="17.不同采样器之间的区别是什么？如何选择合适的采样器？">17.不同采样器之间的区别是什么？如何选择合适的采样器？</h3>
 
 **主要采样器类型**：
 
@@ -334,10 +334,10 @@ $$
 - **创意探索**：Euler a 或 DPM++ SDE
 
 
-<h2 id="18.不同采样方法的优缺点是什么？">18.不同采样方法的优缺点是什么？</h2>
+<h3 id="18.不同采样方法的优缺点是什么？">18.不同采样方法的优缺点是什么？</h3>
 
 
-<h2 id="19.扩散模型中噪声调度策略的设计原理？">19.扩散模型中噪声调度策略的设计原理？</h2>
+<h3 id="19.扩散模型中噪声调度策略的设计原理？">19.扩散模型中噪声调度策略的设计原理？</h3>
 
 **基本概念**：
 
@@ -377,7 +377,7 @@ $$
 不同的噪声调度策略适用于不同类型的数据和应用场景。
 
 
-<h2 id="20.cfg参数的介绍">20.cfg参数的介绍</h2>
+<h3 id="20.cfg参数的介绍">20.cfg参数的介绍</h3>
 
 Classifier Guidance，使得扩散模型可以按图像、按文本和多模态条件来生成。Classifier Guidance 需要训练噪声数据版本的classifier网络，推理时每一步都需要额外计算classifier的梯度
 
@@ -394,7 +394,7 @@ Classifier-Free Guidance方案，可以规避上述问题，而且可以通过�
 简单说：通过cfg参数控制图像生成内容和文本之间的关联性
 
 
-<h2 id="21.介绍一下PAG（Perturbed-Attention-Guidance）">21.介绍一下PAG（Perturbed-Attention Guidance）</h2>
+<h3 id="21.介绍一下PAG（Perturbed-Attention-Guidance）">21.介绍一下PAG（Perturbed-Attention Guidance）</h3>
 
 [Perturbed-Attention Guidance (PAG)](https://ku-cvlab.github.io/Perturbed-Attention-Guidance/) 是一种新的扩散采样指南，可提高无条件和有条件设置的样本质量，无需进一步培训或集成外部模块即可实现这一目标。PAG 旨在通过考虑自注意力机制捕获结构信息的能力，在整个去噪过程中逐步增强合成样本的结构。它涉及通过用单位矩阵替换扩散 U-Net 中选定的自注意力图来生成具有降解结构的中间样品，并引导去噪过程远离这些降解的样品。
 
@@ -427,25 +427,25 @@ PAG 选择扰动扩散 U-Net 中的自注意力图，是因为自注意力机制
 
 ### 【一】Stable Diffusion 1.5基础高频考点
 
-<h2 id="1.Stable-Diffusion相比Diffusion主要解决的问题是什么？">1.Stable Diffusion相比Diffusion主要解决的问题是什么？</h2>
+<h3 id="1.Stable-Diffusion相比Diffusion主要解决的问题是什么？">1.Stable Diffusion相比Diffusion主要解决的问题是什么？</h3>
 
 
-<h2 id="2.Stable-Diffusion比起经典Diffusion的核心优化是什么？">2.Stable Diffusion比起经典Diffusion的核心优化是什么？</h2>
+<h3 id="2.Stable-Diffusion比起经典Diffusion的核心优化是什么？">2.Stable Diffusion比起经典Diffusion的核心优化是什么？</h3>
 
 
-<h2 id="3.介绍一下Stable-Diffusion的训练/推理过程（正向扩散过程和反向扩散过程）">3.介绍一下Stable Diffusion的训练/推理过程（正向扩散过程和反向扩散过程）</h2>
+<h3 id="3.介绍一下Stable-Diffusion的训练/推理过程（正向扩散过程和反向扩散过程）">3.介绍一下Stable Diffusion的训练/推理过程（正向扩散过程和反向扩散过程）</h3>
 
 
-<h2 id="4.Stable-Diffusion每一轮训练样本选择一个随机时间步长？">4.Stable Diffusion每一轮训练样本选择一个随机时间步长？</h2>
+<h3 id="4.Stable-Diffusion每一轮训练样本选择一个随机时间步长？">4.Stable Diffusion每一轮训练样本选择一个随机时间步长？</h3>
 
 
-<h2 id="5.为什么Stable-Diffusion可能会出现细节信息失真?">5.为什么Stable Diffusion可能会出现细节信息失真?</h2>
+<h3 id="5.为什么Stable-Diffusion可能会出现细节信息失真?">5.为什么Stable Diffusion可能会出现细节信息失真?</h3>
 
 
-<h2 id="6.在Stable-Diffusion-1.5的经典失败案例中，生成图像中的猫出现头部缺失的问题的本质原因及优化方案？">6.在Stable Diffusion 1.5的经典失败案例中，生成图像中的猫出现头部缺失的问题的本质原因及优化方案？</h2>
+<h3 id="6.在Stable-Diffusion-1.5的经典失败案例中，生成图像中的猫出现头部缺失的问题的本质原因及优化方案？">6.在Stable Diffusion 1.5的经典失败案例中，生成图像中的猫出现头部缺失的问题的本质原因及优化方案？</h3>
 
 
-<h2 id="7.介绍一下针对Stable-Diffusion的模型融合技术">7.介绍一下针对Stable Diffusion的模型融合技术</h2>
+<h3 id="7.介绍一下针对Stable-Diffusion的模型融合技术">7.介绍一下针对Stable Diffusion的模型融合技术</h3>
 
 Stable Diffusion的模型融合主要通过 **Merge Block Weight（块权重融合）** 这种精细化的模型参数整合技术实现，通过分层处理U-Net/Transformer内部不同功能模块层的权重，实现多个Stable Diffusion模型特点优势的定向组合。
 
@@ -487,18 +487,18 @@ Stable Diffusion的模型融合主要通过 **Merge Block Weight（块权重融�
 Merge Block Weight通过解构U-Net并分层融合权重，实现了模型能力的精准嫁接，成为解决单一模型局限性问题的关键技术。随着Stable Diffusion 3等新架构对多模态权重的分离设计（如MMDiT），模型融合将进一步向**模态感知融合**（Modality-Aware Merging）演进，在艺术创作、工业设计等领域释放更大潜力。
 
 
-<h2 id="8.Stable-Diffusion中是如何添加时间步timestep信息的?">8.Stable Diffusion中是如何添加时间步timestep信息的?</h2>
+<h3 id="8.Stable-Diffusion中是如何添加时间步timestep信息的?">8.Stable Diffusion中是如何添加时间步timestep信息的?</h3>
 
 
-<h2 id="9.为什么Stable-Diffusion训练时用DDPM，而采样时用DDIM呢?">9.为什么Stable Diffusion训练时用DDPM，而采样时用DDIM呢?</h2>
+<h3 id="9.为什么Stable-Diffusion训练时用DDPM，而采样时用DDIM呢?">9.为什么Stable Diffusion训练时用DDPM，而采样时用DDIM呢?</h3>
 
 
-<h2 id="10.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？">10.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？</h2>
+<h3 id="10.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？">10.SD模型训练时需要设置timesteps=1000，在推理时却只用几十步就可以生成图片？</h3>
 
 目前扩散模型训练一般使用DDPM（Denoising Diffusion Probabilistic Models）采样方法，但推理时可以使用DDIM（Denoising Diffusion Implicit Models）采样方法，DDIM通过去马尔可夫化，大大减少了扩散模型在推理时的步数。
 
 
-<h2 id="11.SD模型中的CFG(Classifier-Free-Guidance)的原理？">11.SD模型中的CFG(Classifier-Free-Guidance)的原理？ </h2>
+<h3 id="11.SD模型中的CFG(Classifier-Free-Guidance)的原理？">11.SD模型中的CFG(Classifier-Free-Guidance)的原理？ </h3>
 
 ### 1. Classifier Guidance：
 条件生成只需额外添加一个classifier的梯度来引导。Classifier Guidance 需要训练噪声数据版本的classifier网络，推理时每一步都需要额外计算classifier的梯度。
@@ -513,7 +513,7 @@ Classifier Guidance 使用显式的分类器引导条件生成有几个问题：
 训练时，Classifier-Free Guidance需要训练两个模型，一个是无条件生成模型，另一个是条件生成模型。但这两个模型可以用同一个模型表示，训练时只需要以一定概率将条件置空即可。推理时，最终结果可以由条件生成和无条件生成的线性外推获得，生成效果可以引导系数可以调节，控制生成样本的逼真性和多样性的平衡。
 
 
-<h2 id="12.SD模型中的(negative-prompt)反向提示词如何加入的？">12.SD模型中的(negative-prompt)反向提示词如何加入的？ </h2>
+<h3 id="12.SD模型中的(negative-prompt)反向提示词如何加入的？">12.SD模型中的(negative-prompt)反向提示词如何加入的？ </h3>
 
 ### 1. 假想方案
 容易想到的一个方案是 unet 输出 3 个噪声，分别对应无prompt，positive prompt 和 negative prompt 三种情况，那么最终的噪声就是
@@ -531,14 +531,14 @@ Classifier Guidance 使用显式的分类器引导条件生成有几个问题：
 就是这么简单，其实也很说得通，虽说设计上预期是无 prompt 的，但是没有人拦着你加上 prompt（反向的），公式上可以看出在正向强化positive prompt的同时也反方向强化——也就是弱化了 negative prompt。同时这个方法相对于我想的那个方法还有一个优势就是只需预测 2 个而不是 3 个噪声。可以减少时间复杂度。
 
 
-<h2 id="13.Stable_Diffusion文本信息是如何控制图像生成的">13.Stable Diffusion文本信息是如何控制图像生成的</h2>
+<h3 id="13.Stable_Diffusion文本信息是如何控制图像生成的">13.Stable Diffusion文本信息是如何控制图像生成的</h3>
 
 1.文本编码：CLIP Text Encoder模型将输入的文本Prompt进行编码，转换成Text Embeddings（文本的语义信息），由于预训练后CLIP模型输入配对的图片和标签文本，Text Encoder和Image Encoder可以输出相似的embedding向量，所以这里的Text Embeddings可以近似表示所要生成图像的image embedding。
 
 2.CrossAttention模块：在U-net的corssAttention模块中Text Embeddings用来生成K和V，Latent Feature用来生成Q。因为需要文本信息注入到图像信息中里，所以用图片token对文本信息做 Attention实现逐步的文本特征提取和耦合。
 
 
-<h2 id="14.简述Stable_Diffusion核心网络结构">14.简述Stable Diffusion核心网络结构</h2>
+<h3 id="14.简述Stable_Diffusion核心网络结构">14.简述Stable Diffusion核心网络结构</h3>
 
 1.CLIP：CLIP模型是一个基于对比学习的多模态模型，主要包含Text Encoder和Image Encoder两个模型。在Stable Diffusion中主要使用了Text Encoder部分。CLIP Text Encoder模型将输入的文本Prompt进行编码，转换成Text Embeddings（文本的语义信息），通过的U-Net网络的CrossAttention模块嵌入Stable Diffusion中作为Condition条件，对生成图像的内容进行一定程度上的控制与引导。
 
@@ -549,7 +549,7 @@ U-Net
 ![训练损失函数](./imgs/DDPM_loss.png) 
 
 
-<h2 id="15.文生图和图生图的区别是什么?">15.文生图和图生图的区别是什么?</h2>
+<h3 id="15.文生图和图生图的区别是什么?">15.文生图和图生图的区别是什么?</h3>
 
 ### 1. 文生图（Text2Image）
 
@@ -568,7 +568,7 @@ U-Net
 它们在技术使用上有所重叠,但应用场景有别。文生图更注重多样性和创造力,而图生图则侧重于对现有图像的编辑和转换。
 
 
-<h2 id="16.长宽比分桶训练策略（AspectRatioBucketing）有什么作用?">16.长宽比分桶训练策略（Aspect Ratio Bucketing）有什么作用?</h2>
+<h3 id="16.长宽比分桶训练策略（AspectRatioBucketing）有什么作用?">16.长宽比分桶训练策略（Aspect Ratio Bucketing）有什么作用?</h3>
 
 目前AI绘画开源社区中很多的LoRA模型和Stable Diffusion模型都是基于**单一图像分辨率**（比如1:1）进行训练的，这就导致当我们想要**生成不同尺寸分辨率的图像**（比如1:2、3:4、4:3、9:16、16:9等）时，**非常容易生成结构崩坏的图像内容**。
 如下图所示，**为了让所有的数据满足特定的训练分辨率，会进行中心裁剪和随机裁剪等操作，这就导致图像中人物的重要特征缺失**：
@@ -582,7 +582,7 @@ U-Net
 长宽比分桶训练策略（Aspect Ratio Bucketing）就是为了解决上面的问题孕育而生。**长宽比分桶训练策略的本质是多分辨率训练**，就是在LoRA模型的训练过程中采用多分辨率而不是单一分辨率，多分辨率训练技术在传统深度学习时代的目标检测、图像分割、图像分类等领域非常有效，在AIGC时代终于有了新的内涵，在AI绘画领域重新繁荣。
 
 
-<h2 id="17.介绍一下长宽比分桶训练策略（AspectRatioBucketing）的具体流程">17.介绍一下长宽比分桶训练策略（Aspect Ratio Bucketing）的具体流程</h2>
+<h3 id="17.介绍一下长宽比分桶训练策略（AspectRatioBucketing）的具体流程">17.介绍一下长宽比分桶训练策略（Aspect Ratio Bucketing）的具体流程</h3>
 
 **AI绘画领域中的长宽比分桶训练策略主要通过数据分桶+多分辨率训练两者结合来实现**。我们设计多个存储桶（Bucket），每个存储桶代表不同的分辨率（比如512x512、768x768、1024x1024等），并将数据存入对应的桶中。在Stable Diffusion模型和LoRA模型训练时，随机选择一个桶，从中采样Batch大小的数据用于多分辨率训练。下面Rocky详细介绍一下完整的流程。
 
@@ -674,7 +674,7 @@ $$ \text{image-bucket} = argmin(abs(\text{bucket-aspects} — \text{image-aspect
 **同时我们将所有的存储桶根据桶中数据量进行权重设置，具体的权重计算方式为这个存储桶的数据量除以所有剩余存储桶的数据量总和**。如果不通过权重来选择存储存储桶，数据量小的存储桶会在训练过程的早期就被用完，而数据量最大的存储桶会在训练结束时仍然存在，**这就会导致存储桶在整个训练周期中采样不均衡问题**。通过按数据量加权选择桶可以避免这种情况。
 
 
-<h2 id="18.Stable-Diffusion进行模型融合的技巧有哪些？">18.Stable Diffusion进行模型融合的技巧有哪些？</h2>
+<h3 id="18.Stable-Diffusion进行模型融合的技巧有哪些？">18.Stable Diffusion进行模型融合的技巧有哪些？</h3>
 
 我们在进行几个Stable Diffusion的融合时，可以调整U-Net架构中每一层模型的融合权重，从而能够进行模型融合的进阶整合：
 
@@ -694,7 +694,7 @@ OUT区影响上采样过程对特征进行还原，层数从00到11，感受野�
 M区：影响最大的一层，甚至比IN11层的影响更大，起到了类似IN层的作用，可以看作IN12层，但也只能起到一层的作用，不如IN层中多层叠加后的影响大。该层越大，构图越向该模型靠拢。
 
 
-<h2 id="19.AI绘画大模型的数据预处理都包含哪些步骤？">19.AI绘画大模型的数据预处理都包含哪些步骤？</h2>
+<h3 id="19.AI绘画大模型的数据预处理都包含哪些步骤？">19.AI绘画大模型的数据预处理都包含哪些步骤？</h3>
 
 我们都知道，在AIGC时代，训练数据质量决定了AI绘画大模型的性能上限，所以Rocky也帮大家总结归纳了一套完整的数据预处理流程，希望能给大家带来帮助：
 
@@ -707,7 +707,7 @@ M区：影响最大的一层，甚至比IN11层的影响更大，起到了类似
 7. 数据增强：使用数据增强技术，扩增数据集规模。
 
 
-<h2 id="20.AI绘画大模型的训练流程都包含哪些步骤？">20.AI绘画大模型的训练流程都包含哪些步骤？</h2>
+<h3 id="20.AI绘画大模型的训练流程都包含哪些步骤？">20.AI绘画大模型的训练流程都包含哪些步骤？</h3>
 
 Rocky为大家总结了AI绘画大模型的主要训练流程，其中包括：
 
@@ -717,7 +717,7 @@ Rocky为大家总结了AI绘画大模型的主要训练流程，其中包括：
 4. 模型测试与优化：将训练好的AI绘画大模型用于效果评估与消融实验，根据bad case和实际需求进行迭代优化。
 
 
-<h2 id="21.AIGC面试中必考的Stable-Diffusion系列模型版本有哪些？">21.AIGC面试中必考的Stable Diffusion系列模型版本有哪些？</h2>
+<h3 id="21.AIGC面试中必考的Stable-Diffusion系列模型版本有哪些？">21.AIGC面试中必考的Stable Diffusion系列模型版本有哪些？</h3>
 
 当前AIGC时代的AI算法面试中，Stable Diffusion系列模型是一个必考模型，Rocky在这里为大家梳理其中的必考版本，大家需要深入了解：
 
@@ -728,7 +728,7 @@ Rocky为大家总结了AI绘画大模型的主要训练流程，其中包括：
 5. FLUX.1版本，必考！
 
 
-<h2 id="22.AIGC面试中必考的AI绘画技术框架脉络是什么样的？">22.AIGC面试中必考的AI绘画技术框架脉络是什么样的？</h2>
+<h3 id="22.AIGC面试中必考的AI绘画技术框架脉络是什么样的？">22.AIGC面试中必考的AI绘画技术框架脉络是什么样的？</h3>
 
 在进入AIGC时代后，大家在面试AIGC算法工程师时，面试官对于AI绘画技术的考察是面试的重中之重，因此Rocky总结梳理了AI绘画技术在工业界、投资界、学术界、竞赛界以及应用界的核心框架脉络，让大家能够有目标的进行技术学习与面试准备：
 
@@ -757,7 +757,7 @@ Rcoky也在撰写与沉淀AI绘画技术框架脉络的相关干货文章，力�
 [深入浅出完整解析AIGC时代中GAN（Generative Adversarial Network）系列模型核心基础知识](https://zhuanlan.zhihu.com/p/663157306)
 
 
-<h2 id="23.Stable-Diffusion中的Inpaint和Outpaint分别是什么？">23.Stable Diffusion中的Inpaint和Outpaint分别是什么?</h2>
+<h3 id="23.Stable-Diffusion中的Inpaint和Outpaint分别是什么？">23.Stable Diffusion中的Inpaint和Outpaint分别是什么?</h3>
 
 - **Inpaint（局部修复）** 指对图像中指定区域进行内容修复或替换的技术。用户可通过遮罩（Mask）标记需修改的区域，并输入文本提示（如“草地”或“删除物体”），模型将根据上下文生成与周围环境协调的新内容。典型应用包括移除水印、修复破损图像或替换特定对象。
 - **Outpaint（边界扩展）** 则用于扩展图像边界，生成超出原图范围的合理内容。例如，将一幅风景画的左右两侧延伸，生成连贯的山脉或天空。其核心挑战在于保持扩展区域与原始图像在风格、光照和语义上的一致性。
@@ -765,7 +765,7 @@ Rcoky也在撰写与沉淀AI绘画技术框架脉络的相关干货文章，力�
 两者均基于 Stable Diffusion 的潜在扩散模型，但目标不同：Inpaint 聚焦于“内部修正”，而 Outpaint 致力于“外部延展”，共同拓展了生成式 AI 在图像编辑中的灵活性。
 
 
-<h2 id="24.StableDiffusion中的safetychecker是什么?">24.StableDiffusion中的safety-checker是什么?</h2>
+<h3 id="24.StableDiffusion中的safetychecker是什么?">24.StableDiffusion中的safety-checker是什么?</h3>
 
 Stable Diffusion中的safety_checker是一个开源的图像内容审核工具，主要用于识别和过滤不适宜的内容。这个组件是Stable Diffusion模型的重要部分，具有以下特点和功能：
 
@@ -780,7 +780,7 @@ Stable Diffusion中的safety_checker是一个开源的图像内容审核工具�
 ![image-20250407194807505](./imgs/safety_checker.png)
 
 
-<h2 id="25.主流AI绘画大模型的完整训练流程是什么样的？">25.主流AI绘画大模型的完整训练流程是什么样的？</h2>
+<h3 id="25.主流AI绘画大模型的完整训练流程是什么样的？">25.主流AI绘画大模型的完整训练流程是什么样的？</h3>
 
 理解主流AI绘画大模型的完整训练流程，在AIGC时代种是非常关键的，不管是算法、研发、产品、运营还是其他工种，都需要学习了解。
 
@@ -808,13 +808,13 @@ Stable Diffusion中的safety_checker是一个开源的图像内容审核工具�
 
 ### 【二】Stable Diffusion VAE高频考点
 
-<h2 id="1.VAE在Stable-Diffusiuon中的作用">1.VAE在Stable Diffusiuon中的作用</h2>
+<h3 id="1.VAE在Stable-Diffusiuon中的作用">1.VAE在Stable Diffusiuon中的作用</h3>
 
 
-<h2 id="2.VAE为什么会导致图像变模糊？">2.VAE为什么会导致图像变模糊？</h2>
+<h3 id="2.VAE为什么会导致图像变模糊？">2.VAE为什么会导致图像变模糊？</h3>
 
 
-<h2 id="3.为什么VAE的图像生成效果不好，但是VAE+Diffusion的图像生成效果就很好？">3.为什么VAE的图像生成效果不好，但是VAE+Diffusion的图像生成效果就很好？</h2>
+<h3 id="3.为什么VAE的图像生成效果不好，但是VAE+Diffusion的图像生成效果就很好？">3.为什么VAE的图像生成效果不好，但是VAE+Diffusion的图像生成效果就很好？</h3>
 
 **这个问题最本质的回答是：传统深度学习时代的VAE是单独作为生成模型；而在AIGC时代，VAE只是作为特征编码器，提供特征给Diffusion用于图像的生成。其实两者的本质作用已经发生改变。**
 
@@ -823,7 +823,7 @@ Stable Diffusion中的safety_checker是一个开源的图像内容审核工具�
 上述的差别都导致了传统深度学习时代的VAE生成效果不佳。
 
 
-<h2 id="4.SD模型中的VAE和单纯的VAE生成模型的区别是什么？">4.SD模型中的VAE和单纯的VAE生成模型的区别是什么？</h2>
+<h3 id="4.SD模型中的VAE和单纯的VAE生成模型的区别是什么？">4.SD模型中的VAE和单纯的VAE生成模型的区别是什么？</h3>
 
 ### 传统VAE生成模型
 
@@ -843,10 +843,10 @@ Stable Diffusion中的safety_checker是一个开源的图像内容审核工具�
 
 ### 【三】Stable Diffusion Backbone高频考点
 
-<h2 id="1.如何将文本与图像的语义信息进行Attention机制，因为Text-Condition是三维的，而Latent-Feature是四维的？">1.如何将文本与图像的语义信息进行Attention机制，因为Text Condition是三维的，而Latent Feature是四维的？ </h2>
+<h3 id="1.如何将文本与图像的语义信息进行Attention机制，因为Text-Condition是三维的，而Latent-Feature是四维的？">1.如何将文本与图像的语义信息进行Attention机制，因为Text Condition是三维的，而Latent Feature是四维的？ </h3>
 
 
-<h2 id="2.介绍一下Stable-Diffusion中的交叉注意力机制">2.介绍一下Stable Diffusion中的交叉注意力机制 </h2>
+<h3 id="2.介绍一下Stable-Diffusion中的交叉注意力机制">2.介绍一下Stable Diffusion中的交叉注意力机制 </h3>
 
 ### 1. 简介
 属于Transformer常见Attention机制，用于合并两个不同的sequence embedding。两个sequence是：Query、Key/Value。
@@ -856,13 +856,13 @@ Stable Diffusion中的safety_checker是一个开源的图像内容审核工具�
 Cross-Attention可以用于将图像与文本之间的关联建立，在stable-diffusion中的Unet部分使用Cross-Attention将文本prompt和图像信息融合交互，控制U-Net把噪声矩阵的某一块与文本里的特定信息相对应。
 
 
-<h2 id="3.Stable-Diffusion中cross_attention的qkv分别是什么？为什么图像隐变量作为q，文本prompt作为kv">3.Stable Diffusion中cross_attention的qkv分别是什么？为什么图像隐变量作为q，文本prompt作为kv </h2>
+<h3 id="3.Stable-Diffusion中cross_attention的qkv分别是什么？为什么图像隐变量作为q，文本prompt作为kv">3.Stable Diffusion中cross_attention的qkv分别是什么？为什么图像隐变量作为q，文本prompt作为kv </h3>
 
 
-<h2 id="4.为什么使用U-Net作为扩散模型的核心架构？">4.为什么使用U-Net作为扩散模型的核心架构？ </h2>
+<h3 id="4.为什么使用U-Net作为扩散模型的核心架构？">4.为什么使用U-Net作为扩散模型的核心架构？ </h3>
 
 
-<h2 id="5.介绍一下Stable-Diffusion中U-Net的架构">5.介绍一下Stable Diffusion中U-Net的架构 </h2>
+<h3 id="5.介绍一下Stable-Diffusion中U-Net的架构">5.介绍一下Stable Diffusion中U-Net的架构 </h3>
 
 ### 1. U-Net的结构具有以下特点：
 
@@ -879,7 +879,7 @@ Cross-Attention可以用于将图像与文本之间的关联建立，在stable-d
 ![image-20240611200630350](./imgs/LDMs.png)
 
 
-<h2 id="6.扩散U-Net中的免费午餐（FreeU）是什么？">6.扩散U-Net中的免费午餐（FreeU）是什么？</h2>
+<h3 id="6.扩散U-Net中的免费午餐（FreeU）是什么？">6.扩散U-Net中的免费午餐（FreeU）是什么？</h3>
 
 论文链接：[[2309.11497\] FreeU: Free Lunch in Diffusion U-Net](https://arxiv.org/abs/2309.11497)
 
@@ -919,25 +919,25 @@ FreeU (Free Lunch in Diffusion U-Net) 是一种针对扩散模型中U-Net架构�
 
 ### 【四】Stable Diffusion Text Encoder高频考点
 
-<h2 id="1.举例介绍一下Stable-Diffusion模型进行文本编码的全过程">1.举例介绍一下Stable Diffusion模型进行文本编码的全过程</h2>
+<h3 id="1.举例介绍一下Stable-Diffusion模型进行文本编码的全过程">1.举例介绍一下Stable Diffusion模型进行文本编码的全过程</h3>
 
 
-<h2 id="2.Stable-Diffusion如何通过文本来实现对图像生成内容的控制?Stable-Diffusion中是如何注入文本信息的?">2.Stable Diffusion如何通过文本来实现对图像生成内容的控制?Stable Diffusion中是如何注入文本信息的?</h2>
+<h3 id="2.Stable-Diffusion如何通过文本来实现对图像生成内容的控制?Stable-Diffusion中是如何注入文本信息的?">2.Stable Diffusion如何通过文本来实现对图像生成内容的控制?Stable Diffusion中是如何注入文本信息的?</h3>
 
 
-<h2 id="3.Negative-Prompt实现的原理是什么?">3.Negative Prompt实现的原理是什么?</h2>
+<h3 id="3.Negative-Prompt实现的原理是什么?">3.Negative Prompt实现的原理是什么?</h3>
 
 
-<h2 id="4.如何处理Prompt和生成的图像不对齐的问题？">4.如何处理Prompt和生成的图像不对齐的问题？</h2>
+<h3 id="4.如何处理Prompt和生成的图像不对齐的问题？">4.如何处理Prompt和生成的图像不对齐的问题？</h3>
 
 
-<h2 id="4.如何处理Prompt和生成的图像不对齐的问题？">4.如何处理Prompt和生成的图像不对齐的问题？</h2>
+<h3 id="4.如何处理Prompt和生成的图像不对齐的问题？">4.如何处理Prompt和生成的图像不对齐的问题？</h3>
 
 
-<h2 id="5.文本编码器和扩散模型，哪一个模型容量变化对生成的结果影响更大？">5.文本编码器和扩散模型，哪一个模型容量变化对生成的结果影响更大？</h2>
+<h3 id="5.文本编码器和扩散模型，哪一个模型容量变化对生成的结果影响更大？">5.文本编码器和扩散模型，哪一个模型容量变化对生成的结果影响更大？</h3>
 
 
-<h2 id="6.扩散模型是如何引入控制条件的？">6.扩散模型是如何引入控制条件的？</h2>
+<h3 id="6.扩散模型是如何引入控制条件的？">6.扩散模型是如何引入控制条件的？</h3>
 
 在现代扩散模型中，引入控制条件的方式主要分为两大类：**采样阶段的引导（Guidance）与网络结构级的条件融合（Architectural Conditioning）**。前者通过调整去噪过程中的梯度方向，在不改动模型参数的前提下实现条件控制；后者则在模型内部直接注入额外信息，包括跨注意力（Cross‐Attention）和时间嵌入（Time Embedding）的多路拼接。下面我们将从这两大类出发，详细介绍包括交叉注意力注入、时间步嵌入拼接、类别嵌入拼接以及 ControlNet 等多种常见的条件引入技术。
 
@@ -989,7 +989,7 @@ FreeU (Free Lunch in Diffusion U-Net) 是一种针对扩散模型中U-Net架构�
 
 ## 第三章 Stable Diffusion XL核心高频考点
 
-<h2 id="1.与Stable-Diffusion相比，Stable-Diffusion-XL的核心优化有哪些？">1.与Stable Diffusion相比，Stable Diffusion XL的核心优化有哪些？ </h2>
+<h3 id="1.与Stable-Diffusion相比，Stable-Diffusion-XL的核心优化有哪些？">1.与Stable Diffusion相比，Stable Diffusion XL的核心优化有哪些？ </h3>
 
 1、模型参数更大。SDXL 基础模型所使用的 Unet 包含了2.6B（26亿）的参数，对比 SD1.5的 860M（8600万），相差超过三倍。因此从模型参数来看，SDXL 相比 SD 有显著优势。
 
@@ -1000,25 +1000,25 @@ FreeU (Free Lunch in Diffusion U-Net) 是一种针对扩散模型中U-Net架构�
 4、生图流程改进。SDXL 采用的是两阶段生图，第一阶段使用 base model（基础模型）生成，第二阶段则使用 refiner model（细化模型）进一步提升画面的细节表现。当然只使用 SDXL 基础模型进行绘图也是可以的。
 
 
-<h2 id="2.Stable-Diffusion-XL的VAE部分有哪些创新？详细分析改进意图">2.Stable Diffusion XL的VAE部分有哪些创新？详细分析改进意图 </h2>
+<h3 id="2.Stable-Diffusion-XL的VAE部分有哪些创新？详细分析改进意图">2.Stable Diffusion XL的VAE部分有哪些创新？详细分析改进意图 </h3>
 
 
-<h2 id="3.Stable-Diffusion-XL的Backbone部分有哪些创新？详细分析改进意图">3.Stable Diffusion XL的Backbone部分有哪些创新？详细分析改进意图 </h2>
+<h3 id="3.Stable-Diffusion-XL的Backbone部分有哪些创新？详细分析改进意图">3.Stable Diffusion XL的Backbone部分有哪些创新？详细分析改进意图 </h3>
 
 
-<h2 id="4.Stable-Diffusion-XL的Text-Encoder部分有哪些创新？详细分析改进意图">4.Stable Diffusion XL的Text Encoder部分有哪些创新？详细分析改进意图 </h2>
+<h3 id="4.Stable-Diffusion-XL的Text-Encoder部分有哪些创新？详细分析改进意图">4.Stable Diffusion XL的Text Encoder部分有哪些创新？详细分析改进意图 </h3>
 
 
-<h2 id="5.Stable-Diffusion-XL中使用的训练方法有哪些创新点？">5.Stable Diffusion XL中使用的训练方法有哪些创新点？ </h2>
+<h3 id="5.Stable-Diffusion-XL中使用的训练方法有哪些创新点？">5.Stable Diffusion XL中使用的训练方法有哪些创新点？ </h3>
 
 
-<h2 id="6.训练Stable-Diffusion-XL时为什么要使用offset-Noise？">6.训练Stable Diffusion XL时为什么要使用offset Noise？ </h2>
+<h3 id="6.训练Stable-Diffusion-XL时为什么要使用offset-Noise？">6.训练Stable Diffusion XL时为什么要使用offset Noise？ </h3>
 
 
-<h2 id="7.介绍一下Stable-Diffusion-XL-Turbo的原理">7.介绍一下Stable Diffusion XL Turbo的原理 </h2>
+<h3 id="7.介绍一下Stable-Diffusion-XL-Turbo的原理">7.介绍一下Stable Diffusion XL Turbo的原理 </h3>
 
 
-<h2 id="8.SDXL-Turbo用的蒸馏方法是什么？">8.SDXL-Turbo用的蒸馏方法是什么？</h2>
+<h3 id="8.SDXL-Turbo用的蒸馏方法是什么？">8.SDXL-Turbo用的蒸馏方法是什么？</h3>
 
 论文链接：[adversarial_diffusion_distillation.pdf](https://static1.squarespace.com/static/6213c340453c3f502425776e/t/65663480a92fba51d0e1023f/1701197769659/adversarial_diffusion_distillation.pdf)
 
@@ -1046,7 +1046,7 @@ ADD 模型具有以下优势：
 - **灵活性**：支持进一步的多步采样，从而在单步生成的基础上通过迭代增强图像细节。
 
 
-<h2 id="9.什么是SDXL-Refiner？">9.什么是SDXL Refiner？</h2>
+<h3 id="9.什么是SDXL-Refiner？">9.什么是SDXL Refiner？</h3>
 
 SDXL Refiner是Stability AI推出的图像精细化模型，作为SDXL生态系统的第二阶段，专门负责提升图像细节质量。它采用了"专家集成"的设计理念：Base模型生成基础结构，Refiner模型优化细节表现。
 
@@ -1083,10 +1083,10 @@ SDXL Refiner是Stability AI推出的图像精细化模型，作为SDXL生态系�
 
 ## 第四章 Stable Diffusion 3系列核心高频考点
 
-<h2 id="1.介绍一下Stable-Diffusion-3的整体架构">1.介绍一下Stable Diffusion 3的整体架构 </h2>
+<h3 id="1.介绍一下Stable-Diffusion-3的整体架构">1.介绍一下Stable Diffusion 3的整体架构 </h3>
 
 
-<h2 id="2.与Stable-Diffusion-XL相比，Stable-Diffusion-3的核心优化有哪些？">2.与Stable Diffusion XL相比，Stable Diffusion 3的核心优化有哪些？ </h2>
+<h3 id="2.与Stable-Diffusion-XL相比，Stable-Diffusion-3的核心优化有哪些？">2.与Stable Diffusion XL相比，Stable Diffusion 3的核心优化有哪些？ </h3>
 
 Rocky认为Stable Diffusion 3的价值和传统深度学习时代的“YOLOv4”一样，在AIGC时代的工业界、应用界、竞赛界以及学术界，都有非常大的学习借鉴价值，以下是SD 3相比之前系列的改进点汇总：
 
@@ -1101,7 +1101,7 @@ Rocky认为Stable Diffusion 3的价值和传统深度学习时代的“YOLOv4”
 9. 训练细节：数据预处理（去除离群点数据、去除低质量数据、去除NSFW数据）、图像Caption精细化、预计算图像和文本特征、Classifier-Free Guidance技术、DPO（Direct Preference Optimization）技术
 
 
-<h2 id="3.Stable-Diffusion-3的VAE部分有哪些创新？详细分析改进意图">3.Stable Diffusion 3的VAE部分有哪些创新？详细分析改进意图 </h2>
+<h3 id="3.Stable-Diffusion-3的VAE部分有哪些创新？详细分析改进意图">3.Stable Diffusion 3的VAE部分有哪些创新？详细分析改进意图 </h3>
 
 **VAE（变分自编码器，Variational Auto-Encoder）模型在Stable Diffusion 3（SD 3）中依旧是不可或缺的组成部分**，Rocky相信不仅在SD 3模型中，在AIGC时代的未来发展中VAE模型也会持续发挥价值。
 
@@ -1134,13 +1134,13 @@ Rocky认为Stable Diffusion 3的价值和传统深度学习时代的“YOLOv4”
 ![Stable Diffusion 3 VAE完整结构图](./imgs/Stable-Diffusion-3-VAE完整结构图.png)
 
 
-<h2 id="4.Stable-Diffusion-3中使用的训练方法有哪些创新点？">4.Stable Diffusion 3中使用的训练方法有哪些创新点？ </h2>
+<h3 id="4.Stable-Diffusion-3中使用的训练方法有哪些创新点？">4.Stable Diffusion 3中使用的训练方法有哪些创新点？ </h3>
 
 
-<h2 id="5.Stable-Diffusion-3的Backbone部分有哪些创新？详细分析改进意图">5.Stable Diffusion 3的Backbone部分有哪些创新？详细分析改进意图 </h2>
+<h3 id="5.Stable-Diffusion-3的Backbone部分有哪些创新？详细分析改进意图">5.Stable Diffusion 3的Backbone部分有哪些创新？详细分析改进意图 </h3>
 
 
-<h2 id="6.Stable-Diffusion-3的Text-Encoder部分有哪些创新？详细分析改进意图">6.Stable Diffusion 3的Text Encoder部分有哪些创新？详细分析改进意图 </h2>
+<h3 id="6.Stable-Diffusion-3的Text-Encoder部分有哪些创新？详细分析改进意图">6.Stable Diffusion 3的Text Encoder部分有哪些创新？详细分析改进意图 </h3>
 
 作为当前最强的AI绘画大模型之一，Stable Diffusion 3模型都是AIGC算法岗面试中的必考内容。接下来，Rocky将带着大家深入浅出讲解Stable Diffusion 3模型的Text Encoder部分是如何改进的。
 
@@ -1169,13 +1169,13 @@ Stable Diffusion 3的文字渲染能力很强，同时遵循文本Prompts的图�
 更多详细内容，大家可以查阅：[深入浅出完整解析Stable Diffusion 3（SD 3）和FLUX.1系列核心基础知识](https://zhuanlan.zhihu.com/p/684068402)
 
 
-<h2 id="7.训练Stable-Diffusion过程中官方使用了哪些训练技巧？">7.训练Stable Diffusion过程中官方使用了哪些训练技巧？ </h2>
+<h3 id="7.训练Stable-Diffusion过程中官方使用了哪些训练技巧？">7.训练Stable Diffusion过程中官方使用了哪些训练技巧？ </h3>
 
 
-<h2 id="8.介绍一下Stable-Diffusion-3.5系列的原理">8.介绍一下Stable Diffusion 3.5系列的原理 </h2>
+<h3 id="8.介绍一下Stable-Diffusion-3.5系列的原理">8.介绍一下Stable Diffusion 3.5系列的原理 </h3>
 
 
-<h2 id="9.为什么Stable-Diffusion-3使用三个文本编码器?">9.为什么Stable Diffusion 3使用三个文本编码器?</h2>
+<h3 id="9.为什么Stable-Diffusion-3使用三个文本编码器?">9.为什么Stable Diffusion 3使用三个文本编码器?</h3>
 
 Stable Diffusion 3作为一款先进的文本到图像模型,采用了三重文本编码器的方法。这一设计选择显著提升了模型的性能和灵活性。
 
@@ -1232,7 +1232,7 @@ Stable Diffusion 3使用以下三个文本编码器:
 3. **可扩展性**: 多编码器方法允许在模型的未来迭代中轻松集成新的或改进的文本编码器。
 
 
-<h2 id="10.Stable-Diffusion-3中数据标签工程的具体流程是什么样的？">10.Stable Diffusion 3中数据标签工程的具体流程是什么样的？</h2>
+<h3 id="10.Stable-Diffusion-3中数据标签工程的具体流程是什么样的？">10.Stable Diffusion 3中数据标签工程的具体流程是什么样的？</h3>
 
 **目前AI绘画大模型存在一个很大的问题是模型的文本理解能力不强**，主要是指AI绘画大模型生成的图像和输入文本Prompt的一致性不高。举个例子，如果说输入的文本Prompt非常精细复杂，那么生成的图像内容可能会缺失这些精细的信息，导致图像与文本的内容不一致。这也是AI绘画大模型Prompt Following能力的体现。
 
@@ -1253,7 +1253,7 @@ SD 3借鉴了DALL-E 3的数据标注方法，使用**多模态大模型CogVLM**�
 ![SD 3数据标注工程](./imgs/SD3数据标注工程.png)
 
 
-<h2 id="11.SD3-Turbo如何用的蒸馏方法是什么？">11.SD3-Turbo用的蒸馏方法是什么？</h2>
+<h3 id="11.SD3-Turbo如何用的蒸馏方法是什么？">11.SD3-Turbo用的蒸馏方法是什么？</h3>
 
 论文链接:[2403.12015](https://arxiv.org/pdf/2403.12015)
 
@@ -1275,7 +1275,7 @@ LADD（潜在对抗扩散蒸馏）与ADD（对抗扩散蒸馏）有几个关键�
 4. **多长宽比支持**：LADD能够直接支持多长宽比的训练，而ADD由于解码和判别过程的限制，不易实现这一点。因此，LADD生成的图像在各种长宽比下具有较好的适应性。
 
 
-<h2 id="12.Stable-Diffusion-3的图像特征和文本特征在训练前缓存策略有哪些优缺点？">12.Stable Diffusion 3的图像特征和文本特征在训练前缓存策略有哪些优缺点？</h2>
+<h3 id="12.Stable-Diffusion-3的图像特征和文本特征在训练前缓存策略有哪些优缺点？">12.Stable Diffusion 3的图像特征和文本特征在训练前缓存策略有哪些优缺点？</h3>
 
 SD 3与之前的版本相比，整体的参数量级大幅增加，这无疑也增加了训练成本，所以官方的技术报告中也**对SD 3训练时冻结（frozen）部分进行了分析**，主要评估了VAE、CLIP-L、CLIP-G以及T5-XXL的显存占用（Mem）、推理耗时（FP）、存储成本（Storage）、训练成本（Delta），如下图所示，T5-XXL的整体成本是最大的：
 
@@ -1288,7 +1288,7 @@ SD 3与之前的版本相比，整体的参数量级大幅增加，这无疑也�
 整体上看，**其实SD 3的预计算策略是一个空间换时间的技术**。
 
 
-<h2 id="13.Stable-Diffusion-3.5的改进在哪里?">13.Stable Diffusion 3.5的改进在哪里？</h2>
+<h3 id="13.Stable-Diffusion-3.5的改进在哪里?">13.Stable Diffusion 3.5的改进在哪里？</h3>
 
 1、**引入 Query-Key 归一化（QK normalization）**：在训练大型 Transformer 模型时，QK 归一化已成为标准实践。SD3.5 也采用了这一技术，以增强模型训练的稳定性并简化后续的微调和开发。
 
