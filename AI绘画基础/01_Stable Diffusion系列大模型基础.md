@@ -68,7 +68,7 @@
 - [20.AI绘画大模型的训练流程都包含哪些步骤？](#20.AI绘画大模型的训练流程都包含哪些步骤？)
 - [21.AIGC面试中必考的Stable Diffusion系列模型版本有哪些？](#21.AIGC面试中必考的Stable-Diffusion系列模型版本有哪些？)
 - [22.AIGC面试中必考的AI绘画技术框架脉络是什么样的？](#22.AIGC面试中必考的AI绘画技术框架脉络是什么样的？)
-- [23.Stable Diffusion中的Inpaint和Outpaint分别是什么?](#23.Stable-Diffusion中的Inpaint（局部修复）和Outpaint（边界扩展）分别是什么？)
+- [23.Stable Diffusion中的Inpaint和Outpaint分别是什么?](#23.Stable-Diffusion中的Inpaint和Outpaint分别是什么？)
 - [24.Stable Diffusion中的safety_checker是什么?](#24.StableDiffusion中的safetychecker是什么?)
 - [25.主流AI绘画大模型的完整训练流程是什么样的？](#25.主流AI绘画大模型的完整训练流程是什么样的？)
 
@@ -1253,7 +1253,7 @@ SD 3借鉴了DALL-E 3的数据标注方法，使用**多模态大模型CogVLM**�
 ![SD 3数据标注工程](./imgs/SD3数据标注工程.png)
 
 
-<h3 id="11.SD3-Turbo如何用的蒸馏方法是什么？">11.SD3-Turbo用的蒸馏方法是什么？</h3>
+<h3 id="11.SD3-Turbo用的蒸馏方法是什么？">11.SD3-Turbo用的蒸馏方法是什么？</h3>
 
 论文链接:[2403.12015](https://arxiv.org/pdf/2403.12015)
 
