@@ -1266,6 +1266,11 @@ control_v11f1e_sd15_tile（实验模型）
 
 <h2 id="65.ControlNet模型的训练流程一般包含哪几部分核心内容？">65.ControlNet模型的训练流程一般包含哪几部分核心内容？</h2>
 
+ControlNet系列模型的训练流程主要分成以下几个步骤：
+
+1. 设计我们想要的额外控制条件：除了上面章节中讲到的控制条件，我们还可以根据实际需求自定义一些控制条件，从而使用ControlNet控制Stable Diffusion/FLUX.1朝着我们想要的细粒度方向生成内容。
+2. 构建训练数据集：确定好额外控制条件后，我们就可以开始构建训练数据集了。ControlNet数据集中需要包含三个维度的信息：Ground Truth图片、作为控制条件（Conditional）的图片，以及对应的Caption标签。
+3. 训练我们自己的ControlNet模型：训练数据集构建好后，我们就可以开始训练自己的ControlNet模型了，我们需要一个至少8G显存的GPU才能满足ControlNet模型的训练要求。
 
 <h2 id="66.ControlNet有哪些万金油级应用案例？">66.ControlNet有哪些万金油级应用案例？</h2>
 
