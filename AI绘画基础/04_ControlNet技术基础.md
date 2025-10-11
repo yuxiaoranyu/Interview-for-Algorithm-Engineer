@@ -67,6 +67,7 @@
 - [66.ControlNet有哪些万金油级应用案例？](#66.ControlNet有哪些万金油级应用案例？)
 - [67.SD/SDXL/FLUX.1 ControlNet之间有哪些区别？](#67.SD/SDXL/FLUX.1-ControlNet之间有哪些区别？)
 - [68.介绍一下Controlnet-Union的原理](#68.介绍一下Controlnet-Union的原理)
+- [69.ControlNet是如何起作用的？](#69.ControlNet是如何起作用的？)
 
 
 
@@ -1250,5 +1251,23 @@ EasyPhoto作为一款基于Stable Diffusion的AI写真生成工具，深度融�
 
 
 <h2 id="68.介绍一下Controlnet-Union的原理">68.介绍一下Controlnet-Union的原理</h2>
+
+
+<h2 id="69.ControlNet是如何起作用的？">69.ControlNet是如何起作用的？</h2>
+
+在以Stable Diffusion和FLUX.1为核心的AIGC图像生成过程中，想要ControlNet起作用，首先我们需要输入一张参考图，通过**预处理器** (Preprocessor)对输入参考图按一定的模式进行预处理，通常是使用传统的计算机视觉算法（如边缘检测、人体姿态估计、深度估计等）来从输入参考图中提取出纯粹的控制信息，也就是我们常说的**条件图像**(Conditioning Image)。
+
+当然的，我们也可以不使用预处理功能，直接输入一张自己处理好的图片当作预处理图。下面是Rocky构建的ControlNet的条件图像处理流程图示，让大家能够更好的理解：
+
+![ControlNet的条件图像处理流程](./imgs/ControlNet的条件图像处理流程.png)
+
+接着条件图像信息通过ControlNet再注入到Stable Diffusion和FLUX.1中，再加上原本就直接注入到Stable Diffusion和FLUX.1中的文本信息和图像信息（可选，进行图生图任务），综合作用进行扩散过程，最终生成受条件信息控制的图像。
+
+总的来说，ControlNet做的就是这样一件事：**它为扩散模型（如 Stable Diffusion/FLUX.1）提供一种额外的“约束”条件，引导AIGC大模型按照我们期望的构图、姿态或结构来生成图像，减少图像生成的随机**性。
+
+为了大家方便的理解，**Rocky也制作了ControlNet推理的完整流程图**，大家可以直观的学习理解：
+
+![完整的ControlNet模型推理流程](./imgs/完整的ControlNet模型推理流程.png)
+
 
 ---
