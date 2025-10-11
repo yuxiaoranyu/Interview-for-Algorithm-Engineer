@@ -1199,6 +1199,7 @@ EasyPhoto作为一款基于Stable Diffusion的AI写真生成工具，深度融�
 
 ControlNet 1.1一共发布了14个模型（11个成品模型和3 个实验模型）：
 
+```bash
 control_v11p_sd15_canny
 control_v11p_sd15_mlsd
 control_v11f1p_sd15_depth
@@ -1213,6 +1214,7 @@ control_v11p_sd15_softedge
 control_v11e_sd15_shuffle（实验模型）
 control_v11e_sd15_ip2p（实验模型）
 control_v11f1e_sd15_tile（实验模型）
+```
 
 <h2 id="49.介绍一下ControlNet-Canny条件控制的原理">49.介绍一下ControlNet Canny条件控制的原理</h2>
 
