@@ -1191,6 +1191,28 @@ EasyPhoto作为一款基于Stable Diffusion的AI写真生成工具，深度融�
 
 <h2 id="48.ControlNet-1.1与ControlNet相比，有哪些改进？">48.ControlNet 1.1与ControlNet相比，有哪些改进？</h2>
 
+**ControlNet 1.1与ControlNet 1.0具有完全相同的模型架构。ControlNet 1.1主要是在ControlNet 1.0的基础上进行了优化训练，提高了鲁棒性和控制效果，同时发布了几个新的ControlNet模型。**
+
+从ControlNet 1.1开始，ControlNet模型将使用标准的命名规则（SCNNR）来命名所有模型，这样我们在使用时也能更加方便与清晰。具体的命名规则如下图所示：
+
+![ControlNet1.1模型命名规则.png](./imgs/ControlNet1.1模型命名规则.png)
+
+ControlNet 1.1一共发布了14个模型（11个成品模型和3 个实验模型）：
+
+control_v11p_sd15_canny
+control_v11p_sd15_mlsd
+control_v11f1p_sd15_depth
+control_v11p_sd15_normalbae
+control_v11p_sd15_seg
+control_v11p_sd15_inpaint
+control_v11p_sd15_lineart
+control_v11p_sd15s2_lineart_anime
+control_v11p_sd15_openpose
+control_v11p_sd15_scribble
+control_v11p_sd15_softedge
+control_v11e_sd15_shuffle（实验模型）
+control_v11e_sd15_ip2p（实验模型）
+control_v11f1e_sd15_tile（实验模型）
 
 <h2 id="49.介绍一下ControlNet-Canny条件控制的原理">49.介绍一下ControlNet Canny条件控制的原理</h2>
 
