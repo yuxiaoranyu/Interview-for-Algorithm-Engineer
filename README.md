@@ -8,15 +8,15 @@
 
 # 
 
-🏆**AIGC算法岗方向：** 涵盖AIGC、传统深度学习、自动驾驶、AI Agent、机器学习、计算机视觉、自然语言处理、强化学习、具身智能、元宇宙、AGI等。
+🏆**AIGC算法岗方向：** 涵盖AIGC、传统深度学习、自动驾驶、AI Agent、机器学习、计算机视觉、自然语言处理、强化学习、大数据挖掘、具身智能、元宇宙、AGI等。
 
 🏆**AIGC开发岗方向：** 涵盖Python、Java、C/C++、Go、嵌入式、前端、后端、测试、运维等。
 
-🚀**本项目凝聚了AIGC时代众多一线AIGC算法专家的行业经验与深度洞察**，涵盖AIGC完整知识架构、AIGC大厂内推、AIGC面试经验、AIGC公司指南/辛秘、AI校招时间表、AIGC面试准备、AIGC薪资爆料、AIGC刷题指南、AIGC求职答疑等干货资源。本项目的核心内容均取材于编者们在AI行业中的工作、研究、竞赛经验以及对各大AIGC公司主流的AIGC岗位笔试/面试题提炼。
+🚀**本项目凝聚了AIGC时代众多一线AIGC算法专家的行业经验与深度洞察**，涵盖AIGC完整知识架构、AIGC大厂内推、AIGC面试经验、AIGC公司指南/辛秘、AI校招时间表、AIGC面试准备、AIGC薪资爆料、AIGC刷题指南、AIGC求职答疑等干货资源。本项目的核心内容均取材于编者们在AI行业中的工作、研究、竞赛经验，以及对各互联网大厂/AIGC明星公司的AIGC岗位笔试/面试题提炼。
 
-💡同时，本项目也可作为高等学府AIGC相关专业的研究、教学、竞赛以及学习的参考用书；还可为AIGC、传统深度学习以及自动驾驶领域的初、中级技术人员提供思路参考，**尤其适合AIGC求职者和提供相关AICG算法岗位的面试官阅读研究**。
+💡**本项目也可作为高等学府AIGC相关专业的研究、教学、竞赛以及学习的参考用书**；还可为AIGC、传统深度学习以及自动驾驶领域的初、中级技术人员提供思路参考，**尤其适合AIGC求职者和提供相关AICG算法岗位的面试官阅读研究**。
 
-👍**本项目的持续构建/维护十分不易，希望大家能多多star～。Star本项目，你就获得了0.5个心仪的offer；再分享本项目，你就获得了0.75个心仪offer！持续star和分享本项目，你就获得了升职加薪的50%必要条件。在这里，Rocky祝大家求职顺利、工作顺利！**
+👍**本项目的持续构建/维护十分不易，希望大家能多多star～。Star本项目，你就获得了0.5个心仪的offer；再分享本项目，你就获得了0.75个心仪offer！在这里，Rocky祝大家求职顺利、工作顺利！**
 
 ## 📖目录
 
@@ -39,7 +39,7 @@
 - :chart_with_upwards_trend: [开放性问题](开放性问题)
 - [2025年AI算法岗求职群&学习交流社区](https://mp.weixin.qq.com/s/ssEJjHBoJDB4y5CfQIWYvw)
 
-## 加入2025年AIGC算法岗/开发岗求职招聘社群（实习、秋招、春招、校招、社招）
+## 💎加入2025年AIGC算法岗/开发岗求职招聘社群（实习、秋招、春招、校招、社招）
 
 咱们的《三年面试五年模拟》AIGC算法岗求职面试项目源自于AIGCmagic社区，**AIGCmagic社区里涵盖了海量的AIGC面试面经资源、内推招聘资讯、面试专业答疑、面试干货知识汇总、AIGC商业变现项目集合**（AIGC、传统深度学习、自动驾驶、机器学习、计算机视觉、自然语言处理、具身智能、元宇宙、SLAM等）。
 
@@ -59,7 +59,7 @@
 
 ![【三年面试五年模拟】内容大纲](imgs/框架.png)
 
-## 作者介绍
+## 👨作者介绍
 
 >Rocky Ding 主编
 
@@ -67,7 +67,7 @@
 <a href="imgs/WeThinkIn公众号.jpg"><img src="https://img.shields.io/badge/WeThinkIn-公众号-brightgreen"></a>
 <a href="https://rockyding.blog.csdn.net"><img src="https://img.shields.io/badge/Rocky Ding-CSDN-red"></a>
 
-Rocky Ding，AIGCmagic社区创始人，知乎AI领域知名博主（同名Rocky Ding），公众号《WeThinkIn》主理人，全网文章阅读量600万+。资深AIGC算法专家，专注于AIGC产品与AI算法解决方案的商业应用。在互联网大厂、AI独角兽、传统科技公司以及国企研究院有丰富的工作经验与创业经验。多次带队获得CVPR、AAAI、Kaggle等AI领域顶级竞赛的冠军成绩。发表多篇AI领域论文和专利。
+Rocky Ding，AIGCmagic社区创始人，知乎AI领域知名博主（同名Rocky Ding），公众号《WeThinkIn》主理人，全网文章阅读量600万+。资深AIGC算法专家，头部投资机构FA合作伙伴，专注于AIGC产品与AI算法解决方案的商业应用。在互联网大厂、AI独角兽、传统科技公司以及国企研究院有丰富的工作经验与创业经验。多次带队获得CVPR、AAAI、Kaggle等AI领域顶级竞赛的冠军成绩。发表多篇AI领域论文和专利。
 
 Rocky最新撰写完成10万字的Stable Diffusion 3和FLUX.1系列模型全网最详细讲解文章：[深入浅出完整解析Stable Diffusion 3（SD 3）和FLUX.1系列核心基础知识](https://zhuanlan.zhihu.com/p/684068402)
 
@@ -78,6 +78,10 @@ Rocky最新撰写完成10万字的Stable Diffusion 3和FLUX.1系列模型全网�
 <a href="https://zhihu.com/people/m_aigc2022"><img src="https://img.shields.io/badge/猫先生-知乎-blue"></a>
 
 猫先生，公众号“魔方AI空间”主理人，资深AIGC算法专家，具有丰富AI模型部署及落地经验，多次参加赛事取得冠军成绩，专注于AIGC技术探索与商业案例应用。
+
+猫先生近期撰写的关于主流智能体框架和大模型推理部署框架的系统性讲解文章：
+- [一文梳理主流热门智能体框架：Dify、Coze、n8n、AutoGen、LangChain、CrewAI](http://mp.weixin.qq.com/s/5zLnArJcI0TDxL-iiuikPg)
+- [一文梳理主流大模型推理部署框架：vLLM、SGLang、TensorRT-LLM、ollama、XInference](http://mp.weixin.qq.com/s/Fsaz7PAUSiKizl_lw-KSeg)
 
 >张一凡 副主编
 
