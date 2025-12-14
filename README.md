@@ -107,6 +107,36 @@ Elliot Qi，互联网大厂AIGC算法工程师，在计算机视觉顶会发表�
 
 初街夜话，计算机视觉方向的在读博士，主要研究目标检测，也会折腾一些 AIGC 技术，享受探索人工智能前沿的过程。
 
+
+## ⚡大模型实验室Lab4AI普惠算力
+
+**【免费H800算力，立即领取！🚀】**
+
+新用户注册即送30元算力券💰，进群再送20元💰！
+
+**立即注册，领取福利**： https://www.lab4ai.cn/register?agentID=user-zSoi7OvcRZ
+
+**基于大模型实验室GPU算力的AI项目实践「小白也能快速上手」**
+
+| 主题 | AI项目实战 | 博客/视频 |
+|:------------:|:--------------------------:|:--------:| 
+| 基于 ComfyUI 调用 Flux 文生图模型生成动漫风格图像 | [实战链接](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=f82ca14acda040ba8a3412feb541ba29&type=project) | [链接](https://mp.weixin.qq.com/s/OEDQO-IkT4uo_HMjBXGuCA) |
+| 告别传统客服：三步骤，LLaMA-Factory 零代码打造会订票的专属大模型 | [实战链接](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=a78043adcef84cd998516e1bcd39562f&type=project) | [链接](https://mp.weixin.qq.com/s/N_CQEBEjN0E31x4Vg31rEQ) |
+| 打造基于多模态 AI 的苏东坡数字人 | [实战链接](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=1f1097f45ea64abca3359e4c0615720a&type=project) | — |
+| WeClone：从聊天记录创造数字分身的一站式解决方案 | [实战链接](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=ab83d14684fa45d197f67eddb3d8316c&type=project) | [链接](https://mp.weixin.qq.com/s/2pOD8YexWtmuPhV4C7uKJA) |
+| LightX2V 四步蒸馏模型：20 倍速的高质量视频生成革命 | [实战链接](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=d5556b93078d4defbb58c9f722b674df&type=project) | [链接](https://mp.weixin.qq.com/s/kVz1dwthn3nOLT0jTeiQgg) |
+| 基于 Qwen3-8B 的沉浸式苏东坡角色扮演大模型 | [实战链接](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=315457fba1b3432c935865d1c5aa1ffe&type=project) | [链接](https://mp.weixin.qq.com/s/bCCHa2RsKieJZizORU19dQ) |
+| LightLLM 轻量化部署新范式：打造高性能法律智能体 | [实战链接](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=b417085ae8cd4dd0bef7161c3d583b15&type=project) | [链接](https://mp.weixin.qq.com/s/j8rJyoBA02ypPEkxb9XSVg) |
+| RoboMIND —— 机器人多形态通用智能评测基准 | [实战链接](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=492a471cd6054a179660c760f0026704&type=project) | [链接](https://mp.weixin.qq.com/s/i_QPGuqaXfql6cPELxlUVg) |
+| 经典论文复现：《Attention Is All You Need》 | [实战链接](https://www.lab4ai.cn/paper/detail?utm_source=mfai&id=e90aa38fdff9420e8902bc71909fa005&type=paper) | [链接](https://www.bilibili.com/video/BV1Fvp3zBEAN/?spm_id_from=333.1387.homepage.video_card.click) |
+| 经典论文复现：《SELF-INSTRUCT: Aligning Language Models with Self-Generated Instructions》 | [实战链接](https://www.lab4ai.cn/paper/detail?utm_source=mfai&id=2bbf2f4971f74c6e8def26879233f2fe&type=paper) | — |
+
+**算力福利**
+
+- **大模型实验室Lab4AI**：[免费领取50元GPU算力](https://www.lab4ai.cn/register?agentID=user-zSoi7OvcRZ)
+- **大模型实验室群**：[点击加入](imgs/lab4ai.png)
+
+
 ## 💡AIGC行业技术交流群
 
 <div align=center>
