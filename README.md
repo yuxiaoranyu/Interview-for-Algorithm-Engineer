@@ -119,7 +119,7 @@ Elliot Qi，互联网大厂AIGC算法工程师，在计算机视觉顶会发表�
 **基于大模型实验室GPU算力的AI项目实践「小白也能快速上手」**
 
 | 主题 | 实践 | 博客/视频 |
-|:------------ |:-----------------------------:|:--------:| 
+|:------------:|:--------------------------:|:--------:| 
 | 基于 ComfyUI 调用 Flux 文生图模型生成动漫风格图像 | [链接🔗](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=f82ca14acda040ba8a3412feb541ba29&type=project) | [链接🔗](https://mp.weixin.qq.com/s/OEDQO-IkT4uo_HMjBXGuCA) |
 | 告别传统客服：三步骤，LLaMA-Factory 零代码打造会订票的专属大模型 | [链接🔗](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=a78043adcef84cd998516e1bcd39562f&type=project) | [链接🔗](https://mp.weixin.qq.com/s/N_CQEBEjN0E31x4Vg31rEQ) |
 | 打造基于多模态 AI 的苏东坡数字人 | [链接🔗](https://www.lab4ai.cn/project/detail?utm_source=mfai&id=1f1097f45ea64abca3359e4c0615720a&type=project) | — |
