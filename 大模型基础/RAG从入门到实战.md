@@ -3,7 +3,7 @@
 ## 一、RAG基础理论与概念
 
 ### 1.1 RAG基础定义
-- [1.什么是RAG？](#1什么是RAG？)
+- [1.什么是RAG？](#1.什么是RAG？)
 
 ### 1.2 RAG评估与挑战
 - [1.RAG文档召回率是什么？](#1.RAG文档召回率是什么？)
@@ -49,7 +49,7 @@
 - [2.怎么让检索过程更加准确？](#2.怎么让检索过程更加准确？)
 - [3.什么是RAG的迭代检索？](#3.什么是RAG的迭代检索？)
 - [4.什么是RAG的递归检索？](#4.什么是RAG的递归检索？)
-- [5.怎么使用llama index实现递归检索？](#5.怎么使用llamaindex实现递归检索？)
+- [5.怎么使用llama-index实现递归检索？](#5.怎么使用llama-index实现递归检索？)
 
 ### 3.3 后检索优化
 - [1.RAG之Re-Ranking机制介绍](#1.RAG之Re-Ranking机制介绍)
@@ -58,24 +58,24 @@
 ## 四、RAG架构与范式
 
 ### 4.1 经典RAG范式
-- [1.什么是Modular RAG及其框架？](#1.什么是ModularRAG及其框架？)
-- [2.经典的RAG Flow范式（Tuning阶段）？](#2.经典的RAGFlow范式（Tuning阶段）？)
-- [3.经典的RAG Flow范式（推理阶段-顺序模式）？](#3.经典的RAGFlow范式（推理阶段-顺序模式）？)
-- [4.经典的RAG Flow范式（推理阶段-条件模式）？](#4.经典的RAGFlow范式（推理阶段-条件模式）？)
+- [1.什么是Modular-RAG及其框架？](#1.什么是Modular-RAG及其框架？)
+- [2.经典的RAG-Flow范式（Tuning阶段）？](#2.经典的RAG-Flow范式（Tuning阶段）？)
+- [3.经典的RAG-Flow范式（推理阶段-顺序模式）？](#3.经典的RAG-Flow范式（推理阶段-顺序模式）？)
+- [4.经典的RAG-Flow范式（推理阶段-条件模式）？](#4.经典的RAG-Flow范式（推理阶段-条件模式）？)
 - [5.如何通过llamaindex实现条件模式？](#5.如何通过llamaindex实现条件模式？)
-- [6.经典的RAG Flow范式（推理阶段-分支模式）？](#6.经典的RAGFlow范式（推理阶段-分支模式）？)
+- [6.经典的RAG-Flow范式（推理阶段-分支模式）？](#6.经典的RAGFlow范式（推理阶段-分支模式）？)
 
 ### 4.2 高级RAG架构
-- [1.什么是Agentic RAG？它与传统RAG有何不同？](#1.什么是Agentic-RAG？它与传统RAG有何不同？)
-- [2.Agentic RAG的核心组件有哪些？](#2.Agentic-RAG的核心组件有哪些？)
-- [3.在Agentic RAG中，代理模块如何决定检索哪些文档？](#3.在Agentic-RAG中，代理模块如何决定检索哪些文档？)
-- [4.Agentic RAG如何处理检索到的信息以生成高质量的回答？](#4.Agentic-RAG如何处理检索到的信息以生成高质量的回答？)
-- [5.请解释Agentic RAG中的自主学习机制是如何工作的？](#5.请解释Agentic-RAG中的自主学习机制是如何工作的？)
-- [6.Agentic RAG在哪些实际应用中具有优势？请举例说明。](#6.Agentic-RAG在哪些实际应用中具有优势？请举例说明。)
-- [7.在多轮对话中，Agentic RAG如何保持上下文一致性和信息连贯性？](#7.在多轮对话中，Agentic-RAG如何保持上下文一致性和信息连贯性？)
-- [8.Agentic RAG面临的主要挑战有哪些？如何应对这些挑战？](#8.Agentic-RAG面临的主要挑战有哪些？如何应对这些挑战？)
-- [9.如何评估Agentic RAG系统的性能？有哪些关键指标？](#9.如何评估Agentic-RAG系统的性能？有哪些关键指标？)
-- [10.在设计Agentic RAG时，如何平衡检索与生成模块的权重？](#10.在设计Agentic-RAG时，如何平衡检索与生成模块的权重？)
+- [1.什么是Agentic-RAG？它与传统RAG有何不同？](#1.什么是Agentic-RAG？它与传统RAG有何不同？)
+- [2.Agentic-RAG的核心组件有哪些？](#2.Agentic-RAG的核心组件有哪些？)
+- [3.在Agentic-RAG中，代理模块如何决定检索哪些文档？](#3.在Agentic-RAG中，代理模块如何决定检索哪些文档？)
+- [4.Agentic-RAG如何处理检索到的信息以生成高质量的回答？](#4.Agentic-RAG如何处理检索到的信息以生成高质量的回答？)
+- [5.请解释Agentic-RAG中的自主学习机制是如何工作的？](#5.请解释Agentic-RAG中的自主学习机制是如何工作的？)
+- [6.Agentic-RAG在哪些实际应用中具有优势？请举例说明。](#6.Agentic-RAG在哪些实际应用中具有优势？请举例说明。)
+- [7.在多轮对话中，Agentic-RAG如何保持上下文一致性和信息连贯性？](#7.在多轮对话中，Agentic-RAG如何保持上下文一致性和信息连贯性？)
+- [8.Agentic-RAG面临的主要挑战有哪些？如何应对这些挑战？](#8.Agentic-RAG面临的主要挑战有哪些？如何应对这些挑战？)
+- [9.如何评估Agentic-RAG系统的性能？有哪些关键指标？](#9.如何评估Agentic-RAG系统的性能？有哪些关键指标？)
+- [10.在设计Agentic-RAG时，如何平衡检索与生成模块的权重？](#10.在设计Agentic-RAG时，如何平衡检索与生成模块的权重？)
 
 ### 4.3 特定技术实现
 - [1.怎么通过llamaindex实现FLAREdirect？](#1.怎么通过llamaindex实现FLAREdirect？)
@@ -86,12 +86,12 @@
 ### 5.1 LangChain框架
 - [1.怎么用langchain构建简单RAG？](#1.怎么用langchain构建简单RAG？)
 - [2.基于langchain的本地文档问答系统实现步骤有哪些?](#2.基于langchain的本地文档问答系统实现步骤有哪些?)
-- [3.介绍一下 LangChain](#3.介绍一下LangChain)
-- [4.LangChain 中 Chat Message History 是什么？](#4.LangChain中ChatMessageHistory是什么？)
-- [5.LangChain 中 LangChain Agent 是什么？](5.LangChain中LangChainAgent是什么？)
-- [6.LangChain 支持哪些功能?](#6.LangChain支持哪些功能?)
-- [7.什么是 LangChain model?](#7.什么是LangChainmodel?)
-- [8.LangChain 如何链接多个组件处理一个特定的下游任务？](#8.LangChain如何链接多个组件处理一个特定的下游任务？)
+- [3.介绍一下LangChain](#3.介绍一下LangChain)
+- [4.LangChain中Chat-Message-History是什么？](#4.LangChain中Chat-Message-History是什么？)
+- [5.LangChain中LangChain-Agent是什么？](5.LangChain中LangChain-Agent是什么？)
+- [6.LangChain支持哪些功能?](#6.LangChain支持哪些功能?)
+- [7.什么是LangChain-model?](#7.什么是LangChain-model?)
+- [8.LangChain如何链接多个组件处理一个特定的下游任务？](#8.LangChain如何链接多个组件处理一个特定的下游任务？)
 
 ### 5.2 RAGFlow项目
 - [1.怎么部署RAGFlow项目？](#1.怎么部署RAGFlow项目？)
@@ -985,64 +985,1356 @@ pgvector是PostgreSQL 的开源扩展，允许你在数据库中存储和查询�
 
 ![pgvector](./imgs/pgvector.png)
 
-
 <h1 id="三、检索优化技术"> 三、检索优化技术 </h1>
 <h2 id="3.1 预检索优化"> 3.1 预检索优化 </h2>
 <h3 id='1.怎么使用子查询（预检索）优化RAG？'>1.怎么使用子查询（预检索）优化RAG？</h3>
+
+- 对于复杂的查询，大模型将其拆分为多个子查询。这些子查询会同时进行，检索到的信息被汇总到一起，再有大模型整合为最终输出。Llamaindex（子查询）的例子：https://docs.llamaindex.ai/en/stable/examples/query_engine/multi_doc_auto_retrieval/multi_doc_auto_retrieval/ 。Ollama也叫多查询。
+
+
+```bash
+from llama_index.query_engine import SubQuestionQueryEngine
+from llama_index.question_generation import BaseQuestionGenerator
+from llama_index.response_synthesizers import ResponseSynthesizer
+from llama_index.retrievers import BaseRetriever
+from typing import Sequence
+
+# 假设我们已经有了以下核心组件（实际实现见下文）
+# 1. 问题生成器：负责将复杂问题分解为子问题
+question_gen: BaseQuestionGenerator = ...  # 实际实现见下文
+
+"""
+from llama_index.question_generation import LLMQuestionGenerator
+from llama_index.llms import OpenAI
+question_gen = LLMQuestionGenerator.from_defaults(
+    llm=OpenAI(model="gpt-4"),  # 使用GPT-4生成子问题
+    prompt_template="""
+    将以下复杂问题分解为2-4个更具体的子问题：
+    原始问题: {query_str}
+    子问题:
+    """,
+    max_questions=4  # 最多生成4个子问题
+)
+"""
+
+# 2. 响应合成器：负责将多个子问题的答案组合成最终响应
+response_synthesizer: ResponseSynthesizer = ...  # 实际实现见下文
+
+"""
+from llama_index.response_synthesizers import get_response_synthesizer
+
+# 创建响应合成器
+response_synthesizer = get_response_synthesizer(
+    llm=OpenAI(model="gpt-4-turbo"),  # 使用更强的模型合成答案
+    response_mode="tree_summarize",  # 树状总结模式
+    summary_template="""
+    基于以下子问题的答案，综合回答原始问题：
+    原始问题: {query_str}
+    
+    子问题及答案:
+    {context_str}
+    
+    综合回答:
+    """
+)
+"""
+
+# 3. 查询引擎工具集：包含多个专门处理特定类型问题的查询引擎
+query_engine_tools: Sequence[BaseRetriever] = ...  # 实际实现见下文
+"""
+from llama_index.tools import QueryEngineTool
+from llama_index import VectorStoreIndex
+
+# 创建多个专业查询引擎
+nutrition_index = VectorStoreIndex(...)  # 营养学知识索引
+agriculture_index = VectorStoreIndex(...)  # 农业知识索引
+economics_index = VectorStoreIndex(...)  # 经济学知识索引
+culinary_index = VectorStoreIndex(...)  # 烹饪知识索引
+
+# 封装为工具集
+query_engine_tools = [
+    QueryEngineTool(
+        query_engine=nutrition_index.as_query_engine(),
+        metadata=ToolMetadata(
+            name="nutrition_qa",
+            description="回答关于食物营养成分的问题"
+        )
+    ),
+    QueryEngineTool(
+        query_engine=agriculture_index.as_query_engine(),
+        metadata=ToolMetadata(
+            name="agriculture_qa",
+            description="回答关于作物种植和农业的问题"
+        )
+    ),
+    QueryEngineTool(
+        query_engine=economics_index.as_query_engine(),
+        metadata=ToolMetadata(
+            name="economics_qa",
+            description="回答关于市场价格和经济分析的问题"
+        )
+    ),
+    QueryEngineTool(
+        query_engine=culinary_index.as_query_engine(),
+        metadata=ToolMetadata(
+            name="culinary_qa",
+            description="回答关于食物烹饪和用途的问题"
+        )
+    )
+]
+"""
+
+# 创建子问题查询引擎
+# 该引擎专门处理需要分解为多个子问题的复杂查询
+sub_question_query_engine = SubQuestionQueryEngine(
+    question_gen=question_gen,  # 问题分解组件
+    response_synthesizer=response_synthesizer,  # 答案合成组件
+    query_engine_tools=query_engine_tools  # 子问题处理工具集
+)
+
+# 使用子问题查询引擎处理复杂问题
+# 示例问题要求比较两种事物（需要多角度分析）
+response = sub_question_query_engine.query("比较和对比苹果和橙子。")
+
+# 输出最终的综合回答
+print(response)
+```
+![](imgs/大模型的应用实操/RAG07.png)
+
 <h3 id='2.怎么使用假设答案（预检索）优化RAG？'>2.怎么使用假设答案（预检索）优化RAG？</h3>
+
+- 在查询时，先生成一个假设答案，而不是直接进行检索。可以解决问题和文档内容不匹配的问题。
+
+```bash 
+from llama_index.core.indices.query.query_transform import HyDEQueryTransform
+from llama_index.core.query_engine import TransformQueryEngine
+from IPython.display import Markdown, display
+
+# 1. 创建基础向量索引
+# 从文档集合构建标准向量索引
+index = VectorStoreIndex.from_documents(documents)
+
+# 2. 创建基础查询引擎
+# 使用标准检索方法
+query_engine = index.as_query_engine()
+
+# 3. 创建HyDE查询转换器
+# HyDE = Hypothetical Document Embeddings (假设性文档嵌入)
+hyde = HyDEQueryTransform(include_original=True)
+
+# 参数说明：
+#   include_original=True: 在最终查询中包含原始查询和生成的假设文档
+
+# 4. 创建HyDE增强的查询引擎
+# 将基础查询引擎与HyDE转换器结合
+hyde_query_engine = TransformQueryEngine(
+    query_engine,  # 基础查询引擎
+    hyde          # HyDE转换器
+)
+
+# 5. 执行HyDE增强查询
+query_str = "量子纠缠的实际应用有哪些？"
+response = hyde_query_engine.query(query_str)
+
+# 6. 在Jupyter中以Markdown格式显示结果
+display(Markdown(f"<b>{response}</b>"))
+
+# 7. 单独分析HyDE转换过程
+#  使用LLM根据原始查询生成一个假设性的文档（即一个假设的答案）,将原始查询和生成的假设文档封装成一个QueryBundle对象。
+query_bundle = hyde(query_str)
+
+# 8. 提取生成的假设文档
+# embedding_strs[0] 包含LLM生成的假设性答案
+hyde_doc = query_bundle.embedding_strs[0]
+```
+
+- include_original=False
+
+![](imgs/大模型的应用实操/RAG08.png)
+
+- include_original=True
+
+![](imgs/大模型的应用实操/RAG09.png)
+
 <h3 id='3.还有哪些其他预检索技术优化RAG？'>3.还有哪些其他预检索技术优化RAG？</h3>
+
+#### 1.提示词的优化和改写
+
+- 提示词优化：https://docs.llamaindex.ai/en/stable/examples/prompts/advanced_prompts/
+
+- 提示词改写：https://arxiv.org/pdf/2305.14283
+
+#### 2.假设问题（Inverse HyDE）
+
+- 在查询时，先生成一个假设问题，而不是直接进行检索。可以解决已知答案和文档内容不匹配的问题。
+
+```bash
+def inverse_hyde(document):
+    # 使用LLM生成可能查询该文档的问题
+    hypothetical_query = llm.predict(f"""
+        给定以下文档，生成用户可能提出的3个问题：
+        文档：{document}
+        可能的问题：
+        1.
+    """)
+    
+    # 返回生成的查询
+    return hypothetical_query
+```
+
+![](imgs/大模型的应用实操/RAG10.png)
+
+
 <h3 id='4.RAG之查询重写的策略介绍'>4.RAG之查询重写的策略介绍</h3>
+
+### 查询重写的策略
+
+- 假设文档嵌入 (HyDE) ：通过创建虚拟文档来使查询和文档的语义空间保持一致。
+
+- 重写-检索-阅读：提出了一种全新的框架，它颠覆了传统的检索-阅读顺序，将重点放在查询重写上。
+
+- 回溯提示 (Step-Back Prompting)： 允许大语言模型 (LLM) 基于- 高层概念进行抽象推理和检索。
+
+- Query2Doc： 利用来自大语言模型 (LLM) 的少量提示生成伪文档，并将这些伪文档与原始查询合并，构建新的查询。
+
+- ITER-RETGEN：提出了一种迭代式检索生成方法。它将前一次生成的结果与之前的查询相结合，然后检索相关文档并生成新的结果。这个过程会重复多次，直到最终得到理想的结果。
+
 <h3 id='5.什么是基于提示词的自适应（主动）检索？'>5.什么是基于提示词的自适应（主动）检索？</h3>
 
+随着 RAG（检索增强生成）技术的不断发展，其核心的检索模式正逐渐从被动检索演进为自适应检索（Adaptive Retrieval），也称为主动检索（Active Retrieval）。根据判断标准可分为**基于提示词的方法**和**基于微调的方法**。
+
+基于提示词的方法是指使用提示工程来控制流程以指导大模型。
+
+典型案例：[前瞻式主动检索增强生成，FLARE](https://arxiv.org/abs/2305.06983)
+
+![](imgs/大模型的应用实操/RAG22.png)
+
+FLARE有两种检索查询方法：直接使用生成句子作为查询的方法(FLARE direct和)基于检索指令的方法(FLAREInstruct)
+
+![](imgs/大模型的应用实操/RAG23.png)
+
+#### 1. FLARE instruct的选代生成过程
+
+FLARE_INSTRUCT 是一种通过指令来引导大型语言模型（LM）在文本生成过程中主动地、动态地发出检索请求的方法。其核心思想是：教导模型在需要外部知识时，自动生成一个特殊的搜索指令（例如 [Search(query)]），系统接收到这个指令后便暂停生成，转而去检索相关信息，然后将检索到的文档提供给模型以继续生成更准确的内容。
+
+![](imgs/大模型的应用实操/RAG24.png)
+
+- 指令提示（Instruction Prompting）：通过精心设计的少样本提示（few-shot prompt），教导模型在生成答案时，如果遇到知识盲区，就输出一个特定的搜索指令格式（如 [Search(“搜索词”)]）。
+
+- 生成与中断：模型开始生成回答。当它意识到需要更多信息时，它不会“胡编乱造”，而是生成一个搜索指令（例如：“乔·拜登毕业于 [Search(“Joe Biden university”)]”）。
+系统一旦检测到 [Search(...)] 标签，便会立即中断模型的生成过程。
+
+- 执行检索：系统提取出括号内的搜索词（如 “Joe Biden university”），并将其发送给检索器（如 BM25 或 Bing 搜索引擎）以获取相关文档。
+
+- 继续生成：检索到的文档被插入到模型的上下文窗口中。然后，模型从中断处继续生成，但此时它已经拥有了更相关、更准确的外部知识，因此能生成事实性更强的文本。
+
+- 循环：这个过程可以重复多次，模型可以在生成的不同阶段多次调用 [Search] 指令，从而实现真正的交互式、主动的检索增强生成。
+
+#### 1. FLARE direct的选代生成过程
+
+先迭代生成临时的下一句，将其用作查询以检索相关文档，如果这些文档包含概率较低的token，就会重新生成下一句，直到达到整体生成的结束。
+
+以第二句话为例子，通过大模型判断出宾夕法尼亚大学和法律学位的概率较低，因此通过掩码进行隐式查询（橙色）和通过问题生成进行明确查询（绿色）来优化生成的结果。
+
+![](imgs/大模型的应用实操/RAG25.png)
+
+- 隐式查询：屏蔽概率低的词汇，选用剩下部分进行检索查询
+
+- 生成问题查询：让大语言模型生成问题，然后使用这些问题从数据库中提取相关数据。
+
 <h2 id="3.2 检索过程优化"> 3.2 检索过程优化 </h2>
+
 <h3 id='1.怎么使用多种切分方式和并行查询？'>1.怎么使用多种切分方式和并行查询？</h3>
+
+- 向量检索中chunk的大小对相似度结果产生较大影响。当chunk过小时，没有上下文信息，导致匹配不精确；当chunk过大时，chunk信息多，导致检索存在噪音。
+
+#### 1.[多chunk索引和查询](https://docs.llamaindex.ai/en/stable/examples/retrievers/ensemble_retrieval/)
+
+```bash
+# 初始化大型语言模型（LLM）
+llm = OpenAI(model="gpt-4")
+
+# 定义要尝试的不同分块大小
+# 这些值代表每个文本块包含的token数量
+chunk_sizes = [128, 256, 512, 1024]
+
+# 准备存储不同分块结果的容器
+nodes_list = []      # 存储不同分块大小的节点列表
+vector_indices = []  # 存储不同分块大小构建的向量索引
+
+# 遍历所有分块大小进行实验
+for chunk_size in chunk_sizes:
+    print(f"Chunk Size: {chunk_size}")  # 打印当前处理的分块大小
+    
+    # 创建句子分割器（SentenceSplitter）
+    # 使用当前循环的分块大小作为参数
+    splitter = SentenceSplitter(chunk_size=chunk_size)
+    
+    # 将文档分割成指定大小的文本块节点
+    nodes = splitter.get_nodes_from_documents(docs)
+    
+    # 在节点元数据中添加当前分块大小信息
+    # 用于后续分析不同分块大小的效果
+    for node in nodes:
+        # 添加分块大小到元数据
+        node.metadata["chunk_size"] = chunk_size
+        
+        # 配置元数据排除规则：
+        # 在嵌入过程中排除"chunk_size"元数据（不参与向量计算）
+        node.excluded_embed_metadata_keys = ["chunk_size"]
+        
+        # 在LLM处理过程中排除"chunk_size"元数据（不影响生成结果）
+        node.excluded_llm_metadata_keys = ["chunk_size"]
+    
+    # 将当前分块大小的节点列表保存到总列表中
+    nodes_list.append(nodes)
+    
+    # 使用当前分块大小的节点构建向量索引
+    vector_index = VectorStoreIndex(nodes)
+    
+    # 将构建的索引添加到索引列表
+    vector_indices.append(vector_index)
+```
+
+#### 2.[并行优化](https://docs.llamaindex.ai/en/stable/examples/retrievers/ensemble_retrieval/)
+
+- 并行嵌入
+
+```bash
+# 并行embedding
+from llama_index.core import Document
+from llama_index.embeddings.openai import OpenAIEmbedding
+from llama_index.core.node_parser import SentenceSplitter
+from llama_index.core.extractors import TitleExtractor
+from llama_index.core.ingestion import IngestionPipeline
+
+# 创建文档处理流水线
+pipeline = IngestionPipeline(
+    transformations=[
+        # 1. 文本分割转换：将文档分割成1024字符的块，块间重叠20字符
+        SentenceSplitter(chunk_size=1024, chunk_overlap=20),
+        
+        # 2. 标题提取转换：为每个文本块生成描述性标题
+        TitleExtractor(),
+        
+        # 3. 嵌入生成转换：使用OpenAI模型生成文本嵌入向量
+        OpenAIEmbedding(),
+    ]
+)
+
+# 禁用缓存（用于性能测试场景）
+# 原因：缓存会干扰性能测量的准确性
+pipeline.disable_cache = True
+
+# 执行流水线处理
+# 参数：
+#   documents: 待处理的文档集合
+#   num_workers=4: 使用4个线程并行处理
+nodes = pipeline.run(documents=documents, num_workers=4)
+```
+
+- 并行查询
+
+```bash
+import asyncio
+from llama_index.core.query_engine import BaseQueryEngine
+
+async def parallel_queries(query_engine: BaseQueryEngine, queries: list):
+    """执行并行查询"""
+    tasks = []
+    for query in queries:
+        # 创建异步查询任务
+        task = query_engine.aquery(query)
+        tasks.append(task)
+    
+    # 并行执行所有查询
+    results = await asyncio.gather(*tasks)
+    return results
+
+# 使用示例
+queries = [
+    "量子计算的基本原理是什么？",
+    "解释Transformer架构",
+    "气候变化对农业的影响"
+]
+
+# 获取查询引擎(index是已经构建好的向量索引)
+query_engine = index.as_query_engine()
+
+# 执行并行查询
+results = asyncio.run(parallel_queries(query_engine, queries))
+
+# 处理结果
+for i, response in enumerate(results):
+    print(f"查询 {i+1}: {queries[i]}")
+    print(f"答案: {response.response}\n")
+```
+
 <h3 id='2.怎么让检索过程更加准确？'>2.怎么让检索过程更加准确？</h3>
+
+- 检索阶段的目标是确定最相关的上下文。通常检索基于向量搜索，通过计算查询与索引数据之间的语义相似性。大多数检索优化技术都围绕嵌入模型展开。
+
+- 微调Embedding
+
+某些术语或词语在通用领域可能相关性较低，但在该行业中却可能具有显著相关性，因此可以对 Embedding 模型在特定行业或领域进行微调。Llamaindex微调：https://github.com/run-llama/finetune-embedding/tree/main ；
+
+- 动态Embedding
+
+动态嵌入会根据单词的上下文进行调整，同一个单词可依据周围词语生成不同的嵌入向量；而静态嵌入则为每个单词分配单一向量。例如，OpenAI 的 embeddings:ada-02 就是一款复杂的动态嵌入模型，具备强大的上下文理解能力。
+
+除了向量搜索，还有其他检索技术，比如混合搜索 —— 通常指将向量搜索与关键词搜索相结合的技术。如果你的检索需求中包含精确的关键词匹配，这种混合搜索技术就尤为适用。
+
 <h3 id='3.什么是RAG的迭代检索？'>3.什么是RAG的迭代检索？</h3>
+
+当单一的检索与生成效果不佳时，可采用RAG的迭代检索方法。该方法会借助上一轮生成的结果作为新上下文进行再次检索，以获取更精准的知识。此过程会循环执行直至生成效果达标或者达到迭代上限。
+
+典型案例：[ITER-RETGEN](https://arxiv.org/abs/2305.15294)
+
+![](imgs/大模型的应用实操/RAG18.png)
+
+迭代循环：对于给定的问题$q$和检索语料库$D$，连续执行$T$次检索生成迭代。在每次迭代$t$中，我们首先使用上一次选代的生成$y_t$，将其与$q$组合，并检索语料库$D$中最匹配的前$k$个段落。接下来，我们提示LLM生成输出$y_{t+1}$。
+
+![](imgs/大模型的应用实操/RAG19.png)
+
 <h3 id='4.什么是RAG的递归检索？'>4.什么是RAG的递归检索？</h3>
-<h3 id='5.怎么使用llama index实现递归检索？'>5.怎么使用llamaindex实现递归检索？</h3>
+
+递归检索体现为“查询转换”技术，能够将一个模糊的用户查询逐步重写为更明确、更易检索的表述。该技术的终止条件通常设置为最大深度。这种方法对于处理需要多跳推理或多层次解析的复杂问题尤为有效。
+
+递归检索与迭代检索的关键区别在于，它显式地依赖上一步的结果来深化检索过程，其核心操作是迭代地“改写查询”和“扩展查询”。
+
+典型案例：[澄清树，TOC](https://arxiv.org/abs/2310.14696)
+
+![](imgs/大模型的应用实操/RAG20.png)
+
+递归循环：TOC（澄清树）方法始于一个初始的模糊问题，通过递归执行RAC来构建一个树形结构。每次递归调用都会在树中插入一个子节点，该节点包含一个“澄清问题-答案”对。每当扩展新的子节点时，系统都会利用新增的上下文信息对当前查询进行文档重排序，以优化检索结果。树结构的探索采用广度优先搜索（BFS）策略，以优先扩展覆盖更广泛的解释，该过程会在达到预设的“最大有效节点数”或“最大深度”时终止。最终，TOC会汇总遍历所有有效节点所获得的信息，生成一个全面、详细的长文本答案来最终解决初始的模糊问题。
+
+![](imgs/大模型的应用实操/RAG21.png)
+
+
+<h3 id='5.怎么使用llama-index实现递归检索？'>5.怎么使用llama-index实现递归检索？</h3>
+
+请注意，LlamaIndex 中的 RecursiveRetriever 其核心机制是基于递归地查找语义相似性来实现查询的深化。这与我们之前讨论的通过“澄清问题-答案对”来构建的澄清树 (Tree of Clarifications, TOC) 方法有本质上的不同。
+
+```bash
+# 导入必要的模块
+from llama_index.core.retrievers import RecursiveRetriever
+from llama_index.core.query_engine import RetrieverQueryEngine
+from llama_index.core import get_response_synthesizer
+
+# 创建递归检索器实例
+recursive_retriever = RecursiveRetriever(
+    "vector",  # 指定基础检索器类型为向量检索
+    retriever_dict={"vector": vector_retriever},  # 检索器字典，包含可用的检索器
+    query_engine_dict=df_id_query_engine_mapping,  # 查询引擎映射，用于处理特定文档ID的查询
+    verbose=True,  # 启用详细输出模式，显示检索过程信息
+)
+
+# 创建响应合成器，使用"compact"模式生成紧凑的响应
+response_synthesizer = get_response_synthesizer(response_mode="compact")
+
+# 使用递归检索器和响应合成器创建查询引擎
+query_engine = RetrieverQueryEngine.from_args(
+    recursive_retriever,  # 传入上面创建的递归检索器
+    response_synthesizer=response_synthesizer  # 传入响应合成器
+)
+
+# 使用查询引擎执行查询
+response = query_engine.query(
+    "What's the net worth of the second richest billionaire in 2023?") 
+```
 
 <h2 id="3.3 后检索优化"> 3.3 后检索优化 </h2>
+
 <h3 id='1.RAG之Re-Ranking机制介绍'>1.RAG之Re-Ranking机制介绍</h3>
+
+### 为什么要用Re-Ranking？
+
+#### 检索阶段的挑战
+
+- 在RAG模型中，检索器负责从大规模的语料库中检索与输入问题相关的文档。然而，由于语料库的广泛性和多样性，检索器可能返回的文档的相关性会有所不同。这种不确定性带来了两个主要挑战：
+
+- 文档相关性差异： 检索器返回的文档可能在相关性上存在差异，有些文档可能与输入问题高度相关，而有些文档可能相关性较低。这种差异性使得直接使用检索器返回的文档进行生成可能会导致结果的不准确或不相关。
+
+- 信息不完整性： 检索器返回的文档通常只是初步筛选，其中可能包含了一些噪音或不相关的信息。这使得生成器在生成结果时面临着信息不完整的挑战，需要进一步处理以提高结果的质量。
+
+因此，为了克服这些挑战，需要引入Re-Ranking机制对检索器返回的文档进行再排序，以确保最终使用的文档具有更高的相关性和质量。
+
+#### 提高生成质量
+
+- Re-Ranking机制不仅可以解决检索阶段的挑战，还可以显著提高生成结果的质量。通过对检索器返回的文档进行再排序，Re-Ranking机制可以使生成器在生成结果时更加准确、相关。
+
+- 具体来说，Re-Ranking机制可以帮助生成器更好地理解和利用检索到的信息，从而生成更加贴近输入问题的文本。它可以过滤掉不相关或噪音信息，强化相关文档的影响，从而提高生成结果的相关性和准确性。这样，Re-Ranking机制不仅可以提高生成结果的质量，还可以增强模型对输入问题的理解能力，使得模型在实际应用中更加可靠和实用。
+
+### 什么是Re-Ranking
+
+Re-Ranking是指在RAG模型中对检索器返回的文档进行再排序的过程。其目的是通过重新排列候选文档，使得生成器更好地利用相关信息，并生成与输入问题更加相关和准确的结果。
+
+在RAG中，Re-Ranking的关键目标是提高生成结果的相关性和质量。通过对检索器返回的文档进行再排序，Re-Ranking可以将与输入问题更加相关的文档排在前面，从而使得生成器在生成结果时能够更加准确地捕捉到输入问题的语境和要求，进而生成更加合适的答案或文本。
+
+### Re-Ranking的步骤
+
+Re-Ranking的过程可以分为以下几个步骤：
+
+- 检索文档： 首先，RAG模型通过检索器从大规模语料库中检索相关文档，这些文档被认为可能包含了与输入问题相关的信息。
+
+- 特征提取： 对检索到的文档进行特征提取，通常会使用各种特征，如语义相关性、词频、TF-IDF值等。这些特征能够帮助模型评估文档与输入问题的相关性。
+
+- 排序文档： 根据提取的特征，对检索到的文档进行排序，将与输入问题最相关的文档排在前面，以便后续生成器使用。
+
+- 重新生成： 排序完成后，生成器将重新使用排在前面的文档进行文本生成，以生成最终的输出结果。
+
+### Re-Ranking的方法
+
+在RAG中，有多种方法可以实现Re-Ranking，包括但不限于：
+
+- 基于特征的Re-Ranking： 根据检索到的文档提取特征，并利用这些特征对文档进行排序，以提高与输入问题相关的文档在排序中的优先级。
+
+- 学习型Re-Ranking： 使用机器学习算法，如支持向量机（SVM）、神经网络等，根据历史数据和标注样本，学习文档与输入问题之间的相关性，并利用学习到的模型对文档进行再排序。
+
+- 混合方法： 将基于特征的方法和学习型方法结合起来，以充分利用特征提取和机器学习的优势，从而更好地实现Re-Ranking的目标。
+
+### Re-Ranking的优化策略
+
+在实际应用中，我们可以采用一些优化策略来进一步提高Re-Ranking的性能和效果：
+
+- 特征优化： 不断优化提取的特征，使其更能反映文档与输入问题的相关性，从而提高Re-Ranking的准确性。
+
+- 模型调优： 如果采用学习型的Re-Ranking方法，可以通过调整模型结构、超参数等来提高模型的性能，使其更好地适应具体的应用场景。
+
+- 多模态融合： 结合文本信息以外的其他模态信息，如图像、视频等，可以提供更多的信息来辅助Re-Ranking，从而提高最终结果的质量。
+
+- 实时调整： 根据实际应用情况，动态调整Re-Ranking策略，以适应不同类型的输入问题和文档。
+
+### 当前Re-Ranking面临的挑战
+
+在实际应用中，Re-Ranking面临一些挑战，限制了其性能和效果，主要包括：
+
+- 计算复杂性： Re-Ranking过程涉及对大规模文档进行排序和评估，计算复杂度较高。尤其是对于大型语料库和实时应用场景，计算资源需求巨大，需要寻找高效的算法和技术来加速处理。
+
+- 可解释性和透明度： Re-Ranking的结果直接影响生成结果的质量，但其内部工作机制通常较为复杂，缺乏可解释性和透明度。这使得难以理解和调试Re-Ranking过程中的问题，也限制了用户对结果的信任度。
+
+-   数据偏差和公平性： Re-Ranking的效果往往受到数据的影响，如果训练数据存在偏差，可能会导致Re-Ranking结果的偏差。此外，Re-Ranking策略可能对不同群体或类别的文档产生不同程度的影响，需要考虑公平性和平衡性的问题。
+
 <h3 id='2.怎么使用Remark技术（后检索）优化RAG？'>2.怎么使用Remark技术（后检索）优化RAG？</h3>
+
+- 在 RAG 系统中，首先通过向量检索或关键词检索快速筛选出一批候选文档。Rerank（重排序） 的作用就是对这批候选文档进行精细化的二次排序，目的是将真正最相关、质量最高、信息量最大的文档提升到排名最前列。
+
+```bash
+import torch
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+
+class Reranker:
+    def __init__(self, model_name="cross-encoder/ms-marco-MiniLM-L-6-v2"):
+        """
+        初始化重排序模型
+        :param model_name: 预训练模型名称（默认使用MS MARCO微调的MiniLM）
+        """
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModelForSequenceClassification.from_pretrained(model_name).to(self.device)
+        self.model.eval()
+    
+    def rerank(self, query: str, documents: list, top_k: int = 5):
+        """
+        对文档列表进行重排序
+        :param query: 查询文本
+        :param documents: 待排序文档列表
+        :param top_k: 返回前K个结果
+        :return: 排序后的(top_k个文档, 得分)
+        """
+        # 生成查询-文档对
+        pairs = [(query, doc) for doc in documents]
+        
+        # 批量编码文本
+        features = self.tokenizer(
+            pairs,
+            padding=True,
+            truncation=True,
+            max_length=512,
+            return_tensors="pt"
+        ).to(self.device)
+        
+        # 计算得分
+        with torch.no_grad():
+            scores = self.model(**features).logits.squeeze(dim=1)
+        
+        # 转换为概率分数
+        scores = torch.sigmoid(scores).cpu().numpy()
+        
+        # 返回数组元素降序排列时对应的原始索引
+        sorted_indices = scores.argsort()[::-1]
+        sorted_docs = [documents[i] for i in sorted_indices]
+        sorted_scores = [scores[i] for i in sorted_indices]
+        
+        # 返回top-k结果
+        return sorted_docs[:top_k], sorted_scores[:top_k]
+
+# 使用示例
+if __name__ == "__main__":
+    # 初始化重排序器
+    reranker = Reranker()
+    
+    # 示例数据
+    query = "什么是人工智能？"
+    documents = [
+        "人工智能是计算机科学的一个分支",
+        "机器学习是AI的核心技术之一",
+        "深度学习推动人工智能发展",
+        "自然语言处理是AI的重要应用",
+        "AI伦理问题引发广泛讨论",
+        "计算机视觉在AI中的应用",
+        "人工智能的历史发展概述"
+    ]
+    
+    # 执行重排序
+    reranked_docs, scores = reranker.rerank(query, documents, top_k=3)
+    
+    # 打印结果
+    print("原始文档数量:", len(documents))
+    print("重排序后Top 3结果:")
+    for i, (doc, score) in enumerate(zip(reranked_docs, scores)):
+        print(f"\nRank {i+1} (Score: {score:.4f}):")
+        print(doc)
+```
 
 <h1 id="四、RAG架构与范式"> 四、RAG架构与范式 </h1>
 
 <h2 id="4.1 经典RAG范式"> 4.1 经典RAG范式 </h2>
+
 <h3 id='1.什么是Modular RAG及其框架？'>1.什么是Modular RAG及其框架？</h3>
+
+[Modular RAG](https://arxiv.org/pdf/2407.21059)整合了各种方法来增强功能模块：
+
+1.**增强数掘采集**: RAG已经超越了传统的非结构化数掘，现在可以处理半结构化和结构化数据，以改进检索并减少模型对外部知识源的作赖。
+
+2.**结合技术**:RAG 正在与其他技术相结合，包括使用微调、适配模块和强化学习来加强检索能力，
+
+3.**可适应的检索过程**:检索过程已发展到支持多轮检索增强，使用检索内容来指导生成，反之亦然。
+
+模块化 RAG提供了一种**高可扩展**的范式，将 RAG 系统划分为**Module Type**、**Module **和 **Operator**三层结构，每个** Module Type **代表 RAG 系统中的一个核心流程，包含多个**Module**，而每个功能模块又包含多个具体的 **Operator**，整个RAG 系统就变成了多个模块和对应 Operator 的排列组合，形成了我们所说的 RAGFlow。在Fow 中，每个 Module Type 中可以选择不同的功能模块，而每个功能模块中又可以选择一个或多个 Operator。
+
+在此范式下，当前 RAG体系中的核心技术，涵盖6大ModuleType、14个Module和40+Operator，旨在提供对 RAG 的全面理解Moduar RAG(模块化检秦增现生成)的三层架构是其核心特点之一，提供了一个高度可重构的框架，以适应不同的应用场景和需求，
+
+这三层架构具体包括:
+
+1、**顶层(Module Type)**：顶层关注RAG的关键阶段，每个阶段都被视为一个独立的模块。这一层继承了高级RAG范式的主要流程，并引入了一个编排模块来控制RAG流程的协调，顶层的模块类型包括索引、预检索、检索、后检索、生成和编排，它们代表了RAG系统中的核心流程。
+
+2、**中间层(Modue)**：中间层由每个横块类型内的子模块组成，进一步细化和优化功能，这些子横块负责处理特定的功能或任务，例如索引模块可能包含块优化和结构组织等子模块，而检索模块可能包含检索器选择和检索器微调等子模块。
+
+3、**底层(Operator)**：底层由基本操作单元-操作特构成。操作特指模块内的具体功能实现，是RAG系统中的构建块。例如，索引模块内的操作符可能负责将文档分割成块、优化块的大小和重叠大小、或者为块附加元数据等。
+
+![](imgs/大模型的应用实操/RAG11.png)
+
 <h3 id='2.经典的RAGFlow范式（Tuning阶段）？'>2.经典的RAGFlow范式（Tuning阶段）？</h3>
+
+主要包括三个模型的微调：Retriever微调，Rerank微调和Generator微调
+
+- **Retriever微调**：在RAG Flow中，对Retriever进行微调，也就是微调embedding模型（代码见后续embedding微调），常用方法：直接微调检索器，构建专门的retriever数据集来微调；LLM监督微调，根据LLM生成的结果对检索器进行微调；LLM Reward RL，利用强化学习将检索器和生成器对齐。
+- 
+![](imgs/大模型的应用实操/RAG12.png)
+
+- **Reranker微调**：使用行业数据库来微调Reranker模型，见后续微调代码。
+
+- **Generator微调**：也就是微调LLM，见前述代码。
+
 <h3 id='3.经典的RAGFlow范式（推理阶段-顺序模式）？'>3.经典的RAGFlow范式（推理阶段-顺序模式）？</h3>
+
+RAG Flow的顺序结构将RAG的模块和运算符组织成线性流水线，如果它同时包含Pre-Retrieval和Post-Retrieval模块类型，就是典型的Advanced RAG范式；去掉则为典型的Naive RAG范式
+
+![](imgs/大模型的应用实操/RAG13.png)
+
+目前使用最广泛的RAG Pipeline是Sequential，常见的包括检索前的Query Rewrite和HyDE以及检索后Rerank。
+
+![](imgs/大模型的应用实操/RAG14.png)
+
+开源项目： [QAnything](https://github.com/netease-youdao/qanything) ，带自研的embedding模型[bce-embedding-base_v1](https://github.com/netease-youdao/BCEmbedding)和重排序模型[bce-reranker-base_v1](https://github.com/netease-youdao/BCEmbedding)。
+
+性能：随着数据上升，二阶段Rerank性能越突出。
+
+![](imgs/大模型的应用实操/RAG15.png)
+
+[重写-检索-阅读](https://arxiv.org/pdf/2407.21059)也是典型的顺序结构。查询重写模块是一个较小的可训练语言模型，在强化学习的背景下，重写器的优化被形式化为马尔可夫决策，以LLM的最终输出作为奖励。
+
+![](imgs/大模型的应用实操/RAG16.png)
+
 <h3 id='4.经典的RAGFlow范式（推理阶段-条件模式）？'>4.经典的RAGFlow范式（推理阶段-条件模式）？</h3>
+
+采用条件模式的 RAG Flow，通过基于查询关键词或语义确定路线的路由模块，实现根据不同的条件选择不同的 RAG 路径。
+
+- 元数据路由器/过滤器：据块中的关键字和元数据进行筛选，以缩小搜索范围。
+
+- 语义路由器：利用查询的语义信息。
+
+- 也可以采用混合路由方法，将基于语义和元数据的方法相结合，以增查询路由根据问题类型选择不同的路由，针对不同场景引导不同的流程。
+
+例如，当用户查询严肃问题、学习问题或娱乐活题时，对大横型答案的容忍度是不同的。不同的路由分支通常在检索源、检索流程、配置、横型和提示方面有所不同。经典项目：[Semantic-router](https://github.com/aurelio-labs/semantic-router/tree/main)
+
 <h3 id='5.如何通过llamaindex实现条件模式？'>5.如何通过llamaindex实现条件模式？</h3>
+
+```bash
+# 定义查询引擎和工具
+from llama_index.core.tools import QueryEngineTool
+
+# 创建基于摘要索引的查询引擎，使用树状总结响应模式和异步处理
+list_query_engine = summary_index.as_query_engine(
+    response_mode="tree_summarize",  # 使用树状结构汇总多个节点的响应
+    use_async=True                   # 启用异步处理提高效率
+)
+
+# 创建基于向量索引的查询引擎，同样使用树状总结和异步处理
+vector_query_engine = vector_index.as_query_engine(
+    response_mode="tree_summarize",
+    use_async=True
+)
+
+# 创建第一个查询引擎工具：列表查询工具
+list_tool = QueryEngineTool.from_defaults(
+    query_engine=list_query_engine,  # 绑定上面创建的列表查询引擎
+    description="Useful for questions asking for a biography of the author.",  # 工具描述：用于获取作者传记类问题
+)
+
+# 创建第二个查询引擎工具：向量查询工具
+vector_tool = QueryEngineTool.from_defaults(
+    query_engine=vector_query_engine,  # 绑定上面创建的向量查询引擎
+    description=(
+        "Useful for retrieving specific snippets from the author's life, like"
+        " his time in college, his time in YC, or more."  # 工具描述：用于检索作者生活片段的具体信息
+    ),
+)
+
+# 定义路由查询引擎
+from llama_index.core import VectorStoreIndex
+from llama_index.core.objects import ObjectIndex
+
+# 创建工具对象的向量索引，用于后续的工具检索
+obj_index = ObjectIndex.from_objects(
+    [list_tool, vector_tool],  # 将两个工具放入索引
+    index_cls=VectorStoreIndex,  # 指定使用向量存储索引类型
+)
+
+# 创建路由查询引擎，自动选择最合适的工具
+from llama_index.core.query_engine import ToolRetrieverRouterQueryEngine
+query_engine = ToolRetrieverRouterQueryEngine(
+    obj_index.as_retriever()  # 将工具索引转换为检索器，用于根据查询匹配最佳工具
+)
+
+# 执行查询示例
+response = query_engine.query(
+    "What is a biography of the author's life?"  # 询问作者传记的问题
+)
+print(str(response))  # 打印响应结果
+```
+
 <h3 id='6.经典的RAGFlow范式（推理阶段-分支模式）？'>6.经典的RAGFlow范式（推理阶段-分支模式）？</h3>
 
+采用分支模式的 RAG Flow 与条件模式的不同之处在于，它涉及多个并行分支，而不是像条件模式那样从多个选项中选择一个分支。从结构上来说，可分为两类:
+
+- 检索前分支(多查询、并行检索)。将原查询扩展为多个子查询，然后对每个子查询进行单独检索。检索完成后，根据子查询和对应的检索内容立即生成答案；也可以只使用扩展后的检索内容，将其合成统一的文本再生成答案。
+
+- 检索后分支(单个查询，并行生成)。此方法保留原始查询并检索多个文档块。随后，它同时使用原始查询和每个文档块进行生成，最后将生成的结果合并在一起。
+
+![](imgs/大模型的应用实操/RAG17.png)
+
+
 <h2 id="4.2 高级RAG架构"> 4.2 高级RAG架构 </h2>
+
 <h3 id='1.什么是Agentic RAG？它与传统RAG有何不同？'>1.什么是Agentic RAG？它与传统RAG有何不同？</h3>
+
+**Agentic RAG（代理型检索增强生成）** 是一种先进的自然语言处理模型架构，结合了**检索（Retrieval）和生成（Generation）的能力**，并引入了代理机制（Agentic Mechanism），使其具备自主决策、动态适应和多任务处理的能力。Agentic RAG不仅能够根据输入的查询从外部知识库中检索相关信息，还能通过智能代理模块优化检索策略、管理上下文信息，并生成连贯、准确且高度相关的自然语言回答。
+
+与传统RAG相比，Agentic RAG不仅能够检索相关信息并生成回答，还能根据任务需求主动选择和优化检索策略，甚至在多轮交互中调整其行为，以实现更智能和灵活的信息处理。
+
+![](imgs/agentic-rag.png)
+
 <h3 id='2.Agentic RAG的核心组件有哪些？'>2.Agentic RAG的核心组件有哪些？</h3>
+
+Agentic RAG通常包括以下几个核心组件：
+
+- **检索模块**：负责从外部知识库或文档中检索相关信息。
+- **生成模块**：基于检索到的信息生成自然语言回答。
+- **代理模块**：具备决策能力，能够根据任务需求动态调整检索策略和生成过程。
+- **反馈与学习机制**：通过用户反馈或自动评估不断优化系统性能。
+
 <h3 id='3.在Agentic RAG中，代理模块如何决定检索哪些文档？'>3.在Agentic RAG中，代理模块如何决定检索哪些文档？</h3>
+
+代理模块通常基于以下几个因素决定检索哪些文档：
+
+- **查询理解**：分析用户查询的意图和需求。
+- **上下文信息**：考虑之前的交互历史和上下文。
+- **检索策略**：应用预定义或动态优化的检索策略，如基于关键词、语义相似度或学习到的模型。
+- **资源管理**：评估可用的计算资源和时间限制，选择最优的检索方式。
+
 <h3 id='4.Agentic RAG如何处理检索到的信息以生成高质量的回答？'>4.Agentic RAG如何处理检索到的信息以生成高质量的回答？</h3>
+
+Agentic RAG通过以下步骤处理检索到的信息：
+
+- **信息筛选与排序**：根据相关性和重要性对检索到的文档进行筛选和排序。
+- **信息融合**：将多篇文档中的相关信息进行整合，避免冗余和冲突。
+- **生成优化**：利用生成模型（如GPT）将整合后的信息转化为连贯、准确的自然语言回答，同时确保信息的完整性和可信度。
+
 <h3 id='5.请解释Agentic RAG中的自主学习机制是如何工作的？'>5.请解释Agentic-RAG中的自主学习机制是如何工作的？</h3>
+
+Agentic RAG的自主学习机制通常包括以下几个步骤：
+
+- **反馈收集**：获取用户对生成回答的反馈，如评分、修正或确认。
+- **性能评估**：自动评估系统性能，识别不足之处。
+- **模型更新**：利用反馈数据对检索模型、生成模型或代理策略进行微调或优化。
+- **策略调整**：根据评估结果动态调整检索和生成策略，以提高未来任务的性能。
+
 <h3 id='6.Agentic RAG在哪些实际应用中具有优势？请举例说明。'>6.Agentic RAG在哪些实际应用中具有优势？请举例说明。</h3>
+
+Agentic RAG在以下应用中具有显著优势：
+- **智能客服**：能够理解用户复杂的问题，从多个知识库中检索相关信息，并生成准确、自然的回答。
+- **医疗诊断辅助**：检索患者的历史记录和相关医学文献，生成综合诊断建议。
+- **法律咨询**：分析法律条文和案例，为用户提供精准的法律意见。
+- **教育辅导**：根据学生的学习情况，检索相关学习资料并生成个性化的辅导内容。
+
 <h3 id='7.在多轮对话中，Agentic RAG如何保持上下文一致性和信息连贯性？'>7.在多轮对话中，Agentic-RAG如何保持上下文一致性和信息连贯性？</h3>
+
+Agentic RAG在多轮对话中通过以下方式保持上下文一致性和信息连贯性：
+
+- **上下文跟踪**：维护一个动态的上下文记忆，记录对话历史和关键信息。
+- **检索整合**：在每一轮对话中，结合当前查询和历史上下文进行检索，确保信息的连续性。
+- **生成优化**：在生成回答时考虑之前的交互内容，确保回答的连贯性和相关性。
+- **代理决策**：利用代理模块动态调整检索和生成策略，以适应对话的发展和变化。
+
 <h3 id='8.Agentic-RAG面临的主要挑战有哪些？如何应对这些挑战？'>8.Agentic-RAG面临的主要挑战有哪些？如何应对这些挑战？</h3>
+
+主要挑战包括：
+- **检索效率**：在大规模数据中快速准确地检索相关信息。
+  - 应对：采用高效的索引结构和检索算法，如近似最近邻搜索（ANN）。
+- **信息质量**：确保检索到的信息准确、相关且最新。
+  - 应对：引入信息筛选和验证机制，定期更新知识库。
+- **生成准确性**：生成内容需高度准确且与检索信息一致。
+  - 应对：优化生成模型，结合检索到的信息进行细粒度控制。
+- **系统复杂性**：集成多个模块导致系统复杂，难以维护和扩展。
+  - 应对：采用模块化设计，使用标准化接口和自动化工具。
+
 <h3 id='9.如何评估Agentic RAG系统的性能？有哪些关键指标？'>9.如何评估Agentic RAG系统的性能？有哪些关键指标？</h3>
+
+评估Agentic RAG系统的性能可以采用以下关键指标：
+- **检索准确率**：检索到的文档与用户需求的相关性。
+- **生成质量**：生成回答的流畅性、准确性和相关性，常用指标如BLEU、ROUGE、BERTScore。
+- **用户满意度**：通过用户反馈评分或满意度调查评估系统表现。
+- **响应时间**：系统处理查询和生成回答的速度。
+- **鲁棒性**：系统在处理复杂或模糊查询时的表现。
+- **自适应能力**：系统在动态环境和多轮对话中的适应性和稳定性。
+
 <h3 id='10.在设计Agentic-RAG时，如何平衡检索与生成模块的权重？'>10.在设计Agentic-RAG时，如何平衡检索与生成模块的权重？</h3>
+
+平衡检索与生成模块的权重可以通过以下方法实现：
+- **联合训练**：同时优化检索和生成模块，使两者相互促进，提升整体性能。
+- **反馈循环**：利用生成模块的输出作为检索模块的反馈，动态调整检索策略。
+- **权重调节**：根据任务需求和应用场景，动态调整检索和生成模块的决策权重。
+- **模块化设计**：保持检索和生成模块的独立性，通过中间层（如代理模块）进行协调和优化。
+- **实验验证**：通过大量实验和评估，找到最佳的权重组合，以满足不同应用场景的需求。
 
 <h2 id="4.3 特定技术实现"> 4.3 特定技术实现 </h2>
 <h3 id='1.怎么通过llamaindex实现FLAREdirect？'>1.怎么通过llamaindex实现FLAREdirect？</h3>
+
+```bash
+# 导入必要的模块
+from llama_index.llms import OpenAI  # 导入OpenAI LLM封装
+from llama_index.query_engine import FLAREInstructQueryEngine  # 导入FLARE增强查询引擎
+from llama_index import (
+    VectorStoreIndex,  # 向量存储索引
+    SimpleDirectoryReader,  # 简单目录文档读取器
+    ServiceContext,  # 服务上下文配置
+)
+
+# 该查询引擎通过让生成器LLM在检索过程中扮演更主动的角色，提示其生成检索指令来明确需要哪些信息以回答用户查询
+
+# 从指定目录加载文档数据
+documents = SimpleDirectoryReader("./data/XXX").load_data()
+
+# 创建向量存储索引
+index = VectorStoreIndex.from_documents(documents)
+
+# 创建基础查询引擎，设置相似性搜索返回前2个结果
+index_query_engine = index.as_query_engine(similarity_top_k=2)
+
+# 配置服务上下文，指定使用OpenAI的GPT-4模型
+service_context = ServiceContext.from_defaults(llm=OpenAI(model="gpt-4"))
+
+# 初始化FLARE增强查询引擎
+flare_query_engine = FLAREInstructQueryEngine(
+    query_engine=index_query_engine,  # 基础查询引擎
+    service_context=service_context,  # 服务上下文（含LLM配置）
+    max_iterations=7,  # 设置最大迭代检索次数为7次
+    verbose=True,  # 启用详细输出模式
+)
+
+# 使用增强的RAG系统进行查询
+response = flare_query_engine.query(
+    "Can you tell me about the author's trajectory in the startup world?")
+```
+
 <h3 id='2.怎么通过langchain实现FLAREdirect？'>2.怎么通过langchain实现FLAREdirect？</h3>
 
+```bash
+# 导入必要的库和模块
+from langchain import PromptTemplate, LLMChain  # 提示模板和LLM链
+from langchain.text_splitter import RecursiveCharacterTextSplitter  # 递归字符文本分割器
+from langchain.chains import RetrievalQA  # 检索增强问答链
+from langchain.embeddings import HuggingFaceBgeEmbeddings  # HuggingFace BGE嵌入模型
+from langchain.document_loaders import PyPDFLoader  # PDF文档加载器
+from langchain.vectorstores import LanceDB  # LanceDB向量存储
+from langchain.document_loaders import ArxivLoader  # ArXiv学术论文加载器
+from langchain.chains import FlareChain  # FLARE链（主动检索增强生成）
+from langchain.prompts import PromptTemplate  # 提示模板
+from langchain.chains import LLMChain  # LLM链
+import os  # 操作系统接口
+import gradio as gr  # 用于创建Web UI的Gradio库
+import lancedb  # LanceDB向量数据库
+from io import BytesIO  # 字节流处理
+from langchain.llms import OpenAI  # OpenAI语言模型
+import getpass  # 安全输入密码
+
+# 设置OpenAI API密钥）
+os.environ["OPENAI_API_KEY"] = "sk-yourapikeyforopenai"
+llm = OpenAI()  # 初始化OpenAI LLM
+
+# 配置HuggingFace BGE嵌入模型
+model_name = "BAAI/bge-large-en"  # 模型名称
+model_kwargs = {'device': 'cpu'}  # 使用CPU进行计算
+encode_kwargs = {'normalize_embeddings': False}  # 不标准化嵌入向量
+embeddings = HuggingFaceBgeEmbeddings(
+    model_name=model_name,
+    model_kwargs=model_kwargs,
+    encode_kwargs=encode_kwargs
+)
+
+# 从ArXiv加载论文（示例使用FLARE论文）
+# 注意：需要传递论文ID而非URL，例如2305.06983
+docs = ArxivLoader(query="2305.06983", load_max_docs=2).load()
+
+# 实例化递归字符文本分割器
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1500,  # 块大小
+    chunk_overlap=150  # 块重叠大小
+)
+
+# 将文档分割成块
+doc_chunks = text_splitter.split_documents(docs)
+
+# 初始化LanceDB向量数据库
+db = lancedb.connect('/tmp/lancedb')  # 连接到本地LanceDB
+
+# 创建表并插入初始数据
+table = db.create_table("documentsai", data=[
+    {"vector": embeddings.embed_query("Hello World"), "text": "Hello World", "id": "1"}
+], mode="overwrite")  # 覆盖模式
+
+# 将文档块存入向量数据库
+vector_store = LanceDB.from_documents(doc_chunks, embeddings, connection=table)
+
+# 创建检索器
+vector_store_retriever = vector_store.as_retriever()
+
+# 初始化FLARE链
+flare = FlareChain.from_llm(
+    llm=llm,  # 使用的语言模型
+    retriever=vector_store_retriever,  # 检索器
+    max_generation_len=300,  # 最大生成长度
+    min_prob=0.45  # 置信度阈值，低于此概率的标记将被视为不确定并触发检索
+)
+
+# 定义生成FLARE输出的函数
+def generate_flare_output(input_text):
+    output = flare.run(input_text)  # 运行FLARE链处理输入
+    return output
+
+# 创建Gradio输入组件
+input = gr.Text(
+    label="Prompt",
+    show_label=False,
+    max_lines=1,
+    placeholder="Enter your prompt",
+    container=False,
+)
+
+# 创建Gradio界面
+iface = gr.Interface(
+    fn=generate_flare_output,  # 处理函数
+    inputs=input,  # 输入组件
+    outputs="text",  # 输出类型
+    title="My AI bot",  # 界面标题
+    description="FLARE implementation with lancedb & bge embedding.",  # 描述
+    allow_screenshot=False,  # 不允许截图
+    allow_flagging=False  # 不显示标记按钮
+)
+
+# 启动Gradio应用
+iface.launch(debug=True)
+```
 
 <h1 id="五、RAG开发框架与工具"> 五、RAG开发框架与工具 </h1>
+
 <h2 id="5.1 LangChain框架"> 5.1 LangChain框架 </h2>
+
 <h3 id='1.怎么用langchain构建简单RAG？'>1.怎么用langchain构建简单RAG？</h3>
+
+本次简要尝试选用[Langchain](https://python.langchain.com/v0.2/docs/introduction/)和[Chroma](https://www.trychroma.com/)构建一个简单的RAG。Langchain负责整体流程编排，chroma提供向量数据库。
+
+#### 1.环境准备
+
+```bash
+# 安装chroma，轻量并且原生支持windows，不需要wsl和docker
+pip install chromadb # 安装
+chroma run # 运行
+
+# 虚拟环境
+conda create -n llmrag python=3.10
+
+# 激活虚拟环境
+conda activate llmrag
+
+# torch安装
+conda install pytorch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 pytorch-cuda==12.1 -c pytorch -c nvidia
+
+# 安装大模型的依赖
+# 使用openai的模型
+pip install openai
+
+# 本地ollama
+pip install -u langchain_ollama
+
+# 支持 OpenAI 系列模型及兼容 OpenAI API 的第三方模型：通义千问，deepseek之类
+pip install -u langchain_openai
+
+# 支持chroma
+pip install langchain_chroma
+pip install -u langchain-community
+```
+
+有关大模型的api获取地址：
+
+- openai：https://platform.openai.com/account/api-keys
+
+- 通义千问：https://help.aliyun.com/zh/model-studio/obtain-api-key-app-id-and-workspace-id
+
+- ollama：直接运行ollama$$ollama run <model_name>$$
+
+#### 2.准备数据
+
+```bash
+# 提取数据，以网页数据为例
+import request
+from langchain.document_loaders import webBaseLoader
+
+loader = webBaseLoader("web url")
+document = loader.load()  # Document是一个包含文本和元数据的字典{"page_content": "完整文本内容", "metadata": {"source": "URL", "title": "页面标题"}}
+
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+
+text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50) # chunk_size：每个文本块的最大字符数。 chunk_overlap：相邻文本块之间的重叠字符数。 额外的参数：length_function 长度计算方式，默认为len，可以改为token计数器； separators：分割符列表，["\n\n", "\n", "。", " ", ""]
+
+chunks = text_splitter.split_documents(documents)
+
+print(chunks[0].page_content)  # 打印第一块
+```
+
+```bash
+# 嵌入并且存储这些文本块
+from langchain.embeddings import OpenAIembeddings
+from langchain_chroma import chroma
+from langchain_community.embeddings import HuggingFaceBgeEmbeddings
+
+# openai
+rag_embeddings=OpenAIEmbeddings(model="text-embedding-3-large")
+
+# hugging face上的嵌入模型
+rag_embeddings=HuggingFaceBgeEmbeddings("<model_name>")
+
+# 保存到向量数据库
+vector_store = chroma.from_documents(documents=chunks, embeddings=rag_embeddings, persist_directory="<db path>")
+```
+
+#### 3.检索增强
+
+```bash
+# 构建检索器
+retriever = vector_store.as_retriever()  # search_type="similarity", search_kwargs={"k": 5}
+
+from langchain.prompts import ChatPromptTemplate
+
+template = "<prompts> question: <question>, context: {context}"
+
+prompt = ChatPromptTemplate.from_template(template)
+```
+
+#### 4.输出生成
+
+
+```bash
+from langchain.chat_models import ChatOpenAI
+from langgchain.schema.runnable import RunnablePassthrough
+from langchain.schema.output_parser import StrOutputParser
+from langchain_ollama.llms import ollamaLLM
+
+# 使用ollama服务
+llm = OllamaLLM(model="<model_name>")
+
+# 使用api_key
+llm = ChatOpenAI(api_key="<api_key>", base_url="<model_url>", model="<model_name>")
+
+# 定义rag链
+rag_chain = (
+| {"context": retriever, "question": RunnablePassthrough()}
+| prompt
+| llm
+| StrOutputParser())
+
+qury = "<questions>"
+
+resp = rag_chain.invoke(query)
+print(resp)
+```
+
 <h3 id='2.基于langchain的本地文档问答系统实现步骤有哪些?'>2.基于langchain的本地文档问答系统实现步骤有哪些?</h3>
+
+项目实现过程包括加载文件、读取文本、文本分割、文本向量化、问句向量化、在文本向量中匹配出与问句向量最相似的topk个、匹配出的文本作为上下文和问题一起添加到prompt中、提交给LLM生成回答。
+
 <h3 id='3.介绍一下LangChain'>3.介绍一下LangChain</h3>
-<h3 id='4.LangChain中ChatMessageHistory是什么？'>4.LangChain中ChatMessageHistory是什么？</h3>
+
+💡 [https://python.langchain.com/docs/get_started/introduction](https://python.langchain.com/docs/get_started/introduction)
+
+LangChain 是一个基于语言模型的框架，用于构建聊天机器人、生成式问答（GQA）、摘要等功能。它的核心思想是将不同的组件“链”在一起，以创建更高级的语言模型应用。LangChain 的起源可以追溯到 2022 年 10 月，由创造者 Harrison Chase 在那时提交了第一个版本。与 Bitcoin 不同，Bitcoin 是在 2009 年由一位使用化名 Satoshi Nakamoto 的未知人士创建的，它是一种去中心化的加密货币。而 LangChain 是围绕语言模型构建的框架。
+
+LangChain 包含以下这些核心概念：
+
+StreamlitChatMessageHistory：用于在 Streamlit 应用程序中存储和使用聊天消息历史记录。它使用 Streamlit 会话状态来存储消息，并可以与 ConversationBufferMemory 和链或代理一起使用。
+
+CassandraChatMessageHistory：使用 Apache Cassandra 数据库存储聊天消息历史记录。Cassandra 是一种高度可扩展和高可用的 NoSQL 数据库，适用于存储大量数据。
+
+MongoDBChatMessageHistory：使用 MongoDB 数据库存储聊天消息历史记录。MongoDB 是一种面向文档的 NoSQL 数据库，使用类似 JSON 的文档进行存储。
+
+<h3 id='4.LangChain中Chat-Message-History是什么？'>4.LangChain中Chat-Message-History是什么？</h3>
+
+💡 [https://python.langchain.com/docs/modules/memory/chat_messages/](https://python.langchain.com/docs/modules/memory/chat_messages/)
+
+Chat Message History 是 Langchain 框架中的一个组件，用于存储和管理聊天消息的历史记录。它可以跟踪和保存用户和AI之间的对话，以便在需要时进行检索和分析。
+
+Langchain 提供了不同的 Chat Message History 实现，包括 StreamlitChatMessageHistory、CassandraChatMessageHistory 和 MongoDBChatMessageHistory。
+
+您可以根据自己的需求选择适合的 Chat Message History 实现，并将其集成到 Langchain 框架中，以便记录和管理聊天消息的历史记录。
+
+请注意，Chat Message History 的具体用法和实现细节可以参考 Langchain 的官方文档和示例代码。
+
 <h3 id='5.LangChain中LangChainAgent是什么？'>5.LangChain中LangChainAgent是什么？</h3>
+
+💡 [https://python.langchain.com/docs/modules/agents/](https://python.langchain.com/docs/modules/agents/)
+
+LangChain Agent 是 LangChain 框架中的一个组件，用于创建和管理对话代理。代理是根据当前对话状态确定下一步操作的组件。LangChain 提供了多种创建代理的方法，包括 OpenAI Function Calling、Plan-and-execute Agent、Baby AGI 和 Auto GPT 等。这些方法提供了不同级别的自定义和功能，用于构建代理。
+
+代理可以使用工具包执行特定的任务或操作。工具包是代理使用的一组工具，用于执行特定的功能，如语言处理、数据操作和外部 API 集成。工具可以是自定义构建的，也可以是预定义的，涵盖了广泛的功能。
+
+通过结合代理和工具包，开发人员可以创建强大的对话代理，能够理解用户输入，生成适当的回复，并根据给定的上下文执行各种任务。
+
+以下是使用 LangChain 创建代理的示例代码：
+
+```
+from langchain.chat_models import ChatOpenAI
+from langchain.agents import tool
+# 加载语言模型
+llm = ChatOpenAI(temperature=0)
+# 定义自定义工具
+@tool   def get_word_length(word: str) -> int:
+"""返回单词的长度。"""     
+return len(word)     
+# 创建代理
+agent = {       "input": lambda x: x["input"],
+"agent_scratchpad": lambda x: format_to_openai_functions(x['intermediate_steps'])   } | prompt | llm_with_tools | OpenAIFunctionsAgentOutputParser()
+ # 调用代理
+output = agent.invoke({       "input": "单词 educa 中有多少个字母？",       "intermediate_steps": []   })      # 打印结果
+print(output.return_values["output"])  
+```
+
+这只是一个基本示例，LangChain 中还有更多功能和功能可用于构建和自定义代理和工具包。您可以参考 LangChain 文档以获取更多详细信息和示例。
+
 <h3 id='6.LangChain支持哪些功能？'>6.LangChain支持哪些功能？</h3>
-<h3 id='7.什么是LangChainmodel?'>7.什么是LangChainmodel?</h3>
+
+langChain是一个用于开发由大语言模型支持的应用程序的框架。它提供以下功能：
+
+上下文感知能力：LangChain可以将语言模型与上下文源（提示说明、示例场景、响应内容等）连接起来，使应用程序具备上下文感知能力。
+推理能力：LangChain依靠语言模型进行推理，例如根据提供的上下文生成回答或执行相应的操作。
+LangChain的价值：
+
+组件抽象化：LangChain提供了用于处理语言模型的抽象组件，并提供了一组实现这些组件的现成实现。不论您是否使用LangChain框架的其他部分，这些组件都具有模块化且易于使用的特点。
+
+现成的链式结构：LangChain提供了一系列结构化的组件链，用于完成特定的高级任务。这些现成的链式结构使您能够轻松上手。对于复杂的应用程序，您可以轻松定制现有链或构建新的链。
+
+<h3 id='7.什么是LangChain-model?'>7.什么是LangChain-model?</h3>
+
+LangChain model 是一个基于语言模型的框架，用于构建聊天机器人、生成式问答（GQA）、摘要等功能。LangChain 的核心思想是可以将不同的组件“链”在一起，以创建更高级的语言模型应用。
+
+LangChain model是一种基于大型语言模型（LLM）的模型。它是LangChain框架的核心组件之一，用于构建基于语言模型的应用程序。LangChain模型可以用于聊天机器人、生成式问答、摘要等多种应用。它提供了一种标准的接口，使开发人员能够使用LLM来处理自然语言处理任务。LangChain模型的目标是简化开发过程，使开发人员能够更轻松地构建强大的语言模型应用程序。
+
 <h3 id='8.LangChain如何链接多个组件处理一个特定的下游任务？'>8.LangChain如何链接多个组件处理一个特定的下游任务？</h3>
 
+要链接多个组件处理一个特定的下游任务，您可以使用LangChain框架提供的**Chain类。Chain类允许您将多个组件连接在一起，以便按顺序处理任务。以下是一个示例代码片段，展示了如何使用Chain**类链接多个组件处理下游任务：
+
+```
+from langchain.chains import Chain
+from langchain.components import Component1, Component2, Component3
+# 创建组件实例
+ component1 = Component1()
+component2 = Component2()
+component3 = Component3()
+ # 创建Chain实例并添加组件
+chain = Chain()
+chain.add_component(component1)
+chain.add_component(component2)
+chain.add_component(component3)
+# 处理下游任务
+output = chain.process_downstream_task()
+print(output)   
+
+```
+在上面的代码中，我们首先创建了多个组件的实例，例如**Component1、Component2和Component3。然后，我们创建了一个Chain实例，并使用add_component方法将这些组件添加到链中。最后，我们调用process_downstream_task**方法来处理下游任务，并打印输出结果。
+
+请注意，您可以根据需要添加、删除和修改组件。**Chain**类提供了多种方法来操作链。更多详细信息和示例代码可以在LangChain文档中找到。
+
 <h2 id="5.2 RAGFlow项目"> 5.2 RAGFlow项目 </h2>
+
 <h3 id='1.怎么部署RAGFlow项目？'>1.怎么部署RAGFlow项目？</h3>
+
+#### 1.环境安装
+
+安装WSL文档（windows系统需要）：https://learn.microsoft.com/zh-cn/windows/wsl/install
+
+常见的WSL命令：https://learn.microsoft.com/zh-cn/windows/wsl/basic-commands
+
+（1）以管理权限打开**powershell**
+
+```bash
+# Windows10及以上版本
+# 启动wsl子系统
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+
+# 启用虚拟机平台支持
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+
+# 设置wsl2wsl 
+--set-default-version 2
+```
+
+- 手动选择：一般在控制面板->程序->程序和功能->启动或关闭Windows功能->适用于Linux的Windows子系统
+
+（2）安装**docker环境**
+
+- 下载安装路径：https://docs.docker.com/engine/install/
+
+- 设置镜像本地路径：默认会将大模型拉取到本地后会保存在c:盘，我们设置到其它路径（一般在setting->Resources->Advanced->Disk image location）
+
+- 设置镜像源：国外镜像源拉取比较慢，更新成国内镜像源。（一般在setting->Docker engine->registry-mirrors）
+
+- 测试docker是否正常
+
+```bash
+# cmd 运行命令
+docker run hello-world # 会拉取下来一个测试的hello-world镜像
+```
+
+![](imgs/大模型的应用实操/RAG01.png)
+
+#### 2.部署RAGFlow项目
+
+RAGFlow项目地址：https://github.com/infiniflow/ragflow
+
+（1） 部署命令
+
+```bash
+# 拉取项目代码
+git clone https://github.com/infiniflow/ragflow.git
+
+# cmd命令行切换到ragflow\docker下
+cd ragflow/docker
+
+# 运行下面命令，一键自动下载项目的依赖镜像和环境
+docker compose -f docker-compose-CN.yml up -d # 运行该命令会自动下载 RAGFlow 的开发版本 docker 镜像。如果你想下载并运行特定版本的 docker 镜像，请在 docker/.env 文件中找到 RAGFLOW_VERSION 变量，将其改为对应版本。
+```
+
+（2） 测试命令
+
+``` bash
+# 测试是否部署完成
+docker logs -f ragflow-server
+```
+
+如果成果会出现以下界面
+
+![](imgs/大模型的应用实操/RAG02.png)
+
+使用以上地址即可登录注册！
+
+![](imgs/大模型的应用实操/RAG03.png)
+
+
+<h2 id="2.怎么用RAGFlow建立知识库与聊天？">2.怎么用RAGFlow建立知识库与聊天？</h2>
+
+（1）模型配置
+
+- 启动Ollama模型，选择本地Ollama部署的大语言模型；并得到对应的模型api端口
+
+```bash
+ollama run <模型名称>  # 运行模型就可以输入命令
+```
+
+```bash
+# 默认的模型端口
+http://127.0.0.1:11434  # 可以自定义端口，方便api调用
+
+# 如果是docker启动
+http://host.docker.internal:11434
+```
+
+![](imgs/大模型的应用实操/RAG04.png)
+
+（2）建立知识库
+
+- 上传**知识库文件**，直至解析成功。
+
+![](imgs/大模型的应用实操/RAG05.png)
+
+（3）新建聊天助手
+
+- 回到主页面，点击**新建助手**，进行新的聊天配置
+
+![](imgs/大模型的应用实操/RAG06.png)
+
+更多的详细讲解请参考[指南](https://www.thoughtailab.com/article/ragflow-project-intro)
+
 <h3 id='2.怎么用RAGFlow建立知识库与聊天？'>2.怎么用RAGFlow建立知识库与聊天？</h3>
+
+（1）模型配置
+
+- 启动Ollama模型，选择本地Ollama部署的大语言模型；并得到对应的模型api端口
+
+```bash
+ollama run <模型名称>  # 运行模型就可以输入命令
+```
+
+```bash
+# 默认的模型端口
+http://127.0.0.1:11434  # 可以自定义端口，方便api调用
+
+# 如果是docker启动
+http://host.docker.internal:11434
+```
+
+![](imgs/大模型的应用实操/RAG04.png)
+
+（2）建立知识库
+
+- 上传**知识库文件**，直至解析成功。
+
+![](imgs/大模型的应用实操/RAG05.png)
+
+（3）新建聊天助手
+
+- 回到主页面，点击**新建助手**，进行新的聊天配置
+
+![](imgs/大模型的应用实操/RAG06.png)
+
+更多的详细讲解请参考[指南](https://www.thoughtailab.com/article/ragflow-project-intro)
