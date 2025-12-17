@@ -4,6 +4,8 @@
 
 【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、AI Agent Interview、Deep Learning Interview、Algorithm Engineer Interview**
 
+[免费H800算力，立即领取！](#Group)
+
 </div>
 
 # 
@@ -107,6 +109,8 @@ Elliot Qi，互联网大厂AIGC算法工程师，在计算机视觉顶会发表�
 
 初街夜话，计算机视觉方向的在读博士，主要研究目标检测，也会折腾一些 AIGC 技术，享受探索人工智能前沿的过程。
 
+
+<a name="Group"></a>
 
 ## ⚡大模型实验室Lab4AI普惠算力
 
