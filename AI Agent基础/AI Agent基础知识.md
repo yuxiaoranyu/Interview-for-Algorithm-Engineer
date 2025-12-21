@@ -27,6 +27,7 @@
 - [25.AI Agent中Agents、Teams、Worflows三者有哪些区别？](#25.AI-Agent中Agents、Teams、Worflows三者有哪些区别？)
 - [26.介绍一下AI Agent中AgentOS的核心概念](#26.介绍一下AI-Agent中AgentOS的核心概念)
 - [27.什么是AI Agent系统中子Agent动态加载？](#27.什么是AI-Agent系统中子Agent动态加载？)
+- [28.用于存储AI Agent长期记忆的主流数据库有哪些？](#28.用于存储AI-Agent长期记忆的主流数据库有哪些？)
 
 
 <h2 id="1.什么是AI-Agent（智能体）？">1.什么是AI Agent（智能体）？</h2>
@@ -1530,3 +1531,43 @@ AgentOS作为AI Agent的基础设施，其核心价值在于**降低Agent开发�
 
 动态加载是构建大型、复杂AI Agent系统的关键技术，它提供了**灵活性**、**可扩展性**和**资源效率**。通过合理的架构设计和优化，可以构建出既能快速响应需求变化，又能保持系统稳定和高性能的AI Agent系统。
 
+
+<h2 id="28.用于存储AI-Agent长期记忆的主流数据库有哪些？">28.用于存储AI Agent长期记忆的主流数据库有哪些？</h2>
+
+目前AI Agent系统中需要使用数据库来存储AI Agent的会话、记忆、知识等数据。
+
+### 关系型数据库
+| 数据库 | 说明 |
+|--------|------|
+| **PostgreSQL** | 生产环境推荐，支持 JSONB、异步操作 |
+| **MySQL** | 企业级关系型数据库 |
+| **SQLite** | 轻量级嵌入式数据库，适合开发测试 |
+| **Neon** | 无服务器 PostgreSQL 平台 |
+| **Supabase** | 开源 Firebase 替代方案 |
+| **SingleStore** | 实时分析数据库 |
+
+### NoSQL 数据库
+| 数据库 | 说明 |
+|--------|------|
+| **MongoDB** | 流行的文档数据库 |
+| **DynamoDB** | AWS NoSQL 服务 |
+| **Firestore** | Google 文档数据库 |
+| **Redis** | 内存数据存储 |
+| **SurrealDB** | 多模态数据库 |
+
+### 其他存储
+| 存储类型 | 说明 |
+|----------|------|
+| **JSON** | 基于文件的简单存储 |
+| **GCS JSON** | Google Cloud Storage 上的 JSON 存储 |
+| **InMemoryDb** | 内存存储（仅用于测试） |
+
+
+## 存储的数据类型
+
+配置数据库后，AI Agent系统可以自动存储：
+- **Sessions** - 会话历史和状态
+- **User Memories** - 用户长期记忆
+- **Knowledge** - 知识库内容
+- **Evals** - 评估数据
+- **Metrics** - 使用指标
