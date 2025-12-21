@@ -59,8 +59,6 @@
 
 加入社群后，我们更有专门的社群VIP交流学习群，大家可以全面深入的交流探讨AIGC面试、求职、学习、商业变现、职业规划等！（请添加小助手微信Jarvis8866，备注**知识星球里的个人昵称+城市+从事方向/研究方向+公司/学校**）
 
-![【三年面试五年模拟】内容大纲](imgs/框架.png)
-
 ## 👨作者介绍
 
 >Rocky Ding 主编
@@ -150,6 +148,8 @@ Elliot Qi，互联网大厂AIGC算法工程师，在计算机视觉顶会发表�
 <div align=center>
 <img src="imgs/AI多模态交流群.jpg" alt="AIGCmagic社区-AI多模态交流群" width="200"/><img src="imgs/传统深度学习交流群.jpg" alt="AIGCmagic社区-传统深度学习交流群" width="200"/><img src="imgs/自动驾驶交流群.jpg" alt="AIGCmagic社区-自动驾驶交流群" width="200"/>
 </div>
+
+![【三年面试五年模拟】内容大纲](imgs/框架.png)
 
 ## 🤝项目合作&共建
 
