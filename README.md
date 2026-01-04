@@ -4,6 +4,8 @@
 
 【Three Years of Interviews, Five Years of Practice】The Ultimate Guide to **AIGC Interview、LLMs Interview、AI Agent Interview、Deep Learning Interview、Algorithm Engineer Interview**
 
+[免费H800算力，立即领取！](#Group)
+
 </div>
 
 # 
@@ -57,8 +59,6 @@
 
 加入社群后，我们更有专门的社群VIP交流学习群，大家可以全面深入的交流探讨AIGC面试、求职、学习、商业变现、职业规划等！（请添加小助手微信Jarvis8866，备注**知识星球里的个人昵称+城市+从事方向/研究方向+公司/学校**）
 
-![【三年面试五年模拟】内容大纲](imgs/框架.png)
-
 ## 👨作者介绍
 
 >Rocky Ding 主编
@@ -108,6 +108,8 @@ Elliot Qi，互联网大厂AIGC算法工程师，在计算机视觉顶会发表�
 初街夜话，计算机视觉方向的在读博士，主要研究目标检测，也会折腾一些 AIGC 技术，享受探索人工智能前沿的过程。
 
 
+<a name="Group"></a>
+
 ## ⚡大模型实验室Lab4AI普惠算力
 
 **【免费H800算力，立即领取！🚀】**
@@ -147,9 +149,11 @@ Elliot Qi，互联网大厂AIGC算法工程师，在计算机视觉顶会发表�
 <img src="imgs/AI多模态交流群.jpg" alt="AIGCmagic社区-AI多模态交流群" width="200"/><img src="imgs/传统深度学习交流群.jpg" alt="AIGCmagic社区-传统深度学习交流群" width="200"/><img src="imgs/自动驾驶交流群.jpg" alt="AIGCmagic社区-自动驾驶交流群" width="200"/>
 </div>
 
+![【三年面试五年模拟】内容大纲](imgs/框架.png)
+
 ## 🤝项目合作&共建
 
-**Rocky承诺本项目会陪伴大家的完整职业生涯和码二代们的完整职业生涯，所以会持续更新，欢迎大家分享AIGC求职经历、工作经验、招聘内推、工作机会等信息，欢迎共同建设完善本项目！**
+**Rocky承诺本项目会陪伴大家的完整职业生涯和码二代们的完整职业生涯，会与时俱进的持续更新迭代，欢迎大家分享AIGC求职经历、工作经验、招聘内推、工作机会等信息，欢迎共同建设完善本项目！**
 
 **经验分享**：如果您已经有AIGC领域的求职经验和从业经验，欢迎您分享笔试经验、面试经验、工作经验、岗位需求等相关经验，可直接通过PR和Issue等方式提交！
 
