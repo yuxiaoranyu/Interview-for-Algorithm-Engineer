@@ -1194,15 +1194,15 @@ EasyPhoto作为一款基于Stable Diffusion的AI写真生成工具，深度融�
 
 Rocky进行下面的推导，相信大家对一切都会非常清晰明了：
 
-我们可以假设ControlNet的初始权重为：$y=wx+b$，然后我们就可以得到对应的梯度求导：
+我们可以假设ControlNet的初始权重为： $y=wx+b$ ，然后我们就可以得到对应的梯度求导：
 
 $$\frac{\partial y}{\partial w}=x,\frac{\partial y}{\partial x}=w,\frac{\partial y}{\partial b}=1$$
 
-如果此时$w=0$并且$x \neq 0$，然后我们就可以得到：
+如果此时 $w=0$ 并且 $x \neq 0$ ，然后我们就可以得到：
 
 $$\frac{\partial y}{\partial w} \neq 0,\frac{\partial y}{\partial x}=0,\frac{\partial y}{\partial b}\neq 0$$
 
-这就意味着只要$x \neq 0$，一次梯度下降迭代将使w变成非零值。然后就得到：$\frac{\partial y}{\partial x}\neq 0$。**这样就能让zero convolution模块逐渐成为具有非零权重的卷积层，并不断优化参数权重**。
+这就意味着只要 $x \neq 0$ ，一次梯度下降迭代将使w变成非零值。然后就得到： $\frac{\partial y}{\partial x}\neq 0$ 。**这样就能让zero convolution模块逐渐成为具有非零权重的卷积层，并不断优化参数权重**。
 
 <h2 id="44.ConrtolNet是如何训练的？">44.ConrtolNet是如何训练的？</h2>
 
@@ -1212,7 +1212,7 @@ $$\frac{\partial y}{\partial w} \neq 0,\frac{\partial y}{\partial x}=0,\frac{\pa
 
 接着，我们在此基础上假设将训练的所有参数锁定在$\Theta$中，然后将其复制为可训练的副本$\Theta_{c}$。复制的$\Theta_{c}$使用额外控制条件信息c进行训练。因此在使用ControlNet之后，**Stable Diffusion/FLUX.1底模型 + ControlNet模型整体的图像生成表达式转化成为：**
 
-![StableDiffusion/FLUX.1底模型+ControlNet模型的整体图像生成过程](./imgs/StableDiffusion/FLUX.1底模型+ControlNet模型的整体图像生成过程.png)
+![StableDiffusion和FLUX.1底模型+ControlNet模型的整体图像生成过程](./imgs/StableDiffusion和FLUX.1底模型+ControlNet模型的整体图像生成过程.png)
 
 其中$Z = F(c; \Theta)$代表了zero convolution模块，$\Theta_{z1}$和$\Theta_{z2}$代表了前后两个zero convolution层的参数权重，$\Theta_{c}$则代表了ControlNet的参数权重。
 
