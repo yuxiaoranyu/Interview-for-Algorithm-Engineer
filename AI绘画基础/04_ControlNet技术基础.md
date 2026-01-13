@@ -1210,14 +1210,19 @@ $$\frac{\partial y}{\partial w} \neq 0,\frac{\partial y}{\partial x}=0,\frac{\pa
 
 ![不使用ControlNet模型时扩散模型推理示意图](./imgs/不使用ControlNet模型时扩散模型推理示意图.png)
 
-接着，我们在此基础上假设将训练的所有参数锁定在$\Theta$中，然后将其复制为可训练的副本$\Theta_{c}$。复制的$\Theta_{c}$使用额外控制条件信息c进行训练。因此在使用ControlNet之后，**Stable Diffusion/FLUX.1底模型 + ControlNet模型整体的图像生成表达式转化成为：**
+接着，我们在此基础上假设将训练的所有参数锁定在 $\Theta$ 中，然后将其复制为可训练的副本 $\Theta_{c}$ 。复制的 $\Theta_{c}$ 使用额外控制条件信息c进行训练。因此在使用ControlNet之后，**Stable Diffusion/FLUX.1底模型 + ControlNet模型整体的图像生成表达式转化成为：**
 
 ![StableDiffusion和FLUX.1底模型+ControlNet模型的整体图像生成过程](./imgs/StableDiffusion和FLUX.1底模型+ControlNet模型的整体图像生成过程.png)
 
-其中$Z = F(c; \Theta)$代表了zero convolution模块，$\Theta_{z1}$和$\Theta_{z2}$代表了前后两个zero convolution层的参数权重，$\Theta_{c}$则代表了ControlNet的参数权重。
+其中 $Z = F(c; \Theta)$ 代表了zero convolution模块， $\Theta_{z1}$ 和 $\Theta_{z2}$ 代表了前后两个zero convolution层的参数权重， $\Theta_{c}$ 则代表了ControlNet的参数权重。
 
 由于训练开始前zero convolution模块的输出都为零，所以ControlNet未经训练时的初始输出为0：
-$$\begin{cases} \mathcal{Z}\left(\boldsymbol{c};\Theta_{z1}\right) = 0 \\ \mathcal{F}\left(x + \mathcal{Z}\left(\boldsymbol{c};\Theta_{z1}\right);\Theta_{\mathrm{c}}\right) = \mathcal{F}\left(x;\Theta_{\mathrm{c}}\right) = \mathcal{F}(x;\Theta) \\ \mathcal{Z}\left(\mathcal{F}\left(x + \mathcal{Z}\left(\boldsymbol{c};\Theta_{z1}\right);\Theta_{\mathrm{c}}\right);\Theta_{z2}\right) = \mathcal{Z}\left(\mathcal{F}\left(x;\Theta_{\mathrm{c}}\right);\Theta_{z2}\right) = \mathbf{0} \end{cases}$$
+
+$$\begin{cases} 
+\mathcal{Z}\left(\boldsymbol{c};\Theta_{z1}\right) = 0 \\ 
+\mathcal{F}\left(x + \mathcal{Z}\left(\boldsymbol{c};\Theta_{z1}\right);\Theta_{\mathrm{c}}\right) = \mathcal{F}\left(x;\Theta_{\mathrm{c}}\right) = \mathcal{F}(x;\Theta) \\
+\mathcal{Z}\left(\mathcal{F}\left(x + \mathcal{Z}\left(\boldsymbol{c};\Theta_{z1}\right);\Theta_{\mathrm{c}}\right);\Theta_{z2}\right) = \mathcal{Z}\left(\mathcal{F}\left(x;\Theta_{\mathrm{c}}\right);\Theta_{z2}\right) = \mathbf{0} 
+\end{cases}$$
 
 由此可知，**在ControlNet微调训练初始阶段对Stable Diffusion/FLUX.1底模型权重是没有任何影响的，能让底模型原本的性能完整保存**，之后ControlNet的训练也只是在原Stable Diffusion/FLUX.1底模型基础上进行优化。
 
