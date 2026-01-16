@@ -1174,12 +1174,59 @@ EasyPhoto作为一款基于Stable Diffusion的AI写真生成工具，深度融�
 
 <h2 id="42.ControlNet的最小单元是什么样的？">42.ControlNet的最小单元是什么样的？</h2>
 
+下图是ControlNet模型的最小单元：
+
+![ControlNet模型的最小单元结构示意图](./imgs/ControlNet模型的最小单元结构示意图.png)
+
+从上图可以看到，**在使用ControlNet模型之后，Stable Diffusion/FLUX.1模型的权重被复制出两个相同的部分，分别是“锁定”副本（locked）权重和“可训练”副本（trainable copy）权重**。
+
+**我们如何理解这两个副本权重呢？** Rocky从训练角度和推理角度给大家进行通俗易懂的讲解。
+
+**首先不管是训练阶段还是推理阶段，ControlNet都在“可训练”副本上输入控制条件** $c$，然后将“可训练”副本输出结果和原来Stable Diffusion/FLUX.1模型的“锁定”副本输出结果**相加（add）**获得最终的输出结果。
+
+在训练阶段，**其中“锁定”副本中冻结参数，权重保持不变，保留了Stable Diffusion/FLUX.1模型原本的能力**；与此同时，**使用新数据对“可训练”副本进行微调训练，学习数据中的控制条件信息**。因为有Stable Diffusion/FLUX.1模型作为预训练权重，**复制“可训练”副本而不是直接训练原始权重还能避免数据集较小时的过拟合**，所以我们使用常规规模数据集（几K-几M级别）就能对控制条件进行学习训练，同时不会破坏Stable Diffusion/FLUX.1模型原本的能力（从数十亿张图像中学习到的大型模型的能力）。
+
+另外，大家可能发现了**ControlNet模型的最小单元结构中有两个zero convolution模块，它们是1×1卷积，并且在微调训练时权重和偏置都初始化为零（zero初始化）**。这样一来，在我们开始训练ControlNet之前，所有zero convolution模块的输出都为零，使得ControlNet完完全全就在原有Stable Diffusion/FLUX.1底模型的能力上进行微调训练，这样可以尽量避免训练加入的初始噪声对ControlNet“可训练”副本权重的破坏，保证了不会产生大的能力偏差。
 
 <h2 id="43.ControlNet中的zero卷积层初始权重为什么是0?zero卷积层为什么有效？">43.ControlNet中的zero卷积层初始权重为什么是0?zero卷积层为什么有效？</h2>
 
+大家很可能就会有一个疑问，如果zero convolution模块的初始权重为零，那么梯度也为零，ControlNet模型将不会学到任何东西。**那么为什么“zero convolution模块”有效呢？（AIGC算法面试必考点）**
+
+Rocky进行下面的推导，相信大家对一切都会非常清晰明了：
+
+我们可以假设ControlNet的初始权重为： $y=wx+b$ ，然后我们就可以得到对应的梯度求导：
+
+$$\frac{\partial y}{\partial w}=x,\frac{\partial y}{\partial x}=w,\frac{\partial y}{\partial b}=1$$
+
+如果此时 $w=0$ 并且 $x \neq 0$ ，然后我们就可以得到：
+
+$$\frac{\partial y}{\partial w} \neq 0,\frac{\partial y}{\partial x}=0,\frac{\partial y}{\partial b}\neq 0$$
+
+这就意味着只要 $x \neq 0$ ，一次梯度下降迭代将使w变成非零值。然后就得到： $\frac{\partial y}{\partial x}\neq 0$ 。**这样就能让zero convolution模块逐渐成为具有非零权重的卷积层，并不断优化参数权重**。
 
 <h2 id="44.ConrtolNet是如何训练的？">44.ConrtolNet是如何训练的？</h2>
 
+我们对ControlNet整体训练过程进行拆解理解。在我们不使用ControlNet模型时，**可以将Stable Diffusion/FLUX.1底模型的图像生成过程表达为：**
+
+![不使用ControlNet模型时扩散模型推理示意图](./imgs/不使用ControlNet模型时扩散模型推理示意图.png)
+
+接着，我们在此基础上假设将训练的所有参数锁定在 $\Theta$ 中，然后将其复制为可训练的副本 $\Theta_{c}$ 。复制的 $\Theta_{c}$ 使用额外控制条件信息c进行训练。因此在使用ControlNet之后，**Stable Diffusion/FLUX.1底模型 + ControlNet模型整体的图像生成表达式转化成为：**
+
+![StableDiffusion和FLUX.1底模型+ControlNet模型的整体图像生成过程](./imgs/StableDiffusion和FLUX.1底模型+ControlNet模型的整体图像生成过程.png)
+
+其中 $Z = F(c; \Theta)$ 代表了zero convolution模块， $\Theta_{z1}$ 和 $\Theta_{z2}$ 代表了前后两个zero convolution层的参数权重， $\Theta_{c}$ 则代表了ControlNet的参数权重。
+
+由于训练开始前zero convolution模块的输出都为零，所以ControlNet未经训练时的初始输出为0：
+
+$$\begin{cases} 
+\mathcal{Z}\left(\boldsymbol{c};\Theta_{z1}\right) = 0 \\ 
+\mathcal{F}\left(x + \mathcal{Z}\left(\boldsymbol{c};\Theta_{z1}\right);\Theta_{\mathrm{c}}\right) = \mathcal{F}\left(x;\Theta_{\mathrm{c}}\right) = \mathcal{F}(x;\Theta) \\
+\mathcal{Z}\left(\mathcal{F}\left(x + \mathcal{Z}\left(\boldsymbol{c};\Theta_{z1}\right);\Theta_{\mathrm{c}}\right);\Theta_{z2}\right) = \mathcal{Z}\left(\mathcal{F}\left(x;\Theta_{\mathrm{c}}\right);\Theta_{z2}\right) = \mathbf{0} 
+\end{cases}$$
+
+由此可知，**在ControlNet微调训练初始阶段对Stable Diffusion/FLUX.1底模型权重是没有任何影响的，能让底模型原本的性能完整保存**，之后ControlNet的训练也只是在原Stable Diffusion/FLUX.1底模型基础上进行优化。
+
+总的来说，**ControlNet的本质原理使得训练后的模型鲁棒性好，能够避免模型过拟合，并在特定条件场景下具有良好的泛化性，同时能够在小规模数据和消费级显卡上进行训练**。
 
 <h2 id="45.ControlNet的损失函数是什么？">45.ControlNet的损失函数是什么？</h2>
 
