@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#f97316"/>
+    </marker>
+    <style>
+      .title { font: 700 30px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 16px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
+      .label { font: 700 18px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
+      .body { font: 500 15px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #334155; }
+      .small { font: 500 13px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
+      .code { font: 600 14px "Menlo","Consolas","Courier New",monospace; fill: #111827; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <text x="640" y="46" text-anchor="middle" class="title">Probability Flow ODE 与 Reverse-time SDE 的关系</text>
+  <text x="640" y="76" text-anchor="middle" class="subtitle">同一个 Score 网络，两类反向轨迹；理论上边缘分布一致，但轨迹性质不同</text>
+
+  <rect x="92" y="138" width="220" height="96" rx="18" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="202" y="174" text-anchor="middle" class="label">初始噪声</text>
+  <text x="202" y="204" text-anchor="middle" class="code">x<tspan baseline-shift="sub" font-size="10">T</tspan> ~ p<tspan baseline-shift="sub" font-size="10">T</tspan>(x)</text>
+
+  <rect x="968" y="138" width="220" height="96" rx="18" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="1078" y="174" text-anchor="middle" class="label">数据分布</text>
+  <text x="1078" y="204" text-anchor="middle" class="code">x<tspan baseline-shift="sub" font-size="10">0</tspan> ~ p<tspan baseline-shift="sub" font-size="10">0</tspan>(x)</text>
+
+  <path d="M 320 168 C 438 94, 610 118, 746 162 S 960 196, 966 186" fill="none" stroke="#f97316" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrowOrange)"/>
+  <path d="M 320 210 C 452 288, 606 258, 732 220 S 936 134, 966 184" fill="none" stroke="#f97316" stroke-width="4" stroke-dasharray="10 8" marker-end="url(#arrowOrange)" opacity="0.78"/>
+  <path d="M 320 190 C 500 198, 700 196, 966 186" fill="none" stroke="#16a34a" stroke-width="5" marker-end="url(#arrowGreen)"/>
+
+  <text x="640" y="132" text-anchor="middle" class="label" fill="#f97316">Reverse-time SDE：随机轨迹</text>
+  <text x="640" y="255" text-anchor="middle" class="label" fill="#16a34a">PF-ODE：确定性轨迹</text>
+
+  <rect x="95" y="314" width="520" height="160" rx="18" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="355" y="350" text-anchor="middle" class="label">Reverse-time SDE</text>
+  <text x="355" y="384" text-anchor="middle" class="code">dx = [f - g² s<tspan baseline-shift="sub" font-size="10">θ</tspan>]dt + g d<tspan style="text-decoration:overline">w</tspan></text>
+  <text x="355" y="418" text-anchor="middle" class="body">保留随机噪声项，适合多样性和局部随机探索</text>
+  <text x="355" y="446" text-anchor="middle" class="small">同一初始噪声下，若随机数不同，轨迹也会不同</text>
+
+  <rect x="665" y="314" width="520" height="160" rx="18" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="925" y="350" text-anchor="middle" class="label">Probability Flow ODE</text>
+  <text x="925" y="384" text-anchor="middle" class="code">dx = [f - 1/2 g² s<tspan baseline-shift="sub" font-size="10">θ</tspan>]dt</text>
+  <text x="925" y="418" text-anchor="middle" class="body">没有随机扩散项，适合复现、反演和似然估计</text>
+  <text x="925" y="446" text-anchor="middle" class="small">同一初始噪声和数值配置下，轨迹通常稳定复现</text>
+
+  <rect x="165" y="544" width="950" height="92" rx="18" fill="#0f172a"/>
+  <text x="640" y="581" text-anchor="middle" style="font:700 20px 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; fill:#ffffff;">关键区分：边缘分布相同，不代表逐点轨迹相同</text>
+  <text x="640" y="612" text-anchor="middle" style="font:500 15px 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; fill:#cbd5e1;">理论等价成立在精确 Score 和理想连续时间条件下；实际采样还受模型误差、步长和求解器影响</text>
+</svg>

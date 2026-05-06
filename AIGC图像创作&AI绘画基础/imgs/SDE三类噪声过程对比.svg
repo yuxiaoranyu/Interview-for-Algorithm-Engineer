@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <marker id="axisArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: 700 30px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 16px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
+      .label { font: 700 18px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
+      .body { font: 500 15px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #334155; }
+      .small { font: 500 13px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
+      .code { font: 600 14px "Menlo","Consolas","Courier New",monospace; fill: #111827; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="720" fill="#ffffff"/>
+
+  <text x="640" y="46" text-anchor="middle" class="title">VP / VE / sub-VP 三类正向噪声过程</text>
+  <text x="640" y="76" text-anchor="middle" class="subtitle">三者的区别不是“谁更高级”，而是信号衰减和噪声方差增长方式不同</text>
+
+  <rect x="72" y="116" width="348" height="300" rx="18" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="246" y="150" text-anchor="middle" class="label">VP-SDE</text>
+  <text x="246" y="178" text-anchor="middle" class="small">信号衰减，噪声增加，尺度较稳定</text>
+  <line x1="118" y1="354" x2="374" y2="354" stroke="#334155" stroke-width="2" marker-end="url(#axisArrow)"/>
+  <line x1="118" y1="354" x2="118" y2="214" stroke="#334155" stroke-width="2" marker-end="url(#axisArrow)"/>
+  <text x="384" y="360" class="small">t</text>
+  <text x="96" y="208" class="small">强度</text>
+  <path d="M 126 226 C 190 245, 262 286, 365 338" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <path d="M 126 338 C 196 318, 270 270, 365 226" fill="none" stroke="#f97316" stroke-width="4"/>
+  <circle cx="148" cy="232" r="5" fill="#2563eb"/>
+  <circle cx="148" cy="334" r="5" fill="#f97316"/>
+  <text x="176" y="234" class="small" fill="#2563eb">信号衰减</text>
+  <text x="176" y="334" class="small" fill="#f97316">噪声增强</text>
+  <text x="246" y="390" text-anchor="middle" class="code">dx = -1/2 β(t)x dt + √β(t)dw</text>
+
+  <rect x="466" y="116" width="348" height="300" rx="18" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="640" y="150" text-anchor="middle" class="label">VE-SDE</text>
+  <text x="640" y="178" text-anchor="middle" class="small">信号均值不主动衰减，噪声尺度快速增大</text>
+  <line x1="512" y1="354" x2="768" y2="354" stroke="#334155" stroke-width="2" marker-end="url(#axisArrow)"/>
+  <line x1="512" y1="354" x2="512" y2="214" stroke="#334155" stroke-width="2" marker-end="url(#axisArrow)"/>
+  <text x="778" y="360" class="small">t</text>
+  <text x="490" y="208" class="small">强度</text>
+  <path d="M 520 260 C 590 260, 660 260, 759 260" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <path d="M 520 342 C 590 336, 678 306, 759 222" fill="none" stroke="#f97316" stroke-width="4"/>
+  <circle cx="542" cy="260" r="5" fill="#2563eb"/>
+  <circle cx="542" cy="340" r="5" fill="#f97316"/>
+  <text x="570" y="262" class="small" fill="#2563eb">信号均值保持</text>
+  <text x="570" y="340" class="small" fill="#f97316">噪声尺度放大</text>
+  <text x="640" y="390" text-anchor="middle" class="code">dx = √(dσ²(t)/dt) dw</text>
+
+  <rect x="860" y="116" width="348" height="300" rx="18" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="1034" y="150" text-anchor="middle" class="label">sub-VP SDE</text>
+  <text x="1034" y="178" text-anchor="middle" class="small">VP 的连续时间变体，扩散强度重新设计</text>
+  <line x1="906" y1="354" x2="1162" y2="354" stroke="#334155" stroke-width="2" marker-end="url(#axisArrow)"/>
+  <line x1="906" y1="354" x2="906" y2="214" stroke="#334155" stroke-width="2" marker-end="url(#axisArrow)"/>
+  <text x="1172" y="360" class="small">t</text>
+  <text x="884" y="208" class="small">强度</text>
+  <path d="M 914 226 C 984 250, 1062 292, 1153 338" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <path d="M 914 342 C 988 332, 1076 296, 1153 246" fill="none" stroke="#f97316" stroke-width="4"/>
+  <path d="M 914 338 C 988 318, 1072 270, 1153 226" fill="none" stroke="#f97316" stroke-width="2" stroke-dasharray="8 6" opacity="0.55"/>
+  <circle cx="936" cy="232" r="5" fill="#2563eb"/>
+  <circle cx="936" cy="340" r="5" fill="#f97316"/>
+  <text x="964" y="234" class="small" fill="#2563eb">信号衰减</text>
+  <text x="964" y="340" class="small" fill="#f97316">扩散弱于 VP</text>
+  <text x="1034" y="390" text-anchor="middle" class="code">dx = -1/2 β(t)x dt + g<tspan baseline-shift="sub" font-size="10">sub</tspan>(t)dw</text>
+
+  <rect x="125" y="494" width="1030" height="118" rx="18" fill="#0f172a"/>
+  <text x="640" y="532" text-anchor="middle" style="font:700 21px 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; fill:#ffffff;">读图方式</text>
+  <text x="640" y="566" text-anchor="middle" style="font:500 16px 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; fill:#cbd5e1;">VP 更像 DDPM 的连续极限；VE 更像多尺度噪声扰动；sub-VP 更常用于连续时间似然和理论分析</text>
+  <text x="640" y="594" text-anchor="middle" style="font:500 16px 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; fill:#cbd5e1;">选择哪一类 SDE，本质是在“噪声尺度、数值求解、似然估计、工程稳定性”之间做取舍</text>
+</svg>
