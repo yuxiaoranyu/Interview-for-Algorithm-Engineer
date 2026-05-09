@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <style>
+      .title { font: 700 30px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
+      .sub { font: 500 16px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
+      .h { font: 700 22px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
+      .body { font: 500 16px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #334155; }
+      .small { font: 500 14px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
+      .code { font: 600 15px "Menlo","Consolas","Courier New",monospace; fill: #0f172a; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="760" fill="#f8fafc"/>
+  <rect x="34" y="28" width="1212" height="704" rx="24" fill="#ffffff" stroke="#d7dee8" stroke-width="2"/>
+
+  <text x="640" y="74" text-anchor="middle" class="title">Rectified Flow、Flow Matching 与 Consistency Model 关系图</text>
+  <text x="640" y="104" text-anchor="middle" class="sub">一个负责训练框架，一个是常用线性路径特例，一个负责把多步生成压成一步或少步一致性映射</text>
+
+  <rect x="76" y="154" width="340" height="278" rx="22" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="246" y="196" text-anchor="middle" class="h">Flow Matching</text>
+  <text x="246" y="230" text-anchor="middle" class="body">通用训练框架</text>
+  <text x="246" y="266" text-anchor="middle" class="code">L = E || v<tspan baseline-shift="sub" font-size="12">θ</tspan>(x(t), t) − v<tspan baseline-shift="sub" font-size="12">target</tspan>(x(t), t) ||²</text>
+  <text x="246" y="310" text-anchor="middle" class="small">可以自由选择路径、速度参数化、条件方式</text>
+  <text x="246" y="338" text-anchor="middle" class="small">重点：直接匹配连续轨迹上的速度场</text>
+  <text x="246" y="382" text-anchor="middle" class="body">角色：定义“怎么训练生成流”</text>
+
+  <rect x="470" y="154" width="340" height="278" rx="22" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="640" y="196" text-anchor="middle" class="h">Rectified Flow</text>
+  <text x="640" y="230" text-anchor="middle" class="body">常用线性路径 / 终点预测形式</text>
+  <text x="640" y="266" text-anchor="middle" class="code">x<tspan baseline-shift="sub" font-size="12">t</tspan> = (1−t)x<tspan baseline-shift="sub" font-size="12">0</tspan> + t x<tspan baseline-shift="sub" font-size="12">1</tspan></text>
+  <text x="640" y="298" text-anchor="middle" class="code">v<tspan baseline-shift="sub" font-size="12">θ</tspan>(x, t) = (f<tspan baseline-shift="sub" font-size="12">θ</tspan>(x, t) − x) / (1−t)</text>
+  <text x="640" y="340" text-anchor="middle" class="small">希望轨迹更直、少步积分误差更小</text>
+  <text x="640" y="382" text-anchor="middle" class="body">角色：规定“走哪条路径、用什么目标回归”</text>
+
+  <rect x="864" y="154" width="340" height="278" rx="22" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="1034" y="196" text-anchor="middle" class="h">Consistency Model</text>
+  <text x="1034" y="230" text-anchor="middle" class="body">一致性映射 / 蒸馏思路</text>
+  <text x="1034" y="266" text-anchor="middle" class="code">f<tspan baseline-shift="sub" font-size="12">θ</tspan>(x<tspan baseline-shift="sub" font-size="12">t1</tspan>, t<tspan baseline-shift="sub" font-size="12">1</tspan>) ≈ f<tspan baseline-shift="sub" font-size="12">θ</tspan>(x<tspan baseline-shift="sub" font-size="12">t2</tspan>, t<tspan baseline-shift="sub" font-size="12">2</tspan>)</text>
+  <text x="1034" y="310" text-anchor="middle" class="small">同一轨迹上的不同点映射到同一终点</text>
+  <text x="1034" y="338" text-anchor="middle" class="small">适合 1 步或极少步采样</text>
+  <text x="1034" y="382" text-anchor="middle" class="body">角色：优化“如何更快采样”</text>
+
+  <path d="M 416 292 L 470 292" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <polygon points="462,286 470,292 462,298" fill="#2563eb"/>
+  <text x="443" y="276" text-anchor="middle" class="small">线性路径特例</text>
+
+  <path d="M 810 292 L 864 292" fill="none" stroke="#f59e0b" stroke-width="4"/>
+  <polygon points="856,286 864,292 856,298" fill="#f59e0b"/>
+  <text x="837" y="276" text-anchor="middle" class="small">可蒸馏 / 可借鉴</text>
+
+  <rect x="96" y="488" width="1088" height="178" rx="22" fill="#0f172a"/>
+  <text x="640" y="530" text-anchor="middle" style="font:700 23px 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; fill:#ffffff;">一句话记忆</text>
+  <text x="640" y="570" text-anchor="middle" style="font:500 18px 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; fill:#cbd5e1;">Flow Matching 负责定义速度匹配训练框架，Rectified Flow 是其中最常见的线性路径版本，Consistency Model 则进一步把多步流压缩成一步或少步映射。</text>
+  <text x="640" y="610" text-anchor="middle" style="font:500 18px 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; fill:#cbd5e1;">所以三者不是并列替代关系，而是“框架、特例、加速范式”三个不同层级。</text>
+</svg>
