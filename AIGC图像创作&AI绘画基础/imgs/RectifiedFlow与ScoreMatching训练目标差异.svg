@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="740" viewBox="0 0 1280 740">
+  <defs>
+    <style>
+      .title { font: 700 30px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
+      .sub { font: 500 16px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
+      .h { font: 700 22px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
+      .body { font: 500 15px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #334155; }
+      .small { font: 500 13px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
+      .code { font: 600 15px "Menlo","Consolas","Courier New",monospace; fill: #0f172a; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="740" fill="#f8fafc"/>
+  <rect x="34" y="28" width="1212" height="684" rx="24" fill="#ffffff" stroke="#d7dee8" stroke-width="2"/>
+
+  <text x="640" y="74" text-anchor="middle" class="title">Rectified Flow 与传统扩散训练目标差异</text>
+  <text x="640" y="104" text-anchor="middle" class="sub">两者都常用 MSE 训练，但一个学“局部去噪方向”，一个学“全局传输方向”</text>
+
+  <rect x="84" y="150" width="512" height="420" rx="24" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="340" y="194" text-anchor="middle" class="h">传统扩散 / Score Matching</text>
+  <text x="340" y="234" text-anchor="middle" class="code">x<tspan baseline-shift="sub" font-size="12">t</tspan> = √ᾱ<tspan baseline-shift="sub" font-size="12">t</tspan> x<tspan baseline-shift="sub" font-size="12">0</tspan> + √(1−ᾱ<tspan baseline-shift="sub" font-size="12">t</tspan>) ε</text>
+  <text x="340" y="272" text-anchor="middle" class="code">L = E || ε − ε<tspan baseline-shift="sub" font-size="12">θ</tspan>(x<tspan baseline-shift="sub" font-size="12">t</tspan>, t) ||²</text>
+  <text x="340" y="322" text-anchor="middle" class="body">监督信号：当前噪声水平下的局部去噪方向</text>
+  <text x="340" y="350" text-anchor="middle" class="body">物理直觉：先把这一步降噪，再交给下一步继续修正</text>
+  <text x="340" y="402" text-anchor="middle" class="small">优点：训练范式成熟、生态完整、采样器很多</text>
+  <text x="340" y="430" text-anchor="middle" class="small">难点：少步采样时，局部方向误差更容易累积</text>
+
+  <circle cx="212" cy="488" r="26" fill="#60a5fa"/>
+  <circle cx="294" cy="488" r="26" fill="#60a5fa" opacity="0.82"/>
+  <circle cx="376" cy="488" r="26" fill="#60a5fa" opacity="0.68"/>
+  <circle cx="458" cy="488" r="26" fill="#60a5fa" opacity="0.52"/>
+  <path d="M 212 488 L 268 488" stroke="#2563eb" stroke-width="3" stroke-dasharray="6 6"/>
+  <path d="M 294 488 L 350 488" stroke="#2563eb" stroke-width="3" stroke-dasharray="6 6"/>
+  <path d="M 376 488 L 432 488" stroke="#2563eb" stroke-width="3" stroke-dasharray="6 6"/>
+  <text x="340" y="542" text-anchor="middle" class="small">更像“沿时间轴反复做局部修正”</text>
+
+  <rect x="684" y="150" width="512" height="420" rx="24" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="940" y="194" text-anchor="middle" class="h">Rectified Flow</text>
+  <text x="940" y="234" text-anchor="middle" class="code">x<tspan baseline-shift="sub" font-size="12">t</tspan> = (1−t)x<tspan baseline-shift="sub" font-size="12">0</tspan> + t x<tspan baseline-shift="sub" font-size="12">1</tspan></text>
+  <text x="940" y="272" text-anchor="middle" class="code">L = E || f<tspan baseline-shift="sub" font-size="12">θ</tspan>(x<tspan baseline-shift="sub" font-size="12">t</tspan>, t) − x<tspan baseline-shift="sub" font-size="12">1</tspan> ||²</text>
+  <text x="940" y="322" text-anchor="middle" class="body">监督信号：最终干净样本或指向终点的速度</text>
+  <text x="940" y="350" text-anchor="middle" class="body">物理直觉：在当前位置直接估计“最终应该走向哪里”</text>
+  <text x="940" y="402" text-anchor="middle" class="small">优点：更具全局性，更适合少步 ODE 采样</text>
+  <text x="940" y="430" text-anchor="middle" class="small">难点：依赖路径是否足够直、速度场是否足够准</text>
+
+  <circle cx="812" cy="502" r="28" fill="#22c55e" opacity="0.48"/>
+  <circle cx="1068" cy="476" r="28" fill="#16a34a"/>
+  <path d="M 812 502 C 872 490, 930 480, 996 478" fill="none" stroke="#16a34a" stroke-width="4"/>
+  <polygon points="988,472 1000,478 988,484" fill="#16a34a"/>
+  <path d="M 1000 478 C 1020 477, 1040 476, 1068 476" fill="none" stroke="#16a34a" stroke-width="4"/>
+  <text x="940" y="542" text-anchor="middle" class="small">更像“持续朝终点推进的全局运输方向”</text>
+
+  <rect x="128" y="606" width="1024" height="64" rx="18" fill="#0f172a"/>
+  <text x="640" y="646" text-anchor="middle" style="font:700 19px 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',Arial,sans-serif; fill:#ffffff;">一句话：扩散模型学“当前位置如何局部去噪”，Rectified Flow 学“当前位置应朝最终数据点如何整体移动”</text>
+</svg>
