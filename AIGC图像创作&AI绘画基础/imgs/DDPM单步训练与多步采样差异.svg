@@ -3,11 +3,11 @@
     <style>
       .bg { fill: #f8fafc; }
       .panel { fill: #ffffff; stroke: #d7dee8; stroke-width: 2; }
-      .title { font: 700 30px Arial, "Microsoft YaHei", sans-serif; fill: #172033; }
-      .subtitle { font: 400 18px Arial, "Microsoft YaHei", sans-serif; fill: #526071; }
-      .h { font: 700 23px Arial, "Microsoft YaHei", sans-serif; fill: #253045; }
-      .label { font: 600 18px Arial, "Microsoft YaHei", sans-serif; fill: #253045; }
-      .small { font: 400 15px Arial, "Microsoft YaHei", sans-serif; fill: #526071; }
+      .title { font: 700 30px "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; fill: #172033; }
+      .subtitle { font: 400 18px "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; fill: #526071; }
+      .h { font: 700 23px "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; fill: #253045; }
+      .label { font: 600 18px "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; fill: #253045; }
+      .small { font: 400 15px "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; fill: #526071; }
       .box-blue { fill: #eff6ff; stroke: #93c5fd; stroke-width: 2; }
       .box-orange { fill: #fff7ed; stroke: #fdba74; stroke-width: 2; }
       .box-green { fill: #ecfdf5; stroke: #86efac; stroke-width: 2; }
@@ -16,7 +16,7 @@
       .arrow-blue { stroke: #2563eb; stroke-width: 4; fill: none; marker-end: url(#arrowBlue); }
       .arrow-orange { stroke: #f97316; stroke-width: 4; fill: none; marker-end: url(#arrowOrange); }
       .dash { stroke: #94a3b8; stroke-width: 2.5; stroke-dasharray: 8 8; fill: none; }
-      .formula { font: 600 18px Arial, "Microsoft YaHei", sans-serif; fill: #1e293b; }
+      .formula { font: 600 18px "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; fill: #1e293b; }
       .pill { fill: #ffffff; stroke: #d7dee8; stroke-width: 1.5; }
     </style>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
@@ -40,25 +40,25 @@
   <text class="small" x="116" y="234">每次随机采样一个时间步 t，输入来自真实前向分布</text>
 
   <rect class="pill" x="124" y="276" width="102" height="58" rx="14"/>
-  <text class="label" x="154" y="312"><tspan font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="12">0</tspan></text>
+  <text class="label" x="154" y="312">x₀</text>
   <text class="small" x="138" y="356">真实图像</text>
 
   <rect class="pill" x="294" y="276" width="130" height="58" rx="14"/>
   <text class="formula" x="310" y="312">加噪 q</text>
-  <text class="small" x="296" y="356">人为构造 <tspan font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="11">t</tspan></text>
+  <text class="small" x="296" y="356">人为构造 x_t</text>
 
   <rect class="pill" x="456" y="276" width="68" height="58" rx="14"/>
-  <text class="label" x="478" y="312"><tspan font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="12">t</tspan></text>
+  <text class="label" x="478" y="312">x_t</text>
 
   <path class="arrow-blue" d="M226 305 H288"/>
   <path class="arrow-blue" d="M424 305 H450"/>
 
   <rect class="box-gray" x="124" y="402" width="180" height="74" rx="16"/>
-  <text class="formula" x="145" y="434"><tspan>ε</tspan><tspan baseline-shift="sub" font-size="12">θ</tspan><tspan>(</tspan><tspan font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="12">t</tspan><tspan>, t)</tspan></text>
+  <text class="formula" x="145" y="434">ε_θ(x_t, t)</text>
   <text class="small" x="145" y="460">预测噪声 ε</text>
 
   <rect class="box-green" x="344" y="402" width="160" height="74" rx="16"/>
-  <text class="formula" x="368" y="434"><tspan>MSE(ε, ε</tspan><tspan baseline-shift="sub" font-size="12">θ</tspan><tspan>)</tspan></text>
+  <text class="formula" x="368" y="434">MSE(ε, ε_θ)</text>
   <text class="small" x="374" y="460">单步Loss</text>
 
   <path class="arrow" d="M490 334 C488 370, 430 384, 306 420"/>
@@ -71,20 +71,20 @@
   <text class="small" x="662" y="234">每一步输入都来自模型上一步输出，偏差可能累积</text>
 
   <rect class="pill" x="664" y="286" width="80" height="56" rx="14"/>
-  <text class="label" x="688" y="321"><tspan font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="12">T</tspan></text>
+  <text class="label" x="688" y="321">x_T</text>
   <text class="small" x="663" y="366">纯噪声</text>
 
   <rect class="pill" x="792" y="286" width="88" height="56" rx="14"/>
-  <text class="label" x="810" y="321"><tspan font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="12">t</tspan></text>
+  <text class="label" x="810" y="321">x_t</text>
 
   <rect class="pill" x="928" y="286" width="96" height="56" rx="14"/>
-  <text class="label" x="944" y="321"><tspan font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="12">t-1</tspan></text>
+  <text class="label" x="944" y="321">x_(t−1)</text>
 
   <rect class="pill" x="792" y="414" width="88" height="56" rx="14"/>
-  <text class="label" x="812" y="449"><tspan font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="12">1</tspan></text>
+  <text class="label" x="812" y="449">x₁</text>
 
   <rect class="pill" x="928" y="414" width="96" height="56" rx="14"/>
-  <text class="label" x="944" y="449"><tspan font-style="italic">x</tspan><tspan baseline-shift="sub" font-size="12">0</tspan></text>
+  <text class="label" x="944" y="449">x₀</text>
   <text class="small" x="928" y="494">生成图像</text>
 
   <path class="arrow-orange" d="M744 314 H786"/>

@@ -13,7 +13,7 @@
       .label { font: 700 21px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
       .body { font: 500 16px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #334155; }
       .small { font: 500 14px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
-      .code { font: 600 16px "Menlo","Consolas","Courier New",monospace; fill: #0f172a; }
+      .code { font: 600 16px "Arial Unicode MS","STIXGeneral","Times New Roman","PingFang SC",serif; fill: #0f172a; }
     </style>
   </defs>
 
@@ -25,25 +25,25 @@
 
   <rect x="82" y="150" width="300" height="204" rx="20" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
   <text x="232" y="190" text-anchor="middle" class="label">起点分布</text>
-  <text x="232" y="226" text-anchor="middle" class="code">x<tspan baseline-shift="sub" font-size="12">0</tspan> ~ N(0, I)</text>
+  <text x="232" y="226" text-anchor="middle" class="code">x₀ ~ N(0, I)</text>
   <text x="232" y="260" text-anchor="middle" class="body">简单噪声分布</text>
   <text x="232" y="286" text-anchor="middle" class="body">采样容易、密度已知</text>
   <text x="232" y="324" text-anchor="middle" class="small">目标：沿连续时间 t ∈ [0,1] 把噪声推到数据分布</text>
 
   <rect x="898" y="150" width="300" height="204" rx="20" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
   <text x="1048" y="190" text-anchor="middle" class="label">终点分布</text>
-  <text x="1048" y="226" text-anchor="middle" class="code">x<tspan baseline-shift="sub" font-size="12">1</tspan> ~ p<tspan baseline-shift="sub" font-size="12">data</tspan>(x)</text>
+  <text x="1048" y="226" text-anchor="middle" class="code">x₁ ~ p_data(x)</text>
   <text x="1048" y="260" text-anchor="middle" class="body">真实数据分布</text>
   <text x="1048" y="286" text-anchor="middle" class="body">图像、视频或多模态样本</text>
   <text x="1048" y="324" text-anchor="middle" class="small">终点由训练数据直接提供监督</text>
 
   <path d="M 382 252 C 500 180, 782 180, 898 252" fill="none" stroke="#2563eb" stroke-width="5" marker-end="url(#arrowBlue)"/>
-  <text x="640" y="174" text-anchor="middle" class="body">连续流映射 φ<tspan baseline-shift="sub" font-size="12">t</tspan></text>
+  <text x="640" y="174" text-anchor="middle" class="body">连续流映射 φ_t</text>
 
   <rect x="312" y="400" width="656" height="170" rx="22" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
   <text x="640" y="442" text-anchor="middle" class="label">训练时先指定路径，再匹配速度</text>
-  <text x="640" y="482" text-anchor="middle" class="code">x(t) = (1−t)x<tspan baseline-shift="sub" font-size="12">0</tspan> + t x<tspan baseline-shift="sub" font-size="12">1</tspan></text>
-  <text x="640" y="518" text-anchor="middle" class="code">v<tspan baseline-shift="sub" font-size="12">target</tspan>(x(t), t) = x<tspan baseline-shift="sub" font-size="12">1</tspan> − x<tspan baseline-shift="sub" font-size="12">0</tspan></text>
+  <text x="640" y="482" text-anchor="middle" class="code">x(t) = (1−t)x₀ + t x₁</text>
+  <text x="640" y="518" text-anchor="middle" class="code">v_target(x(t), t) = x₁ − x₀</text>
   <text x="640" y="548" text-anchor="middle" class="body">网络不用显式计算散度，只需回归“当前点应该往哪走、多快走”</text>
 
   <path d="M 640 354 L 640 400" fill="none" stroke="#16a34a" stroke-width="4" marker-end="url(#arrowGreen)"/>

@@ -9,29 +9,21 @@
       .label { font: 700 18px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
       .body { font: 500 15px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #1f2937; }
       .small { font: 500 13px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #334155; }
-      .code { font: 600 14px "Menlo","Consolas","Courier New",monospace; fill: #0f172a; }
+      .code { font: 600 14px "Arial Unicode MS","STIXGeneral","Times New Roman","PingFang SC",serif; fill: #0f172a; }
     </style>
   </defs>
 
   <rect width="1280" height="620" fill="#ffffff"/>
   <text x="640" y="48" text-anchor="middle" class="title">DDIM 的确定性与随机性切换</text>
-  <text x="640" y="78" text-anchor="middle" class="sub">
-    <tspan>随机性由 σ</tspan><tspan baseline-shift="sub" font-size="11">t</tspan><tspan> 或全局参数 η 控制；η = 0 时退化为确定性采样</tspan>
-  </text>
+  <text x="640" y="78" text-anchor="middle" class="sub">随机性由 σ_t 或全局参数 η 控制；η = 0 时退化为确定性采样</text>
 
   <rect x="170" y="108" width="940" height="72" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
-  <text x="640" y="140" text-anchor="middle" class="code">
-    <tspan>σ</tspan><tspan baseline-shift="sub" font-size="10">t</tspan><tspan>(η) = η · √((1−ᾱ</tspan><tspan baseline-shift="sub" font-size="10">t−1</tspan><tspan>)/(1−ᾱ</tspan><tspan baseline-shift="sub" font-size="10">t</tspan><tspan>)) · √(1−ᾱ</tspan><tspan baseline-shift="sub" font-size="10">t</tspan><tspan>/ᾱ</tspan><tspan baseline-shift="sub" font-size="10">t−1</tspan><tspan>)</tspan>
-  </text>
+  <text x="640" y="140" text-anchor="middle" class="code">σ_t(η) = η · √((1−ᾱ_(t−1))/(1−ᾱ_t)) · √(1−ᾱ_t/ᾱ_(t−1))</text>
   <text x="640" y="163" text-anchor="middle" class="small">η 越大，额外随机噪声越强；η = 0 时没有随机项</text>
 
   <line x1="240" y1="220" x2="1040" y2="220" stroke="#cbd5e1" stroke-width="2"/>
-  <text x="220" y="225" text-anchor="end" class="small">
-    <tspan>z</tspan><tspan baseline-shift="sub" font-size="10">T</tspan>
-  </text>
-  <text x="1060" y="225" class="small">
-    <tspan>x</tspan><tspan baseline-shift="sub" font-size="10">0</tspan>
-  </text>
+  <text x="220" y="225" text-anchor="end" class="small">z_T</text>
+  <text x="1060" y="225" class="small">x₀</text>
 
   <line x1="340" y1="245" x2="340" y2="430" stroke="#60a5fa" stroke-width="5" stroke-linecap="round"/>
   <path d="M 340 245 C 382 282, 360 330, 392 368 C 414 396, 408 422, 432 430" fill="none" stroke="#2563eb" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)"/>
@@ -61,7 +53,5 @@
   <text x="940" y="554" text-anchor="middle" class="small">DDPM 风格</text>
 
   <path d="M 240 590 C 420 574, 860 574, 1040 590" fill="none" stroke="#cbd5e1" stroke-width="2"/>
-  <text x="640" y="590" text-anchor="middle" class="small">
-    <tspan>同一个初始噪声 z</tspan><tspan baseline-shift="sub" font-size="10">T</tspan><tspan>，在不同 η 下会走出不同性质的轨迹</tspan>
-  </text>
+  <text x="640" y="590" text-anchor="middle" class="small">同一个初始噪声 z_T，在不同 η 下会走出不同性质的轨迹</text>
 </svg>

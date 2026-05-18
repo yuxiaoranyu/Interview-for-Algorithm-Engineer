@@ -6,7 +6,7 @@
       .h { font: 700 22px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
       .body { font: 500 15px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #334155; }
       .small { font: 500 13px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
-      .code { font: 600 15px "Menlo","Consolas","Courier New",monospace; fill: #0f172a; }
+      .code { font: 600 15px "Arial Unicode MS","STIXGeneral","Times New Roman","PingFang SC",serif; fill: #0f172a; }
     </style>
   </defs>
 
@@ -18,8 +18,8 @@
 
   <rect x="84" y="150" width="512" height="420" rx="24" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
   <text x="340" y="194" text-anchor="middle" class="h">传统扩散 / Score Matching</text>
-  <text x="340" y="234" text-anchor="middle" class="code">x<tspan baseline-shift="sub" font-size="12">t</tspan> = √ᾱ<tspan baseline-shift="sub" font-size="12">t</tspan> x<tspan baseline-shift="sub" font-size="12">0</tspan> + √(1−ᾱ<tspan baseline-shift="sub" font-size="12">t</tspan>) ε</text>
-  <text x="340" y="272" text-anchor="middle" class="code">L = E || ε − ε<tspan baseline-shift="sub" font-size="12">θ</tspan>(x<tspan baseline-shift="sub" font-size="12">t</tspan>, t) ||²</text>
+  <text x="340" y="234" text-anchor="middle" class="code">x_t = √ᾱ_t x₀ + √(1−ᾱ_t) ε</text>
+  <text x="340" y="272" text-anchor="middle" class="code">L = E || ε − ε_θ(x_t, t) ||²</text>
   <text x="340" y="322" text-anchor="middle" class="body">监督信号：当前噪声水平下的局部去噪方向</text>
   <text x="340" y="350" text-anchor="middle" class="body">物理直觉：先把这一步降噪，再交给下一步继续修正</text>
   <text x="340" y="402" text-anchor="middle" class="small">优点：训练范式成熟、生态完整、采样器很多</text>
@@ -36,8 +36,8 @@
 
   <rect x="684" y="150" width="512" height="420" rx="24" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
   <text x="940" y="194" text-anchor="middle" class="h">Rectified Flow</text>
-  <text x="940" y="234" text-anchor="middle" class="code">x<tspan baseline-shift="sub" font-size="12">t</tspan> = (1−t)x<tspan baseline-shift="sub" font-size="12">0</tspan> + t x<tspan baseline-shift="sub" font-size="12">1</tspan></text>
-  <text x="940" y="272" text-anchor="middle" class="code">L = E || f<tspan baseline-shift="sub" font-size="12">θ</tspan>(x<tspan baseline-shift="sub" font-size="12">t</tspan>, t) − x<tspan baseline-shift="sub" font-size="12">1</tspan> ||²</text>
+  <text x="940" y="234" text-anchor="middle" class="code">x_t = (1−t)x₀ + t x₁</text>
+  <text x="940" y="272" text-anchor="middle" class="code">L = E || f_θ(x_t, t) − x₁ ||²</text>
   <text x="940" y="322" text-anchor="middle" class="body">监督信号：最终干净样本或指向终点的速度</text>
   <text x="940" y="350" text-anchor="middle" class="body">物理直觉：在当前位置直接估计“最终应该走向哪里”</text>
   <text x="940" y="402" text-anchor="middle" class="small">优点：更具全局性，更适合少步 ODE 采样</text>

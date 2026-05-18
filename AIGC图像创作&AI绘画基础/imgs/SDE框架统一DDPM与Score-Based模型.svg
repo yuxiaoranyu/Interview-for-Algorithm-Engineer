@@ -12,7 +12,7 @@
       .label { font: 700 18px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #0f172a; }
       .body { font: 500 15px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #334155; }
       .small { font: 500 13px "PingFang SC","Microsoft YaHei","Noto Sans CJK SC",Arial,sans-serif; fill: #475569; }
-      .code { font: 600 15px "Menlo","Consolas","Courier New",monospace; fill: #111827; }
+      .code { font: 600 15px "Arial Unicode MS","STIXGeneral","Times New Roman","PingFang SC",serif; fill: #111827; }
     </style>
   </defs>
 
@@ -23,12 +23,12 @@
 
   <rect x="70" y="132" width="220" height="120" rx="18" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
   <text x="180" y="168" text-anchor="middle" class="label">数据分布</text>
-  <text x="180" y="200" text-anchor="middle" class="code">p<tspan baseline-shift="sub" font-size="11">0</tspan>(x)</text>
+  <text x="180" y="200" text-anchor="middle" class="code">p₀(x)</text>
   <text x="180" y="226" text-anchor="middle" class="small">真实图像 / 训练样本</text>
 
   <rect x="990" y="132" width="220" height="120" rx="18" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
   <text x="1100" y="168" text-anchor="middle" class="label">简单先验</text>
-  <text x="1100" y="200" text-anchor="middle" class="code">p<tspan baseline-shift="sub" font-size="11">T</tspan>(x)</text>
+  <text x="1100" y="200" text-anchor="middle" class="code">p_T(x)</text>
   <text x="1100" y="226" text-anchor="middle" class="small">高斯噪声分布</text>
 
   <path d="M 300 190 C 430 104, 850 104, 980 190" fill="none" stroke="#2563eb" stroke-width="4" marker-end="url(#arrowBlue)"/>
@@ -37,17 +37,17 @@
 
   <path d="M 980 218 C 850 304, 430 304, 300 218" fill="none" stroke="#16a34a" stroke-width="4" marker-end="url(#arrowGreen)"/>
   <text x="640" y="276" text-anchor="middle" class="label">反向 SDE：噪声逐渐生成数据</text>
-  <text x="640" y="304" text-anchor="middle" class="code">dx = [ f(x,t) - g<tspan baseline-shift="super" font-size="11">2</tspan>(t) s<tspan baseline-shift="sub" font-size="11">θ</tspan>(x,t) ]dt + g(t)d<tspan style="text-decoration:overline">w</tspan></text>
+  <text x="640" y="304" text-anchor="middle" class="code">dx = [ f(x,t) - g²(t) s_θ(x,t) ]dt + g(t)dw̄</text>
 
   <rect x="395" y="352" width="490" height="126" rx="20" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
   <text x="640" y="388" text-anchor="middle" class="label">真正需要训练的部分</text>
-  <text x="640" y="424" text-anchor="middle" class="code">s<tspan baseline-shift="sub" font-size="11">θ</tspan>(x,t) ≈ ∇<tspan baseline-shift="sub" font-size="11">x</tspan> log p<tspan baseline-shift="sub" font-size="11">t</tspan>(x)</text>
+  <text x="640" y="424" text-anchor="middle" class="code">s_θ(x,t) ≈ ∇_x log p_t(x)</text>
   <text x="640" y="452" text-anchor="middle" class="body">Score 网络告诉采样器：当前位置应该往高概率区域怎么走</text>
 
   <rect x="92" y="540" width="315" height="110" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
   <text x="250" y="574" text-anchor="middle" class="label">DDPM</text>
   <text x="250" y="604" text-anchor="middle" class="body">VP-SDE 的离散化视角</text>
-  <text x="250" y="630" text-anchor="middle" class="small">常用噪声预测 ε<tspan baseline-shift="sub" font-size="10">θ</tspan>(x<tspan baseline-shift="sub" font-size="10">t</tspan>,t)</text>
+  <text x="250" y="630" text-anchor="middle" class="small">常用噪声预测 ε_θ(x_t, t)</text>
 
   <rect x="482" y="540" width="315" height="110" rx="16" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
   <text x="640" y="574" text-anchor="middle" class="label">Score-Based / NCSN</text>
