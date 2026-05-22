@@ -38,7 +38,7 @@
 - :battery: [数据结构&算法基础](数据结构&算法基础)
 - :computer: [计算机基础](计算机基础)
 - :chart_with_upwards_trend: [开放性问题](开放性问题)
-- [2025年AI算法岗求职群&学习交流社区](https://mp.weixin.qq.com/s/ssEJjHBoJDB4y5CfQIWYvw)
+- [2026年AI算法岗求职群&学习交流社区](https://mp.weixin.qq.com/s/ssEJjHBoJDB4y5CfQIWYvw)
 
 ## 💎加入2026年AIGC算法岗/开发岗求职招聘社群（实习、秋招、春招、校招、社招）
 
