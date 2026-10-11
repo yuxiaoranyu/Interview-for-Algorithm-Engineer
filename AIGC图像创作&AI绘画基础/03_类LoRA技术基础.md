@@ -29,7 +29,7 @@
   - [面试问题：MoE-LoRA如何通过路由和专家适配器提升条件容量？](#q-025)
   - [面试问题：MoE-LoRA的工程收益、训练风险与适用场景是什么？](#q-026)
 
-[6.介绍一下PEFT技术在AIGC图像生成领域的应用](#q-027)
+[6.介绍一下PEFT技术在AIGC图像生成领域的应用（进阶）](#q-027)
   - [面试问题：PEFT的核心技术路线有哪些？LoRA属于哪个细分类别？](#q-028)
   - [面试问题：Textual Inversion的原理、优势与局限是什么？](#q-029)
   - [面试问题：DreamBooth和DreamBooth LoRA的原理是什么？](#q-030)
@@ -73,7 +73,7 @@ $$
 
 <div align="center">
 
-![LoRA模型的训练流程示意图](./imgs/LoRA模型的训练流程示意图.png)
+![LoRA模型的训练流程示意图](./imgs/lora_lowrank_branch_4k.png)
 
 </div>
 
@@ -127,7 +127,7 @@ LoRA并不天然等于“只训练Cross-Attention”。它可以作用于任何�
 
 <div align="center">
 
-![LoRA主要与SD模型的Cross-Attention部分结合训练](./imgs/LoRA主要与SD模型的CrossAttention部分结合训练.jpg)
+![LoRA主要与SD模型的Cross-Attention部分结合训练](./imgs/lora_injection_locations_4k.png)
 
 </div>
 
@@ -213,6 +213,12 @@ LoRA最常见的应用场景是人物、角色、产品、风格、服装、材�
 
 - **动态加载**：前向计算同时执行原层与LoRA分支，保留随时切换和调权能力，但会增加少量计算、显存管理与框架开销。
 - **权重融合**：预先计算 $W'=W_0+sBA$ 并写回底模，层结构与原模型一致，理论上不增加该层推理计算；代价是切换、撤销、精度管理和多LoRA版本控制更复杂。
+
+<div align="center">
+
+![LoRA动态加载与离线融合推理路径示意图](./imgs/lora_dynamic_vs_fused_inference_4k.png)
+
+</div>
 
 因此，“LoRA推理成本完全不变”只在已经正确融合、且不保留额外分支计算时成立。生产环境还要考虑适配器加载I/O、显存碎片、并发租户隔离和融合误差。
 
@@ -428,6 +434,12 @@ $$
 W_1-W_0\approx U_r\Sigma_rV_r^\top=B A
 $$
 
+<div align="center">
+
+![LoRA权重融合与差分提取流程示意图](./imgs/lora_merge_difference_extraction_4k.png)
+
+</div>
+
 关于LoRA的跨底模迁移，这里存在三条关键边界：
 
 1. **架构边界**：SD 1.x、SDXL、SD3和FLUX的网络结构及参数形状不同，不能直接互融。
@@ -589,6 +601,12 @@ $$
 
 随后只进行有限缩放和裁剪，并在同一Batch内使用相同空间尺寸。工程上还要让宽高满足VAE和网络下采样倍数要求，并控制每个Bucket的像素面积，避免极端长图把显存拉爆。
 
+<div align="center">
+
+![长宽比分桶与同尺寸组批示意图](./imgs/lora_aspect_ratio_bucketing_4k.png)
+
+</div>
+
 由于我们以经做了精细化的存储桶设计，所以出现**长宽比不匹配时的图像裁剪比例一般小于0.033，只去除了小于32像素的实际图像内容，所以对训练影响不大**。
 
 在完成数据的分桶存储后，接下来Rocky再讲解一下在训练过程中如何基于存储桶实现多分辨率训练过程。
@@ -696,6 +714,12 @@ LoRA技术本身已经节省了大量的训练显存，但是在消费级显卡�
 3. **梯度累积（gradient_checkpointing）**：**开启梯度累积能够减少显存占用**，从而能够设置更大的Batch Size，但是会减慢训练速度。开启梯度累积后，逐步更新模型权重而不是在训练期间一次更新所有模型权重（用多个Micro-Batch近似更大有效Batch）。
 4. **低比特优化器**：8-bit AdamW等可降低优化器状态显存，但需要验证数值稳定性和平台支持。
 5. **缓存VAE或文本特征**：在数据增强与文本编码器冻结条件满足时，可预计算latent或文本嵌入；若训练过程需要随机裁剪、动态Caption或训练Text Encoder，则缓存策略会受限。
+
+<div align="center">
+
+![梯度累积与激活检查点机制对比图](./imgs/lora_accumulation_checkpointing_4k.png)
+
+</div>
 
 学习率Warmup、梯度裁剪、EMA式监控、定期Checkpoint保存和训练阶段性验证测试用于提升训练稳定性。调度器不是越复杂越好；小数据LoRA中，常数加Warmup、余弦衰减都可以成立，关键是让总训练预算、初始学习率和验证曲线匹配。
 
@@ -972,7 +996,7 @@ B-LoRA的关键不是“训练两个LoRA”这么简单，而是三个条件同�
 
 论文的单图训练设置包括SDXL底模、冻结模型权重与Text Encoder、Rank为64、1000步优化；在论文实验环境中单张图约需10分钟A100。这里的数字是论文实验配置，不应直接当成所有SDXL或FLUX训练任务的推荐值。
 
-训练完成后，B-LoRA把同一张图的两个增量分别记为内容分支 $`\Delta W_c^4`$ 和风格分支 $`\Delta W_c^5`$。它们可以独立或组合使用：
+训练完成后，B-LoRA把同一张图的两个增量分别记为内容分支 $\Delta W_c^4$ 和风格分支 $\Delta W_c^5$。它们可以独立或组合使用：
 
 <div align="center">
 
@@ -1157,7 +1181,7 @@ $$
 
 <div align="center">
 
-![MoE-LoRA模型架构示意图](./imgs/MoE-LoRA模型架构示意图.jpg)
+![MoE-LoRA模型架构示意图](./imgs/lora_moe_sparse_routing_4k.png)
 
 </div>
 
@@ -1245,7 +1269,7 @@ $$
 
 **总的来说，MoE-LoRA不是把更多LoRA简单叠加到模型上，而是让不同LoRA形成专业分工，再由Router为每次AIGC创作动态选择合适的能力组合。它的长期价值不在“专家数量多”，而在“复杂创作任务能够被正确拆分、选择和协同”。**
 
-<h1 id="q-027">6.介绍一下PEFT技术在AIGC图像生成领域的应用</h1>
+<h1 id="q-027">6.介绍一下PEFT技术在AIGC图像生成领域的应用（进阶）</h1>
 
 <h2 id="q-028">面试问题：PEFT的核心技术路线有哪些？LoRA属于哪个细分类别？</h2>
 
