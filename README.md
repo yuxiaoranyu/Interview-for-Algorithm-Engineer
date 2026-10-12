@@ -14,7 +14,9 @@
 
 从 AI 技术学习走向应用实践，也需要便捷的模型调用与创作工具。点击下图获取RunningHub平台免费测试API额度和优惠折扣：
 
-<table>
+<div align="center">
+
+<table align="center">
   <tr>
     <td align="center">
       <a href="docs/runninghub-api.md"><img src="docs/imgs/主横幅预览.png" alt="RunningHub API：点击查看服务介绍、折扣与免费测试入口" width="400"></a><br>
@@ -32,7 +34,10 @@
         <li>数千家企业信赖，<strong>500 万 C 端月活</strong>验证。</li>
       </ul>
     </td>
+  </tr>
 </table>
+
+</div>
 
 # 
 
