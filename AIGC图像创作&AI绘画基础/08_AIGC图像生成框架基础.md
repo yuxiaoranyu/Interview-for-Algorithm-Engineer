@@ -7,14 +7,13 @@
 [2.ComfyUI为什么会成为AIGC图像创作领域的最主流框架？](#q-004)
   - [面试问题：介绍一下ComfyUI的节点图和工作流架构原理](#q-005)
   - [面试问题：ComfyUI为什么适合复杂AIGC图像工作流和商业化场景？](#q-006)
-  - [面试问题：ComfyUI的动态显存（Dynamic VRAM）机制是什么？](#q-006b)
+  - [面试问题：ComfyUI的动态显存（Dynamic VRAM）机制是什么？（进阶）](#q-006b)
 
 [3.介绍一下Diffusers框架的原理](#q-012)
   - [面试问题：Diffusers框架的核心设计思想是什么？](#q-013)
-  - [面试问题：Pipeline、Scheduler、Adapter和Model Component在Diffusers中分别起什么作用？](#q-014)
-  - [面试问题：Diffusers在训练、推理优化和生产部署中有哪些关键能力？](#q-015)
+  - [面试问题：除Pipeline外，Diffusers中还有哪些核心组件？](#q-014)
 
-[4.Stable Diffusion WebUI、Forge、SD.Next和Fooocus分别适合什么场景？](#q-008)
+[4.Stable Diffusion WebUI、SD.Next和Fooocus分别适合什么场景？](#q-008)
   - [面试问题：Stable Diffusion WebUI的核心功能和长期价值是什么？](#q-009)
   - [面试问题：Stable Diffusion WebUI Forge、SD.Next和Fooocus各自有哪些跨周期价值？](#q-010)
   - [面试问题：Variation Seed、Hires.fix和提示词权重控制如何在WebUI中发挥作用？](#q-011)
@@ -173,15 +172,15 @@ ComfyUI之所以适合复杂AIGC图像创作工作流，本质上是因为它解
 </div>
 
 
-<h2 id="q-006b">面试问题：ComfyUI的动态显存（Dynamic VRAM）机制是什么？</h2>
+<h2 id="q-006b">面试问题：ComfyUI的动态显存（Dynamic VRAM）机制是什么？（进阶）</h2>
 
 **难度评分：⭐⭐⭐⭐⭐ (5/5)  |  考察频率：⭐⭐⭐⭐ (4/5)**
 
-一个真实AIGC图像创作工作流可能先运行文本编码器，再执行多轮去噪，最后进行VAE解码和局部修复。这些模型参与计算的时间不同，扩散模型内部的权重也会按执行顺序被访问。如果让所有权重一直占据显存，会挤压不同阶段的有效计算资源；如果每次都重新在GPU和CPU之间搬运权重，又会增加工作流的低效等待时间。
+一个真实AIGC图像创作工作流可能先运行文本编码器，再执行多轮去噪，最后进行VAE解码和局部修复等。这些模型参与计算的时间不同，扩散模型内部的权重也会按执行顺序被访问。如果让所有权重一直占据显存，会挤压不同阶段的有效计算资源；如果每次都重新在GPU和CPU之间搬运权重，又会增加工作流的低效等待时间。
 
-**ComfyUI的Dynamic VRAM围绕权重工作集进行调度：让当前需要的权重进入物理显存，在空间允许时保留可复用结果，在压力升高时回收可释放的驻留权重。** 它调整的是权重的存储位置与生命周期。实际收益取决于工作集大小、访问顺序、缓存命中以及数据搬运成本。
+**ComfyUI的Dynamic VRAM围绕权重工作流进行调度：让当前需要的权重进入物理显存，在空间允许时保留可复用结果，在压力升高时回收可释放的驻留权重。** 它调整的是权重的存储位置与生命周期。实际收益取决于工作流大小、访问顺序、缓存命中以及数据搬运成本。
 
-Dynamic VRAM的核心思想是：**把显存管理从“静态预估占用”改造成“按需物理化、按压力淘汰、按计算路径调度”的动态权重工作集管理。**
+Dynamic VRAM的核心思想是：**把显存管理从“静态预估占用”改造成“按需物理化、按压力淘汰、按计算路径调度”的动态权重工作流管理。**
 
 可以把它理解成ComfyUI为PyTorch模型权重引入了一层更细粒度的内存调度系统：
 
@@ -197,14 +196,16 @@ Dynamic VRAM的核心思想是：**把显存管理从“静态预估占用”改
 
 这里最关键的是VBAR。VBAR可以理解为一块为模型权重准备的**GPU虚拟地址空间**。创建VBAR时，并不等于把全部模型权重都真实塞进物理VRAM；它更像先把“这些权重未来可能住在哪里”安排好。只有当某一层真正参与计算，系统才通过类似 `fault` 的机制把对应权重物理化到GPU显存里。
 
-从执行机制看，Dynamic VRAM大致可以分成六步：
+从执行机制看，Dynamic VRAM核心逻辑大致可以分成六步：
 
 1. **模型加载阶段不急于深拷贝全部权重。** ComfyUI对safetensors加载路径做了更贴近动态显存的处理。权重可以先以mmap或文件切片引用的方式存在，框架记录每个tensor对应的文件偏移、大小和几何信息，而不是一上来就把所有权重完整复制成常驻PyTorch张量。
 2. **模型准备阶段建立VBAR和动态pin状态。** 在本地ComfyUI代码里，`ModelPatcherDynamic`会为非CPU加载设备维护 `dynamic_vbars` 和 `dynamic_pins`。模型被准备为Dynamic VRAM加载时，权重不再全部强制加载到GPU，而是优先进入“可按需加载”的状态。
 3. **算子执行前触发权重物理化。** 进入具体Linear、Conv或Attention相关模块时，ComfyUI会检查模块是否有 `_v` 这类VBAR分配信息。执行前通过 `vbar_fault` 判断这段权重是否已经驻留。如果已经驻留，就直接使用；如果没有驻留，就从文件切片、pinned host buffer或缓存路径把当前算子需要的权重加载到合适的位置。
 4. **显存够用时缓存权重，显存紧张时动态释放。** 如果GPU显存足够，当前层权重会被保留在VRAM里，后续重复访问可以更快。如果显存压力上升，ComfyUI可以从VBAR里释放一部分低优先级权重，而不是让整条工作流直接OOM。当前活跃模型、最近访问的VBAR和即将参与计算的权重会拥有更高优先级。
 5. **加载失败时走临时张量兜底。** 如果某段权重无法长期驻留在VBAR里，Dynamic VRAM并不必然崩溃。它可以只为当前层创建临时GPU张量，把本次计算需要的权重拷进去，用完后释放或复用。这意味着显存压力从“全模型必须同时住进VRAM”变成“当前计算窗口需要什么就加载什么”。
-6. **预取与异步offload降低等待时间。** ComfyUI还引入了动态VBAR预取和异步offload能力。比如 `model_prefetch.py` 会根据 `prefetch_dynamic_vbars` 准备后续模块的权重；启动参数里也提供了 `--async-offload`、`--disable-async-offload`、`--fast-disk` 等选项，让快NVMe、pinned memory和GPU stream之间的配合更灵活。
+6. **预取与异步offload降低等待时间。** ComfyUI还引入了动态VBAR预取和异步offload能力，让快NVMe、pinned memory和GPU stream之间的配合更灵活。
+
+下图是ComfyUI动态显存的逻辑示意图：
 
 <div align="center">
 
@@ -212,7 +213,7 @@ Dynamic VRAM的核心思想是：**把显存管理从“静态预估占用”改
 
 </div>
 
-所以，Dynamic VRAM真正改变的不是某个单点参数，而是模型权重的生命周期：
+所以，Dynamic VRAM真正改变的不是某个单点参数，而是模型权重的生命周期，与传统显存管理策略相比的优势如下表所示：
 
 <div align="center">
 
@@ -227,18 +228,6 @@ Dynamic VRAM的核心思想是：**把显存管理从“静态预估占用”改
 
 </div>
 
-这套机制带来的直接收益，可以概括为四点：
-
-第一，**降低复杂工作流的系统内存压力。** Dynamic VRAM减少了“GPU一份、CPU再常驻一份、页面文件再兜底一份”的低效内存形态。模型权重可以更多依赖文件映射、切片读取和按需加载，系统内存不再需要长期承载那么多完整副本。
-
-第二，**显著降低因权重卸载不足导致的OOM风险。** 传统低显存方案经常遇到“前面能跑，后面突然爆”的问题。Dynamic VRAM把释放、重载和临时张量兜底放到运行时路径里，目标是让工作流在显存紧张时降速，而不是直接崩溃。
-
-第三，**在部分场景下提升模型加载和LoRA应用速度。** 因为模型加载节点不一定要立刻把所有权重深拷贝到PyTorch常驻张量里，所以首次加载、切换prompt、加载LoRA等动作在一些大模型场景中会更快。公开测试中，类似FLUX 2 Dev bf16这类任务的首次启动、改prompt和加载LoRA耗时都有明显下降；WAN 2.2 14B双模型视频任务在32GB内存机器上也能看到端到端耗时的大幅改善。
-
-第四，**让“高VRAM占用”不再等同于内存泄漏。** Dynamic VRAM倾向于把最快的VRAM用作真实工作集缓存。如果监控面板里看到GPU显存占用较高，不一定是坏事；关键要看工作流是否稳定、是否触发OOM、端到端耗时是否下降。现代推理系统的目标不是让显存看起来很空，而是让显存被有效利用，并且在压力到来时能及时释放。
-
-**总的来说，Dynamic VRAM的本质，是把模型权重从静态常驻资源变成动态工作集；把显存不足从一次性OOM问题，转化为运行时调度、释放、预取和按需加载问题。**
-
 
 <h1 id="q-012">3.介绍一下Diffusers框架的原理</h1>
 
@@ -250,14 +239,14 @@ Diffusers是Hugging Face生态中用于扩散/生成模型推理、训练和部�
 
 ![diffusers](./imgs/diffusers图标.png)
 
-Diffusers的核心抽象是 `DiffusionPipeline`。它把图像生成所需的多个组件封装成一个可调用对象：
+Diffusers的核心设计是抽象一个 `DiffusionPipeline`。它把图像创作所需的多个组件封装成一个可调用对象，使用者可以先通过Pipeline运行一个完整任务，再按需要替换兼容组件、检查中间过程或修改实现：
 
 ```python
 from diffusers import DiffusionPipeline
 import torch
 
 pipe = DiffusionPipeline.from_pretrained(
-    "stabilityai/stable-diffusion-xl-base-1.0",
+    "本地路径/stable-diffusion-xl-base-1.0",
     torch_dtype=torch.float16,
 ).to("cuda")
 
@@ -267,74 +256,70 @@ image = pipe(
 ).images[0]
 ```
 
-这个抽象的价值在于：
+Rocky认为，这种设计可以从四个方面理解：
 
-1. **统一不同模型的调用方式。** Stable Diffusion、SDXL、SD3、FLUX、Z-Image、GLM-Image、video diffusion等模型架构不同，但都可以被封装成pipeline形式。
-
-2. **组件可替换。** Scheduler、VAE、U-Net/DiT、Text Encoder、LoRA、ControlNet、IP-Adapter等都可以组合或替换，方便研究和工程实验。
-
-3. **贴近生产部署。** Diffusers支持offload、量化、torch.compile、xFormers/SDPA等推理优化策略，也能和Transformers、Accelerate、PEFT、Hub生态打通。
-
+1. **统一不同模型的加载和调用方式。** Stable Diffusion系列、FLUX系列、Z-Image、GLM-Image、video diffusion等模型架构不同，但都可以被封装成pipeline形式。与此同时，一致的接口并不意味着所有模型支持相同参数。切换模型时，仍要核对对应的pipeline类、条件输入与输出格式。
+2. **分离组件职责，组件可灵活替换。** Scheduler策略、VAE、U-Net/DiT、Text Encoder、LoRA、ControlNet、Adapter、GAN等都可以组合或替换，方便研究和工程实验。
+3. **贴近生产部署。** Diffusers强调代码可读性与可修改性，支持offload、量化、torch.compile、xFormers/SDPA等推理优化策略，也能和Transformers、Accelerate、PEFT等其他主流库生态打通。
 4. **兼顾训练和推理。** 它不仅能进行模型推理，还提供训练脚本、LoRA微调、DreamBooth、Textual Inversion、ControlNet训练等工程入口。
 
-Rocky认为，Diffusers的跨周期价值是：**把AIGC图像生成从“模型仓库里的权重文件”变成“可组合、可测试、可部署的软件组件”。** 这很重要，因为真实业务不是在本地进行图像创作，而是要把模型接进服务、评测、数据回流和产品链路。
-
-
-<h2 id="q-014">面试问题：Pipeline、Scheduler、Adapter和Model Component在Diffusers中分别起什么作用？</h2>
-
-**难度评分：⭐⭐⭐⭐ (4/5)  |  考察频率：⭐⭐⭐⭐ (4/5)**
+下图是Diffusers的核心流程链路：
 
 <div align="center">
 
-| 抽象 | 作用 | 类比 | 面试要点 |
-|---|---|---|---|
-| Pipeline | 把完整生成流程封装成可调用对象 | 一条装配线 | 负责组织文本编码、去噪、解码、后处理 |
-| Model Component | U-Net、DiT、VAE、Text Encoder、Tokenizer等模型模块 | 装配线上的机器 | 组件可替换，决定模型能力边界 |
-| Scheduler | 控制采样时间步和去噪更新公式 | 采样路线规划器 | 决定速度、稳定性和步数-质量关系 |
-| Adapter | LoRA、ControlNet、各类Adapter等 | 外接能力模块 | 不重训主模型也能补风格、结构、参考图控制 |
-| Optimization | offload、quantization、torch.compile、attention优化 | 工程加速层 | 决定能否低成本部署 |
+![Diffusers通过Pipeline组织可配置的生成组件](./imgs/diffusers_design_q013_4k.png)
 
 </div>
 
-我们可以把Diffusers框架下一次推理理解成：
 
-```text
-Pipeline接收prompt和参数
-→ Tokenizer/Text Encoder得到文本条件
-→ Scheduler初始化时间步和噪声
-→ U-Net/DiT在每个时间步预测噪声/velocity/flow
-→ Scheduler更新Latent
-→ VAE把Latent解码成图像
-→ Safety/后处理/输出
-```
-
-其中Scheduler非常关键。它不是“可有可无的小参数”，而是决定去噪路径的数值方法。Euler、DDIM、DPM-Solver、UniPC、LCM Scheduler等Scheduler在步数、稳定性、质量和速度上各有取舍。
-
-Adapter则体现了AIGC图像生成框架的另一个趋势：**基础大模型规模越来越大，但业务能力经常靠轻量模块扩展。** LoRA补风格和角色特征，ControlNet补结构控制特征，各类Adapter补各种细分条件信息。这些能力如果都靠重训主模型，成本会极高。
-
-
-<h2 id="q-015">面试问题：Diffusers在训练、推理优化和生产部署中有哪些关键能力？</h2>
+<h2 id="q-014">面试问题：除Pipeline外，Diffusers中还有哪些核心组件？</h2>
 
 **难度评分：⭐⭐⭐⭐ (4/5)  |  考察频率：⭐⭐⭐⭐ (4/5)**
 
-Diffusers的核心工程价值，主要体现在三条线：
+上个问答中，我们已经知道Pipeline负责把Diffusers框架下的生成过程组织起来。以此为基础，我们还需要理解六大类不同的核心模块：输入处理、条件编码、生成预测、采样更新、图像表示转换，以及额外条件和权重适配，各模块具体内容如下表所示：
 
-1. **训练线：让研究方法可复现。**  Diffusers提供了多类训练脚本和示例，常见包括LoRA、DreamBooth、Textual Inversion、ControlNet训练、模型蒸馏等。对算法岗来说，它适合快速验证“某个训练策略是否有效”。
+<div align="center">
 
-2. **推理优化线：让大模型能跑起来、跑得快。** Diffusers围绕offloading、quantization和torch.compile等优化，让大模型在显存受限设备上可用，并在显存足够时提升推理速度。实际工程中还会结合FP16/BF16、SDPA/xFormers、FlashAttention、SageAttention、VAE tiling、CPU/GPU offload等策略。
+| 组件类别 | 典型对象 | 主要输入与输出 |
+|---|---|---|
+| 输入与输出处理 | Tokenizer、Image Processor | 文本到token ID；图像/掩码到规范张量；输出张量到图像格式 |
+| 条件编码 | Text Encoder、Image Encoder | token或参考图到条件特征 |
+| 生成主干 | U-Net、Transformer/DiT类模型 | 当前样本、时间步与条件到模型预测 |
+| 采样更新 | Scheduler | 模型预测、当前样本和时间信息到下一采样状态 |
+| 图像表示转换 | VAE等自编码器 | 图像与潜变量之间的编码/解码 | 
+| 条件扩展与权重适配 | LoRA、ControlNet、Adapter等 | 适配参数、结构条件或参考特征影响模型计算 |
 
-3. **部署线：让模型成为服务组件。** Diffusers天然适合封装成API服务，因为pipeline是Python对象，可以接入FastAPI、队列系统、GPU调度、模型缓存、批量推理、日志评测和bad case回流。
+</div>
 
-同时，**Diffusers不是最适合普通创作者手动创作图像的工具，也不是天然的可视化工作流框架**。它的强项是研发、评测、自动化、部署和生态集成。真正的生产系统，往往会用Diffusers承载后端服务，用ComfyUI探索和固化复杂工作流，用WebUI/Forge做创意调参和插件验证。
+以常见潜空间文生图为例，我们可以把Diffusers框架下一次推理流程概括为：
+
+```text
+Pipeline接收prompt和参数
+→ 准备初始Latent，并设置采样时间步
+→ Tokenizer/Text Encoder得到文本条件
+→ 在每个采样步中：
+→     当前Latent、时间步与条件 → 生成模型预测
+→     当前Latent、模型预测与时间信息 → Scheduler更新状态
+→ 迭代结束后，VAE把Latent解码成图像
+→ 后处理/输出并返回结果
+```
+
+下图也生动展示了整个流程：
+
+<div align="center">
+
+![Diffusers核心组件的条件编码、模型预测、采样更新与图像解码](./imgs/diffusers_components_q014_4k.png)
+
+</div>
 
 
-<h1 id="q-008">4.Stable Diffusion WebUI、Forge、SD.Next和Fooocus分别适合什么场景？</h1>
+<h1 id="q-008">4.Stable Diffusion WebUI、SD.Next和Fooocus分别适合什么场景？</h1>
 
 <h2 id="q-009">面试问题：Stable Diffusion WebUI的核心功能和长期价值是什么？</h2>
 
 **难度评分：⭐⭐⭐ (3/5)  |  考察频率：⭐⭐⭐⭐⭐ (5/5)**
 
-Stable Diffusion WebUI，是Stable Diffusion生态里非常重要的参数面板式创作框架之一。它基于Gradio实现，把txt2img、img2img、inpainting、outpainting、upscale、prompt权重、X/Y/Z Plot、Textual Inversion、LoRA、ControlNet、ADetailer等多维能力放进统一界面。**它曾经是很多人应用学习Stable Diffusion的第一入口，但今天再看WebUI，它已经不是“领先的主流工具”，而是一个已经完成历史使命、被新范式取代、但仍然有跨周期价值的AIGC创作框架样本**。
+Stable Diffusion WebUI是Stable Diffusion生态里非常重要的参数面板式创作框架之一。它基于Gradio实现，把txt2img、img2img、inpainting、outpainting、upscale、prompt权重、X/Y/Z Plot、Textual Inversion、LoRA、ControlNet、ADetailer等多维能力放进统一界面。**它曾经是很多人学习应用Stable Diffusion的第一选择，但今天再看SD WebUI，它已经不是“领先的主流AIGC图像创作框架”，而是一个已经完成历史使命、被ComfyUI取代、但仍然有跨周期价值的AIGC创作框架样本**。
 
 我们需要知道，**WebUI不是因为功能太少而衰落，而是因为它的“参数面板范式”跟不上复杂AIGC工作流的结构化需求。** 它在SDXL阶段之后仍有过维护和新模型适配，例如后续版本继续补充SD 3支持、采样器和性能优化；但从生态势能看，WebUI的主战场已经被ComfyUI系统性取代。原因不只是ComfyUI“更新更快”，而是ComfyUI把创作过程从表单调参升级成了节点化、画布化、可复现的工作流系统。
 
